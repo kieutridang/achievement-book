@@ -1,0 +1,16 @@
+.Table {
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        th, td {
+            border: 1px solid black;
+        }
+        th {
+            background-color: gray;
+        }
+        td img {
+            height: 50px;
+            width: 50px;
+        }
+    }
+}

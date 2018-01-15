@@ -1,0 +1,37 @@
+.Input {
+    // display: flex;
+    label {
+        &:first-of-type {
+            display: inline-block;
+            width: 20%;
+            height: 15px;
+            text-align: right;
+            font-weight: bold;
+        }
+    }
+    input {
+        display: inline-block;
+        position: relative;
+        left: 5px;
+        width: 65%;
+    }
+    div {
+        display: inline-block;
+        width: 20%;
+        height: 15px;
+        text-align: right;
+        font-weight: bold;
+        line-height: initial;
+    }
+    label {
+        &:nth-of-type(2) {
+            display: inline-block;
+            position: relative;
+            left: 5px;
+            color: red;
+            font-size: 10px;
+            text-align: left;
+            width: 65%;
+        }
+    }
+}
