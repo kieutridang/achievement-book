@@ -19729,9 +19729,13 @@ var Main = function (_React$Component) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                _reactRouterDom.BrowserRouter,
+                'div',
                 null,
-                _react2.default.createElement(_Page2.default, null)
+                _react2.default.createElement(
+                    _reactRouterDom.BrowserRouter,
+                    null,
+                    _react2.default.createElement(_Page2.default, null)
+                )
             );
         }
     }]);
@@ -23464,6 +23468,10 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _index = __webpack_require__(78);
+
+var _index2 = _interopRequireDefault(_index);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23493,9 +23501,14 @@ var HelloWord = function (_React$Component) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'p',
+                'div',
                 null,
-                'Hello World'
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'Hello World'
+                ),
+                _react2.default.createElement(_index2.default, null)
             );
         }
     }]);
@@ -23504,6 +23517,71 @@ var HelloWord = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = HelloWord;
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Button = function (_React$Component) {
+  _inherits(Button, _React$Component);
+
+  function Button() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, Button);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Button.__proto__ || Object.getPrototypeOf(Button)).call.apply(_ref, [this].concat(args))), _this), _this.handleClick = function () {
+      alert('Clicked successful');
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(Button, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'button' },
+        _react2.default.createElement(
+          'button',
+          { type: 'button', onClick: this.handleClick },
+          'Click Me'
+        )
+      );
+    }
+  }]);
+
+  return Button;
+}(_react2.default.Component);
+
+exports.default = Button;
+;
 
 /***/ })
 /******/ ]);

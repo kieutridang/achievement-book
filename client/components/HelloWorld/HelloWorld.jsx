@@ -1,11 +1,15 @@
 import React from 'react'
+import Button from '../Button/index.jsx'
 
 
 export default class HelloWord extends React.Component {
     state = {  }
     render() {
         return (
-            <p>Hello World</p>
+            <div>
+                <p>Hello World</p>
+                <Button></Button>
+            </div>
         );
     }
 }

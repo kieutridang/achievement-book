@@ -1,20 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Button extends Component  {
-  constructor(props) {
-    super(props);
-    this.alertClicked = this.alertClicked.bind(this);
-  }
-
-  alertClicked() {
+export default class Button extends React.Component  {
+  handleClick = () => {
      alert('Clicked successful');
   }
 
   render() {
-    const { name } = this.props;
     return (
       <div className = 'button'>
-        <button type='button' onClick={alertClicked}>{name}</button>
+        <button type='button' onClick={this.handleClick}>Click Me</button>
       </div>
     )
   }

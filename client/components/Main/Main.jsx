@@ -5,9 +5,11 @@ import Page from '../Page/Page.jsx'
 export default class Main extends React.Component {
     render() {
         return (
-            <BrowserRouter>
-                <Page></Page>
-            </BrowserRouter>
+            <div>
+                <BrowserRouter>
+                    <Page></Page>
+                </BrowserRouter>
+            </div>
         );
     }
 }
