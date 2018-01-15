@@ -1,0 +1,19 @@
+{
+  "name": "achievement-book",
+  "version": "1.0.0",
+  "description": "This is book will archive everything for you to reach your long term objectives.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kieutridang/achievement-book.git"
+  },
+  "author": "Kieu Tri Dang, Nguyen Ngoc Minh Huy, Nguyen Quang Thuc, Mai Ngoc Anh Duy, Do Nhat Huy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kieutridang/achievement-book/issues"
+  },
+  "homepage": "https://github.com/kieutridang/achievement-book#readme"
+}
