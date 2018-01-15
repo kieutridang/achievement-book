@@ -1,0 +1,41 @@
+.Choice {
+    >label {
+        &:first-of-type {
+            display: inline-block;
+            width: 20%;
+            height: 15px;
+            text-align: right;
+            font-weight: bold;
+        }
+        &:nth-of-type(2) {
+            display: inline-block;
+            position: relative;
+            left: 5px;
+            color: red;
+            font-size: 10px;
+            width: 65%;
+            text-align: left;
+        }
+    }
+    >div {
+        &:first-of-type {
+            display: inline-block;
+            position: relative;
+            left: 5px;
+            width: 65%;
+            text-align: left;
+            div {
+                display: inline-block;
+                width: 100px;
+            }
+        }
+        &:nth-of-type(2) {
+            display: inline-block;
+            width: 20%;
+            height: 15px;
+            text-align: right;
+            font-weight: bold;
+            line-height: initial;
+        }
+    }
+}

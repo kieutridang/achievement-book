@@ -1,0 +1,11 @@
+.page {
+    display: block;
+    >div {
+        &:first-child {
+          text-align: right;
+        }
+        &:second-child {
+        }
+        &:nth-child(3) {}
+    }
+}

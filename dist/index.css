@@ -1,0 +1,203 @@
+.Input label:first-of-type {
+  display: inline-block;
+  width: 20%;
+  height: 15px;
+  text-align: right;
+  font-weight: bold; }
+
+.Input input {
+  display: inline-block;
+  position: relative;
+  left: 5px;
+  width: 65%; }
+
+.Input div {
+  display: inline-block;
+  width: 20%;
+  height: 15px;
+  text-align: right;
+  font-weight: bold;
+  line-height: initial; }
+
+.Input label:nth-of-type(2) {
+  display: inline-block;
+  position: relative;
+  left: 5px;
+  color: red;
+  font-size: 10px;
+  text-align: left;
+  width: 65%; }
+.Login {
+  margin: 20px 100px 40px;
+  font-size: 20px;
+  line-height: 30px;
+  border: 10px solid gray;
+  padding: 60px 50px 60px 50px;
+  background-color: #FFFFFF;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  .Login button {
+    border-radius: 5px;
+    background-color: #008cff;
+    display: inline-block;
+    width: 130px;
+    height: 35px;
+    margin: 10px 10px 0px 10px;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    cursor: pointer; }
+    .Login button:active {
+      background-color: #005cac; }
+.SignUp {
+  margin: 20px 100px 40px;
+  font-size: 20px;
+  line-height: 30px;
+  border: 10px solid gray;
+  padding: 60px 50px 60px 50px;
+  background-color: #FFFFFF;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  .SignUp button {
+    border-radius: 5px;
+    background-color: #008cff;
+    display: inline-block;
+    width: 130px;
+    height: 35px;
+    margin: 10px 10px 0px 10px;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    cursor: pointer; }
+    .SignUp button:active {
+      background-color: #005cac; }
+.Select {
+  line-height: 40px; }
+  .Select label {
+    display: inline-block;
+    width: 20%;
+    height: 15px;
+    text-align: right;
+    font-weight: bold;
+    line-height: initial; }
+  .Select select {
+    display: inline-block;
+    position: relative;
+    left: 5px;
+    width: 65%; }
+  .Select div {
+    height: 30px; }
+.Choice > label:first-of-type {
+  display: inline-block;
+  width: 20%;
+  height: 15px;
+  text-align: right;
+  font-weight: bold; }
+
+.Choice > label:nth-of-type(2) {
+  display: inline-block;
+  position: relative;
+  left: 5px;
+  color: red;
+  font-size: 10px;
+  width: 65%;
+  text-align: left; }
+
+.Choice > div:first-of-type {
+  display: inline-block;
+  position: relative;
+  left: 5px;
+  width: 65%;
+  text-align: left; }
+  .Choice > div:first-of-type div {
+    display: inline-block;
+    width: 100px; }
+
+.Choice > div:nth-of-type(2) {
+  display: inline-block;
+  width: 20%;
+  height: 15px;
+  text-align: right;
+  font-weight: bold;
+  line-height: initial; }
+.image {
+  display: flex;
+  /* flex-grow:1; */
+  flex-direction: column;
+  padding: 0px 50px 0px;
+  vertical-align: center; }
+  .image img {
+    width: 160px;
+    height: 160px;
+    margin: 10px 50px 10px; }
+  .image p {
+    color: red;
+    font-size: 10px; }
+  .image label {
+    border-radius: 5px;
+    background-color: #008cff;
+    display: inline-block;
+    width: 130px;
+    height: 35px;
+    margin: 10px auto 0px;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    cursor: pointer; }
+    .image label:active {
+      background-color: #005cac; }
+    .image label input {
+      display: none; }
+.wrapper {
+  margin: 20px 100px 40px;
+  font-size: 20px;
+  line-height: 30px;
+  border: 10px solid gray;
+  padding: 60px 50px 60px 50px;
+  background-color: #FFFFFF;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  .wrapper h1 {
+    color: grey;
+    margin-bottom: 50px; }
+  .wrapper > div:first-of-type {
+    display: flex;
+    justify-content: space-around; }
+    .wrapper > div:first-of-type > div:nth-child(2) {
+      flex-grow: 3;
+      width: 100%; }
+  .wrapper button {
+    border-radius: 5px;
+    background-color: #008cff;
+    display: inline-block;
+    width: 130px;
+    height: 35px;
+    margin: 10px auto 0px;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    cursor: pointer; }
+    .wrapper button:active {
+      background-color: #005cac; }
+.Table table {
+  width: 100%;
+  border-collapse: collapse; }
+  .Table table th, .Table table td {
+    border: 1px solid black; }
+  .Table table th {
+    background-color: gray; }
+  .Table table td img {
+    height: 50px;
+    width: 50px; }
+.page {
+  display: block; }
+  .page > div:first-child {
+    text-align: right; }
