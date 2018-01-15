@@ -1,0 +1,20 @@
+.Select {
+    line-height: 40px;
+    label {
+        display: inline-block;
+        width: 20%;
+        height: 15px;
+        text-align: right;
+        font-weight: bold;
+        line-height: initial;
+    }
+    select {
+        display: inline-block;
+        position: relative;
+        left: 5px;
+        width: 65%;
+    }
+    div {
+        height: 30px;
+    }
+}
