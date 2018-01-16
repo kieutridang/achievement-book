@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from '../Button/index.jsx'
 import Select from '../Select/index.jsx'
+import SingleChoice from '../SingleChoice/index.jsx'
 
 
 export default class HelloWord extends React.Component {
@@ -8,8 +9,12 @@ export default class HelloWord extends React.Component {
         alert('Hello World!!');
     }
 
-    handlingSelectChange(label, value) {
+    handlingSelectChange = (label, value) => {
         alert(label + ': ' + value);
+    }
+
+    handlingSingleChoiceChange = (value) => {
+        alert(value);
     }
 
     render() {
@@ -18,7 +23,7 @@ export default class HelloWord extends React.Component {
                 <p>Hello World</p>
                 <Button 
                     name='Hello'
-                    handleClick={this.alertHelloWorld}></Button>
+                    handleClick={this.alertHelloWorld}/>
                 <Select
                     label = 'City'
                     property = 'city'
@@ -27,7 +32,15 @@ export default class HelloWord extends React.Component {
                         'Ha Noi',
                         'Da Nang'
                     ]}
-                    _handlingChange={() => this.handlingSelectChange(label, value)}></Select>
+                    handlingSelectChange={this.handlingSelectChange}/>
+                <SingleChoice
+                    label = 'Gender'
+                    property = 'gender'
+                    optionsList = {[
+                        'Male',
+                        'Female'
+                    ]}
+                    handlingSingleChoiceChange={this.handlingSingleChoiceChange}/>
             </div>
         );
     }

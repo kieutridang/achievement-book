@@ -14,15 +14,14 @@ export default class Select extends React.Component {
     return (
       <div className='select'>
         <label> {label} </label>
-        <select>
+        <select onChange = {(e) => this._handlingChange(label, e.target.value)}>
           {
             optionsList.map((option, index) => {
               return (
                 <option 
                   key = {index}
-                  value = {option.value}
-                  onClick = {() => this._handlingChange(label, option.value)}
-                > {option.value} </option>
+                  value = {option}
+                > {option} </option>
               )
             })
           }
