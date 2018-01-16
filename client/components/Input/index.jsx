@@ -7,11 +7,11 @@ export default class Input extends Component {
       this.state ={
         value:"",
         message:"This field can't be empty",
-        validate: false
+        validate: false,
       }
     }
     render() {
-      const {label, property, validateAndMessage, type, changeHandle, validate} = this.props;
+      const {label, property, validateAndMessage, type, changeHandle, validate, showValidation} = this.props;
       return (
         <div className = 'Input'>
           <label>{label} :</label>
@@ -22,7 +22,7 @@ export default class Input extends Component {
             onBlur = {this._changeHandle.bind(this, label)}
           />
           <div></div>
-          {!this.state.validate && <label>{this.state.message}</label>}
+          {showValidation && !this.state.validate && <label>{this.state.message}</label>}
         </div>
       );
     }
