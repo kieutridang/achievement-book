@@ -23493,23 +23493,26 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var HelloWord = function (_React$Component) {
     _inherits(HelloWord, _React$Component);
 
-    function HelloWord() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
+    function HelloWord(props) {
         _classCallCheck(this, HelloWord);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (HelloWord.__proto__ || Object.getPrototypeOf(HelloWord)).call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = HelloWord.__proto__ || Object.getPrototypeOf(HelloWord)).call.apply(_ref, [this].concat(args))), _this), _this.state = {}, _temp), _possibleConstructorReturn(_this, _ret);
+        _this.state = {};
+        _this.alertHelloWorld = _this.alertHelloWorld.bind(_this);
+        return _this;
     }
 
     _createClass(HelloWord, [{
+        key: 'alertHelloWorld',
+        value: function alertHelloWorld() {
+            alert('Hello World!!');
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             return _react2.default.createElement(
                 'div',
                 null,
@@ -23518,7 +23521,11 @@ var HelloWord = function (_React$Component) {
                     null,
                     'Hello World'
                 ),
-                _react2.default.createElement(_index2.default, { name: 'Hello' })
+                _react2.default.createElement(_index2.default, {
+                    name: 'Hello',
+                    handleClick: function handleClick() {
+                        return _this2.alertHelloWorld();
+                    } })
             );
         }
     }]);
@@ -23562,21 +23569,19 @@ var Button = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
 
     _this.state = { name: _this.props.name };
-    _this.handleClick = _this.handleClick.bind(_this);
     return _this;
   }
 
   _createClass(Button, [{
-    key: 'handleClick',
-    value: function handleClick(name) {
-      alert('Button has been clicked!');
-    }
-  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'button',
-        { onClick: this.handleClick },
+        { onClick: function onClick() {
+            return _this2.props.handleClick();
+          } },
         this.state.name
       );
     }
