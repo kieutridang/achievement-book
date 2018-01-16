@@ -5,7 +5,7 @@ const app = express()
 const staticPath = '../dist';
 var database = require('./database');
 
-app.get('/', (req, res) => {
+app.get(/^\/[a-z]*$/, (req, res) => {
     res.sendFile(path.join(__dirname, staticPath, '/index.html'))
 })
 
