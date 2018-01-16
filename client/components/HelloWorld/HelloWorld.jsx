@@ -3,12 +3,6 @@ import Button from '../Button/index.jsx'
 
 
 export default class HelloWord extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-        this.alertHelloWorld = this.alertHelloWorld.bind(this);
-    }
-
     alertHelloWorld() {
         alert('Hello World!!');
     }
@@ -19,7 +13,7 @@ export default class HelloWord extends React.Component {
                 <p>Hello World</p>
                 <Button 
                 name='Hello'
-                handleClick={() => this.alertHelloWorld()}></Button>
+                handleClick={this.alertHelloWorld}></Button>
             </div>
         );
     }
