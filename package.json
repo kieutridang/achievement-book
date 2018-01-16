@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "webpack-dev-server --port 8081 & nodemon ./server/express.js",
-    "Start": "webpack-dev-server --port 8081 & forever start ./server/express.js",
+    "Start": "webpack-dev-server --port 8081 | nodemon ./server/express.js",
+    "start": "forever start ./server/express.js | webpack-dev-server --port 8081",
+    "stop": "forever stopall",
     "dev": "webpack-dev-server --port 8081"
   },
   "repository": {
