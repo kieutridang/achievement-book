@@ -8,7 +8,7 @@ export default class HelloWord extends React.Component {
         return (
             <div>
                 <p>Hello World</p>
-                <Button></Button>
+                <Button name='Hello'></Button>
             </div>
         );
     }

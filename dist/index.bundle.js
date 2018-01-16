@@ -23508,7 +23508,7 @@ var HelloWord = function (_React$Component) {
                     null,
                     'Hello World'
                 ),
-                _react2.default.createElement(_index2.default, null)
+                _react2.default.createElement(_index2.default, { name: 'Hello' })
             );
         }
     }]);
@@ -23546,33 +23546,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Button = function (_React$Component) {
   _inherits(Button, _React$Component);
 
-  function Button() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function Button(props) {
     _classCallCheck(this, Button);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Button.__proto__ || Object.getPrototypeOf(Button)).call.apply(_ref, [this].concat(args))), _this), _this.handleClick = function () {
-      alert('Clicked successful');
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    _this.state = { name: '' };
+    _this.handleClick = _this.handleClick.bind(_this);
+    return _this;
   }
 
   _createClass(Button, [{
+    key: 'handleClick',
+    value: function handleClick(name) {
+      alert('Button ' + { name: name } + 'has been clicked!');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        { className: 'button' },
-        _react2.default.createElement(
-          'button',
-          { type: 'button', onClick: this.handleClick },
-          'Click Me'
-        )
+        'button',
+        { onClick: this.handleClick(this.state.name) },
+        this.state.name
       );
     }
   }]);
