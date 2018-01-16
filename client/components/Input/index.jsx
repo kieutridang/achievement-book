@@ -5,7 +5,6 @@ export default class Input extends Component {
     constructor(props) {
       super(props);
       this.state ={
-        value:"",
         message:"This field can't be empty",
         validate: false,
       }
@@ -16,7 +15,7 @@ export default class Input extends Component {
         <div className = 'Input'>
           <label>{label} :</label>
           <input
-            value = {this.state.value}
+            value = {this.props.value}
             type  = {type}
             onChange = {this._changeHandle.bind(this, label)}
             onBlur = {this._changeHandle.bind(this, label)}
@@ -45,7 +44,7 @@ export default class Input extends Component {
         message: newMessage,
         validate: newValidate
       }, () => {
-        this.props.changeHandle(this.props.property, this.state.value, this.state.validate);
+        this.props.changeHandle(this.props.property, this.props.value, this.state.validate);
       });
     }
   }
