@@ -23511,6 +23511,8 @@ var HelloWord = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             return _react2.default.createElement(
                 'div',
                 null,
@@ -23521,7 +23523,9 @@ var HelloWord = function (_React$Component) {
                 ),
                 _react2.default.createElement(_index2.default, {
                     name: 'Hello',
-                    alertHelloWorld: this.alertHelloWorld })
+                    handleClick: function handleClick() {
+                        return _this2.alertHelloWorld();
+                    } })
             );
         }
     }]);
