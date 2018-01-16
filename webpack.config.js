@@ -15,7 +15,7 @@ const extractSass = new ExtractTextPlugin({
 
 module.exports = {
     entry: {
-        index: './client/index.js'
+        index: './client/index.jsx'
     },
     output: {
         path: path.resolve('dist'),
