@@ -23551,7 +23551,7 @@ var Button = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
 
-    _this.state = { name: '' };
+    _this.state = { name: _this.props.name };
     _this.handleClick = _this.handleClick.bind(_this);
     return _this;
   }
@@ -23559,14 +23559,14 @@ var Button = function (_React$Component) {
   _createClass(Button, [{
     key: 'handleClick',
     value: function handleClick(name) {
-      alert('Button ' + { name: name } + 'has been clicked!');
+      alert('Button has been clicked!');
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'button',
-        { onClick: this.handleClick(this.state.name) },
+        { onClick: this.handleClick },
         this.state.name
       );
     }
