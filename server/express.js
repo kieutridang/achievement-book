@@ -5,8 +5,8 @@ const app = express()
 const staticPath = '../dist';
 var database = require('./database');
 
-app.get('/abc', (req, res) => {
-    res.end('Hello');
+app.get('/api/testGet', (req, res) => {
+    res.end('testSuccessfully');
 })
 
 app.get(/^\/[a-z]*$/, (req, res) => {
