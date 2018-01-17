@@ -5,29 +5,78 @@ import SingleChoice from '../SingleChoice/index.jsx'
 import MultipleChoice from '../MultipleChoice/index.jsx'
 
 export default class HelloWord extends React.Component {
-    alertHelloWorld() {
-        alert('Hello World!!');
+    constructor(props) {
+        super(props);
+        this.state = {
+            validate: {
+                gender: false,
+                department: false,
+                haveClickedButton: false
+            },
+            info: {
+                city: 'Ho Chi Minh',
+                gender: '',
+                department: []
+            }
+        }
     }
 
-    handlingSelectChange = (label, value) => {
-        alert(label + ': ' + value);
+    handlingClick = () => {
+        let validate = this.state.validate;
+        let newValidate = this.state.validate;
+        let newInfo = this.state.info;
+        newValidate.haveClickedButton = true;
+        this.setState({
+            validate: newValidate,
+            info: newInfo
+        })
+        if (validate.gender && validate.department) {
+            alert('Submit successful');
+        } else {
+            alert('Fail');
+        }
     }
 
-    handlingSingleChoiceChange = (value) => {
-        alert(value);
+    handlingCityChange = (value) => {
+        let newValidate = this.state.validate;
+        let newInfo = this.state.info;
+        newInfo.city = value;
+        this.setState({
+            validate: newValidate,
+            info: newInfo
+        });
     }
 
-    handlingMultipleChoiceChange = (value) => {
-        alert(value);
+    handlingGenderChange = (value) => {
+        let newValidate = this.state.validate;
+        let newInfo = this.state.info;
+        newValidate.gender = true;
+        newInfo.gender = value;
+        this.setState({
+            validate: newValidate,
+            info: newInfo
+        });
+    }
+
+    handlingDepartmentChange = (value) => {
+        let newValidate = this.state.validate;
+        let newInfo = this.state.info;
+        if (value.length === 0) {
+            newValidate.department = false;
+        } else {
+            newValidate.department = true;
+            newInfo.department = value;
+        }
+        this.setState({
+            validate: newValidate,
+            info: newInfo
+        });
     }
 
     render() {
         return (
             <div>
                 <p>Hello World</p>
-                <Button 
-                    name='Hello'
-                    handleClick={this.alertHelloWorld}/>
                 <Select
                     label = 'City'
                     property = 'city'
@@ -36,7 +85,7 @@ export default class HelloWord extends React.Component {
                         'Ha Noi',
                         'Da Nang'
                     ]}
-                    handlingSelectChange={this.handlingSelectChange}/>
+                    handlingSelectChange={this.handlingCityChange}/>
                 <SingleChoice
                     label = 'Gender'
                     property = 'gender'
@@ -44,7 +93,9 @@ export default class HelloWord extends React.Component {
                         'Male',
                         'Female'
                     ]}
-                    handlingSingleChoiceChange={this.handlingSingleChoiceChange}/>
+                    validate = {this.state.validate.gender}
+                    haveClickedButton = {this.state.validate.haveClickedButton}
+                    handlingSingleChoiceChange={this.handlingGenderChange}/>
                 <MultipleChoice
                     label = 'Department'
                     property = 'department'
@@ -53,8 +104,13 @@ export default class HelloWord extends React.Component {
                         {value: 'Teacher', checked: false},
                         {value: 'BlahBlah', checked: false}
                     ]}
-                    handlingMultipleChoiceChange = {this.handlingMultipleChoiceChange}/>
+                    validate = {this.state.validate.department}
+                    haveClickedButton = {this.state.validate.haveClickedButton}
+                    handlingMultipleChoiceChange = {this.handlingDepartmentChange}/>
+                <Button 
+                    name='Submit'
+                    handlingClick={this.handlingClick}/>
             </div>
-        );
-    }
-}
+                );
+            }
+        }
