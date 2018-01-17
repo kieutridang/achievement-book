@@ -4,7 +4,18 @@ import Select from '../Select/index.jsx'
 import SingleChoice from '../SingleChoice/index.jsx'
 import MultipleChoice from '../MultipleChoice/index.jsx'
 
+import {_helper} from '../api/_helper'
+
 export default class HelloWord extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            test: {
+                username: 'minhhuynk',
+                password: 'minhhuy123'
+            }
+        }
+    }
     alertHelloWorld() {
         alert('Hello World!!');
     }
@@ -21,13 +32,18 @@ export default class HelloWord extends React.Component {
         alert(value);
     }
 
+    
+
     render() {
         return (
             <div>
                 <p>Hello World</p>
                 <Button 
                     name='Hello'
-                    handleClick={this.alertHelloWorld}/>
+                    handleClick={() => {
+                        console.log(_helper.GET("http://localhost:8080/api/testGet", []));
+                    }
+                    }/>
                 <Select
                     label = 'City'
                     property = 'city'
