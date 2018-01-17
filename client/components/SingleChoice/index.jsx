@@ -14,14 +14,18 @@ export default class SingleChoice extends React.Component {
     return (
       <div>
         <label> {label} </label>
+        <form>
         {
           optionsList.map((option, index) => {
             <div>
-              <input type='radio' name={this.props.property} value={option} key={index} onClick={(e) => this._handlingChange(e.target.value)}/>
-              <label> {option} </label>
+              <label>
+                <input type='radio' name={this.props.property} value={option} key={index} onClick={(e) => this._handlingChange(e.target.value)}/>
+                {option} 
+              </label>
             </div>
           })
         }
+        </form>
       </div>
     )
   }
