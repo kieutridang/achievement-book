@@ -48,6 +48,8 @@ export default class MultipleChoice extends React.Component {
           })
         }
         </form>
+        <div></div>
+        <label>{!this.props.validate && this.props.haveClickedButton && "You need to choose at least one"}</label>
       </div>
     )
   }

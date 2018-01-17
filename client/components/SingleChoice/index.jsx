@@ -28,6 +28,8 @@ export default class SingleChoice extends React.Component {
           })
         }
         </form>
+        <div></div>
+        <label>{!this.props.validate && this.props.haveClickedButton && "You need to choose one"}</label>
       </div>
     )
   }

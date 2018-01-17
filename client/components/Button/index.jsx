@@ -7,7 +7,7 @@ export default class Button extends React.Component  {
 
   render() {
     return (
-      <button onClick={this.props.handleClick}>
+      <button onClick={this.props.handlingClick}>
         {this.props.name}
       </button>
     )
