@@ -5,8 +5,8 @@ export default class Select extends React.Component {
     super(props);
   }
 
-  _handlingChange = (label, value) => {
-    this.props.handlingSelectChange(label, value);
+  _handlingChange = (value) => {
+    this.props.handlingSelectChange(value);
   }
 
   render() {
@@ -14,7 +14,7 @@ export default class Select extends React.Component {
     return (
       <div className='select'>
         <label> {label} </label>
-        <select onChange = {(e) => this._handlingChange(label, e.target.value)}>
+        <select onChange = {(e) => this._handlingChange(e.target.value)}>
           {
             optionsList.map((option, index) => {
               return (
