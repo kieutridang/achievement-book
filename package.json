@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "Start": "webpack-dev-server --port 8081 & nodemon ./server/express.js",
-    "start": "forever start -a -w ./server/express.js | webpack-dev-server --port 8081",
-    "stop": "forever stopall",
+    "start": "pm2 start ./server/express.js --watch | webpack-dev-server --port 8081",
+    "stop": "pm2 delete express",
     "dev": "webpack-dev-server --port 8081"
   },
   "repository": {
@@ -48,6 +48,7 @@
     "webpack-server": "^0.1.2"
   },
   "devDependencies": {
+    "pm2": "^2.9.1",
     "sass": "^1.0.0-beta.4",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1"
