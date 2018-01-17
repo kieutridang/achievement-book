@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../Button/index.jsx'
 import Select from '../Select/index.jsx'
 import SingleChoice from '../SingleChoice/index.jsx'
-
+import MultipleChoice from '../MultipleChoice/index.jsx'
 
 export default class HelloWord extends React.Component {
     alertHelloWorld() {
@@ -14,6 +14,10 @@ export default class HelloWord extends React.Component {
     }
 
     handlingSingleChoiceChange = (value) => {
+        alert(value);
+    }
+
+    handlingMultipleChoiceChange = (value) => {
         alert(value);
     }
 
@@ -41,6 +45,15 @@ export default class HelloWord extends React.Component {
                         'Female'
                     ]}
                     handlingSingleChoiceChange={this.handlingSingleChoiceChange}/>
+                <MultipleChoice
+                    label = 'Department'
+                    property = 'department'
+                    optionsList = {[
+                        {value: 'Student', checked: false},
+                        {value: 'Teacher', checked: false},
+                        {value: 'BlahBlah', checked: false}
+                    ]}
+                    handlingMultipleChoiceChange = {this.handlingMultipleChoiceChange}/>
             </div>
         );
     }
