@@ -110,6 +110,10 @@ export default class HelloWord extends React.Component {
                 <Button 
                     name='Submit'
                     handlingClick={this.handlingClick}/>
+                <Label
+                    label = 'Name'
+                    labelRequired  = {this.labelRequired}    
+                />
             </div>
                 );
             }
