@@ -17,6 +17,18 @@ app.get('/api/testGet', (req, res) => {
     res.end('testSuccessfully');
 })
 
+app.post('/api/testPost', (req, res) => {
+    var body = '';
+    var json = {};
+    req.on('data', (chunk) => {
+        body += chunk;
+    })
+    req.on('end', function () {
+        json = JSON.parse(body);
+        res.end(body);
+    });
+})
+
 app.get(/^\/[a-z]*$/, (req, res) => {
     res.sendFile(path.join(__dirname, staticPath, '/index.html'))
 })

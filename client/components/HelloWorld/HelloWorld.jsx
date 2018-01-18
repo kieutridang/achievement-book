@@ -82,7 +82,10 @@ export default class HelloWord extends React.Component {
                 <Button 
                     name='Hello'
                     handleClick={() => {
-                        console.log(_helper.GET("http://localhost:8080/api/testGet", []));
+                        _helper.GET("http://localhost:8080/api/testGet",[], (response) => {
+                            console.log(response);
+                        });
+                        {/* console.log(_helper.POST("http://localhost:8080/api/testPost", '{"name":"Huy"}' ,[])); */}
                     }
                     }/>
                 <Select
