@@ -1,12 +1,13 @@
 let _helper = {
-    GET: function(reqURL, headers){
+    GET: function(reqURL, headers, callback){
         let response = {};
         let xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
-        xhr.addEventListener("readyStateChange", function(){
+        xhr.addEventListener("readystatechange", function(){
             if (this.readyState === 4) {
                 response.statusCode = xhr.status;
                 response.data = this.responseText;
+                callback(response);
             }
         })
         xhr.open("GET", reqURL);
@@ -15,53 +16,56 @@ let _helper = {
         })
         xhr.send();
     },
-    POST: function(reqURL, dataToBeSend, headers){
+    POST: function(reqURL, dataToBeSend, headers, callback){
         let response = {};
         let xhr = new XMLHttpRequest();
         xhr.withCredentials = true;        
-        xhr.addEventListener("readStateChange", function(){
+        xhr.addEventListener("readystatechange", function(){
             if (this.readyState === 4) {
                 response.statusCode = xhr.status;
                 response.data = this.responseText;
+                callback(response);
             }
         })
         xhr.open("POST", reqURL);
         headers.forEach(function(header){
             xhr.setRequestHeader(header.key, header.value);
         })
-        xhr.send();
+        xhr.send(dataToBeSend);
     },
-    PUT: function (reqURL, dataToBeSend, headers) {
+    PUT: function (reqURL, dataToBeSend, headers, callback) {
         let response = {};
         let xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
-        xhr.addEventListener("readStateChange", function () {
+        xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
                 response.statusCode = xhr.status;
                 response.data = this.responseText;
+                callback(response);
             }
         })
         xhr.open("PUT", reqURL);
         headers.forEach(function (header) {
             xhr.setRequestHeader(header.key, header.value);
         })
-        xhr.send();
+        xhr.send(dataToBeSend);
     },
-    DELETE: function (reqURL, dataToBeSend, headers) {
+    DELETE: function (reqURL, dataToBeSend, headers, callback) {
         let response = {};
         let xhr = new XMLHttpRequest();
         xhr.withCredentials = true;        
-        xhr.addEventListener("readStateChange", function () {
+        xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
                 response.statusCode = xhr.status;
                 response.data = this.responseText;
+                callback(response);
             }
         })
         xhr.open("DELETE", reqURL);
         headers.forEach(function (header) {
             xhr.setRequestHeader(header.key, header.value);
         })
-        xhr.send();
+        xhr.send(dataToBeSend);
     }
 }
 
