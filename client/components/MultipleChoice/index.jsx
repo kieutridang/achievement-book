@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class MultipleChoice extends React.Component {
+export default class MultipleChoice extends Component {
   constructor(props) {
     super(props);
     this.state = { optionsList: this.props.optionsList };
@@ -49,7 +49,7 @@ export default class MultipleChoice extends React.Component {
         }
         </form>
         <div></div>
-        <label>{!this.props.validate && this.props.haveClickedButton && "You need to choose at least one"}</label>
+        <label>{!this.props.validate && this.props.haveClickedSubmit && "You need to choose at least one"}</label>
       </div>
     )
   }

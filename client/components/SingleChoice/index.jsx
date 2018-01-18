@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class SingleChoice extends React.Component {
+export default class SingleChoice extends Component {
   constructor(props) {
     super(props);
   }
@@ -29,7 +29,7 @@ export default class SingleChoice extends React.Component {
         }
         </form>
         <div></div>
-        <label>{!this.props.validate && this.props.haveClickedButton && "You need to choose one"}</label>
+        <label>{!this.props.validate && this.props.haveClickedSubmit && "You need to choose one"}</label>
       </div>
     )
   }

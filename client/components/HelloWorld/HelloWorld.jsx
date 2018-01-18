@@ -11,7 +11,7 @@ export default class HelloWord extends React.Component {
             validate: {
                 gender: false,
                 department: false,
-                haveClickedButton: false
+                haveClickedSubmit: false
             },
             info: {
                 city: 'Ho Chi Minh',
@@ -25,7 +25,7 @@ export default class HelloWord extends React.Component {
         let validate = this.state.validate;
         let newValidate = this.state.validate;
         let newInfo = this.state.info;
-        newValidate.haveClickedButton = true;
+        newValidate.haveClickedSubmit = true;
         this.setState({
             validate: newValidate,
             info: newInfo
@@ -94,7 +94,7 @@ export default class HelloWord extends React.Component {
                         'Female'
                     ]}
                     validate = {this.state.validate.gender}
-                    haveClickedButton = {this.state.validate.haveClickedButton}
+                    haveClickedSubmit = {this.state.validate.haveClickedSubmit}
                     handlingSingleChoiceChange={this.handlingGenderChange}/>
                 <MultipleChoice
                     label = 'Department'
@@ -105,7 +105,7 @@ export default class HelloWord extends React.Component {
                         {value: 'BlahBlah', checked: false}
                     ]}
                     validate = {this.state.validate.department}
-                    haveClickedButton = {this.state.validate.haveClickedButton}
+                    haveClickedSubmit = {this.state.validate.haveClickedSubmit}
                     handlingMultipleChoiceChange = {this.handlingDepartmentChange}/>
                 <Button 
                     name='Submit'
