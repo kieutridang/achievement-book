@@ -3,6 +3,7 @@ import Button from '../Button/index.jsx'
 import Select from '../Select/index.jsx'
 import SingleChoice from '../SingleChoice/index.jsx'
 import MultipleChoice from '../MultipleChoice/index.jsx'
+import Label from '../Label/index.jsx'
 
 export default class HelloWord extends React.Component {
     constructor(props) {
@@ -112,7 +113,7 @@ export default class HelloWord extends React.Component {
                     handlingClick={this.handlingClick}/>
                 <Label
                     label = 'Name'
-                    labelRequired  = {this.labelRequired}    
+                    labelRequired  = {true}   
                 />
             </div>
                 );
