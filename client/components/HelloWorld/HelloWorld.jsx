@@ -81,11 +81,20 @@ export default class HelloWord extends React.Component {
                 <p>Hello World</p>
                 <Button 
                     name='Hello'
-                    handleClick={() => {
-                        _helper.GET("http://localhost:8080/api/testGet",[], (response) => {
-                            console.log(response);
+                    handlingClick={() => {
+                        _helper.fetchPOST(
+                            "http://localhost:8080/api/testPost",
+                            {
+                                username: 'minhhuynk',
+                                password: 'minhhuy123'
+                            },
+                            ['Content-Type: application/json'], (error, response) => {
+                                if (error) {
+                                    console.log('error');
+                                    console.log(response);
+                                }
+                                else console.log(response);
                         });
-                        {/* console.log(_helper.POST("http://localhost:8080/api/testPost", '{"name":"Huy"}' ,[])); */}
                     }
                     }/>
                 <Select
