@@ -9,7 +9,7 @@ export default class Select extends Component {
     const { name, label, required, optionsList } = this.props;
     return (
       <div>
-        <label> {label} </label>
+        <label> {label}: </label>
         { required && <span> * </span> }
         <select onChange = {e => this.props.onChange(name, e.target.value)}>
           {

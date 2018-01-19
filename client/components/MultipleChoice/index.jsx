@@ -31,7 +31,7 @@ export default class MultipleChoice extends Component {
     const { name, label, required, optionsList, message, showMessage } = this.props;
     return (
       <div>
-        <label> {label} </label>
+        <label> {label}: </label>
         { required && <span> * </span> }
         <form>
         {
