@@ -4,6 +4,8 @@ import Select from '../Select/index.jsx'
 import SingleChoice from '../SingleChoice/index.jsx'
 import MultipleChoice from '../MultipleChoice/index.jsx'
 
+import {_helper} from '../api/_helper'
+
 export default class HelloWord extends React.Component {
     constructor(props) {
         super(props);
@@ -77,6 +79,24 @@ export default class HelloWord extends React.Component {
         return (
             <div>
                 <p>Hello World</p>
+                <Button 
+                    name='Hello'
+                    handlingClick={() => {
+                        _helper.fetchPOST(
+                            "http://localhost:8080/api/testPost",
+                            {
+                                username: 'minhhuynk',
+                                password: 'minhhuy123'
+                            },
+                            ['Content-Type: application/json'], (error, response) => {
+                                if (error) {
+                                    console.log('error');
+                                    console.log(response);
+                                }
+                                else console.log(response);
+                        });
+                    }
+                    }/>
                 <Select
                     label = 'City'
                     property = 'city'
