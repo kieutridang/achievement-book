@@ -16,26 +16,17 @@ exports.findUser = function(req, res) {
 
 exports.createUser = function(req, res) {
   try {
-    var User = require('./models/user')(db)
-    var body = '';
-    var newUser = {};
-    req.on('data', (chunk) => {
-      body += chunk;
-    }).
-    on('end', function() {
-      newUser = JSON.parse(body)
-      dataUser.findUser(db, {username: newUser.username} , function(data) {
-        if (data.length > 0) {
-          res.status(409).send('User is already exists');
-          res.end();
-        }
-        else {
-          dataUser.createUser(db, data);
-          res.status(200).end();
-        }
-      })
+    var newUser = req.body
+    dataUser.findUser(db, {username: newUser.username} , function(data) {
+      if (data) {
+        res.status(409).send('User is already exists');
+        res.end();
+      }
+      else {
+        dataUser.createUser(db, newUser);
+        res.status(200).end();
+      }
     })
-
   } catch(ex) {
     res.status(500).send(ex)
   }

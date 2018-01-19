@@ -1,5 +1,3 @@
-import { request } from 'https';
-
 var mongoose = require('mongoose')
 
 exports.findUser = function(db, data, callback) {
@@ -12,7 +10,8 @@ exports.findUser = function(db, data, callback) {
 
 exports.createUser = function(db, data) {
   var User = require('../models/user')(db)
-  data.save(function(err, data) {
+  var newUser = new User(data)
+  newUser.save(function(err, data) {
     if (err) console.log(err)
     else {
       User.find(data, function(err, data){
