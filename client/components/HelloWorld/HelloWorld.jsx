@@ -3,6 +3,7 @@ import Button from '../Button/index.jsx'
 import Select from '../Select/index.jsx'
 import SingleChoice from '../SingleChoice/index.jsx'
 import MultipleChoice from '../MultipleChoice/index.jsx'
+import Label from '../Label/index.jsx'
 
 import {_helper} from '../api/_helper'
 
@@ -130,6 +131,10 @@ export default class HelloWord extends React.Component {
                 <Button 
                     name='Submit'
                     handlingClick={this.handlingClick}/>
+                <Label
+                    label = 'Name'
+                    labelRequired  = {true}   
+                />
             </div>
                 );
             }
