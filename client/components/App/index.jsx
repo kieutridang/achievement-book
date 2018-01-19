@@ -21,7 +21,7 @@ export default class App extends Component {
   }
 
   getMessage = (name) => {
-    if (this.state.showMessage && this.state[name].length === 0) {
+    if (this.state[name].length === 0) {
       switch (name) {
         case 'gender':
           return "You must choose your gender";
@@ -58,6 +58,7 @@ export default class App extends Component {
             'Female'
           ]}
           message = {this.getMessage('gender')}
+          showMessage = {this.state.showMessage}
           onChange = {(name, value) => this.handlingChange(name, value)}/>
         <MultipleChoice
           name = 'department'
@@ -69,6 +70,7 @@ export default class App extends Component {
             {value: 'Blahblah', checked: false}
           ]}
           message = {this.getMessage('department')}
+          showMessage = {this.state.showMessage}
           onChange = {(name, value) => this.handlingChange(name, value)}/>
         <Button 
           value = 'Submit'

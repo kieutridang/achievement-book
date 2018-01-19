@@ -6,7 +6,7 @@ export default class SingleChoice extends Component {
   }
 
   render() {
-    const { name, label, required, optionsList, message } = this.props;
+    const { name, label, required, optionsList, message, showMessage } = this.props;
     return (
       <div>
         <label> {label} </label>
@@ -30,7 +30,7 @@ export default class SingleChoice extends Component {
           }
         </form>
         <div></div>
-        { message && <span> {message} </span> }
+        { showMessage && message && <span> {message} </span> }
       </div>
     )
   }
