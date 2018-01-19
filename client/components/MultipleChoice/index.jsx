@@ -15,9 +15,9 @@ export default class MultipleChoice extends Component {
 
     let checkedList = [];
     debugger;
-    this.state.optionsList.map(option => {
+    this.state.optionsList.forEach(option => {
       if (option.checked) {
-        return checkedList.push(option.value);
+        checkedList.push(option.value);
       }
     })
     this.props.onChange(name, checkedList);
