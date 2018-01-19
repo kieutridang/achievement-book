@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import './index.scss';
+
 export default class Input extends Component {
-  constructor(props){
-    super(props);
-    this.state ={
-      
+    constructor(props){
+        super(props);
+        this.state = {
+
+        }
     }
-  }
-  render() {
-    return (
-      <input/>
-    )
-  }
+    render() {
+        let {type, label, name, required, onChange, message, showMessage} = this.props;
+        return (
+            <div>
+                <label>{label}: </label>
+                {required && 
+                    <span>*</span>
+                }
+                <input 
+                    type={type || 'text'}
+                    onChange={(e) => (onChange(name, e.target.value))}
+                />
+                <div></div>
+                {showMessage && message && <span>{message}</span>}
+            </div>
+        );
+    }
 }

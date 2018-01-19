@@ -5,6 +5,6 @@ module.exports = function(app) {
     var router = express.Router()
     
     router('/user/createuser', user.createUser)
-    router('/user/userid/:id', user.findUser)
+    router('/user/userid/:_id', user.findUser)
     app.use('/api', router)
 }
