@@ -1,35 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class SingleChoice extends React.Component {
+export default class SingleChoice extends Component {
   constructor(props) {
     super(props);
   }
 
-  _handlingChange = (value) => {
-    this.props.handlingSingleChoiceChange(value);
-  }
-
   render() {
-    const { label, optionsList } = this.props;
+    const { name, label, required, optionsList, message } = this.props;
     return (
       <div>
         <label> {label} </label>
+        { required && <span> * </span> }
         <form>
-        {
-          optionsList.map((option, index) => {
-            return (
-              <div key={index}>
-                <label>
-                  <input type='radio' name={this.props.property} value={option} onClick={(e) => this._handlingChange(e.target.value)}/>
-                  {option} 
-                </label>
-              </div>
-            )
-          })
-        }
+          {
+            optionsList.map((option, index) => {
+              return (
+                <div key={index}>
+                  <label>
+                    <input 
+                      type='radio'
+                      name={name} 
+                      value={option} 
+                      onClick={(e) => this.props.onChange(name, e.target.value)}/>
+                      {option} 
+                  </label>
+                </div>
+              )
+            })
+          }
         </form>
         <div></div>
-        <label>{!this.props.validate && this.props.haveClickedSubmit && "You need to choose one"}</label>
+        { message && <span> {message} </span> }
       </div>
     )
   }
