@@ -11,12 +11,10 @@ export default class Input extends Component {
         let {type, label, name, required, onChange, message, showMessage} = this.props;
         return (
             <div>
-                {required ? (
-                    <label>{label}* :</label>
-                ) 
-                : (
-                    <label>{label}</label>
-                )}
+                <label>{label}: </label>
+                {required && 
+                    <span>*</span>
+                }
                 <input 
                     type={type || 'text'}
                     onChange={(e) => (onChange(name, e.target.value))}
