@@ -21,7 +21,6 @@ export default class App extends Component {
   }
 
   getMessage = (name) => {
-    // debugger;
     if (this.state.showMessage && this.state[name].length === 0) {
       switch (name) {
         case 'gender':
@@ -43,6 +42,7 @@ export default class App extends Component {
         <Select 
           name = 'city'
           label = 'City'
+          required = {true}
           optionsList = {[
             'Ho Chi Minh',
             'Ha Noi',
