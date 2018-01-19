@@ -3,11 +3,13 @@ import Button from '../Button/index.jsx'
 import Select from '../Select/index.jsx'
 import SingleChoice from '../SingleChoice/index.jsx'
 import MultipleChoice from '../MultipleChoice/index.jsx'
+import Input from '../Input/index.jsx'
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
       city: 'Ho Chi Minh',
       gender: '',
       department: [],
@@ -34,6 +36,10 @@ export default class App extends Component {
 
   handlingChange = (name, value) => {
     this.setState({ [name]: value });
+  }
+
+  messageForText = (name, value) => {
+    return 'OK';
   }
 
   render() {
@@ -72,6 +78,14 @@ export default class App extends Component {
           message = {this.getMessage('department')}
           showMessage = {this.state.showMessage}
           onChange = {(name, value) => this.handlingChange(name, value)}/>
+        <Input
+          name = 'name'
+          label = 'Name'
+          required = {true}
+          onChange = {this.handlingChange}
+          message = {this.messageForText('name', this.state.name)}
+          showMessage = {this.state.showMessage}
+        />
         <Button 
           value = 'Submit'
           onClick = {this.showMessage}/>

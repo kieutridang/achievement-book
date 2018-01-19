@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 export default class Input extends Component {
     constructor(props){
@@ -18,8 +18,8 @@ export default class Input extends Component {
                     <label>{label}</label>
                 )}
                 <input 
-                    type={type}
-                    onChange={(e) => (onChange(e.target.value))}
+                    type={type || 'text'}
+                    onChange={(e) => (onChange(name, e.target.value))}
                 />
                 <div></div>
                 {showMessage && message && <span>{message}</span>}
