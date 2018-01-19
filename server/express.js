@@ -1,17 +1,24 @@
 const express = require('express')
 const path = require('path')
+const cors = require('cors');
 const app = express()
 
 const staticPath = '../dist';
 var database = require('./database');
 
-app.use(function(req, res, next){
-    res.header('Access-Control-Allow-Origin', "http://localhost:8081");
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    res.header('Access-Control-Allow-Credentials', true);
-    next();
-})
+// app.use(function(req, res, next){
+//     res.header('Access-Control-Allow-Origin', "http://localhost:8081");
+//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type');
+//     res.header('Access-Control-Allow-Credentials', true);
+//     next();
+// })
+
+
+app.use(cors({
+    origin: true,
+    credentials: true
+}))
 
 app.get('/api/testGet', (req, res) => {
     res.end('testSuccessfully');
