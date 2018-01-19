@@ -1,31 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class MultipleChoice extends React.Component {
+export default class MultipleChoice extends Component {
   constructor(props) {
     super(props);
-    this.state = { optionsList: this.props.optionsList };
-    
-    this._handlingChange = this._handlingChange.bind(this);
+    this.state = {
+      optionsList: this.props.optionsList
+    } 
   }
 
-  _handlingChange(index, checked) {
-    let newOptionsList = this.state.optionsList;
+  handlingChange = (name, index, checked) => {
+    let newOptionsList = [];
+    this.state.optionsList.forEach((obj) => {
+      var newObj = {};
+      Object.keys(obj).forEach(key => newObj[key] = obj[key]);
+      newOptionsList.push(newObj);
+    });
     newOptionsList[index].checked = checked;
-    this.setState({ optionsList: newOptionsList });
-    let checkedList = [];
-    this.state.optionsList.map((option, index) => {
-      if (option.checked) {
-        checkedList.push(option.value)
-      }
-    })
-    this.props.handlingMultipleChoiceChange(checkedList);
+    this.setState({optionsList: newOptionsList}, function () {
+      let checkedList = [];
+      this.state.optionsList.forEach(option => {
+        if (option.checked) {
+          checkedList.push(option.value);
+        }
+      })
+      this.props.onChange(name, checkedList);
+    });
   }
 
   render() {
-    const { label, optionsList } = this.props;
+    const { name, label, required, optionsList, message } = this.props;
     return (
       <div>
         <label> {label} </label>
+        { required && <span> * </span> }
         <form>
         {
           optionsList.map((option, index) => {
@@ -33,14 +40,12 @@ export default class MultipleChoice extends React.Component {
               <div key={index}>
                 <label>
                   <input 
-                    type='checkbox' 
-                    name={this.props.property} 
-                    value={index} // This is the index of the value in the optionsList
-                    key={index}
-                    onClick={
-                      (e) => this._handlingChange(e.target.value, e.target.checked)
-                    }
-                  />
+                    type = 'checkbox' 
+                    name = {name} 
+                    value = {index} // This is the index of the value in the optionsList
+                    onClick = {
+                      e => this.handlingChange(name, e.target.value, e.target.checked)
+                    }/>
                   {option.value}
                 </label>
               </div>
@@ -49,7 +54,7 @@ export default class MultipleChoice extends React.Component {
         }
         </form>
         <div></div>
-        <label>{!this.props.validate && this.props.haveClickedSubmit && "You need to choose at least one"}</label>
+        { message && <span> {message} </span> }
       </div>
     )
   }

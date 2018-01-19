@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class Button extends React.Component  {
+export default class Button extends Component  {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <button onClick={this.props.handlingClick}>
-        {this.props.name}
+      <button onClick={this.props.onClick}>
+        {this.props.value}
       </button>
     )
   }

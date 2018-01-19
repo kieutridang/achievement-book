@@ -1,27 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class Select extends React.Component {
+export default class Select extends Component {
   constructor(props) {
     super(props);
   }
 
-  _handlingChange = (value) => {
-    this.props.handlingSelectChange(value);
-  }
-
   render() {
-    const { label, optionsList } = this.props;
+    const { name, label, required, optionsList } = this.props;
     return (
-      <div className='select'>
+      <div>
         <label> {label} </label>
-        <select onChange = {(e) => this._handlingChange(e.target.value)}>
+        { required && <span> * </span> }
+        <select onChange = {e => this.props.onChange(name, e.target.value)}>
           {
             optionsList.map((option, index) => {
               return (
-                <option 
-                  key = {index}
-                  value = {option}
-                > {option} </option>
+                <option key = {index} value = {option}> {option} </option>
               )
             })
           }

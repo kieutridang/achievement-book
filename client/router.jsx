@@ -1,11 +1,11 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-import HelloWorld from './components/HelloWorld/HelloWorld.jsx'
+import App from './components/App/index.jsx'
 
 const routes = (
     <Switch>
-        <Route exact path='/' component={HelloWorld} />
+        <Route exact path='/' component={App} />
     </Switch>
 )
 
