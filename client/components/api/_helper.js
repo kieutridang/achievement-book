@@ -3,14 +3,16 @@ import axios from 'axios'
 let _helper = {
     fetchGET: function (reqURL, headers, callback){
         axios({
-            method: 'POST',
+            method: 'GET',
             url: reqURL,
             headers: headers
         })
         .then((response) => {
+            debugger
             return response.data;
         })
         .then((json) => {
+            debugger
             callback(true, json);
         })
         .catch((error) => {

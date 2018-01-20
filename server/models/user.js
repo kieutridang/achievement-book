@@ -34,7 +34,7 @@ var Schema = new Schema({
     }
   },
   DOB: {
-    type: Date,
+    type: String,
     required: [true, "Date of Birth is required"]
   },
   gender: {

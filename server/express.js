@@ -2,44 +2,22 @@ const express = require('express')
 const path = require('path')
 const cors = require('cors');
 const app = express()
-
 const staticPath = '../dist';
-var database = require('./database');
+const bodyParser = require('body-parser')
 
-// app.use(function(req, res, next){
-//     res.header('Access-Control-Allow-Origin', "http://localhost:8081");
-//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//     res.header('Access-Control-Allow-Headers', 'Content-Type');
-//     res.header('Access-Control-Allow-Credentials', true);
-//     next();
-// })
+module.exports = function(app) {
+    app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({extended: true})) 
 
-
-app.use(cors({
-    origin: true,
-    credentials: true
-}))
-
-app.get('/api/testGet', (req, res) => {
-    res.end('testSuccessfully');
-})
-
-app.post('/api/testPost', (req, res) => {
-    var body = '';
-    var json = {};
-    req.on('data', (chunk) => {
-        body += chunk;
+    app.use(cors({
+        origin: true,
+        credentials: true
+    }))
+    
+    app.get(/^\/[a-z]*$/, (req, res) => {
+        res.sendFile(path.join(__dirname, staticPath, '/index.html'))
     })
-    req.on('end', function () {
-        json = JSON.parse(body);
-        res.end(body);
-    });
-})
-
-app.get(/^\/[a-z]*$/, (req, res) => {
-    res.sendFile(path.join(__dirname, staticPath, '/index.html'))
-})
-
-app.use('/', express.static(path.join(__dirname, staticPath)))
-
-app.listen(8080, () => { console.log('Server running on port 8080')});
+    
+    app.use('/', express.static(path.join(__dirname, staticPath)))
+    
+}
