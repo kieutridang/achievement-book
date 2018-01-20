@@ -15,7 +15,7 @@ var Schema = new Schema({
   },
   fullname: {
     type: String,
-    required: [true, "Username is required"], 
+    required: [true, "Fullname is required"], 
     validate: {
       validator: function(v) {
         return !(/(^| )[a-z]/.test(v));

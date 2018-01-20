@@ -20,3 +20,10 @@ exports.createUser = function(db, data) {
     }
   })
 }
+
+exports.updateUser = function(db, condition, data, callback) {
+  var User = require('../models/user')(db)
+  User.findOneAndUpdate(condition, data, {$new: false}, function(err, model) {
+    callback(err, model)
+  })
+}
