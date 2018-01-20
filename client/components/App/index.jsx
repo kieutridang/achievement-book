@@ -4,7 +4,10 @@ import Select from '../Select/index.jsx'
 import SingleChoice from '../SingleChoice/index.jsx'
 import MultipleChoice from '../MultipleChoice/index.jsx'
 import Input from '../Input/index.jsx'
+
 import {_helper} from '../api/_helper'
+import {checkValidate} from '../functions/checkValidate'
+import {validations} from '../functions/validations'
 
 export default class App extends Component {
   constructor(props) {
@@ -101,7 +104,9 @@ export default class App extends Component {
             'Male',
             'Female'
           ]}
-          message = {this.getMessage('gender')}
+          message={
+            checkValidate.checkSingleChoice(this.state.gender, true, validations.gender)
+          }
           showMessage = {this.state.showMessage}
           onChange = {(name, value) => this.handlingChange(name, value)}/>
         <MultipleChoice
@@ -113,7 +118,9 @@ export default class App extends Component {
             {value: 'Teacher', checked: false},
             {value: 'Blahblah', checked: false}
           ]}
-          message = {this.getMessage('department')}
+          message = {
+            checkValidate.checkMultipleChoice(this.state.department, true, validations.department)
+          }
           showMessage = {this.state.showMessage}
           onChange = {(name, value) => this.handlingChange(name, value)}/>
         <Input
@@ -121,7 +128,7 @@ export default class App extends Component {
           label = 'Name'
           required = {true}
           onChange = {this.handlingChange}
-          message = {this.messageForText('name', this.state.name)}
+          message = {checkValidate.checkText(this.state.name, validations.name)}
           showMessage = {this.state.showMessage}
         />
         <Button 
