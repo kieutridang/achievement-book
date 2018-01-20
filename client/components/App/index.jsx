@@ -47,14 +47,36 @@ export default class App extends Component {
     return (
       <div>
         <button onClick={() => {
-          _helper.fetchGET(
-            'https://localhost:8080/api/user/userid/5a61f703f29dd3283e449c96', 
+          // _helper.fetchGET(
+          //   'http://localhost:8080/api/user/userid/5a61f703f29dd3283e449c96', 
+          //   [{'Content-Type': 'javascript/json'}], 
+          //   (err, response) => {
+          //     if (!err) {
+          //       console.log(response);
+          //     }
+          //     else {
+          //       debugger
+          //       console.log(response);
+          //     }
+          //   })
+          _helper.fetchPOST(
+            'http://localhost:8080/api/user/createuser', 
+            {
+              username: 'congaa',
+              password: 'huygaa',
+              email: 'thucga@gmail.com',
+              fullname: 'Duy La Con Ga',
+              DOB: '01-01-1111',
+              gender: 'Female'
+            },
             [{'Content-Type': 'javascript/json'}], 
-            (err, repsonse) => {
+            (err, response) => {
+              debugger
               if (!err) {
                 console.log(response);
               }
               else {
+                debugger
                 console.log(response);
               }
             })

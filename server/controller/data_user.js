@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 
 exports.findUser = function(db, data, callback) {
   var User = require('../models/user')(db)
-  User.findOne(data, function(err, data){
+  User.find(data, function(err, data){
       if (err) return console.log(err);
       callback(data);
   })

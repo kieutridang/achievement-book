@@ -6,8 +6,10 @@ var db = mongoose.connection
 
 exports.findUser = function(req, res) {
   try {
+    debugger
     dataUser.findUser(db, req.params, function (data) {
-      res.status(200).send(data);
+      debugger
+      res.status(200).send(JSON.stringify(data));
     })
   } catch (ex) {
     res.status(500).send(ex);
@@ -18,7 +20,7 @@ exports.createUser = function(req, res) {
   try {
     var newUser = req.body
     dataUser.findUser(db, {username: newUser.username} , function(data) {
-      if (data) {
+      if (data.length != 0) {
         res.status(409).send('User is already exists');
         res.end();
       }

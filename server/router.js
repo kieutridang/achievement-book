@@ -4,7 +4,7 @@ const user = require('./controller/user')
 module.exports = function(app) {
     var router = express.Router()
     
-    router('/user/createuser', user.createUser)
-    router('/user/userid/:_id', user.findUser)
+    router.post('/user/createuser', user.createUser)
+    router.get('/user/userid/:_id', user.findUser)
     app.use('/api', router)
 }
