@@ -4,6 +4,7 @@ import Select from '../Select/index.jsx'
 import SingleChoice from '../SingleChoice/index.jsx'
 import MultipleChoice from '../MultipleChoice/index.jsx'
 import Input from '../Input/index.jsx'
+import UploadImage from '../UploadImage/index.jsx'
 
 import {_helper} from '../api/_helper'
 import {checkValidate} from '../functions/checkValidate'
@@ -17,6 +18,7 @@ export default class App extends Component {
       city: 'Ho Chi Minh',
       gender: '',
       department: [],
+      avatar: '',
 
       showMessage: false
     }
@@ -50,19 +52,23 @@ export default class App extends Component {
     return (
       <div>
         <button onClick={() => {
-          // _helper.fetchGET(
-          //   'http://localhost:8080/api/user/userid/5a61f703f29dd3283e449c96', 
-          //   [{'Content-Type': 'javascript/json'}], 
-          //   (err, response) => {
-          //     if (!err) {
-          //       console.log(response);
-          //     }
-          //     else {
-          //       debugger
-          //       console.log(response);
-          //     }
-          //   })
-          _helper.fetchPOST(
+          _helper.fetchGET(
+            'http://localhost:8080/api/user/userid/5a631a74663b97acda046c54',
+            [{ 'Content-Type': 'javascript/json' }],
+            (err, response) => {
+              if (!err) {
+                console.log(response);
+              }
+              else {
+                debugger
+                this.setState ({
+                  avatar: response[0].avatar
+                })
+                console.log(response);
+              }
+            })
+
+          {/* _helper.fetchPOST(
             'http://localhost:8080/api/user/createuser', 
             {
               username: 'congaa',
@@ -70,7 +76,8 @@ export default class App extends Component {
               email: 'thucga@gmail.com',
               fullname: 'Duy La Con Ga',
               DOB: '01-01-1111',
-              gender: 'Female'
+              gender: 'Female',
+              avatar: this.state.avatar
             },
             [{'Content-Type': 'javascript/json'}], 
             (err, response) => {
@@ -83,6 +90,7 @@ export default class App extends Component {
                 console.log(response);
               }
             })
+          } */}
           }}>
           ClickMe
         </button>
@@ -130,6 +138,11 @@ export default class App extends Component {
           onChange = {this.handlingChange}
           message = {checkValidate.checkText(this.state.name, validations.name)}
           showMessage = {this.state.showMessage}
+        />
+        <UploadImage
+          name = 'avatar'
+          onChange = {this.handlingChange}
+          srcData = {this.state.avatar}
         />
         <Button 
           value = 'Submit'

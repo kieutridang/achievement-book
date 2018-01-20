@@ -8,11 +8,9 @@ let _helper = {
             headers: headers
         })
         .then((response) => {
-            debugger
             return response.data;
         })
         .then((json) => {
-            debugger
             callback(true, json);
         })
         .catch((error) => {
