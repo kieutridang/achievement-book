@@ -4,7 +4,7 @@ const baseURL = 'http://localhost:8080/api';
 const defaultHeaders = [{ 'Content-Type': 'javascript/json' }]
 
 let _helper = {
-    fetchGET: function (reqURL, headers){
+    fetchGET: (reqURL, headers) => {
         return axios({
             method: 'GET',
             url: baseURL + reqURL,
@@ -20,7 +20,7 @@ let _helper = {
             return error
         })
     },
-    fetchPOST: function (reqURL, dataToBeSent, headers, type){
+    fetchPOST: (reqURL, dataToBeSent, headers, type) => {
         return axios({
             method: type || "POST",
             url: baseURL + reqURL,

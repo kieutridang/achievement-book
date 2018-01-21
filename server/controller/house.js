@@ -8,17 +8,19 @@ var db = mongoose.connection
 
 exports.addData = function(req, res) {
   try {
+    debugger
     var data = req.body
     var House = require('../models/house')(db)
     data = new House(data)
     data.save(function(err, data) {
+      debugger
       if (err) console.log(err)
       else {
         House.find({}, function(err,data) {
           console.log(data)
         })
         res.status(200).end()
-      }
+      }     
     })
   } catch (ex) {
     res.status(500).send(ex).end()

@@ -10,5 +10,6 @@ module.exports = function(app) {
 
     router.post('/house/add-training-data', house.addData)
     router.get('/house/square/:square/bedroom/:numberOfBedrooms/distance/:distance', house.predictHousePrice)
+    router.get('/houses', house.getHouses)
     app.use('/api', router)
 }

@@ -17,7 +17,7 @@ export default class Input extends Component {
                 }
                 <input 
                     type={type || 'text'}
-                    onChange={(e) => (onChange(name, e.target.value))}
+                    onChange={(e) => (onChange(e.target.value, name))}
                 />
                 <div></div>
                 {showMessage && message && <span>{message}</span>}

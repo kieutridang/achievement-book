@@ -12,7 +12,9 @@ export default class TrainingDataTable extends Component {
   }
 
   componentDidMount() {
-    getHouses().then(data => this.setState(data))
+    getHouses().then(data => {
+      this.setState({data})
+    })
   }
 
   render() {
@@ -24,16 +26,16 @@ export default class TrainingDataTable extends Component {
               <button onClick={this._addButtonHandler}>Add</button>
             </th>
             <th>
-              <Input name={'square'} label={'Square'}/>
+              <Input name={'square'} label={'Square'} onChange={(square) => this.setState({square})}/>
             </th>
             <th>
-              <Input name={'bedroom'} label={'No.Bedroom'}/>
+              <Input name={'bedroom'} label={'No.Bedroom'} onChange={(bedroom) => this.setState({bedroom})}/>
             </th>
             <th>
-              <Input name={'distance'} label={'Distance to city center'}/>
+              <Input name={'distance'} label={'Distance to city center'} onChange={(distance) => this.setState({distance})}/>
             </th>
             <th>
-              <Input name={'price'} label={'House price'}/>
+              <Input name={'price'} label={'House price'} onChange={(price) => this.setState({price})}/>
             </th>
           </tr>
         </thead>
@@ -41,7 +43,7 @@ export default class TrainingDataTable extends Component {
           {
             this.state.data && this.state.data.map((house, i) => {
               return (
-                <tr key={house.id}>
+                <tr key={house._id}>
                   <td>{i + 1}</td>
                   <td>{house.square}</td>
                   <td>{house.numberOfBedrooms}</td>
@@ -58,6 +60,7 @@ export default class TrainingDataTable extends Component {
 
   _addButtonHandler = () => {
     const { square, bedroom, distance, price } = this.state
+    debugger
     addHouse(square, bedroom, distance, price).then(data => alert(data))
   }
 }
