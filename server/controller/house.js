@@ -39,17 +39,23 @@ exports.predictHousePrice = function(req, res) {
         trainingData = trainingData.map((element) => {
           return {
             input: {
-              square: Number(element.square),
-              numberOfBedrooms: Number(element.numberOfBedrooms),
-              distance: Number(element.distance)
+              square: Number(element.square)/100,
+              numberOfBedrooms: Number(element.numberOfBedrooms)/10,
+              distance: Number(element.distance)/100
             },
             output: {
-              price: Number(element.price)
+              price: Number(element.price)/1000
             }
           }
         })
         net.train(trainingData)
-        var output = net.run(data);
+        var dataTest = {
+          square: Number(req.params.square)/100,
+          numberOfBedrooms: Number(req.params.numberOfBedrooms)/10,
+          distance: Number(req.params.distance)/100
+        }
+        debugger
+        var output = net.run(dataTest);
         res.status(200).send(output).end()
       }
     })
