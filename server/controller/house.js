@@ -1,6 +1,6 @@
-import express from 'express'
-import mongoose from 'mongoose'
-import brain from 'brainjs'
+const express = require('express')
+const mongoose = require('mongoose')
+const brain = require('brainjs')
 var net = new brain.NeuralNetwork();
 
 mongoose.connect('mongodb://localhost/machine-learing')
@@ -30,27 +30,41 @@ exports.predictHousePrice = function(req, res) {
     var data = req.params;
     var House = require('../models/house')(db)
     var trainingData;
-    House.find({}, function(err, data) {
+    House.find(function(err, data) {
       if (err) console.log(err)
       else {
         trainingData = data
+        trainingData = trainingData.map((element) => {
+          return {
+            input: {
+              square: Number(element.square),
+              numberOfBedrooms: Number(element.numberOfBedrooms),
+              distance: Number(element.distance)
+            },
+            output: {
+              price: Number(element.price)
+            }
+          }
+        })
+        net.train(trainingData)
+        var output = net.run(data);
+        res.status(200).send(output).end()
       }
     })
-    trainingData = trainingData.map((element) => {
-      return {
-        input: {
-          square: element.square,
-          numberOfBedrooms: element.numberOfBedrooms,
-          distance: element.distance
-        },
-        output: {
-          price: element.price
-        }
+  } catch(ex) {
+    res.status(500).send(ex)
+  }
+}
+
+exports.getHouses = function(req, res) {
+  try {
+    var House = require('../models/house')(db)
+    House.find(function(err, data) {
+      if (err) console.log(err)
+      else {
+        res.status(200).send(data).end()
       }
     })
-    net.train(trainingData)
-    var output = net.run(data);
-    res.status(200).send(output).end()
   } catch(ex) {
     res.status(500).send(ex)
   }
