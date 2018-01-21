@@ -1,39 +1,40 @@
 import axios from 'axios'
 
+const baseURL = 'http://localhost:8080/api';
+const defaultHeaders = [{ 'Content-Type': 'javascript/json' }]
+
 let _helper = {
     fetchGET: function (reqURL, headers, callback){
         axios({
             method: 'GET',
-            url: reqURL,
-            headers: headers
+            url: baseURL + reqURL,
+            headers: headers || defaultHeaders
         })
         .then((response) => {
-            debugger
             return response.data;
         })
         .then((json) => {
-            debugger
-            callback(true, json);
+            return json
         })
         .catch((error) => {
-            callback(false, error);
+            return error
         })
     },
     fetchPOST: function (reqURL, dataToBeSent, headers, callback, type){
         axios({
             method: type || "POST",
-            url: reqURL,
-            headers: headers,
+            url: baseURL + reqURL,
+            headers: headers || defaultHeaders,
             data: dataToBeSent,
         })
         .then((response) => {
             return response.data;
         })
         .then((json) => {
-            callback(false, json);
+            return json
         })
         .catch((error) => {
-            callback(true, error);
+            return error
         })
     }
 }
