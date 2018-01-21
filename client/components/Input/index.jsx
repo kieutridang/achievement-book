@@ -8,7 +8,7 @@ export default class Input extends Component {
         }
     }
     render() {
-        let {type, label, name, required, onChange, message, showMessage} = this.props;
+        let {type, label, property, required, onChange, message, showMessage} = this.props;
         return (
             <div>
                 <label>{label}: </label>
@@ -17,7 +17,7 @@ export default class Input extends Component {
                 }
                 <input 
                     type={type || 'text'}
-                    onChange={(e) => (onChange(name, e.target.value))}
+                    onChange={(e) => (onChange(e.target.value, property))}
                 />
                 <div></div>
                 {showMessage && message && <span>{message}</span>}
