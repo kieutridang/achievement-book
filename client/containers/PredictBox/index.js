@@ -21,7 +21,7 @@ export default class PredictBox extends Component {
         <button onClick={this._calculatePrice}>Calculate</button>
         <div>
           <label>House Price:</label>
-          <label>{price}</label>
+          <label>{price*1000}</label>
         </div>
         <hr/>
       </div>
