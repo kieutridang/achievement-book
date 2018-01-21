@@ -38,14 +38,10 @@ export default class App extends Component {
     return null;
   }
 
-  handlingChange = (name, value) => {
-    this.setState({ [name]: value });
+  handlingChange = (value, property) => {
+    this.setState({ [property]: value });
   }
-
-  messageForText = (name, value) => {
-    return 'OK';
-  }
-
+  
   render() {
     return (
       <div>
@@ -124,7 +120,7 @@ export default class App extends Component {
           showMessage = {this.state.showMessage}
           onChange = {(name, value) => this.handlingChange(name, value)}/>
         <Input
-          name = 'name'
+          property = 'name'
           label = 'Name'
           required = {true}
           onChange = {this.handlingChange}
