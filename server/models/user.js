@@ -40,6 +40,10 @@ var Schema = new Schema({
   gender: {
     type: String,
     required: [true, "Gender is required"],
+  },
+  avatar: {
+    type: String,
+    required: [true, "Avatar is required"],
   }
 });
 

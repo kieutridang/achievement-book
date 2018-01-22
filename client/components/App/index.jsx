@@ -4,6 +4,7 @@ import Select from '../Select/index.jsx'
 import SingleChoice from '../SingleChoice/index.jsx'
 import MultipleChoice from '../MultipleChoice/index.jsx'
 import Input from '../Input/index.jsx'
+import UploadImage from '../UploadImage/index.jsx'
 
 import {_helper} from '../api/_helper'
 import {checkValidate} from '../functions/checkValidate'
@@ -42,7 +43,8 @@ export default class App extends Component {
               email: 'thucga@gmail.com',
               fullname: 'Duy La Con Ga',
               DOB: '01-01-1111',
-              gender: 'Female'
+              gender: 'Female',
+              avatar: this.state.avatar
             },
             [{'Content-Type': 'javascript/json'}],
             "POST"
@@ -60,10 +62,10 @@ export default class App extends Component {
           message = {checkValidate.checkText(this.state.name, validations.name)}
           showMessage = {this.state.showMessage}
         />
-        <Input
-          label = 'Age'
-          type = 'number'
-          onChange={(age) => { this.setState({ age }) }}
+        <UploadImage
+          property = 'avatar'
+          onChange = {(avatar) => {this.setState({avatar})}}
+          srcData = {this.state.avatar}
         />
         <Button 
           value = 'Submit'
