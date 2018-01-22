@@ -25,6 +25,9 @@ export default class UploadImage extends Component {
         );
     }
     encodeImageFileAsURL = (file, callback) => {
+        if (!file) {
+            return;
+        }
         let reader = new FileReader();
         reader.onloadend = function(){
             callback(reader.result);
