@@ -49,7 +49,7 @@ export default class App extends Component {
       <div>
         <button onClick={() => {
           _helper.fetchGET(
-            '/user/useri/5a61f703f29dd3283e449c96',
+            '/user/userid/5a61f703f29dd3283e449c96',
             [{ 'Content-Type': 'javascript/json' }],)
             .then((response) => {
               console.log(response);
@@ -70,50 +70,11 @@ export default class App extends Component {
             "POST"
             ).then((response) => {
               console.log(response);
-            })
-            .catch((error) => {
-              console.log(error);
             }) */}
+
           }}>
           ClickMe
         </button>
-        <Select 
-          name = 'city'
-          label = 'City'
-          required = {true}
-          optionsList = {[
-            'Ho Chi Minh',
-            'Ha Noi',
-            'Da Nang'
-          ]}
-          onChange = {(name, value) => this.handlingChange(name, value)}/>
-        <SingleChoice 
-          name = 'gender'
-          label = 'Gender'
-          required = {true}
-          optionsList = {[
-            'Male',
-            'Female'
-          ]}
-          message={
-            checkValidate.checkSingleChoice(this.state.gender, true, validations.gender)
-          }
-          showMessage = {this.state.showMessage}
-          onChange = {(name, value) => this.handlingChange(name, value)}/>
-        <MultipleChoice
-          name = 'department'
-          label = 'Department'
-          required = {true}
-          optionsList = {[
-            {value: 'Student', checked: false},
-            {value: 'Teacher', checked: false},
-            {value: 'Blahblah', checked: false}
-          ]}
-          message = {
-            checkValidate.checkMultipleChoice(this.state.department, true, validations.department)
-          }
-          showMessage = {this.state.showMessage}
-          onChange = {(name, value) => this.handlingChange(name, value)}/>
         <Input
           property = 'name'
           label = 'Name'
