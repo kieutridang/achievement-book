@@ -8,7 +8,7 @@ export default class MultipleChoice extends Component {
     } 
   }
 
-  handlingChange = (name, index, checked) => {
+  handlingChange = (index, checked) => {
     let newOptionsList = [];
     this.state.optionsList.forEach((obj) => {
       var newObj = {};
@@ -23,12 +23,12 @@ export default class MultipleChoice extends Component {
           checkedList.push(option.value);
         }
       })
-      this.props.onChange(name, checkedList);
+      this.props.onChange(checkedList);
     });
   }
 
   render() {
-    const { name, label, required, optionsList, message, showMessage } = this.props;
+    const { label, required, optionsList, message, showMessage } = this.props;
     return (
       <div>
         <label> {label}: </label>
@@ -41,10 +41,9 @@ export default class MultipleChoice extends Component {
                 <label>
                   <input 
                     type = 'checkbox' 
-                    name = {name} 
                     value = {index} // This is the index of the value in the optionsList
                     onClick = {
-                      e => this.handlingChange(name, e.target.value, e.target.checked)
+                      e => this.handlingChange(e.target.value, e.target.checked)
                     }/>
                   {option.value}
                 </label>

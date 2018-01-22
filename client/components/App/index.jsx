@@ -15,15 +15,14 @@ export default class App extends Component {
     super(props);
     this.state = {
       name: '',
+      gender: '',
+      city: 'Ho Chi Minh',
+      department: [],
 
       showMessage: false
     }
   }
 
-  showMessage = () => {
-    this.setState({showMessage: true});
-  }
-  
   render() {
     return (
       <div>
@@ -55,6 +54,40 @@ export default class App extends Component {
           }}>
           ClickMe
         </button>
+        <Select 
+          label = 'City'
+          required = {true}
+          optionsList = {[
+            'Ho Chi Minh',
+            'Ha Noi',
+            'Da Nang'
+          ]}
+          onChange = {(city) => this.setState({city})}/>
+        <SingleChoice 
+          label = 'Gender'
+          required = {true}
+          optionsList = {[
+            'Male',
+            'Female'
+          ]}
+          message={
+            checkValidate.checkSingleChoice(this.state.gender, true, validations.gender)
+          }
+          showMessage = {this.state.showMessage}
+          onChange = {(gender) => this.setState({gender})}/>
+        <MultipleChoice
+          label = 'Department'
+          required = {true}
+          optionsList = {[
+            {value: 'Student', checked: false},
+            {value: 'Teacher', checked: false},
+            {value: 'Blahblah', checked: false}
+          ]}
+          message = {
+            checkValidate.checkMultipleChoice(this.state.department, true, validations.department)
+          }
+          showMessage = {this.state.showMessage}
+          onChange = {(department) => this.setState({department})}/>
         <Input
           label = 'Name'
           required = {true}
@@ -69,7 +102,7 @@ export default class App extends Component {
         />
         <Button 
           value = 'Submit'
-          onClick = {this.showMessage}/>
+          onClick = {() => {this.setState({showMessage: true})}}/>
       </div>
     )
   }
