@@ -5,7 +5,7 @@ const defaultHeaders = [{ 'Content-Type': 'javascript/json' }]
 
 let _helper = {
     fetchGET: function (reqURL, headers){
-        axios({
+        return axios({
             method: 'GET',
             url: baseURL + reqURL,
             headers: headers || defaultHeaders
@@ -21,7 +21,7 @@ let _helper = {
         })
     },
     fetchPOST: function (reqURL, dataToBeSent, headers, type){
-        axios({
+        return axios({
             method: type || "POST",
             url: baseURL + reqURL,
             headers: headers || defaultHeaders,
