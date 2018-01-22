@@ -23,18 +23,6 @@ export default class App extends Component {
     }
   }
 
-  getMessage = (name) => {
-    if (this.state[name].length === 0) {
-      switch (name) {
-        case 'gender':
-          return "You must choose your gender";
-        case 'department':
-          return "You must choose at least one department";
-      }
-    }
-    return null;
-  }
-
   render() {
     return (
       <div>
