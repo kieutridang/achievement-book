@@ -13,11 +13,14 @@ let _helper = {
         .then((response) => {
             return response.data;
         })
-        .then((json) => {
-            return json
-        })
         .catch((error) => {
-            return error
+            if (error.response){
+                return error.response.data;
+            }
+            else {
+                console.log(error);
+                return null;
+            }
         })
     },
     fetchPOST: function (reqURL, dataToBeSent, headers, type){
