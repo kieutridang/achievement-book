@@ -14,9 +14,6 @@ export default class App extends Component {
     super(props);
     this.state = {
       name: '',
-      city: 'Ho Chi Minh',
-      gender: '',
-      department: [],
 
       showMessage: false
     }
@@ -24,22 +21,6 @@ export default class App extends Component {
 
   showMessage = () => {
     this.setState({showMessage: true});
-  }
-
-  getMessage = (name) => {
-    if (this.state[name].length === 0) {
-      switch (name) {
-        case 'gender':
-          return "You must choose your gender";
-        case 'department':
-          return "You must choose at least one department";
-      }
-    }
-    return null;
-  }
-
-  handlingChange = (value, property) => {
-    this.setState({ [property]: value });
   }
   
   render() {
@@ -74,50 +55,17 @@ export default class App extends Component {
           }}>
           ClickMe
         </button>
-        <Select 
-          name = 'city'
-          label = 'City'
-          required = {true}
-          optionsList = {[
-            'Ho Chi Minh',
-            'Ha Noi',
-            'Da Nang'
-          ]}
-          onChange = {(name, value) => this.handlingChange(name, value)}/>
-        <SingleChoice 
-          name = 'gender'
-          label = 'Gender'
-          required = {true}
-          optionsList = {[
-            'Male',
-            'Female'
-          ]}
-          message={
-            checkValidate.checkSingleChoice(this.state.gender, true, validations.gender)
-          }
-          showMessage = {this.state.showMessage}
-          onChange = {(name, value) => this.handlingChange(name, value)}/>
-        <MultipleChoice
-          name = 'department'
-          label = 'Department'
-          required = {true}
-          optionsList = {[
-            {value: 'Student', checked: false},
-            {value: 'Teacher', checked: false},
-            {value: 'Blahblah', checked: false}
-          ]}
-          message = {
-            checkValidate.checkMultipleChoice(this.state.department, true, validations.department)
-          }
-          showMessage = {this.state.showMessage}
-          onChange = {(name, value) => this.handlingChange(name, value)}/>
         <Input
-          property = 'name'
           label = 'Name'
           required = {true}
-          onChange = {this.handlingChange}
+          onChange = {(name) => {this.setState({name})}}
           message = {checkValidate.checkText(this.state.name, validations.name)}
           showMessage = {this.state.showMessage}
+        />
+        <Input
+          label = 'Age'
+          type = 'number'
+          onChange={(age) => { this.setState({ age }) }}
         />
         <Button 
           value = 'Submit'
