@@ -64,7 +64,7 @@ export default class App extends Component {
         />
         <UploadImage
           property = 'avatar'
-          onChange = {this.handlingChange}
+          onChange = {(avatar) => {this.setState({avatar})}}
           srcData = {this.state.avatar}
         />
         <Button 

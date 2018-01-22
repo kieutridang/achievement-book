@@ -8,7 +8,7 @@ export default class UploadImage extends Component {
         }
     }
     render() {
-        let { property, onChange , srcData} = this.props;
+        let { onChange, srcData } = this.props;
         return (
             <div>
                 <img src={srcData} alt=""/>
@@ -17,7 +17,7 @@ export default class UploadImage extends Component {
                     accept = 'image/*'
                     onChange={(e) => {
                         this.encodeImageFileAsURL(e.target.files[0], (base64Img) => {
-                            onChange(base64Img, property);
+                            onChange(base64Img);
                         });
                     }}
                 />
@@ -26,7 +26,13 @@ export default class UploadImage extends Component {
     }
     encodeImageFileAsURL = (file, callback) => {
         if (!file) {
-            return;
+            if (!this.props.required) {
+                callback(null);
+                return;
+            }
+            else {
+                return;
+            }
         }
         let reader = new FileReader();
         reader.onloadend = function(){
