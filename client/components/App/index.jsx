@@ -62,10 +62,10 @@ export default class App extends Component {
           message = {checkValidate.checkText(this.state.name, validations.name)}
           showMessage = {this.state.showMessage}
         />
-        <Input
-          label = 'Age'
-          type = 'number'
-          onChange={(age) => { this.setState({ age }) }}
+        <UploadImage
+          property = 'avatar'
+          onChange = {this.handlingChange}
+          srcData = {this.state.avatar}
         />
         <Button 
           value = 'Submit'

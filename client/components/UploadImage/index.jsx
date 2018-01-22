@@ -8,21 +8,19 @@ export default class UploadImage extends Component {
         }
     }
     render() {
-        let { name, onChange , srcData} = this.props;
+        let { property, onChange , srcData} = this.props;
         return (
             <div>
                 <img src={srcData} alt=""/>
-                <button>
-                    <input 
-                        type = 'file'
-                        accept = 'image/*'
-                        onChange={(e) => {
-                            this.encodeImageFileAsURL(e.target.files[0], (base64Img) => {
-                                onChange(name, base64Img);
-                            });
-                        }}
-                    />
-                </button>
+                <input 
+                    type = 'file'
+                    accept = 'image/*'
+                    onChange={(e) => {
+                        this.encodeImageFileAsURL(e.target.files[0], (base64Img) => {
+                            onChange(base64Img, property);
+                        });
+                    }}
+                />
             </div>
         );
     }
