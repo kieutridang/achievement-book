@@ -4,8 +4,8 @@ const baseURL = 'http://localhost:8080/api';
 const defaultHeaders = [{ 'Content-Type': 'javascript/json' }]
 
 let _helper = {
-    fetchGET: function (reqURL, headers, callback){
-        axios({
+    fetchGET: function (reqURL, headers){
+        return axios({
             method: 'GET',
             url: baseURL + reqURL,
             headers: headers || defaultHeaders
@@ -20,8 +20,8 @@ let _helper = {
             return error
         })
     },
-    fetchPOST: function (reqURL, dataToBeSent, headers, callback, type){
-        axios({
+    fetchPOST: function (reqURL, dataToBeSent, headers, type){
+        return axios({
             method: type || "POST",
             url: baseURL + reqURL,
             headers: headers || defaultHeaders,
@@ -31,6 +31,7 @@ let _helper = {
             return response.data;
         })
         .then((json) => {
+            debugger
             return json
         })
         .catch((error) => {

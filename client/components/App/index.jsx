@@ -46,20 +46,15 @@ export default class App extends Component {
     return (
       <div>
         <button onClick={() => {
-          // _helper.fetchGET(
-          //   'http://localhost:8080/api/user/userid/5a61f703f29dd3283e449c96', 
-          //   [{'Content-Type': 'javascript/json'}], 
-          //   (err, response) => {
-          //     if (!err) {
-          //       console.log(response);
-          //     }
-          //     else {
-          //       debugger
-          //       console.log(response);
-          //     }
-          //   })
-          _helper.fetchPOST(
-            'http://localhost:8080/api/user/createuser', 
+          _helper.fetchGET(
+            '/user/useri/5a61f703f29dd3283e449c96',
+            [{ 'Content-Type': 'javascript/json' }],)
+            .then((response) => {
+              console.log(response);
+            })
+
+          {/* _helper.fetchPOST(
+            '/user/createuser', 
             {
               username: 'congaa',
               password: 'huygaa',
@@ -68,17 +63,14 @@ export default class App extends Component {
               DOB: '01-01-1111',
               gender: 'Female'
             },
-            [{'Content-Type': 'javascript/json'}], 
-            (err, response) => {
-              debugger
-              if (!err) {
-                console.log(response);
-              }
-              else {
-                debugger
-                console.log(response);
-              }
+            [{'Content-Type': 'javascript/json'}],
+            "POST"
+            ).then((response) => {
+              console.log(response);
             })
+            .catch((error) => {
+              console.log(error);
+            }) */}
           }}>
           ClickMe
         </button>
