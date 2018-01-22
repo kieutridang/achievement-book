@@ -15,6 +15,9 @@ export default class App extends Component {
     super(props);
     this.state = {
       name: '',
+      gender: '',
+      city: 'Ho Chi Minh',
+      department: [],
 
       showMessage: false
     }
@@ -85,7 +88,6 @@ export default class App extends Component {
           showMessage = {this.state.showMessage}
           onChange = {(gender) => this.setState({gender})}/>
         <MultipleChoice
-          name = 'department'
           label = 'Department'
           required = {true}
           optionsList = {[
