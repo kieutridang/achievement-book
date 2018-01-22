@@ -6,12 +6,12 @@ export default class Select extends Component{
   }
 
   render() {
-    const { name, label, required, optionsList } = this.props;
+    const { label, required, optionsList } = this.props;
     return (
       <div>
         <label> {label}: </label>
         { required && <span> * </span> }
-        <select onChange = {e => this.props.onChange(name, e.target.value)}>
+        <select onChange = {e => this.props.onChange(e.target.value)}>
           {
             optionsList.map((option, index) => {
               return (

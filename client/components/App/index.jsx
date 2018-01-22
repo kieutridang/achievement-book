@@ -20,10 +20,18 @@ export default class App extends Component {
     }
   }
 
-  showMessage = () => {
-    this.setState({showMessage: true});
+  getMessage = (name) => {
+    if (this.state[name].length === 0) {
+      switch (name) {
+        case 'gender':
+          return "You must choose your gender";
+        case 'department':
+          return "You must choose at least one department";
+      }
+    }
+    return null;
   }
-  
+
   render() {
     return (
       <div>
@@ -55,6 +63,41 @@ export default class App extends Component {
           }}>
           ClickMe
         </button>
+        <Select 
+          label = 'City'
+          required = {true}
+          optionsList = {[
+            'Ho Chi Minh',
+            'Ha Noi',
+            'Da Nang'
+          ]}
+          onChange = {(city) => this.setState({city})}/>
+        <SingleChoice 
+          label = 'Gender'
+          required = {true}
+          optionsList = {[
+            'Male',
+            'Female'
+          ]}
+          message={
+            checkValidate.checkSingleChoice(this.state.gender, true, validations.gender)
+          }
+          showMessage = {this.state.showMessage}
+          onChange = {(gender) => this.setState({gender})}/>
+        <MultipleChoice
+          name = 'department'
+          label = 'Department'
+          required = {true}
+          optionsList = {[
+            {value: 'Student', checked: false},
+            {value: 'Teacher', checked: false},
+            {value: 'Blahblah', checked: false}
+          ]}
+          message = {
+            checkValidate.checkMultipleChoice(this.state.department, true, validations.department)
+          }
+          showMessage = {this.state.showMessage}
+          onChange = {(department) => this.setState({department})}/>
         <Input
           label = 'Name'
           required = {true}
@@ -69,7 +112,7 @@ export default class App extends Component {
         />
         <Button 
           value = 'Submit'
-          onClick = {this.showMessage}/>
+          onClick = {() => {this.setState({showMessage: true})}}/>
       </div>
     )
   }
