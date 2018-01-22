@@ -123,7 +123,7 @@ export default class App extends Component {
           showMessage = {this.state.showMessage}
         />
         <UploadImage
-          name = 'avatar'
+          property = 'avatar'
           onChange = {this.handlingChange}
           srcData = {this.state.avatar}
         />
