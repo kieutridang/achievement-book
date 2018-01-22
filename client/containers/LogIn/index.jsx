@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
-import Input from '../../components/Input/index.jsx'
-import Button from '../../components/Button/index.jsx'
-import { _helper } from '../../components/api/_helper'
+import React, { Component } from 'react';
+import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
+import Input from '../../components/Input/index.jsx';
+import Button from '../../components/Button/index.jsx';
+import { _helper } from '../../components/api/_helper';
 
-export default class LogIn extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -24,31 +26,36 @@ export default class LogIn extends Component {
     }
     return (
       <div>
-        <h1> Log In </h1>
-        <Input
-          label = "Username"
-          onChange = {(username) => {this.setState({username})}}     
-          showMessage = {this.state.showMessage}
-        />
-        <Input
-          type = "password"
-          lable = "Password"
-          onChange={(password) => { this.setState({ password }) }}
-        />
-        <Button
-          onClick = {this.logIn()}
-        />
-        <Button
-        />
-        {showMessage &&
-          <span>{message}</span>
-        }
-        <Link to='/register'>
-          <button>Sign Up</button>
-        </Link>
+        <div>
+          <h1> Log In </h1>
+        </div>
+        <div>
+          <Input
+            label = "Username"
+            onChange = {(username) => {this.setState({username})}}     
+            showMessage = {this.state.showMessage}
+          />
+          <Input
+            type = "password"
+            label = "Password"
+            onChange={(password) => { this.setState({ password }) }}
+          />
+        </div>
+        <div>
+          <Button
+            value = "Log In"
+            onClick = {this.login}
+          />
+          {showMessage &&
+            <span>{message}</span>
+          }
+          <Link to='/register'>
+            <button>Sign Up</button>
+          </Link>
+        </div>
       </div>
     )
-    logIn = () => {
+    login = () => {
       const {username, password} = this.state;
       _helper.fetchPOST(
         "/login",
