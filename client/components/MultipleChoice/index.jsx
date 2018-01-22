@@ -8,7 +8,7 @@ export default class MultipleChoice extends Component {
     } 
   }
 
-  handlingChange = (name, index, checked) => {
+  handlingChange = (index, checked) => {
     let newOptionsList = [];
     this.state.optionsList.forEach((obj) => {
       var newObj = {};
@@ -23,7 +23,7 @@ export default class MultipleChoice extends Component {
           checkedList.push(option.value);
         }
       })
-      this.props.onChange(name, checkedList);
+      this.props.onChange(checkedList, this.props.property);
     });
   }
 
@@ -44,7 +44,7 @@ export default class MultipleChoice extends Component {
                     name = {name} 
                     value = {index} // This is the index of the value in the optionsList
                     onClick = {
-                      e => this.handlingChange(name, e.target.value, e.target.checked)
+                      e => this.handlingChange(e.target.value, e.target.checked)
                     }/>
                   {option.value}
                 </label>
