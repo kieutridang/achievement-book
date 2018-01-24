@@ -7,7 +7,7 @@ import Login from './containers/Login/index.jsx'
 const routes = (
     <Switch>
         <Route exact path='/' component={App} />
-        <Route exact path='/login' component={Login} />
+        <Route exact path='/users/login' component={Login} />
     </Switch>
 )
 

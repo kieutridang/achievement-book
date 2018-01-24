@@ -16,7 +16,54 @@ export default class Login extends Component {
       redirect: false
      }
   }
-
+  checkAuth = () => {
+    _helper.fetchAPI(
+      '/users/authenticate',
+      {
+        token: localStorage.token
+      }
+    ).then((response) => {
+      if (response){
+        const {data, status} = response;
+        if (status == 200){
+          this.setState({
+            redirect: true
+          })
+        }
+      }
+    })
+  }
+  login = () => {
+    const { username, password } = this.state;
+    _helper.fetchAPI(
+      "/users/login",
+      {
+        username,
+        password
+      }
+    )
+    .then((response) => {
+      if (response) {
+        const {data, status} = response;
+        alert(status);
+        if (data) {
+          this.setState({
+            showMessage: true,
+            message: data.message
+          })
+        }
+        else {
+          localStorage.setItem('token', data.token);
+          this.setState({
+            redirect: true
+          })
+        }
+      }
+    })
+  }
+  componentWillMount = () => {
+    this.checkAuth()
+  }
   render() {
     const { redirect, message, showMessage} = this.state
     if (redirect) {
@@ -30,6 +77,9 @@ export default class Login extends Component {
           <h1> Log In </h1>
         </div>
         <div>
+          {showMessage &&
+            <span>{message}</span>
+          }
           <Input
             label = "Username"
             onChange = {(username) => {this.setState({username})}}     
@@ -40,46 +90,20 @@ export default class Login extends Component {
             label = "Password"
             onChange={(password) => { this.setState({ password }) }}
           />
+          <Button
+            value="Log In"
+            onClick= {this.login}
+          />
         </div>
         <div>
-          <Button
-            value = "Log In"
-            onClick = {this.login}
-          />
-          {showMessage &&
-            <span>{message}</span>
-          }
-          <Link to='/register'>
-            <button>Sign Up</button>
-          </Link>
+          <div>
+            <Link to='/users/reset-password'>Forgot Password?</Link>
+          </div>
+          <div>
+            <Link to='/users/register'>Sign Up</Link>
+          </div>
         </div>
       </div>
     )
-    login = () => {
-      const {username, password} = this.state;
-      _helper.fetchPOST(
-        "/login",
-        {
-          username,
-          password
-        }
-      )
-      .then((response) => {
-        if (response) {
-          if (response.message){
-            this.setState({
-              showMessage: true,
-              message: response.message
-            })
-          }
-          else {
-            localStorage.setItem('token', response.token);
-            this.setState({
-              redirect: true
-            })
-          }
-        }
-      })
-    }
   }
 }
