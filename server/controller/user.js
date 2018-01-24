@@ -6,7 +6,6 @@ var db = mongoose.connection
 
 exports.findUser = function(req, res) {
   try {
-    debugger
     dataUser.findUser(db, res, req.params, function (data) {
       res.status(200).send(JSON.stringify(data));
     })
@@ -42,7 +41,7 @@ exports.updateUser = function(req, res) {
       return;
     }
     else {
-      dataUser.updateUser(db, res, req.params._id, newUser, function(err, data) {
+      dataUser.updateUser(db, res, req.params, newUser, function(err, data) {
         res.status(200).send("Update succeeded");
         res.end();
       })
