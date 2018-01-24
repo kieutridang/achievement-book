@@ -11,16 +11,26 @@ let _helper = {
             headers: headers || defaultHeaders
         })
         .then((response) => {
-            return response.data;
-        })
-        .then((json) => {
-            return json
+            return
+            {
+                data: response.data
+                status: response.status
+            }
         })
         .catch((error) => {
-            return error
+            if (error.response) {
+                {
+                    data: error.response.data
+                    status: error.response.status
+                }
+            }
+            else {
+                console.log(error);
+                return null;
+            }
         })
     },
-    fetchPOST: function (reqURL, dataToBeSent, headers, type){
+    fetchAPI: function (reqURL, dataToBeSent, headers, type){
         return axios({
             method: type || "POST",
             url: baseURL + reqURL,
@@ -28,14 +38,23 @@ let _helper = {
             data: dataToBeSent,
         })
         .then((response) => {
-            return response.data;
-        })
-        .then((json) => {
-            debugger
-            return json
+            return 
+                {
+                    data: response.data
+                    status: response.status
+                }
         })
         .catch((error) => {
-            return error
+            if (error.response) {
+                {
+                    data: error.response.data
+                    status: error.response.status
+                }
+            }
+            else {
+                console.log(error);
+                return null;
+            }
         })
     }
 }
