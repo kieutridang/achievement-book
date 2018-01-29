@@ -1,8 +1,13 @@
 var mongoose = require('mongoose')
+var Bcrypt = require('mongoose-bcrypt')
 var Schema = mongoose.Schema
 
-var Schema = new Schema({
+var UserSchema = new Schema({
   id: { type: String },
+  avatar: {
+    type: String,
+    required: [true, "Avatar is required"],
+  },
   username: { 
     type: String, 
     required: [true, "Username is required"],
@@ -11,7 +16,8 @@ var Schema = new Schema({
   password: {
     type: String,
     required: [true, "Password is required"],
-    minlength: [6, "Password is at least 6 characters"]
+    minlength: [6, "Password is at least 6 characters"],
+    bcrypt: true
   },
   fullname: {
     type: String,
@@ -40,13 +46,9 @@ var Schema = new Schema({
   gender: {
     type: String,
     required: [true, "Gender is required"],
-  },
-  avatar: {
-    type: String,
-    required: [true, "Avatar is required"],
   }
 });
 
-module.exports = function(db) {
-  return db.model('UserInfo', Schema)
-}
+UserSchema.plugin(Bcrypt);
+
+module.exports = mongoose.model('UserInfo', UserSchema)

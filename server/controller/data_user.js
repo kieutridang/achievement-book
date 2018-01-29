@@ -1,26 +1,30 @@
 var mongoose = require('mongoose')
 
-exports.findUser = function(db, res, data, callback) {
-  var User = require('../models/user')(db)
+exports.findUser = function(res, data, callback) {
+  debugger
+  var User = require('../models/user')
   User.find(data, function(err, data){
       if (err) return res.status(500).send(err);
       callback(data);
   })
 }
 
-exports.createUser = function(db, res, data) {
-  var User = require('../models/user')(db)
+exports.createUser = function(res, data, callback) {
+  var User = require('../models/user')
   var newUser = new User(data)
+  debugger
   newUser.save(function(err, data) {
+    debugger
     if (err) res.status(500).send(err)
     else {
       console.log(data)
+      callback();
     }
   })
 }
 
-exports.updateUser = function(db, res, condition, data, callback) {
-  var User = require('../models/user')(db)
+exports.updateUser = function(res, condition, data, callback) {
+  var User = require('../models/user')
   User.findOneAndUpdate(condition, data, {$new: false}, function(err, model) {
     if (err) res.status(500).send(err) 
     else {
@@ -29,8 +33,8 @@ exports.updateUser = function(db, res, condition, data, callback) {
   })
 }
 
-exports.deleteUser = function(db, res, condition, callback) {
-  var User = require('../models/user')(db)
+exports.deleteUser = function(res, condition, callback) {
+  var User = require('../models/user')
   User.findByIdAndRemove(condition, (err, data) => {
     if (err) res.status(500).send(err) 
     else {

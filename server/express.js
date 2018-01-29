@@ -3,7 +3,10 @@ const path = require('path')
 const cors = require('cors');
 const app = express()
 const staticPath = '../dist';
+const publicPath = '../assets'
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+
 
 module.exports = function(app) {
     app.use(bodyParser.json({
@@ -20,6 +23,6 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, staticPath, '/index.html'))
     })
     
-    app.use('/', express.static(path.join(__dirname, staticPath)))
+    app.use('/', express.static(path.join(__dirname, publicPath)))
     
 }

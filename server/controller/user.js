@@ -1,12 +1,11 @@
-var mongoose = require('mongoose')
 var dataUser = require('./data_user')
+var mongoose = require('mongoose')
 
 mongoose.connect('mongodb://localhost/achievement-book')
-var db = mongoose.connection
 
 exports.findUser = function(req, res) {
   try {
-    dataUser.findUser(db, res, req.params, function (data) {
+    dataUser.findUser(res, req.params, function (data) {
       res.status(200).send(JSON.stringify(data));
     })
   } catch (ex) {
@@ -17,14 +16,18 @@ exports.findUser = function(req, res) {
 exports.createUser = function(req, res) {
   try {
     var newUser = req.body
-    dataUser.findUser(db, {username: newUser.username} , function(data) {
+    debugger
+    dataUser.findUser(res, {username: newUser.username} , function(data) {
+      debugger
       if (data.length != 0) {
         res.status(409).send('User is already exists');
         res.end();
       }
       else {
-        dataUser.createUser(db, newUser);
-        res.status(200).end('Create user successful');
+        debugger
+        dataUser.createUser(res, newUser, () => {
+          res.status(200).end('Create user successful');
+        })
       }
     })
   } catch(ex) {
@@ -41,7 +44,7 @@ exports.updateUser = function(req, res) {
       return;
     }
     else {
-      dataUser.updateUser(db, res, req.params, newUser, function(err, data) {
+      dataUser.updateUser(res, req.params, newUser, function(err, data) {
         res.status(200).send("Update succeeded");
         res.end();
       })
@@ -53,9 +56,17 @@ exports.updateUser = function(req, res) {
 
 exports.deleteUser = function(req, res) {
   try {
-    dataUser.deleteUser(db, res, req.params._id, (data) => {
+    dataUser.deleteUser(res, req.params._id, (data) => {
       res.status(200).send('Delete succeeded')
     })
+  } catch (ex) {
+    res.status(500).send(ex)
+  }
+}
+
+exports.authenticateUser = function(req, res) {
+  try {
+    
   } catch (ex) {
     res.status(500).send(ex)
   }
