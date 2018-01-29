@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var Bcrypt = require('mongoose-bcrypt')
+var moment = require('moment')
 var Schema = mongoose.Schema
 
 var UserSchema = new Schema({
@@ -41,6 +42,14 @@ var UserSchema = new Schema({
   },
   DOB: {
     type: String,
+    validate: {
+      validator: function (v) {
+        if (moment(v, 'YYYY-MM-DD', true).format() == "Invalid date")
+          return true;
+        else return false;
+      },
+      message: 'Invalid date'
+    },
     required: [true, "Date of Birth is required"]
   },
   gender: {
