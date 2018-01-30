@@ -63,11 +63,3 @@ exports.deleteUser = function(req, res) {
     res.status(500).send(ex)
   }
 }
-
-exports.authenticateUser = function(req, res) {
-  try {
-    
-  } catch (ex) {
-    res.status(500).send(ex)
-  }
-}

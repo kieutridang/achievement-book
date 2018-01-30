@@ -45,8 +45,8 @@ var UserSchema = new Schema({
     validate: {
       validator: function (v) {
         if (moment(v, 'YYYY-MM-DD', true).format() == "Invalid date")
-          return true;
-        else return false;
+          return false;
+        else return true;
       },
       message: 'Invalid date'
     },
