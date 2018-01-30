@@ -1,8 +1,14 @@
 var mongoose = require('mongoose')
+var Bcrypt = require('mongoose-bcrypt')
+var moment = require('moment')
 var Schema = mongoose.Schema
 
-var Schema = new Schema({
+var UserSchema = new Schema({
   id: { type: String },
+  avatar: {
+    type: String,
+    required: [true, "Avatar is required"],
+  },
   username: { 
     type: String, 
     required: [true, "Username is required"],
@@ -11,11 +17,12 @@ var Schema = new Schema({
   password: {
     type: String,
     required: [true, "Password is required"],
-    minlength: [6, "Password is at least 6 characters"]
+    minlength: [6, "Password is at least 6 characters"],
+    bcrypt: true
   },
   fullname: {
     type: String,
-    required: [true, "Username is required"], 
+    required: [true, "Fullname is required"], 
     validate: {
       validator: function(v) {
         return !(/(^| )[a-z]/.test(v));
@@ -35,18 +42,22 @@ var Schema = new Schema({
   },
   DOB: {
     type: String,
+    validate: {
+      validator: function (v) {
+        if (moment(v, 'YYYY-MM-DD', true).format() == "Invalid date")
+          return false;
+        else return true;
+      },
+      message: 'Invalid date'
+    },
     required: [true, "Date of Birth is required"]
   },
   gender: {
     type: String,
     required: [true, "Gender is required"],
-  },
-  avatar: {
-    type: String,
-    required: [true, "Avatar is required"],
   }
 });
 
-module.exports = function(db) {
-  return db.model('UserInfo', Schema)
-}
+UserSchema.plugin(Bcrypt);
+
+module.exports = mongoose.model('UserInfo', UserSchema)
