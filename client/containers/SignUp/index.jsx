@@ -31,22 +31,6 @@ export default class SignUp extends Component {
     }
   }
 
-  // checkAuth = () => {
-  //   _helper.fetchAPI(
-  //     '/users/authenticate',
-  //     {
-  //       token: localStorage.token
-  //     }
-  //   ).then((response) => {
-  //     if (response) {
-  //       const { data, status } = response;
-  //       if (status == 200) {
-  //         this.setState({redirect: true})
-  //       }
-  //     }
-  //   })
-  // }
-
   checkConfirmPassword = () => {
     if (this.state.password != this.state.confirmPassword)
       return "Confirm password need to be the same with password";
@@ -77,37 +61,35 @@ export default class SignUp extends Component {
           DOB: DOB,
           gender: gender
         }
-      )
-      .then((response) => {
+      ).then((response) => {
         if (response) {
           const { data, status } = response;
           if (data) {
-            this.setState({message: data.message})
+            this.setState({message: data}, function() {
+              alert(this.state.message);
+              if (this.state.message == 'Create user successful') {
+                this.setState({redirect: true});
+              }
+            })
           }
         }
-      })
+      });
+      
     }
   }
 
-  // componentWillMount = () => {
-  //   this.checkAuth()
-  // }
-
   render() {
-    // if (this.state.redirect) {
-    //   return (
-    //     <Redirect to={'/home'}></Redirect>
-    //   )
-    // }
+    if (this.state.redirect) {
+      return (
+        <Redirect to={'/users/login'}></Redirect>
+      )
+    }
     return (
       <div>
         <div>
           <h1> Sign Up </h1>
         </div>
         <div>
-          { this.state.showMessage && 
-            <span> {this.state.message} </span>
-          }
           <UploadImage
             onChange = {(avatar) => {this.setState({avatar})}}
             srcData = {this.state.avatar}
