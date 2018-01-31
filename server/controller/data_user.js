@@ -1,44 +1,30 @@
 var mongoose = require('mongoose')
 
-exports.findUser = function(res, data, callback) {
-  debugger
+exports.findUser = function(data, callback) {
   var User = require('../models/user')
   User.find(data, function(err, data){
-      if (err) return res.status(500).send(err);
-      callback(data);
+      callback(err, data);
   })
 }
 
-exports.createUser = function(res, data, callback) {
+exports.createUser = function(data, callback) {
   var User = require('../models/user')
   var newUser = new User(data)
-  debugger
   newUser.save(function(err, data) {
-    debugger
-    if (err) res.status(500).send(err)
-    else {
-      console.log(data)
-      callback();
-    }
+      callback(err, data);
   })
 }
 
-exports.updateUser = function(res, condition, data, callback) {
+exports.updateUser = function(condition, data, callback) {
   var User = require('../models/user')
   User.findOneAndUpdate(condition, data, {$new: false}, function(err, model) {
-    if (err) res.status(500).send(err) 
-    else {
-      callback(model)
-    }
+    callback(err, model);
   })
 }
 
-exports.deleteUser = function(res, condition, callback) {
+exports.deleteUser = function(condition, callback) {
   var User = require('../models/user')
   User.findByIdAndRemove(condition, (err, data) => {
-    if (err) res.status(500).send(err) 
-    else {
-      callback(data)
-    }
+    callback(err, data);
   })
 }

@@ -9,6 +9,7 @@ const mongoose = require('mongoose')
 
 
 module.exports = function(app) {
+    mongoose.connect('mongodb://localhost/achievement-book')
     app.use(bodyParser.json({
         limit: "50mb"
     }))
