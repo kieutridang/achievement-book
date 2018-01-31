@@ -1,7 +1,7 @@
 var dataUser = require('./data_user')
 
 module.exports = {
-  findUser = function(req, res) {
+  findUser: function(req, res) {
     try {
       dataUser.findUser(req.params, function (err, data) {
         if (err) res.status(500).send(err).end();
@@ -15,7 +15,7 @@ module.exports = {
     }
   },
   
-  createUser = function(req, res) {
+  createUser: function(req, res) {
     try {
       var newUser = req.body
       dataUser.findUser({username: newUser.username} , function(err, data) {
@@ -38,7 +38,7 @@ module.exports = {
     }
   },
   
-  updateUser = function(req, res) {
+  updateUser: function(req, res) {
     try {
       var newUser = req.body;
       if (newUser.username || newUser.password) {
@@ -58,7 +58,7 @@ module.exports = {
     }
   },
   
-  deleteUser = function(req, res) {
+  deleteUser: function(req, res) {
     try {
       dataUser.deleteUser(req.params._id, (err, data) => {
         if (err) res.status(500).send(err).end();
