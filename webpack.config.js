@@ -19,7 +19,7 @@ module.exports = {
     },
     output: {
         path: path.resolve('dist'), 
-        publicPath: './',
+        publicPath: '/',
         filename: 'index.bundle.js'
     },
     watch: true,
@@ -41,7 +41,7 @@ module.exports = {
         ]
     },
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
     },
     plugins: [
         HtmlWebpackPluginConfig,
