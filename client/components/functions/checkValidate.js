@@ -1,6 +1,11 @@
 
 
 let checkValidate = {
+    checkAvatar: function(avatar, required, validations) {
+        if (required && avatar == '../../../public/default-profile-pic.png') 
+            return validations.message;
+        return null;
+    },
     checkText: function(value, validations){
         value = value.split(' ').filter(function(c){ return c != ''}).join(' ');
         for (var i = 0; i < validations.length; ++i){

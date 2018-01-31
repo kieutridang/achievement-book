@@ -8,7 +8,7 @@ export default class UploadImage extends Component {
         }
     }
     render() {
-        let { onChange, srcData } = this.props;
+        let { onChange, srcData, message, showMessage } = this.props;
         return (
             <div>
                 <img src={srcData} alt=""/>
@@ -21,6 +21,7 @@ export default class UploadImage extends Component {
                         });
                     }}
                 />
+                { showMessage && message && <span> {message} </span> }
             </div>
         );
     }
