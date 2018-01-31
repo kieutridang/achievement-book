@@ -11,16 +11,15 @@ let _helper = {
             headers: headers || defaultHeaders
         })
         .then((response) => {
-            return
-            {
-                data: response.data
+            return {
+                data: response.data,
                 status: response.status
             }
         })
         .catch((error) => {
             if (error.response) {
-                {
-                    data: error.response.data
+            return {
+                    data: error.response.data,
                     status: error.response.status
                 }
             }
@@ -38,19 +37,17 @@ let _helper = {
             data: dataToBeSent,
         })
         .then((response) => {
-            return 
-                {
-                    data: response.data
-                    status: response.status
-                }
+            return {
+                data: response.data,
+                status: response.status
+            }
         })
         .catch((error) => {
             if (error.response) {
-                {
-                    data: error.response.data
-                    status: error.response.status
-                }
-            }
+            return {
+                data: error.response.data,
+                status: error.response.status
+            }}
             else {
                 console.log(error);
                 return null;
