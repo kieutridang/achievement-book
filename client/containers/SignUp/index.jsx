@@ -77,37 +77,33 @@ export default class SignUp extends Component {
           DOB: DOB,
           gender: gender
         }
-      )
-      .then((response) => {
+      ).then((response) => {
         if (response) {
           const { data, status } = response;
           if (data) {
             this.setState({message: data.message})
           }
         }
-      })
+      });
+      alert(this.state.message);
+      if (this.state.message == 'Create user successful') {
+        this.setState({redirect: true});
+      }
     }
   }
 
-  // componentWillMount = () => {
-  //   this.checkAuth()
-  // }
-
   render() {
-    // if (this.state.redirect) {
-    //   return (
-    //     <Redirect to={'/home'}></Redirect>
-    //   )
-    // }
+    if (this.state.redirect) {
+      return (
+        <Redirect to={'/users/login'}></Redirect>
+      )
+    }
     return (
       <div>
         <div>
           <h1> Sign Up </h1>
         </div>
         <div>
-          { this.state.showMessage && 
-            <span> {this.state.message} </span>
-          }
           <UploadImage
             onChange = {(avatar) => {this.setState({avatar})}}
             srcData = {this.state.avatar}
