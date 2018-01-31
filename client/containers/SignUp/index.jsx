@@ -31,22 +31,6 @@ export default class SignUp extends Component {
     }
   }
 
-  // checkAuth = () => {
-  //   _helper.fetchAPI(
-  //     '/users/authenticate',
-  //     {
-  //       token: localStorage.token
-  //     }
-  //   ).then((response) => {
-  //     if (response) {
-  //       const { data, status } = response;
-  //       if (status == 200) {
-  //         this.setState({redirect: true})
-  //       }
-  //     }
-  //   })
-  // }
-
   checkConfirmPassword = () => {
     if (this.state.password != this.state.confirmPassword)
       return "Confirm password need to be the same with password";
@@ -81,14 +65,16 @@ export default class SignUp extends Component {
         if (response) {
           const { data, status } = response;
           if (data) {
-            this.setState({message: data.message})
+            this.setState({message: data}, function() {
+              alert(this.state.message);
+              if (this.state.message == 'Create user successful') {
+                this.setState({redirect: true});
+              }
+            })
           }
         }
       });
-      alert(this.state.message);
-      if (this.state.message == 'Create user successful') {
-        this.setState({redirect: true});
-      }
+      
     }
   }
 
