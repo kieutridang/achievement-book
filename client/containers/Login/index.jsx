@@ -29,6 +29,11 @@ export default class Login extends Component {
             redirect: true
           })
         }
+        else {
+          this.setState({
+            redirect: false
+          })
+        }
       }
     })
   }
@@ -45,15 +50,13 @@ export default class Login extends Component {
       if (response) {
         const {data, status} = response;
         alert(status);
-        if (data) {
-          this.setState({
-            showMessage: true,
-            message: data
-          })
+        if (status == 200) {
+          this.checkAuth()   
         }
         else {
           this.setState({
-            redirect: true
+            showMessage: true,
+            message: data
           })
         }
       }

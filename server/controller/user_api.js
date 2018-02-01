@@ -28,6 +28,7 @@ module.exports = {
                                         req.session.user = {
                                             username: user.username
                                         }
+                                        console.log(req.session)
                                     }
                                 })
                                 res.status(200).end('Logged in successfully');
@@ -70,12 +71,12 @@ module.exports = {
     },
 
     checkAuthenticate: function(req, res){
+
+        console.log(req.session)
         if (req.session.user){
-            console.log('Logged in');
             res.status(200).end('Logged in');
         }
         else {
-            console.log('Not logged in');
             res.status(401).end('Not logged in');
         }
     }

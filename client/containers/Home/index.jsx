@@ -8,7 +8,9 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            authenticate: false
+            authenticate: false,
+            showMessage: false,
+            message: ""
         }
     }
     checkAuth = () => {
@@ -24,6 +26,11 @@ export default class Login extends Component {
                         authenticate: true
                     })
                 }
+                else {
+                    this.setState({
+                        authenticate: false
+                    })
+                }
             }
         })
     }
@@ -36,15 +43,13 @@ export default class Login extends Component {
                 if (response) {
                     const { data, status } = response;
                     alert(status);
-                    if (data) {
-                        this.setState({
-                            showMessage: true,
-                            message: data
-                        })
+                    if (status == 200) {
+                        this.checkAuth()
                     }
                     else {
                         this.setState({
-                            redirect: true
+                            showMessage: true,
+                            message: data
                         })
                     }
                 }
@@ -54,44 +59,16 @@ export default class Login extends Component {
         this.checkAuth()
     }
     render() {
-        const { redirect, message, showMessage } = this.state
-        if (redirect) {
+        const {authenticate, message, showMessage } = this.state
+        if (!authenticate) {
             return (
-                <Redirect to={'/home'}></Redirect>
+                <Redirect to={'/users/login'}></Redirect>
             )
         }
         return (
             <div>
-                <div>
-                    <h1> Log In </h1>
-                </div>
-                <div>
-                    {showMessage &&
-                        <span>{message}</span>
-                    }
-                    <Input
-                        label="Username"
-                        onChange={(username) => { this.setState({ username }) }}
-                        showMessage={this.state.showMessage}
-                    />
-                    <Input
-                        type="password"
-                        label="Password"
-                        onChange={(password) => { this.setState({ password }) }}
-                    />
-                    <Button
-                        value="Log In"
-                        onClick={this.login}
-                    />
-                </div>
-                <div>
-                    <div>
-                        <Link to='/users/reset-password'>Forgot Password?</Link>
-                    </div>
-                    <div>
-                        <Link to='/users/register'>Sign Up</Link>
-                    </div>
-                </div>
+                <h1>Logged in successfully</h1>
+                <button onClick={this.logout}>Logout</button>
             </div>
         )
     }
