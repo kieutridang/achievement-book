@@ -17,10 +17,9 @@ export default class Login extends Component {
      }
   }
   checkAuth = () => {
-    _helper.fetchAPI(
-      '/users/authenticate',
+    _helper.fetchGET(
+      '/user/checkAuthenticate',
       {
-        token: localStorage.token
       }
     ).then((response) => {
       if (response){
@@ -36,7 +35,7 @@ export default class Login extends Component {
   login = () => {
     const { username, password } = this.state;
     _helper.fetchAPI(
-      "/users/login",
+      "/user/login",
       {
         username,
         password
@@ -49,11 +48,10 @@ export default class Login extends Component {
         if (data) {
           this.setState({
             showMessage: true,
-            message: data.message
+            message: data
           })
         }
         else {
-          localStorage.setItem('token', data.token);
           this.setState({
             redirect: true
           })

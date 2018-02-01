@@ -71,9 +71,11 @@ module.exports = {
 
     checkAuthenticate: function(req, res){
         if (req.session.user){
+            console.log('Logged in');
             res.status(200).end('Logged in');
         }
         else {
+            console.log('Not logged in');
             res.status(401).end('Not logged in');
         }
     }

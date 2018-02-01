@@ -1,6 +1,9 @@
 const express = require('express');
 var session = require('express-session');
+var morgan = require('morgan');
 const app = express()
+
+app.use(morgan('dev'));
 
 app.use(session(
     module.exports = {

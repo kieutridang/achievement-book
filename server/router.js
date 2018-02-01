@@ -8,6 +8,7 @@ module.exports = function(app) {
     router.post('/user/createuser', user.createUser)
     router.put('/user/updateuser/userid/:_id', user.updateUser)
     router.post('/user/login', userApi.login);
+    router.post('/user/logout', userApi.logout);
     router.get('/user/checkAuthenticate', userApi.checkAuthenticate);
     app.use('/api', router)
 }
