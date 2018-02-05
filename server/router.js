@@ -11,7 +11,7 @@ module.exports = function(app) {
     router.post('/user/login', userApi.login);
     router.post('/user/logout', userApi.logout);
     router.get('/user/checkAuthenticate', userApi.checkAuthenticate);
-    router.delete('user/deleteuser', userApi.authenticate, userApi.deleteUser);
+    router.delete('/user/deleteuser', userApi.authenticate, userApi.deleteUser);
 
     app.use('/api', router)
 }
