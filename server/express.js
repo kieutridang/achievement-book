@@ -39,7 +39,7 @@ module.exports = function(app) {
             ttl: 5
         })
     }))
-    
+
     app.get(/^\/[a-z]*$/, (req, res) => {
         res.sendFile(path.join(__dirname, staticPath, '/index.html'))
     })

@@ -1,6 +1,7 @@
 const express = require('express');
 const user = require('./controller/user');
 const userApi = require('./controller/user_api');
+
 module.exports = function(app) {
     var router = express.Router()
     
@@ -10,5 +11,7 @@ module.exports = function(app) {
     router.post('/user/login', userApi.login);
     router.post('/user/logout', userApi.logout);
     router.get('/user/checkAuthenticate', userApi.checkAuthenticate);
+    router.get('/user/profile', userApi.authenticate, userApi.profile);
+
     app.use('/api', router)
 }
