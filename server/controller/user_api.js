@@ -18,23 +18,18 @@ module.exports = {
                         user.verifyPassword(password, function(err, valid){
                             if (err) {
                                 res.status(500).end(err);
+                                return;
                             }
                             if (valid) {
-                                req.session.regenerate(function (err) {
-                                    if (err) {
-                                        res.status(500).end(err);
+                                req.session.regenerate(function () {
+                                    req.session.user = {
+                                        username: user.username
                                     }
-                                    else {
-                                        req.session.user = {
-                                            username: user.username
-                                        }
-                                        console.log(req.session)
-                                    }
+                                    res.status(200).end('Logged in successfully');
                                 })
-                                res.status(200).end('Logged in successfully');
                             }
                             else {
-                                res.end(401).end('Incorrect password');
+                                res.status(401).end('Incorrect password');
                             }
                         })
                     }
@@ -71,8 +66,6 @@ module.exports = {
     },
 
     checkAuthenticate: function(req, res){
-
-        console.log(req.session)
         if (req.session.user){
             res.status(200).end('Logged in');
         }

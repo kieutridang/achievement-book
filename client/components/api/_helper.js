@@ -8,7 +8,8 @@ let _helper = {
         return axios({
             method: 'GET',
             url: baseURL + reqURL,
-            headers: headers || defaultHeaders
+            headers: headers || defaultHeaders,
+            withCredentials: true
         })
         .then((response) => {
             return {
@@ -35,6 +36,7 @@ let _helper = {
             url: baseURL + reqURL,
             headers: headers || defaultHeaders,
             data: dataToBeSent,
+            withCredentials: true
         })
         .then((response) => {
             return {
