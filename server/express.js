@@ -14,7 +14,9 @@ module.exports = function(app) {
 
     app.use(morgan('dev'));
 
-    mongoose.connect('mongodb://localhost/achievement-book');
+    mongoose.connect('mongodb://localhost/achievement-book', {
+        useMongoClient: true
+    });
 
     app.use(bodyParser.json({
         limit: "50mb"
@@ -29,7 +31,7 @@ module.exports = function(app) {
     app.use(session({
         secret: 'achievement-book',
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
         httpOnly: true,
         cookie: {
             maxAge: 5 * 60 * 1000
