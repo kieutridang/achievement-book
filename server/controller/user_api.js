@@ -150,6 +150,7 @@ module.exports = {
         try {
             dataUser.deleteUser({_id: req.session.user._id}, (err, data) => {
                 if (err) res.status(500).send(err).end();
+                req.session.destroy();
                 res.status(200).send('Delete succeeded').end();
             })
         } catch (ex) {
