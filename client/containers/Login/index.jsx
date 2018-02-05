@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
+
 import Input from '../../components/Input/index.jsx';
 import Button from '../../components/Button/index.jsx';
+
 import { _helper } from '../../components/api/_helper';
+import checkAuthenticate from '../../components/functions/checkAuthenticate';
+
 
 export default class Login extends Component {
   constructor(props) {
@@ -13,30 +17,23 @@ export default class Login extends Component {
       password: '',
       message: '',
       showMessage: false,
-      redirect: false
+      authenticate: false
      }
   }
   checkAuth = () => {
-    _helper.fetchAPI(
-      '/users/authenticate',
-      {
-        token: localStorage.token
-      }
-    ).then((response) => {
-      if (response){
-        const {data, status} = response;
-        if (status == 200){
-          this.setState({
-            redirect: true
-          })
-        }
-      }
+    checkAuthenticate().then((authenticate) => {
+      this.setState({
+        authenticate: authenticate
+      })
     })
+  }
+  componentDidMount = () => {
+    this.checkAuth()
   }
   login = () => {
     const { username, password } = this.state;
     _helper.fetchAPI(
-      "/users/login",
+      "/user/login",
       {
         username,
         password
@@ -45,28 +42,21 @@ export default class Login extends Component {
     .then((response) => {
       if (response) {
         const {data, status} = response;
-        alert(status);
-        if (data) {
-          this.setState({
-            showMessage: true,
-            message: data.message
-          })
+        if (status == 200) {
+          this.checkAuth()
         }
         else {
-          localStorage.setItem('token', data.token);
           this.setState({
-            redirect: true
+            showMessage: true,
+            message: data
           })
         }
       }
     })
   }
-  componentWillMount = () => {
-    this.checkAuth()
-  }
   render() {
-    const { redirect, message, showMessage} = this.state
-    if (redirect) {
+    const { authenticate, message, showMessage} = this.state
+    if (authenticate) {
       return (
         <Redirect to={'/home'}></Redirect>
       )
@@ -82,8 +72,7 @@ export default class Login extends Component {
           }
           <Input
             label = "Username"
-            onChange = {(username) => {this.setState({username})}}     
-            showMessage = {this.state.showMessage}
+            onChange = {(username) => {this.setState({username})}}
           />
           <Input
             type = "password"

@@ -68,7 +68,9 @@ export default class SignUp extends Component {
             this.setState({message: data}, function() {
               alert(this.state.message);
               if (this.state.message == 'Create user successful') {
-                this.setState({redirect: true});
+                this.setState({
+                  redirect: true
+                })
               }
             })
           }
@@ -79,9 +81,10 @@ export default class SignUp extends Component {
   }
 
   render() {
-    if (this.state.redirect) {
+    let {redirect} = this.state;
+    if (redirect) {
       return (
-        <Redirect to={'/users/login'}></Redirect>
+        <Redirect to={'/home'}></Redirect>
       )
     }
     return (
