@@ -56,7 +56,7 @@ module.exports = {
         }
     },
 
-    athenticate: function(req, res, next){
+    authenticate: function(req, res, next){
         if (req.session.user){
             next();
         }
