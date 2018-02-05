@@ -7,6 +7,7 @@ import UploadImage from '../../components/UploadImage/index.jsx'
 import Button from '../../components/Button/index.jsx'
 
 import { _helper } from '../../components/api/_helper'
+import checkAuthenticate from '../../components/functions/checkAuthenticate'
 import { checkValidate } from '../../components/functions/checkValidate'
 import { validations } from '../../components/functions/validations'
 import { Redirect } from 'react-router';
@@ -26,9 +27,20 @@ export default class SignUp extends Component {
       gender: '',
 
       message: '',
-      redirect: false,
+      authenticate: false,
       showMessage: false
     }
+  }
+
+  checkAuth = () => {
+    checkAuthenticate().then((authenticate) => {
+      this.setState({
+        authenticate: authenticate
+      })
+    })
+  }
+  componentDidMount = () => {
+    this.checkAuth()
   }
 
   checkConfirmPassword = () => {
@@ -68,7 +80,7 @@ export default class SignUp extends Component {
             this.setState({message: data}, function() {
               alert(this.state.message);
               if (this.state.message == 'Create user successful') {
-                this.setState({redirect: true});
+                this.checkAuth();
               }
             })
           }
@@ -79,9 +91,10 @@ export default class SignUp extends Component {
   }
 
   render() {
-    if (this.state.redirect) {
+    let {authenticate} = this.state;
+    if (authenticate) {
       return (
-        <Redirect to={'/users/login'}></Redirect>
+        <Redirect to={'/home'}></Redirect>
       )
     }
     return (
