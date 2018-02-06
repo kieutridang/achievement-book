@@ -11,6 +11,7 @@ import { checkValidate } from '../../components/functions/checkValidate'
 import { validations } from '../../components/functions/validations'
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom'
+import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -27,8 +28,19 @@ export default class SignUp extends Component {
 
       message: '',
       redirect: false,
-      showMessage: false
+      showMessage: false,
+      authenticate: false
     }
+  }
+
+  checkAuth = () => {
+    checkAuthenticate().then((authenticate) => {
+      this.setState({authenticate});
+    })
+  }
+
+  componentDidMount() {
+    this.checkAuth();
   }
 
   checkConfirmPassword = () => {
@@ -81,10 +93,15 @@ export default class SignUp extends Component {
   }
 
   render() {
-    let {redirect} = this.state;
-    if (redirect) {
+    let { authenticate, redirect} = this.state;
+    if (authenticate) {
       return (
         <Redirect to={'/home'}></Redirect>
+      )
+    }
+    if (redirect) {
+      return (
+        <Redirect to={'/users/login'}></Redirect>
       )
     }
     return (
