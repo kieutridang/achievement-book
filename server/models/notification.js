@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var NotificationSchema = new Schema({
     id: { type: String },
+    userId: { type: String },
     title: { type: String },
     content: { type: String },
     time: {
@@ -16,7 +17,8 @@ var NotificationSchema = new Schema({
             },
             message: 'Invalid date'
         }
-    }
+    },
+    seen: { type: Boolean}
 })
 
 module.exports = mongoose.model('Notification', NotificationSchema);
