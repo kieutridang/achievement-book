@@ -5,6 +5,7 @@ import SingleChoice from '../SingleChoice/index.jsx'
 import MultipleChoice from '../MultipleChoice/index.jsx'
 import Input from '../Input/index.jsx'
 import UploadImage from '../UploadImage/index.jsx'
+import TickBar from '../TickBar/index.jsx'
 
 import {_helper} from '../api/_helper'
 import {checkValidate} from '../functions/checkValidate'
@@ -103,6 +104,10 @@ export default class App extends Component {
         <Button 
           value = 'Submit'
           onClick = {() => {this.setState({showMessage: true})}}/>
+        <TickBar
+          label = 'Test'
+          selections = {['a', 'b', 'c', 'd']}
+        />
       </div>
     )
   }
