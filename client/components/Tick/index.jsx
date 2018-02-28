@@ -8,11 +8,11 @@ export default class Tick extends Component {
         }
     }
     render() {
-        const { label , selected, index, onSelect} = this.props;
+        const { label , selected, id, onSelect} = this.props;
         return (
             <div 
                 className = {selected ? 'selected-tick' : 'unselected-tick'}
-                onClick = {() => {onSelect(index)}}
+                onClick = {() => {onSelect(id)}}
             >
                 <label>{ label }</label>
             </div>
