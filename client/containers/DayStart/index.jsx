@@ -18,13 +18,17 @@ export default class DayStart extends Component {
       <div>
         <div>
           <h1> Daily Plan </h1>
-          <OnBlurInput
-            type = 'date'
-            label = 'Date'
-            onBlur = {date => this.setState({date})}
-          />
+          <div>
+            <input type="image" src="../../../public/backward.png" alt="Back" width="48" height="48"/>
+            <OnBlurInput
+              type = 'date'
+              label = 'Date'
+              onBlur = {date => this.setState({date})}
+            />
+            <input type="image" src="../../../public/forward.png" alt="Next" width="48" height="48"/>
+          </div>
           <h3> { quote } </h3>
-        </div>
+        </div>  
         <div>
 
         </div>

@@ -6,6 +6,7 @@ import MultipleChoice from '../MultipleChoice/index.jsx'
 import Input from '../Input/index.jsx'
 import UploadImage from '../UploadImage/index.jsx'
 import TickBar from '../TickBar/index.jsx'
+import Table from '../Table/index.jsx'
 
 import {_helper} from '../api/_helper'
 import {checkValidate} from '../functions/checkValidate'
@@ -107,6 +108,9 @@ export default class App extends Component {
         <TickBar
           label = 'Test'
           selections = {['a', 'b', 'c', 'd']}
+        />
+        <Table
+          label='Task'
         />
       </div>
     )

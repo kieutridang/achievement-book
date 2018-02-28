@@ -25,11 +25,11 @@ export default class Tickbar extends Component {
             <Tick
                 key = { selection } 
                 label = { selection }
-                index = { index }
+                id = { index }
                 selected = { selected[index] }
-                onSelect = {(index) => {
+                onSelect = {(id) => {
                     let newArr = this.state.selected.map((value) => value);
-                    newArr[index] = !newArr[index];
+                    newArr[id] = !newArr[id];
                     this.setState({
                         selected: newArr
                     }, () =>{
