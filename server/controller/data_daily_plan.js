@@ -11,14 +11,14 @@ module.exports = {
     createPlan: function(data, callback){
         var Daily = require('../models/daily_plan');
         var newPlan = new Daily(data);
-        newPlan.save(function(err, data){
-            callback(err, data);
+        newPlan.save(function(err, newData){
+            callback(err, newData);
         })
     },
 
     updatePlan: function(condition, data, callback){
         var Daily = require('../models/daily_plan');
-        Daily.findOneAndUpdate(condition, data, {$new: false}, function(err, model){
+        Daily.findOneAndUpdate(condition, data, {new: false, upsert: true, runValidators: true}, function(err, model){
             callback(err, model);
         })
     },
@@ -27,6 +27,6 @@ module.exports = {
         var Daily = require('../models/daily_plan');
         Daily.findByIdAndRemove(condition, function(err, data){
             callback(err, data);
-        }) 
+        })
     }
 }
