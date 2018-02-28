@@ -4,14 +4,15 @@ export default class OnBlurInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: this.props.default || '',
 
       edit: false
     }
   }
 
-  handlingBlur = (value) => {
-    this.props.onBlur(value);
+  handlingBlur = (value, id) => {
+    debugger
+    this.props.onBlur(value, id);
     this.setState({
       edit: false,
       value: value
@@ -23,11 +24,11 @@ export default class OnBlurInput extends Component {
   }
 
   render() {
-    let { type, label, required, suggestion, onBlur, message, showMessage } = this.props;
+    let { id, type, label, required, suggestion, onBlur, message, showMessage } = this.props;
     let { value, edit } = this.state;
     return (
       <div>
-        <label> {label}: </label>
+        { label && <label> {label}: </label> }
         { required && <span>*</span> }
         { suggestion && 
           <div>
@@ -40,7 +41,11 @@ export default class OnBlurInput extends Component {
             <input
               type = {type || 'text'}
               defaultValue = {value}
-              onBlur = {e => this.handlingBlur(e.target.value)}
+              onBlur = {(e, id) => {
+                debugger
+                this.handlingBlur(e.target.value, id)
+              }
+              }
             />
           : <span onDoubleClick = {this.handlingDoubleClick}> {value} </span>
         }
