@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import OnBlurInput from '../../components/OnBlurInput/index.jsx'
+import Table from '../../components/Table/index.jsx'
 
 export default class DayStart extends Component {
   constructor(props) {
@@ -30,7 +31,9 @@ export default class DayStart extends Component {
           <h3> { quote } </h3>
         </div>  
         <div>
-
+          <Table
+            label='Task'
+          />
         </div>
         <div>
           <OnBlurInput
