@@ -5,6 +5,7 @@ import App from './components/App/index.jsx'
 import Login from './containers/Login/index.jsx'
 import SignUp from './containers/SignUp/index.jsx'
 import Home from "./containers/Home/index.jsx";
+import DailyPlan from './containers/DayStart/index.jsx'
 
 const routes = (
     <Switch>
@@ -12,6 +13,7 @@ const routes = (
         <Route exact path='/home' component={Home} />
         <Route exact path='/users/login' component={Login} />
         <Route exact path='/users/signup' component={SignUp} />
+        <Route exact path='/daily-plan' component={DailyPlan} />
     </Switch>
 )
 
