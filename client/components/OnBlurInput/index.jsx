@@ -10,9 +10,8 @@ export default class OnBlurInput extends Component {
     }
   }
 
-  handlingBlur = (value, id) => {
-    debugger
-    this.props.onBlur(value, id);
+  handlingBlur = (value) => {
+    this.props.onBlur(value, this.props.id);
     this.setState({
       edit: false,
       value: value
@@ -41,9 +40,8 @@ export default class OnBlurInput extends Component {
             <input
               type = {type || 'text'}
               defaultValue = {value}
-              onBlur = {(e, id) => {
-                debugger
-                this.handlingBlur(e.target.value, id)
+              onBlur = {e => {
+                this.handlingBlur(e.target.value)
               }
               }
             />
