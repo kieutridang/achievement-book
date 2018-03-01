@@ -15,7 +15,7 @@ export default class Table extends Component {
     return (
       <div>
         <div>
-          { label && <h3> {label} </h3> }
+          { label && <label> {label} </label> }
         </div>
         <div>
           <table>

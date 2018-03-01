@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import OnBlurInput from '../../components/OnBlurInput/index.jsx'
 import Table from '../../components/Table/index.jsx'
 
-export default class DayStart extends Component {
+import { Link } from 'react-router-dom'
+
+export default class DailyPlan extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,7 +34,7 @@ export default class DayStart extends Component {
         </div>  
         <div>
           <Table
-            label='Task'
+            label='Tasks Planning'
           />
         </div>
         <div>
@@ -40,6 +42,9 @@ export default class DayStart extends Component {
             label = 'Note'
             onBlur = {note => this.setState({note})}
           />
+        </div>
+        <div>
+          <Link to='/daily-result'>Daily Result</Link>
         </div>
       </div>
     )
