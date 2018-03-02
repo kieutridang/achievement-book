@@ -9,7 +9,7 @@ exports.findUser = function(data, callback) {
 
 exports.createUser = function(data, callback) {
   var User = require('../models/user')
-  var newUser = new User(data)
+  var newUser = new User(data);
   newUser.save(function(err, data) {
       callback(err, data);
   })

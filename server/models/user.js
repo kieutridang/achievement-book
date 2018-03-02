@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 var Bcrypt = require('mongoose-bcrypt')
-var moment = require('moment')
-var Schema = mongoose.Schema
+var moment = require('moment');
+var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
   id: { type: String },
