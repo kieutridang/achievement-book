@@ -34,7 +34,15 @@ var DailyPlan = new Schema({
                 type: String
             },
             from: {
-                type: Date
+                type: Date,
+                validate: {
+                    validator: function(time){
+                        if (moment(time, 'hh:mm', true).format() == "Invalid date")
+                            return false;
+                        else return true;
+                    },
+                    message: 'Invalid time'
+                }
             },
             process: {
                 type: Number
