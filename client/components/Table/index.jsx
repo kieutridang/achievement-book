@@ -12,7 +12,7 @@ export default class Table extends Component {
   }
 
   render() {
-    const { label } = this.props;
+    const { label, reqUrl } = this.props;
     const { rows } = this.state;
     return (
       <div>
@@ -42,7 +42,7 @@ export default class Table extends Component {
                           this.setState(
                             {rows: newRows},
                             () => {
-                              _helper.fetchAPI(reqUrl, newRows, [], "PUT")
+                              _helper.fetchAPI(reqUrl, {plan: newRows}, [], "PUT")
                             }
                           )
                         }}
@@ -59,7 +59,7 @@ export default class Table extends Component {
                           this.setState(
                             {rows: newRows},
                             () => {
-                              _helper.fetchAPI(reqUrl, newRows, [], "PUT")
+                              _helper.fetchAPI(reqUrl, {plan: newRows}, [], "PUT")
                             }
                           )
                         }}
@@ -76,7 +76,7 @@ export default class Table extends Component {
                           this.setState(
                             {rows: newRows},
                             () => {
-                              _helper.fetchAPI(reqUrl, newRows, [], "PUT")
+                              _helper.fetchAPI(reqUrl, {plan: newRows}, [], "PUT")
                             }
                           )
                         }}
