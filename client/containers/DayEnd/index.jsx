@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import OnBlurInput from '../../components/OnBlurInput/index.jsx'
 import TickBar from '../../components/TickBar/index.jsx'
 import SingleChoice from '../../components/SingleChoice/index.jsx'
+import DateSelection from '../../components/DateSelection/index'
 
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
+import { Redirect } from 'react-router';
 import moment from 'moment'
 
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
