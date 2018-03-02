@@ -69,9 +69,24 @@ export default class DailyResult extends Component {
     this.getDailyResult();
   }
 
+  logout = () => {
+        _helper.fetchAPI(
+            "/user/logout",
+            {}
+        )
+        .then((response) => {
+            if (response) {
+                const { data, status } = response;
+                if (status == 200) {
+                    this.checkAuth()
+                }
+            }
+        })
+    }
+
   render() {
     const { authenticate, date, taskNumber, bestTask, whyBest, bestTime, efficiency, lessionLearned } = this.state;
-    if (authenticate) {
+    if (!authenticate) {
       return (
         <Redirect to={'/users/login'}></Redirect>
       )
@@ -80,16 +95,15 @@ export default class DailyResult extends Component {
       <div>
         <div>
           <h1> Daily Result </h1>
-          <div>
-            <input type="image" src="../../../public/backward.png" alt="Back" width="48" height="48"/>
-            <OnBlurInput
-              default = {date}
-              type = 'date'
-              label = 'Date'
-              onBlur = {date => this.setState({date})}
-            />
-            <input type="image" src="../../../public/forward.png" alt="Next" width="48" height="48"/>
-          </div>
+          <DateSelection
+            date={date}
+            handleChange = {date => {
+              this.setState(
+                {date},
+                () => this.getDailyPlan()
+              )
+            }}
+          />
         </div>
         <div>
           <div>
@@ -166,6 +180,7 @@ export default class DailyResult extends Component {
         </div>
         <div>
           <Link to='/daily-plan'>Daily Plan</Link>
+          <button onClick={this.logout}>Logout</button>
         </div>
       </div>
     )

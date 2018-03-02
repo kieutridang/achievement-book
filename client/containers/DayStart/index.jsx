@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import OnBlurInput from '../../components/OnBlurInput/index.jsx'
 import Table from '../../components/Table/index.jsx'
+import DateSelection from '../../components/DateSelection/index.jsx'
 
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
@@ -52,9 +53,24 @@ export default class DailyPlan extends Component {
     this.getDailyPlan();
   }
 
+  logout = () => {
+        _helper.fetchAPI(
+            "/user/logout",
+            {}
+        )
+        .then((response) => {
+            if (response) {
+                const { data, status } = response;
+                if (status == 200) {
+                    this.checkAuth()
+                }
+            }
+        })
+    }
+
   render() {
     const { authenticate, date, quote, plan, note } = this.state
-    if (authenticate) {
+    if (!authenticate) {
       return (
         <Redirect to={'/users/login'}></Redirect>
       )
@@ -63,21 +79,15 @@ export default class DailyPlan extends Component {
       <div>
         <div>
           <h1> Daily Plan </h1>
-          <div>
-            <input type="image" src="../../../public/backward.png" alt="Back" width="48" height="48"/>
-            <OnBlurInput
-              default={date}
-              type = 'date'
-              label = 'Date'
-              onBlur = {date => {
-                this.setState(
-                  {date},
-                  this.getDailyPlan()
-                )
-              }}
-            />
-            <input type="image" src="../../../public/forward.png" alt="Next" width="48" height="48"/>
-          </div>
+          <DateSelection
+            date={date}
+            handleChange = {date => {
+              this.setState(
+                {date},
+                () => this.getDailyPlan()
+              )
+            }}
+          />
           <h3> { quote } </h3>
         </div>  
         <div>
@@ -100,6 +110,7 @@ export default class DailyPlan extends Component {
         </div>
         <div>
           <Link to='/daily-result'>Daily Result</Link>
+          <button onClick={this.logout}>Logout</button>
         </div>
       </div>
     )

@@ -58,7 +58,7 @@ export default class Login extends Component {
     const { authenticate, message, showMessage} = this.state
     if (authenticate) {
       return (
-        <Redirect to={'/users/signup'}></Redirect>
+        <Redirect to={'/home'}></Redirect>
       )
     }
     return (
