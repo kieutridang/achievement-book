@@ -7,6 +7,8 @@ import { _helper } from '../../components/api/_helper'
 
 import moment from 'moment'
 
+import checkAuthenticate from '../../components/functions/checkAuthenticate';
+
 export default class DailyPlan extends Component {
   constructor(props) {
     super(props);
@@ -14,8 +16,20 @@ export default class DailyPlan extends Component {
       date: moment().format('YYYY-MM-DD'),
       quote: '',
       plan: [],
-      note: ''
+      note: '',
+      authenticate: false
     }
+  }
+
+  checkAuth = () => {
+    checkAuthenticate().then((authenticate) => {
+      this.setState({
+        authenticate: authenticate
+      })
+    })
+  }
+  componentDidMount = () => {
+    this.checkAuth()
   }
 
   getDailyPlan = () => {
@@ -25,7 +39,7 @@ export default class DailyPlan extends Component {
       {}
     )
     .then((response) => {
-      const { date, quote, plan, note } = response;
+      const { date, quote, plan, note } = response.data;
       return this.setState({
         quote: quote,
         plan: plan,
@@ -39,7 +53,12 @@ export default class DailyPlan extends Component {
   }
 
   render() {
-    const { date, quote, plan, note } = this.state
+    const { authenticate, date, quote, plan, note } = this.state
+    if (authenticate) {
+      return (
+        <Redirect to={'/users/login'}></Redirect>
+      )
+    }
     return (
       <div>
         <div>
@@ -65,6 +84,7 @@ export default class DailyPlan extends Component {
           <Table
             label='Tasks Planning'
             reqUrl={'/dailyplan/updateplan/' + date}
+            rows={plan}
           />
         </div>
         <div>

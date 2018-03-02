@@ -4,17 +4,36 @@ import TickBar from '../../components/TickBar/index.jsx'
 import SingleChoice from '../../components/SingleChoice/index.jsx'
 
 import { Link } from 'react-router-dom'
+import { _helper } from '../../components/api/_helper'
+import moment from 'moment'
+
+import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
 export default class DailyResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
       date: moment().format('YYYY-MM-DD'),
-      taskNumber: new Number(),
+      plan: [],
+      taskNumber: 0,
       bestTask: '',
       whyBest: '',
-      lessionLearned: ''      
+      bestTime: [],
+      effciency: 0,
+      lessionLearned: '',
+      authenticate: false      
     }
+  }
+
+  checkAuth = () => {
+    checkAuthenticate().then((authenticate) => {
+      this.setState({
+        authenticate: authenticate
+      })
+    })
+  }
+  componentDidMount = () => {
+    this.checkAuth()
   }
 
   getDailyResult = () => {
@@ -24,14 +43,17 @@ export default class DailyResult extends Component {
       {}
     )
     .then((response) => {
-      const { date, plan, bestTask, whyBest, bestTime, effciency, lessionLearned } = response;
-      return this.setState({
+      const { date, plan, bestTask, whyBest, bestTime, effciency, lessionLearned } = response.data;
+      this.setState({
+        plan: plan,
         bestTask: bestTask,
         whyBest: whyBest,
         bestTime: bestTime,
         effciency: effciency,
         lessionLearned: lessionLearned
       }, () => {
+        debugger
+        const { plan } = this.state;
         var count = 0;
         for (var i = 0; i < plan.length; ++i) {
           if (plan[i].process === 100) {
@@ -44,11 +66,16 @@ export default class DailyResult extends Component {
   }
 
   componentWillMount = () => {
-    this.getDailyPlan();
+    this.getDailyResult();
   }
 
   render() {
-    const { date, taskNumber, bestTask, whyBest, lessionLearned } = this.state;
+    const { authenticate, date, taskNumber, bestTask, whyBest, bestTime, efficiency, lessionLearned } = this.state;
+    if (authenticate) {
+      return (
+        <Redirect to={'/users/login'}></Redirect>
+      )
+    }
     return (
       <div>
         <div>

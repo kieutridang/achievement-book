@@ -34,11 +34,11 @@ module.exports = function(app) {
         saveUninitialized: false,
         httpOnly: true,
         cookie: {
-            maxAge: 5 * 60 * 1000
+            maxAge: 15 * 60 * 1000
         },
         store: new MongoStore({
             url: 'mongodb://localhost/achievement-book',
-            ttl: 5
+            ttl: 15
         })
     }))
 

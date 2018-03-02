@@ -7,7 +7,7 @@ export default class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rows: new Array(5).fill({task: '', from: '', process: ''})
+      rows: props.rows
     }
   }
 
