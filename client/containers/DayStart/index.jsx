@@ -5,11 +5,13 @@ import Table from '../../components/Table/index.jsx'
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
 
+import moment from 'moment'
+
 export default class DailyPlan extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: '',
+      date: new Date().moment().format('YYYY-MM-DD'),
       quote: '',
       plan: [],
       note: ''
@@ -62,12 +64,16 @@ export default class DailyPlan extends Component {
         <div>
           <Table
             label='Tasks Planning'
+            reqUrl={'/dailyplan/updateplan/:' + {date}}
           />
         </div>
         <div>
           <OnBlurInput
             label = 'Note'
-            onBlur = {note => this.setState({note})}
+            onBlur = {note => this.setState(
+              {note},
+              _helper.fetchAPI('/dailyplan/updateplan/:' + {date}, {note: note}, [], 'PUT')
+            )}
           />
         </div>
         <div>
