@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var moment = required('moment');
+var moment = require('moment');
 var Schema = mongoose.Schema;
 
 var DailyPlan = new Schema({
@@ -8,47 +8,45 @@ var DailyPlan = new Schema({
     },
     userId: {
         type: String,
-        required: [true, "UserId is required"],
+        required: [true, 'UserId is required']
     },
     weeklyPlanId: {
         type: String
     },
     date: {
         type: String,
-        required: [true, "Date is reqired"],
         validate: {
-            validator: function(date){
-                if (moment(v, 'YYYY-MM-DD', true).format() == "Invalid date")
+            validator: function (date) {
+                if (moment(date, 'YYYY-MM-DD', true).format() == "Invalid date")
                     return false;
                 else return true;
             },
             message: 'Invalid date'
-        }
+        },
+        required: [true, 'Date is required']
     },
     quote: {
         type: String
     },
-    plan: [
-        {
-            task: {
-                type: String
-            },
-            from: {
-                type: Date,
-                validate: {
-                    validator: function(time){
-                        if (moment(time, 'hh:mm', true).format() == "Invalid date")
-                            return false;
-                        else return true;
-                    },
-                    message: 'Invalid time'
-                }
-            },
-            process: {
-                type: Number
+    plan: [{
+        task: {
+            type: String
+        },
+        from: {
+            type: String,
+            validator: {
+                validate: function (time) {
+                    if (moment(time, 'hh:mm', true).format() == "Invalid date")
+                        return false;
+                    else return true;
+                },
+                message: 'Invalid date'
             }
+        },
+        process: {
+            type: Number
         }
-    ],
+    }],
     note: {
         type: String
     },
@@ -58,9 +56,9 @@ var DailyPlan = new Schema({
     whyBest: {
         type: String
     },
-    bestTime: [
-        {type: Boolean}
-    ],
+    bestTime: {
+        type: [Boolean]
+    },
     effciency: {
         type: Number
     },
