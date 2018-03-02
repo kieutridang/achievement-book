@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import OnBlurInput from '../OnBlurInput/index.jsx'
 
+import { _helper } from '../api/_helper'
+
 export default class Table extends Component {
   constructor(props) {
     super(props);
@@ -37,19 +39,29 @@ export default class Table extends Component {
                         onBlur={(value, id) => {
                           var newRows = this.state.rows.map(row => row);
                           newRows[id].task = value;
-                          this.setState({rows: newRows})
+                          this.setState(
+                            {rows: newRows},
+                            () => {
+                              _helper.fetchAPI(reqUrl, newRows, [], "PUT")
+                            }
+                          )
                         }}
                       />
                     </td>
                     <td> 
                       <OnBlurInput
-                        type = 'date'
+                        type = 'time'
                         default={row.from}
                         id={i}
                         onBlur={(value, id) => {
                           var newRows = this.state.rows.map(row => row);
                           newRows[id].from = value;
-                          this.setState({rows: newRows})
+                          this.setState(
+                            {rows: newRows},
+                            () => {
+                              _helper.fetchAPI(reqUrl, newRows, [], "PUT")
+                            }
+                          )
                         }}
                       />
                     </td>
@@ -61,7 +73,12 @@ export default class Table extends Component {
                         onBlur={(value, id) => {
                           var newRows = this.state.rows.map(row => row);
                           newRows[id].process = value;
-                          this.setState({rows: newRows})
+                          this.setState(
+                            {rows: newRows},
+                            () => {
+                              _helper.fetchAPI(reqUrl, newRows, [], "PUT")
+                            }
+                          )
                         }}
                       />
                     </td>

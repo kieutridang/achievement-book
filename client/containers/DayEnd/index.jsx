@@ -45,10 +45,12 @@ export default class DailyResult extends Component {
           <TickBar
             label='Which times do you work best?'
             selections={['0-2', '2-4', '4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '16-18', '18-20', '20-22', '22-24']}
+            
           />
           <TickBar
             label='Which are your most efficient times?'
-            selections={['0-2', '2-4', '4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '16-18', '18-20', '20-22', '22-24']}
+            selections={['Low', 'Medium', 'Equivalent', 'Relative', 'High', 'Excellent']}
+            
           />
         </div>
         <div>

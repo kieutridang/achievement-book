@@ -6,7 +6,7 @@ export default class Tickbar extends Component {
     constructor(props){
         super(props);
         this.state = {
-            selected: new Array(props.selections.length).fill(false),
+            selected: props.selected,
             // selected: _helper.fetchGET(props.reqUrl).then((response) => {
             //     const {status, data} = response;
             //     if (status == 200) {
