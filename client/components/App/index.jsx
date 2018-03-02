@@ -5,10 +5,12 @@ import SingleChoice from '../SingleChoice/index.jsx'
 import MultipleChoice from '../MultipleChoice/index.jsx'
 import Input from '../Input/index.jsx'
 import UploadImage from '../UploadImage/index.jsx'
+import DateSelection from '../DateSelection/index'
 
 import {_helper} from '../api/_helper'
 import {checkValidate} from '../functions/checkValidate'
 import {validations} from '../functions/validations'
+import moment from 'moment'
 
 export default class App extends Component {
   constructor(props) {
@@ -19,7 +21,8 @@ export default class App extends Component {
       city: 'Ho Chi Minh',
       department: [],
 
-      showMessage: false
+      showMessage: false,
+      date: moment().format('YYYY-MM-DD')
     }
   }
 
@@ -103,6 +106,10 @@ export default class App extends Component {
         <Button 
           value = 'Submit'
           onClick = {() => {this.setState({showMessage: true})}}/>
+          <DateSelection
+            date = {this.state.date}
+            handleChange = {(newDate) => {this.setState({date: newDate})}}
+          />
       </div>
     )
   }
