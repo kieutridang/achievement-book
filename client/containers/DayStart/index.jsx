@@ -22,7 +22,7 @@ export default class DailyPlan extends Component {
       authenticate: false
     }
   }
-
+  
   checkAuth = () => {
     checkAuthenticate().then((authenticate) => {
       this.setState({
