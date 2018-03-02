@@ -26,7 +26,8 @@ var DailyPlan = new Schema({
         required: [true, 'Date is required']
     },
     quote: {
-        type: String
+        type: String,
+        default: '',
     },
     plan: [{
         task: {
@@ -48,22 +49,28 @@ var DailyPlan = new Schema({
         }
     }],
     note: {
-        type: String
+        type: String,
+        default: '',
     },
     bestTask: {
-        type: String
+        type: String,
+        default: '',
     },
     whyBest: {
-        type: String
+        type: String,
+        default: '',
     },
-    bestTime: {
-        type: [Boolean]
-    },
+    bestTime: [{
+        type: Boolean
+    }],
     effciency: {
-        type: Number
+        type: Number,
+        min: 0,
+        max: 4,
     },
     lessonLearn: {
-        type: String
+        type: String,
+        default: '',
     }
 })
 
