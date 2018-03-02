@@ -11,7 +11,7 @@ export default class DailyPlan extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: new Date().moment().format('YYYY-MM-DD'),
+      date: moment().format('YYYY-MM-DD'),
       quote: '',
       plan: [],
       note: ''
@@ -21,7 +21,7 @@ export default class DailyPlan extends Component {
   getDailyPlan = () => {
     const { date } = this.state;
     _helper.fetchGET(
-      '/dailyplan/getplan/:' + date,
+      '/dailyplan/getplan/' + date,
       {}
     )
     .then((response) => {
@@ -64,7 +64,7 @@ export default class DailyPlan extends Component {
         <div>
           <Table
             label='Tasks Planning'
-            reqUrl={'/dailyplan/updateplan/:' + {date}}
+            reqUrl={'/dailyplan/updateplan/' + date}
           />
         </div>
         <div>
@@ -72,7 +72,9 @@ export default class DailyPlan extends Component {
             label = 'Note'
             onBlur = {note => this.setState(
               {note},
-              _helper.fetchAPI('/dailyplan/updateplan/:' + {date}, {note: note}, [], 'PUT')
+              () => {
+                _helper.fetchAPI('/dailyplan/updateplan/' + date, {note: note}, [], 'PUT')
+              }
             )}
           />
         </div>
