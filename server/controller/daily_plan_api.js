@@ -101,7 +101,7 @@ module.exports = {
                     res.status(403).end("Invalid daily plan");
                 }
                 else {
-                    dataDaily.updatePlan( {userId: plan.userId, date: plan.date}, req.body, function(error, data) {
+                    dataDaily.updatePlan( {userId: plan.userId, date: plan.date}, plan, function(error, data) {
                         if (error) {
                             res.status(500).end(error);
                         }
