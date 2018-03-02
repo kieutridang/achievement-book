@@ -54,7 +54,6 @@ export default class DailyResult extends Component {
         effciency: effciency,
         lessionLearned: lessionLearned
       }, () => {
-        debugger
         const { plan } = this.state;
         var count = 0;
         for (var i = 0; i < plan.length; ++i) {
