@@ -33,7 +33,7 @@ export default class Tickbar extends Component {
                     this.setState({
                         selected: newArr
                     }, () =>{
-                        _helper.fetchAPI(reqUrl, newArr, [], "PUT")
+                        _helper.fetchAPI(reqUrl, {bestTime: newArr}, [], "PUT")
                     })
                 }}
             />

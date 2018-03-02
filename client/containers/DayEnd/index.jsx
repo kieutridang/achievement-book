@@ -23,7 +23,7 @@ export default class DailyResult extends Component {
       bestTime: [],
       effciency: 0,
       lessionLearned: '',
-      authenticate: false      
+      authenticate: true      
     }
   }
 
@@ -35,7 +35,8 @@ export default class DailyResult extends Component {
     })
   }
   componentDidMount = () => {
-    this.checkAuth()
+    this.checkAuth();
+    this.getDailyResult();
   }
 
   getDailyResult = () => {
@@ -64,10 +65,6 @@ export default class DailyResult extends Component {
         this.setState({taskNumber: count});
       })
     })
-  }
-
-  componentWillMount = () => {
-    this.getDailyResult();
   }
 
   logout = () => {

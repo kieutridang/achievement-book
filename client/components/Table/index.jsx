@@ -11,6 +11,15 @@ export default class Table extends Component {
     }
   }
 
+  componentDidMount = () => {
+    var newRows = this.state.rows.map(value => value);
+    var length = 5 - newRows.length;
+    for (var i = 0; i < length; ++i) {
+      newRows.push({task: '', from: '', process: ''})
+    }
+    this.setState({rows: newRows})
+  }
+
   render() {
     const { label, reqUrl } = this.props;
     const { rows } = this.state;

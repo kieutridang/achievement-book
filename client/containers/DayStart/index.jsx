@@ -19,19 +19,14 @@ export default class DailyPlan extends Component {
       quote: '',
       plan: [],
       note: '',
-      authenticate: false
+      authenticate: true
     }
   }
   
   checkAuth = () => {
     checkAuthenticate().then((authenticate) => {
-      this.setState({
-        authenticate: authenticate
-      })
+      this.setState({authenticate})
     })
-  }
-  componentDidMount = () => {
-    this.checkAuth()
   }
 
   getDailyPlan = () => {
@@ -50,7 +45,8 @@ export default class DailyPlan extends Component {
     })
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
+    this.checkAuth();
     this.getDailyPlan();
   }
 
