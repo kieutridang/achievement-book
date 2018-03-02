@@ -15,7 +15,7 @@ module.exports = function(app) {
     router.delete('/user/deleteuser', userApi.authenticate, userApi.deleteUser);
 
     router.get('/dailyplan/getplan/:date', userApi.authenticate, dailyApi.getPlan);
-    router.post('dailyplan/createplan/:date', userApi.authenticate, dailyApi.createPlan);
+    router.post('/dailyplan/createplan/:date', userApi.authenticate, dailyApi.createPlan);
     router.put('/dailyplan/updateplan/:date', userApi.authenticate, dailyApi.updatePlan);
 
     app.use('/api', router)
