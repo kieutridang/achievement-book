@@ -98,7 +98,7 @@ export default class DailyResult extends Component {
             handleChange = {date => {
               this.setState(
                 {date},
-                () => this.getDailyPlan()
+                () => this.getDailyResult()
               )
             }}
           />
