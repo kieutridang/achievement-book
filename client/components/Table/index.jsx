@@ -20,6 +20,16 @@ export default class Table extends Component {
     this.setState({rows: newRows})
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    console.log(nextProps);
+    var newRows = nextProps.rows;
+    var length = 5 - newRows.length;
+    for (var i = 0; i < length; ++i) {
+      newRows.push({ task: '', from: '', process: '' })
+    }
+    this.setState({ rows: newRows })
+  }
+
   render() {
     const { label, reqUrl } = this.props;
     const { rows } = this.state;

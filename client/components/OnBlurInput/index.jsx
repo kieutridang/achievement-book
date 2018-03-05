@@ -10,6 +10,12 @@ export default class OnBlurInput extends Component {
     }
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    this.setState({
+      value: nextProps.default || ''
+    })
+  }
+
   handlingBlur = (value) => {
     this.props.onBlur(value, this.props.id);
     this.setState({
