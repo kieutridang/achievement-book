@@ -37,7 +37,7 @@ export default class DailyPlan extends Component {
     )
     .then((response) => {
       const { date, quote, plan, note } = response.data;
-      return this.setState({
+      this.setState({
         quote: quote,
         plan: plan,
         note: note
@@ -78,7 +78,7 @@ export default class DailyPlan extends Component {
           <h1> Daily Plan </h1>
           <DateSelection
             date={date}
-            handleChange = {date => {
+            handleChange={date => {
               this.setState(
                 {date},
                 () => this.getDailyPlan()
@@ -96,8 +96,9 @@ export default class DailyPlan extends Component {
         </div>
         <div>
           <OnBlurInput
-            label = 'Note'
-            onBlur = {note => this.setState(
+            default={note}
+            label='Note'
+            onBlur={note => this.setState(
               {note},
               () => {
                 _helper.fetchAPI('/dailyplan/updateplan/' + date, {note: note}, [], 'PUT')

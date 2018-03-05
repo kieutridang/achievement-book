@@ -133,7 +133,7 @@ export default class DailyResult extends Component {
             reqUrl={'/dailyplan/updateplan/' + date}
           />
           <SingleChoice
-            label='Which are your most efficient times?'
+            label='Which rate of effciency in your task(s)?'
             optionsList={['Low', 'Medium', 'Equivalent', 'Relative', 'High', 'Excellent']}
             onChange = {(effciency) => this.setState(
               {effciency},
