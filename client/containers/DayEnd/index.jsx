@@ -22,7 +22,7 @@ export default class DailyResult extends Component {
       whyBest: '',
       bestTime: [],
       efficiency: -1,
-      lessionLearned: '',
+      lessonLearned: '',
       authenticate: true      
     }
   }
@@ -46,14 +46,14 @@ export default class DailyResult extends Component {
       {}
     )
     .then((response) => {
-      const { date, plan, bestTask, whyBest, bestTime, efficiency, lessionLearned } = response.data;
+      const { date, plan, bestTask, whyBest, bestTime, efficiency, lessonLearned } = response.data;
       this.setState({
         plan: plan,
         bestTask: bestTask,
         whyBest: whyBest,
         bestTime: bestTime,
         efficiency: efficiency,
-        lessionLearned: lessionLearned
+        lessonLearned: lessonLearned
       }, () => {
         const { plan } = this.state;
         var count = 0;
@@ -83,7 +83,7 @@ export default class DailyResult extends Component {
     }
 
   render() {
-    const { authenticate, date, taskNumber, bestTask, whyBest, bestTime, efficiency, lessionLearned } = this.state;
+    const { authenticate, date, taskNumber, bestTask, whyBest, bestTime, efficiency, lessonLearned } = this.state;
     if (!authenticate) {
       return (
         <Redirect to={'/users/login'}></Redirect>
@@ -172,12 +172,12 @@ export default class DailyResult extends Component {
         </div>
         <div>
           <OnBlurInput
-            default={lessionLearned}
-            label='Lession Learned'
-            onBlur={lessionLearned => this.setState(
-              {lessionLearned},
+            default={lessonLearned}
+            label='Lesson Learned'
+            onBlur={lessonLearned => this.setState(
+              {lessonLearned},
               () => {
-                _helper.fetchAPI('/dailyplan/updateplan/' + date, {lessionLearned: lessionLearned}, [], 'PUT')
+                _helper.fetchAPI('/dailyplan/updateplan/' + date, {lessonLearned: lessonLearned}, [], 'PUT')
               }
             )}
           />
