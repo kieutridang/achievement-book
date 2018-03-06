@@ -86,8 +86,6 @@ export default class Table extends Component {
                     </td>
                     <td> 
                       <OnBlurInput
-                        min={0}
-                        max={100}
                         type = 'number'
                         default={row.process}
                         id={i}
