@@ -19,6 +19,12 @@ export default class OnBlurInput extends Component {
   }
 
   handlingBlur = (value) => {
+    const { type, conditions } = this.props
+    debugger
+    if(type == 'number' && conditions) {
+      if(value > conditions.max) { value = conditions.max.toString() }
+      if(value < conditions.min) { value = conditions.min.toString() }
+    }
     this.props.onBlur(value, this.props.id);
     this.setState({
       edit: false,
@@ -48,7 +54,7 @@ export default class OnBlurInput extends Component {
             <input
               type={type || 'text'}
               defaultValue={value}
-              onBlur={e => {
+              onBlur={(e) => {
                 this.handlingBlur(e.target.value)
               }
               }

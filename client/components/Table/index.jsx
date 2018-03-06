@@ -89,6 +89,7 @@ export default class Table extends Component {
                         type = 'number'
                         default={row.process}
                         id={i}
+                        conditions={{min: 0, max: 100}}
                         onBlur={(value, id) => {
                           var newRows = this.state.rows.map(row => row);
                           newRows[id].process = value;
