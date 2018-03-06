@@ -21,7 +21,7 @@ export default class DailyResult extends Component {
       bestTask: '',
       whyBest: '',
       bestTime: [],
-      efficiency: 0,
+      efficiency: -1,
       lessionLearned: '',
       authenticate: true      
     }
