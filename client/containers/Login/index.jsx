@@ -58,7 +58,7 @@ export default class Login extends Component {
     const { authenticate, message, showMessage} = this.state
     if (authenticate) {
       return (
-        <Redirect to={'/users/signup'}></Redirect>
+        <Redirect to={'/home'}></Redirect>
       )
     }
     return (
@@ -89,7 +89,7 @@ export default class Login extends Component {
             <Link to='/users/reset-password'>Forgot Password?</Link>
           </div>
           <div>
-            <Link to='/users/register'>Sign Up</Link>
+            <Link to='/users/signup'>Sign Up</Link>
           </div>
         </div>
       </div>

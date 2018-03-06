@@ -50,6 +50,8 @@ export default class Login extends Component {
         return (
             <div>
                 <h1>Logged in successfully</h1>
+                <div><Link to='/daily-plan'>Daily Plan</Link></div>
+                <div><Link to='/daily-result'>Daily Result</Link></div>
                 <button onClick={this.logout}>Logout</button>
             </div>
         )
