@@ -66,7 +66,7 @@ var DailyPlan = new Schema({
     efficiency: {
         type: Number,
         min: 0,
-        max: 4,
+        max: 5,
     },
     lessonLearned: {
         type: String,
