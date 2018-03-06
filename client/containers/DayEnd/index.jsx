@@ -109,6 +109,7 @@ export default class DailyResult extends Component {
             <span> {taskNumber} </span>
           </div>
           <OnBlurInput
+            default={bestTask}
             label='Best Completed Task'
             onBlur={bestTask => this.setState(
               {bestTask},
@@ -118,6 +119,7 @@ export default class DailyResult extends Component {
             )}
           />
           <OnBlurInput
+            default={whyBest}
             label='Why it is your best task?'
             onBlur={whyBest => this.setState(
               {whyBest},
@@ -133,40 +135,44 @@ export default class DailyResult extends Component {
             reqUrl={'/dailyplan/updateplan/' + date}
           />
           <SingleChoice
+            choice={efficiency}
             label='Which rate of effciency in your task(s)?'
             optionsList={['Low', 'Medium', 'Equivalent', 'Relative', 'High', 'Excellent']}
-            onChange = {(effciency) => this.setState(
-              {effciency},
-              () => {
-                var effciencyNumber;
-                switch (effciency) {
-                  case 'Low':
-                    effciencyNumber = 0;
-                    break;
-                  case 'Medium':
-                    effciencyNumber = 1;
-                    break;
-                  case 'Equivalent':
-                    effciencyNumber = 2;
-                    break;
-                  case 'Relatve':
-                    effciencyNumber = 3;
-                    break;
-                  case 'High':
-                    effciencyNumber = 4;
-                    break;
-                
-                  default:
-                    effciencyNumber = 5;
-                    break;
-                }
-                _helper.fetchAPI('/dailyplan/updateplan/' + date, {effciency: effciencyNumber}, [], 'PUT')
+            onChange = {(effciency) => {
+              var effciencyNumber;
+              switch (effciency) {
+                case 'Low':
+                  effciencyNumber = 0;
+                  break;
+                case 'Medium':
+                  effciencyNumber = 1;
+                  break;
+                case 'Equivalent':
+                  effciencyNumber = 2;
+                  break;
+                case 'Relative':
+                  effciencyNumber = 3;
+                  break;
+                case 'High':
+                  effciencyNumber = 4;
+                  break;
+              
+                default:
+                  effciencyNumber = 5;
+                  break;
               }
-            )}
+              this.setState(
+                {effciency: effciencyNumber},
+                () => {
+                _helper.fetchAPI('/dailyplan/updateplan/' + date, {effciency: effciencyNumber}, [], 'PUT')
+                }
+              )
+            }}
           />
         </div>
         <div>
           <OnBlurInput
+            default={lessionLearned}
             label='Lession Learned'
             onBlur={lessionLearned => this.setState(
               {lessionLearned},

@@ -6,7 +6,7 @@ export default class SingleChoice extends Component {
   }
 
   render() {
-    const { label, required, optionsList, message, showMessage } = this.props;
+    const { label, required, optionsList, message, showMessage, choice } = this.props;
     const property = label.toLowerCase().replace(' ', '-');
     return (
       <div>
@@ -18,12 +18,20 @@ export default class SingleChoice extends Component {
               return (
                 <div key={index}>
                   <label>
-                    <input 
-                      type='radio'
-                      name={property} 
-                      value={option} 
-                      onClick={(e) => this.props.onChange(e.target.value)}/>
-                      {option} 
+                    {
+                      index === choice ? <input 
+                        type='radio'
+                        name={property} 
+                        value={option} 
+                        checked
+                        onClick={(e) => this.props.onChange(e.target.value)}/>
+                      : <input 
+                        type='radio'
+                        name={property} 
+                        value={option} 
+                        onClick={(e) => this.props.onChange(e.target.value)}/>
+                    }
+                    {option} 
                   </label>
                 </div>
               )

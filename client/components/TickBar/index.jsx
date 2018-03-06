@@ -6,7 +6,7 @@ export default class Tickbar extends Component {
     constructor(props){
         super(props);
         this.state = {
-            selected: props.selected,
+            selected: props.selected
             // selected: _helper.fetchGET(props.reqUrl).then((response) => {
             //     const {status, data} = response;
             //     if (status == 200) {
@@ -18,6 +18,16 @@ export default class Tickbar extends Component {
             // })
         }
     }
+
+    componentWillReceiveProps = (nextProps) => {
+        var newSelected = nextProps.selected;
+        var length = 12 - newSelected.length;
+        for (var i = 0; i < length; ++i) {
+          newSelected.push(false)
+        }
+        this.setState({ selected: newSelected })
+      }
+
     render() {
         const { label, selections, reqUrl } = this.props;
         const { selected } = this.state;
