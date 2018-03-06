@@ -31,7 +31,7 @@ export default class OnBlurInput extends Component {
   }
 
   render() {
-    let { id, type, label, required, suggestion, onBlur, message, showMessage } = this.props;
+    let { id, type, label, required, suggestion, onBlur, message, showMessage, min, max } = this.props;
     let { value, edit } = this.state;
     return (
       <div>
@@ -46,9 +46,11 @@ export default class OnBlurInput extends Component {
         {
           (edit || value == '') ? 
             <input
-              type = {type || 'text'}
-              defaultValue = {value}
-              onBlur = {e => {
+              type={type || 'text'}
+              defaultValue={value}
+              min={min}
+              max={max}
+              onBlur={e => {
                 this.handlingBlur(e.target.value)
               }
               }
