@@ -63,7 +63,7 @@ var DailyPlan = new Schema({
     bestTime: [{
         type: Boolean
     }],
-    effciency: {
+    efficiency: {
         type: Number,
         min: 0,
         max: 4,

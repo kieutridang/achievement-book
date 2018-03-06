@@ -21,7 +21,7 @@ export default class DailyResult extends Component {
       bestTask: '',
       whyBest: '',
       bestTime: [],
-      effciency: 0,
+      efficiency: 0,
       lessionLearned: '',
       authenticate: true      
     }
@@ -46,13 +46,13 @@ export default class DailyResult extends Component {
       {}
     )
     .then((response) => {
-      const { date, plan, bestTask, whyBest, bestTime, effciency, lessionLearned } = response.data;
+      const { date, plan, bestTask, whyBest, bestTime, efficiency, lessionLearned } = response.data;
       this.setState({
         plan: plan,
         bestTask: bestTask,
         whyBest: whyBest,
         bestTime: bestTime,
-        effciency: effciency,
+        efficiency: efficiency,
         lessionLearned: lessionLearned
       }, () => {
         const { plan } = this.state;
@@ -136,35 +136,35 @@ export default class DailyResult extends Component {
           />
           <SingleChoice
             choice={efficiency}
-            label='Which rate of effciency in your task(s)?'
+            label='Which rate of efficiency in your task(s)?'
             optionsList={['Low', 'Medium', 'Equivalent', 'Relative', 'High', 'Excellent']}
-            onChange = {(effciency) => {
-              var effciencyNumber;
-              switch (effciency) {
+            onChange = {(efficiency) => {
+              var efficiencyNumber;
+              switch (efficiency) {
                 case 'Low':
-                  effciencyNumber = 0;
+                  efficiencyNumber = 0;
                   break;
                 case 'Medium':
-                  effciencyNumber = 1;
+                  efficiencyNumber = 1;
                   break;
                 case 'Equivalent':
-                  effciencyNumber = 2;
+                  efficiencyNumber = 2;
                   break;
                 case 'Relative':
-                  effciencyNumber = 3;
+                  efficiencyNumber = 3;
                   break;
                 case 'High':
-                  effciencyNumber = 4;
+                  efficiencyNumber = 4;
                   break;
               
                 default:
-                  effciencyNumber = 5;
+                  efficiencyNumber = 5;
                   break;
               }
               this.setState(
-                {effciency: effciencyNumber},
+                {efficiency: efficiencyNumber},
                 () => {
-                _helper.fetchAPI('/dailyplan/updateplan/' + date, {effciency: effciencyNumber}, [], 'PUT')
+                _helper.fetchAPI('/dailyplan/updateplan/' + date, {efficiency: efficiencyNumber}, [], 'PUT')
                 }
               )
             }}
