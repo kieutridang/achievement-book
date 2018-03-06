@@ -68,7 +68,7 @@ var DailyPlan = new Schema({
         min: 0,
         max: 4,
     },
-    lessonLearn: {
+    lessonLearned: {
         type: String,
         default: '',
     }

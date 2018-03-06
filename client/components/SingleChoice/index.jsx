@@ -24,12 +24,12 @@ export default class SingleChoice extends Component {
                         name={property} 
                         value={option} 
                         checked
-                        onClick={(e) => this.props.onChange(e.target.value)}/>
+                        onChange={(e) => this.props.onChange(e.target.value)}/>
                       : <input 
                         type='radio'
                         name={property} 
                         value={option} 
-                        onClick={(e) => this.props.onChange(e.target.value)}/>
+                        onChange={(e) => this.props.onChange(e.target.value)}/>
                     }
                     {option} 
                   </label>
