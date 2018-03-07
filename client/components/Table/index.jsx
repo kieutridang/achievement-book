@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import OnBlurInput from '../OnBlurInput/index.jsx'
+import moment from 'moment'
 
 import { _helper } from '../api/_helper'
 
@@ -31,7 +32,7 @@ export default class Table extends Component {
   }
 
   render() {
-    const { label, reqUrl } = this.props;
+    const { label, reqUrl, date } = this.props;
     const { rows } = this.state;
     return (
       <div>
@@ -101,6 +102,42 @@ export default class Table extends Component {
                           )
                         }}
                       />
+                    </td>
+                    <td> 
+                        {
+                        (date < moment().add(1, 'd').format('YYYY-MM-DD')) &&
+                        <button 
+                          onClick = {() => {
+                              var getURL;
+                              let tommorrowDay = moment().add(1, 'd').format('YYYY-MM-DD');
+                              _helper.fetchGET('/dailyplan/getplan/' + tommorrowDay, {})
+                              .then((response) => {
+                                let tommorowTask = response.data.plan;
+                                console.log(tommorrowDay);
+                                console.log(response.data);
+                                for (var i = 0; i < 5; ++i) {
+                                  if (tommorowTask[i] && row.task == tommorowTask[i].task && row.from == tommorowTask[i].from) {
+                                    tommorowTask[i].process = row.process;
+                                    return tommorowTask;
+                              
+                                  }
+                                }
+                                for (var i = 0; i < 5; ++i) {
+                                  if (!tommorowTask[i] || tommorowTask[i].task == '' && tommorowTask[i].from == '') {
+                                    tommorowTask[i] = row;
+                                    return tommorowTask;
+                                  }
+                                }
+                              })
+                              .then((tommorowTask) => {
+                                _helper.fetchAPI('/dailyplan/updateplan/' + tommorrowDay, {plan: tommorowTask}, [], "PUT")
+                              })
+                            }
+                          }
+                        >
+                          Move Task
+                        </button>
+                        }
                     </td>
                   </tr>
                 ))

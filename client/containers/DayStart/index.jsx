@@ -90,6 +90,7 @@ export default class DailyPlan extends Component {
         <div>
           <Table
             label='Tasks Planning'
+            date={date}
             reqUrl={'/dailyplan/updateplan/' + date}
             rows={plan}
           />
