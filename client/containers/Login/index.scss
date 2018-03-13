@@ -1,0 +1,50 @@
+.log-in {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(59, 42, 169);
+    display: flex;
+    align-items: center;
+    >div {
+        font-family: 'Lucida Grande';
+        background-color: white;
+        width: 60%;
+        height: 60%;
+        min-height: 250px;
+        min-width: 530px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        >div {
+            &:nth-child(1) {
+                width: 50%;
+                >div {
+                    &:nth-child(1) {
+                        h1 {
+                            font-size: 45;
+                        }
+                    }
+                    &:nth-child(2) {
+                        >div {
+                            >input {
+                                border: none;
+                                border-bottom: rgb(172, 172, 172) solid 2px;
+                            }
+                        }
+                    }
+                }
+            }
+            &:nth-child(2) {
+                height: 100%;
+                width: 50%;
+                overflow: hidden;
+                img {
+                    max-height: 100%;
+                }
+            }
+        }
+    }
+}
+
+ ::placeholder {
+    font-family: 'Lucida Grande';
+}

@@ -3,11 +3,13 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import Input from '../../components/Input/index.jsx';
+import Input2 from '../../components/Input2/index.jsx';
 import Button from '../../components/Button/index.jsx';
 
 import { _helper } from '../../components/api/_helper';
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
+import './index.scss';
 
 export default class Login extends Component {
   constructor(props) {
@@ -62,34 +64,38 @@ export default class Login extends Component {
       )
     }
     return (
-      <div>
-        <div>
-          <h1> Log In </h1>
-        </div>
-        <div>
-          {showMessage &&
-            <span>{message}</span>
-          }
-          <Input
-            label = "Username"
-            onChange = {(username) => {this.setState({username})}}
-          />
-          <Input
-            type = "password"
-            label = "Password"
-            onChange={(password) => { this.setState({ password }) }}
-          />
-          <Button
-            value="Log In"
-            onClick= {this.login}
-          />
-        </div>
+      <div className="log-in">
         <div>
           <div>
-            <Link to='/users/reset-password'>Forgot Password?</Link>
+            <div>
+              <h1> Achievement Book </h1>
+            </div>
+            <div>
+              <Input2
+                label = "username"
+                onChange = {(username) => {this.setState({username})}}
+              />
+              <Input2
+                type = "password"
+                label = "password"
+                onChange={(password) => { this.setState({ password }) }}
+              />
+            </div>
+            <div>
+              <Button
+                value="Log In"
+                onClick={this.login}
+              />
+              <div>
+                <Link to='/users/reset-password'>Forgot Password?</Link>
+              </div>
+              <div>
+                <Link to='/users/signup'>Sign Up</Link>
+              </div>
+            </div>
           </div>
           <div>
-            <Link to='/users/signup'>Sign Up</Link>
+            <img src="http://localhost:8080/public/log-in-background.jpg" alt=""/>
           </div>
         </div>
       </div>
