@@ -11,7 +11,7 @@ export default class OnBlurInput extends Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    if (this.props.default != nextProps.default){
+    if (this.props.default != nextProps.default) {
       this.setState({
         value: nextProps.default || ''
       })
@@ -21,9 +21,9 @@ export default class OnBlurInput extends Component {
   handlingBlur = (value) => {
     const { type, conditions } = this.props
     debugger
-    if(type == 'number' && conditions) {
-      if(value > conditions.max) { value = conditions.max.toString() }
-      if(value < conditions.min) { value = conditions.min.toString() }
+    if (type == 'number' && conditions) {
+      if (value > conditions.max) { value = conditions.max.toString() }
+      if (value < conditions.min) { value = conditions.min.toString() }
     }
     this.props.onBlur(value, this.props.id);
     this.setState({
@@ -33,36 +33,48 @@ export default class OnBlurInput extends Component {
   }
 
   handlingDoubleClick = () => {
-    this.setState({edit: true})
+    this.setState({ edit: true })
   }
 
   render() {
-    let { id, type, label, required, suggestion, onBlur, message, showMessage } = this.props;
+    let { id, type, label, required, suggestion, onBlur, message, showMessage, disabled } = this.props;
     let { value, edit } = this.state;
     return (
       <div>
-        { label && <label> {label}: </label> }
-        { required && <span>*</span> }
-        { suggestion && 
+        {label && <label> {label}: </label>}
+        {required && <span>*</span>}
+        {suggestion &&
           <div>
             <div></div>
             <p> {suggestion} </p>
           </div>
         }
         {
-          (edit || value == '') ? 
-            <input
-              type={type || 'text'}
-              defaultValue={value}
-              onBlur={(e) => {
-                this.handlingBlur(e.target.value)
-              }
-              }
-            />
-          : <span onDoubleClick = {this.handlingDoubleClick}> {value} </span>
+          (edit || value == '') ?
+            (
+              (!disabled) ?
+                <input
+                  type={type || 'text'}
+                  defaultValue={value}
+                  onBlur={(e) => {
+                    this.handlingBlur(e.target.value)
+                  }
+                  }
+                />
+                : <input
+                  type={type || 'text'}
+                  defaultValue={value}
+                  onBlur={(e) => {
+                    this.handlingBlur(e.target.value)
+                  }
+                  }
+                  disabled
+                />
+            )
+            : <span onDoubleClick={this.handlingDoubleClick}> {value} </span>
         }
         <div></div>
-        { showMessage && message && <span>{message}</span> }
+        {showMessage && message && <span>{message}</span>}
       </div>
     )
   }
