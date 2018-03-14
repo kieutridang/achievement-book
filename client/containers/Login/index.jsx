@@ -14,13 +14,13 @@ import './index.scss';
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       username: '',
       password: '',
       message: '',
       showMessage: false,
       authenticate: false
-     }
+    }
   }
   checkAuth = () => {
     checkAuthenticate().then((authenticate) => {
@@ -41,23 +41,23 @@ export default class Login extends Component {
         password
       }
     )
-    .then((response) => {
-      if (response) {
-        const {data, status} = response;
-        if (status == 200) {
-          this.checkAuth()
+      .then((response) => {
+        if (response) {
+          const { data, status } = response;
+          if (status == 200) {
+            this.checkAuth()
+          }
+          else {
+            this.setState({
+              showMessage: true,
+              message: data
+            })
+          }
         }
-        else {
-          this.setState({
-            showMessage: true,
-            message: data
-          })
-        }
-      }
-    })
+      })
   }
   render() {
-    const { authenticate, message, showMessage} = this.state
+    const { authenticate, message, showMessage } = this.state
     if (authenticate) {
       return (
         <Redirect to={'/home'}></Redirect>
@@ -72,12 +72,12 @@ export default class Login extends Component {
             </div>
             <div>
               <Input2
-                label = "username"
-                onChange = {(username) => {this.setState({username})}}
+                label="username"
+                onChange={(username) => { this.setState({ username }) }}
               />
               <Input2
-                type = "password"
-                label = "password"
+                type="password"
+                label="password"
                 onChange={(password) => { this.setState({ password }) }}
               />
             </div>
@@ -95,7 +95,7 @@ export default class Login extends Component {
             </div>
           </div>
           <div>
-            <img src="http://localhost:8080/public/log-in-background.jpg" alt=""/>
+            <img src="http://localhost:8080/public/log-in-background.jpg" alt="" />
           </div>
         </div>
       </div>
