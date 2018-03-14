@@ -121,6 +121,7 @@ export default class DailyResult extends Component {
           <OnBlurInput
             default={whyBest}
             label='Why it is your best task?'
+            disabled={(bestTask == '')}
             onBlur={whyBest => this.setState(
               {whyBest},
               () => {
