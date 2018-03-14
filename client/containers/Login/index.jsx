@@ -48,16 +48,26 @@ export default class Login extends Component {
             this.checkAuth()
           }
           else {
-            this.setState({
-              showMessage: true,
-              message: data
-            })
+            if (status == 401){
+              this.setState({
+                showMessage: true,
+                messagePassword: data,
+                messageUser: '',
+              })
+            }
+            else {
+              this.setState({
+                showMessage: true,
+                messagePassword: '',
+                messageUser: data,
+              })
+            }
           }
         }
       })
   }
   render() {
-    const { authenticate, message, showMessage } = this.state
+    const { authenticate, messageUser, messagePassword, showMessage } = this.state
     if (authenticate) {
       return (
         <Redirect to={'/home'}></Redirect>
@@ -74,11 +84,15 @@ export default class Login extends Component {
               <Input2
                 label="username"
                 onChange={(username) => { this.setState({ username }) }}
+                showMessage={showMessage}
+                message={messageUser}
               />
               <Input2
                 type="password"
                 label="password"
                 onChange={(password) => { this.setState({ password }) }}
+                showMessage={showMessage}
+                message={messagePassword}
               />
             </div>
             <div>
