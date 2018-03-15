@@ -20,7 +20,6 @@ export default class OnBlurInput extends Component {
 
   handlingBlur = (value) => {
     const { type, conditions } = this.props
-    debugger
     if (type == 'number' && conditions) {
       if (value > conditions.max) { value = conditions.max.toString() }
       if (value < conditions.min) { value = conditions.min.toString() }
