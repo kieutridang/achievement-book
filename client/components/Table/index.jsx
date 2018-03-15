@@ -8,7 +8,8 @@ export default class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rows: props.rows
+      rows: props.rows,
+      moveTask: false
     }
   }
 
@@ -34,6 +35,7 @@ export default class Table extends Component {
   render() {
     const { label, reqUrl, date } = this.props;
     const { rows } = this.state;
+    let newMoveTask = false;
     return (
       <div>
         <div>
@@ -51,8 +53,11 @@ export default class Table extends Component {
             <tbody>
               {
                 rows.map((row, i) => (
+                  console.log(row.process),
+                  newMoveTask = row.process.toString() === '100' ? true : false,
+                  console.log(newMoveTask),
                   <tr key={i}>
-                    <td> 
+                    <td>
                       <OnBlurInput
                         default={row.task}
                         id={i}
@@ -68,7 +73,7 @@ export default class Table extends Component {
                         }}
                       />
                     </td>
-                    <td> 
+                    <td>
                       <OnBlurInput
                         type = 'time'
                         default={row.from}
@@ -85,7 +90,7 @@ export default class Table extends Component {
                         }}
                       />
                     </td>
-                    <td> 
+                    <td>
                       <OnBlurInput
                         type = 'number'
                         default={row.process}
@@ -103,10 +108,11 @@ export default class Table extends Component {
                         }}
                       />
                     </td>
-                    <td> 
+                    <td>
                         {
                         (date < moment().add(1, 'd').format('YYYY-MM-DD')) &&
-                        <button 
+                        <button
+                        disabled={newMoveTask}
                           onClick = {() => {
                               var getURL;
                               let tommorrowDay = moment().add(1, 'd').format('YYYY-MM-DD');
@@ -119,7 +125,7 @@ export default class Table extends Component {
                                   if (tommorowTask[i] && row.task == tommorowTask[i].task && row.from == tommorowTask[i].from) {
                                     tommorowTask[i].process = row.process;
                                     return tommorowTask;
-                              
+
                                   }
                                 }
                                 for (var i = 0; i < 5; ++i) {
