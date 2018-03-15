@@ -8,8 +8,7 @@ export default class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rows: props.rows,
-      moveTask: false
+      rows: props.rows
     }
   }
 
@@ -35,7 +34,7 @@ export default class Table extends Component {
   render() {
     const { label, reqUrl, date } = this.props;
     const { rows } = this.state;
-    let newMoveTask = false;
+    let moveTask = false;
     return (
       <div>
         <div>
@@ -53,7 +52,7 @@ export default class Table extends Component {
             <tbody>
               {
                 rows.map((row, i) => (
-                  newMoveTask = row.process.toString() === '100' ? true : false,
+                  moveTask = row.process != null && row.process.toString() === '100' ? true : false,
                   <tr key={i}>
                     <td>
                       <OnBlurInput
@@ -110,7 +109,7 @@ export default class Table extends Component {
                         {
                         (date < moment().add(1, 'd').format('YYYY-MM-DD')) &&
                         <button
-                        disabled={newMoveTask}
+                        disabled={moveTask}
                           onClick = {() => {
                               var getURL;
                               let tommorrowDay = moment().add(1, 'd').format('YYYY-MM-DD');
