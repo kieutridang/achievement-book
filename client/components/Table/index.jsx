@@ -53,9 +53,7 @@ export default class Table extends Component {
             <tbody>
               {
                 rows.map((row, i) => (
-                  console.log(row.process),
                   newMoveTask = row.process.toString() === '100' ? true : false,
-                  console.log(newMoveTask),
                   <tr key={i}>
                     <td>
                       <OnBlurInput
@@ -119,8 +117,6 @@ export default class Table extends Component {
                               _helper.fetchGET('/dailyplan/getplan/' + tommorrowDay, {})
                               .then((response) => {
                                 let tommorowTask = response.data.plan;
-                                console.log(tommorrowDay);
-                                console.log(response.data);
                                 for (var i = 0; i < 5; ++i) {
                                   if (tommorowTask[i] && row.task == tommorowTask[i].task && row.from == tommorowTask[i].from) {
                                     tommorowTask[i].process = row.process;
