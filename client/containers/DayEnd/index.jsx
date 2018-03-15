@@ -121,7 +121,7 @@ export default class DailyResult extends Component {
         </div>
         <div>
           <div>
-            <label> Number(s) of completed task(s) </label>
+            <label> Number of completed task(s) </label>
             <span> {taskNumber} </span>
           </div>
           <Select
