@@ -3,7 +3,7 @@ const path = require('path');
 const cors = require('cors');
 const app = express();
 const staticPath = '../dist';
-const publicPath = '../assets';
+const publicPath = '../public/';
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
@@ -46,6 +46,6 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, staticPath, '/index.html'))
     })
     
-    app.use('/', express.static(path.join(__dirname, publicPath)))
+    app.use('/public', express.static(path.join(__dirname, publicPath)))
     
 }
