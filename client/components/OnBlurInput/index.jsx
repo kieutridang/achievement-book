@@ -42,7 +42,7 @@ handlingkeydown = (e) => {
   }
 
   render() {
-    let { id, type, label, required, suggestion, onBlur, message, showMessage, disabled } = this.props;
+    let { id, type, label, required, suggestion, onBlur, message, showMessage, disabled, maxLength } = this.props;
     let { value, edit } = this.state;
     return (
       <div>
@@ -65,6 +65,7 @@ handlingkeydown = (e) => {
                        this.handlingkeydown(e)
                      }
                    }
+                  maxlength={maxLength}
                   onBlur={(e) => {
                       this.handlingBlur(e.target.value)
                     }
@@ -74,6 +75,7 @@ handlingkeydown = (e) => {
                 : <input
                   type={type || 'text'}
                   defaultValue={value}
+                  maxLength={maxLength}
                   onBlur={(e) => {
                     this.handlingBlur(e.target.value)
 
