@@ -6,7 +6,7 @@ export default class Select extends Component{
   }
 
   render() {
-    const { label, required, optionsList } = this.props;
+    const { label, required, optionsList, selectedIndex } = this.props;
     return (
       <div>
         <label> {label}: </label>
@@ -15,7 +15,9 @@ export default class Select extends Component{
           {
             optionsList.map((option, index) => {
               return (
-                <option key = {index} value = {option}> {option} </option>
+                selectedIndex === index ? 
+                  <option key={index} value={option} selected> {option} </option>
+                : <option key={index} value={option}> {option} </option>
               )
             })
           }
