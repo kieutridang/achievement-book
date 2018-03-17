@@ -3,6 +3,7 @@ import OnBlurInput from '../../components/OnBlurInput/index.jsx'
 import TickBar from '../../components/TickBar/index.jsx'
 import SingleChoice from '../../components/SingleChoice/index.jsx'
 import DateSelection from '../../components/DateSelection/index'
+import Select from '../../components/Select/index.jsx'
 
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
@@ -18,6 +19,7 @@ export default class DailyResult extends Component {
       date: moment().format('YYYY-MM-DD'),
       plan: [],
       taskNumber: 0,
+      completedTasksList: [],
       bestTask: '',
       whyBest: '',
       bestTime: [],
@@ -57,12 +59,26 @@ export default class DailyResult extends Component {
       }, () => {
         const { plan } = this.state;
         var count = 0;
+        var newCompletedTasksList = [];
         for (var i = 0; i < plan.length; ++i) {
           if (plan[i].process === 100) {
             count++;
+            newCompletedTasksList.push(plan[i].task);
           }
         }
-        this.setState({taskNumber: count});
+        if (bestTask == '') {
+          _helper.fetchAPI('/dailyplan/updateplan/' + date, {bestTask: newCompletedTasksList}, [], 'PUT');
+          this.setState({
+            taskNumber: count,
+            completedTasksList: newCompletedTasksList,
+            bestTask: newCompletedTasksList[0]
+          })
+        } else {
+          this.setState({
+            taskNumber: count,
+            completedTasksList: newCompletedTasksList
+          });
+        }
       })
     })
   }
@@ -83,7 +99,7 @@ export default class DailyResult extends Component {
     }
 
   render() {
-    const { authenticate, date, taskNumber, bestTask, whyBest, bestTime, efficiency, lessonLearned } = this.state;
+    const { authenticate, date, plan, taskNumber, completedTasksList, bestTask, whyBest, bestTime, efficiency, lessonLearned } = this.state;
     if (!authenticate) {
       return (
         <Redirect to={'/users/login'}></Redirect>
@@ -105,13 +121,16 @@ export default class DailyResult extends Component {
         </div>
         <div>
           <div>
-            <label> Number(s) of completed task(s) </label>
+            <label> Number of completed task(s) </label>
             <span> {taskNumber} </span>
           </div>
-          <OnBlurInput
-            default={bestTask}
+          <Select
             label='Best Completed Task'
-            onBlur={bestTask => this.setState(
+            optionsList={completedTasksList}
+            selectedIndex={completedTasksList.indexOf(bestTask)}
+            disabled={taskNumber == 0}
+            disabledMessage="You haven't done any task"
+            onChange={(bestTask) => this.setState(
               {bestTask},
               () => {
                 _helper.fetchAPI('/dailyplan/updateplan/' + date, {bestTask: bestTask}, [], 'PUT')
@@ -121,7 +140,7 @@ export default class DailyResult extends Component {
           <OnBlurInput
             default={whyBest}
             label='Why it is your best task?'
-            disabled={(bestTask == '')}
+            disabled={taskNumber == 0}
             onBlur={whyBest => this.setState(
               {whyBest},
               () => {
