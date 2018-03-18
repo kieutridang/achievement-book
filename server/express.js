@@ -9,8 +9,10 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const morgan = require('morgan');
 const MongoStore = require('connect-mongo')(session);
+const helper = require('./controller/helper');
+const cron = require('node-cron');
 
-module.exports = function(app) {
+module.exports = function (app) {
 
     app.use(morgan('dev'));
 
@@ -21,12 +23,15 @@ module.exports = function(app) {
     app.use(bodyParser.json({
         limit: "50mb"
     }))
-    app.use(bodyParser.urlencoded({extended: true})) 
+    app.use(bodyParser.urlencoded({ extended: true }))
 
     app.use(cors({
         origin: true,
         credentials: true
     }))
+
+    let task = cron.schedule('59 23 * * *', helper.moveTaskAutomatically);
+    task.start();
 
     app.use(session({
         secret: 'achievement-book',
@@ -45,7 +50,7 @@ module.exports = function(app) {
     app.get(/^\/[a-z]*$/, (req, res) => {
         res.sendFile(path.join(__dirname, staticPath, '/index.html'))
     })
-    
+
     app.use('/public', express.static(path.join(__dirname, publicPath)))
-    
+
 }

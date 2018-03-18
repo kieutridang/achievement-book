@@ -22,7 +22,6 @@ export default class Table extends Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    console.log(nextProps);
     var newRows = nextProps.rows;
     var length = 5 - newRows.length;
     for (var i = 0; i < length; ++i) {
