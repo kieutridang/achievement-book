@@ -11,8 +11,8 @@ export default class UploadImage extends Component {
         let { onChange, srcData, message, showMessage } = this.props;
         return (
             <div>
-                <img src={srcData} alt=""/>
-                <input 
+                <img src={srcData} alt=""/><br></br>
+                <input
                     type = 'file'
                     accept = 'image/*'
                     onChange={(e) => {
