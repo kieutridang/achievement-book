@@ -14,43 +14,47 @@ const cron = require('node-cron');
 
 module.exports = function (app) {
 
-    app.use(morgan('dev'));
+	app.use(morgan('dev'));
 
-    mongoose.connect('mongodb://localhost/achievement-book', {
-        useMongoClient: true
-    });
+	mongoose.connect('mongodb://localhost/achievement-book', {
+		useMongoClient: true
+	});
 
-    app.use(bodyParser.json({
-        limit: "50mb"
-    }))
-    app.use(bodyParser.urlencoded({ extended: true }))
+	app.use(bodyParser.json({
+		limit: "50mb"
+	}))
+	app.use(bodyParser.urlencoded({ extended: true }))
 
-    app.use(cors({
-        origin: true,
-        credentials: true
-    }))
+	app.use(cors({
+		origin: true,
+		credentials: true
+	}))
 
-    let task = cron.schedule('59 23 * * *', helper.moveTaskAutomatically);
-    task.start();
+	let task = cron.schedule('59 23 * * *', helper.moveTaskAutomatically);
+	task.start();
+	app.use(session({
+		secret: 'achievement-book',
+		resave: false,
+		saveUninitialized: false,
+		httpOnly: true,
+		cookie: {
+			maxAge: 15 * 60 * 1000
+		},
+		store: new MongoStore({
+			url: 'mongodb://localhost/achievement-book',
+			ttl: 15
+		})
+	}))
+	
+	app.use((req, res, next) => {
+		req.session.touch();
+		next()
+	})
 
-    app.use(session({
-        secret: 'achievement-book',
-        resave: false,
-        saveUninitialized: false,
-        httpOnly: true,
-        cookie: {
-            maxAge: 15 * 60 * 1000
-        },
-        store: new MongoStore({
-            url: 'mongodb://localhost/achievement-book',
-            ttl: 15
-        })
-    }))
+	app.get(/^\/[a-z]*$/, (req, res) => {
+		res.sendFile(path.join(__dirname, staticPath, '/index.html'))
+	})
 
-    app.get(/^\/[a-z]*$/, (req, res) => {
-        res.sendFile(path.join(__dirname, staticPath, '/index.html'))
-    })
-
-    app.use('/public', express.static(path.join(__dirname, publicPath)))
+	app.use('/public', express.static(path.join(__dirname, publicPath)))
 
 }
