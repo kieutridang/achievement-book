@@ -61,7 +61,6 @@ export default class Table extends Component {
                         onBlur={(value, id) => {
                           var newRows = this.state.rows.map(row => row);
                           newRows[id].task = value;
-                          debugger
                           this.setState(
                             {rows: newRows},
                             () => {

@@ -32,8 +32,9 @@ export default class OnBlurInput extends Component {
   }
 
 handlingkeydown = (e) => {
-  if(e.keyCode === 69)
+  if(e.keyCode === 69 && this.props.type =='number') {
     e.preventDefault();
+  }
 }
 
   handlingDoubleClick = () => {
