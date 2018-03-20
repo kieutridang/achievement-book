@@ -46,7 +46,7 @@ export default class Table extends Component {
               <tr>
                 <th> Task </th>
                 <th> From </th>
-                <th> Process </th>
+                <th> Process(%) </th>
               </tr>
             </thead>
             <tbody>
@@ -109,7 +109,6 @@ export default class Table extends Component {
                         {
                         (date < moment().add(1, 'd').format('YYYY-MM-DD')) &&
                         <button
-                        disabled={moveTask}
                           onClick = {() => {
                               var getURL;
                               let tommorrowDay = moment().add(1, 'd').format('YYYY-MM-DD');
