@@ -31,6 +31,11 @@ export default class OnBlurInput extends Component {
     })
   }
 
+handlingkeydown = (e) => {
+  if(e.keyCode === 69)
+    e.preventDefault();
+}
+
   handlingDoubleClick = () => {
     this.setState({ edit: true })
   }
@@ -55,18 +60,25 @@ export default class OnBlurInput extends Component {
                 <input
                   type={type || 'text'}
                   defaultValue={value}
+                  onKeyDown={(e) => {
+                       this.handlingkeydown(e)
+                     }
+                   }
                   onBlur={(e) => {
-                    this.handlingBlur(e.target.value)
+                      this.handlingBlur(e.target.value)
+                    }
                   }
-                  }
+
                 />
                 : <input
                   type={type || 'text'}
                   defaultValue={value}
                   onBlur={(e) => {
                     this.handlingBlur(e.target.value)
+
                   }
                   }
+
                   disabled
                 />
             )
