@@ -11,6 +11,8 @@ import moment from 'moment'
 
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
+import './index.scss';
+
 export default class DailyPlan extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,8 @@ export default class DailyPlan extends Component {
       date: moment().format('YYYY-MM-DD'),
       quote: '',
       plan: [],
+      totalTasks: 0,
+      doneTasks: 0,
       note: '',
       authenticate: true
     }
@@ -29,6 +33,64 @@ export default class DailyPlan extends Component {
     })
   }
 
+  showTask = (task, index) => {
+    const { plan } = this.state;
+    return (
+      <div
+        key={index}
+        className={task.process < 100 ? 'undoneTask' : 'doneTask'}
+      >
+        <OnBlurInput
+          default={task.task}
+          id={index}
+          onBlur={(value, id) => {
+            var newPlan = plan.map(task => task);
+            newPlan[id].task = value;
+            this.updatePlan(newPlan);
+          }}
+        />
+        <OnBlurInput
+          type='number'
+          default={task.process}
+          id={index}
+          conditions={{ min: 0, max: 100 }}
+          onBlur={(value, id) => {
+            var newPlan = plan.map(task => task);
+            newPlan[id].process = value;
+            this.updatePlan(newPlan);
+          }}
+        />
+        { (task.process < 100) && 
+          <img 
+            src="../../../public/checkmark.png"
+            id = {index}
+            onClick = {(e) => {
+              var id = e.target.id;
+              var newPlan = plan.map(task => task);
+              newPlan[id].process = 100;
+              this.updatePlan(newPlan);
+            }}
+          />
+        }
+      </div>
+    )
+  }
+
+  newTask = () => {
+    const { plan } = this.state;
+    var newPlan = plan.map(task => task);
+    newPlan.push({ task: '', process: '0'});
+    this.updatePlan(newPlan);
+  }
+
+  countDoneTasks = (plan) => {
+    let count = 0;
+    for (var i = 0; i < plan.length; ++i){
+      if (plan[i].process == 100) ++count; 
+    }
+    return count;
+  }
+
   getDailyPlan = () => {
     const { date } = this.state;
     _helper.fetchGET(
@@ -37,12 +99,25 @@ export default class DailyPlan extends Component {
     )
     .then((response) => {
       const { date, quote, plan, note } = response.data;
+      const doneTasks = this.countDoneTasks(plan);
       this.setState({
         quote: quote,
         plan: plan,
-        note: note
+        note: note,
+        totalTasks: plan.length,
+        doneTasks: doneTasks, 
       })
     })
+  }
+
+  updatePlan = (newPlan) => {
+    this.setState({
+      plan: newPlan,
+      totalTasks: newPlan.length,
+      doneTasks: this.countDoneTasks(newPlan),
+    })
+    const date = this.state.date;
+    _helper.fetchAPI('/dailyplan/updateplan/' + date, {plan: newPlan}, [], "PUT");
   }
 
   componentDidMount = () => {
@@ -66,7 +141,7 @@ export default class DailyPlan extends Component {
     }
 
   render() {
-    const { authenticate, date, quote, plan, note } = this.state
+    const { authenticate, date, quote, plan, note, doneTasks, totalTasks } = this.state;
     if (!authenticate) {
       return (
         <Redirect to={'/users/login'}></Redirect>
@@ -75,7 +150,7 @@ export default class DailyPlan extends Component {
     return (
       <div>
         <div>
-          <h1> Daily Plan </h1>
+          <h1> Make plan for your day </h1>
           <DateSelection
             date={date}
             handleChange={date => {
@@ -85,15 +160,35 @@ export default class DailyPlan extends Component {
               )
             }}
           />
-          <h3> { quote } </h3>
         </div>  
         <div>
-          <Table
-            label='Tasks Planning'
-            date={date}
-            reqUrl={'/dailyplan/updateplan/' + date}
-            rows={plan}
-          />
+          <div>
+            <span>Tasks </span>
+            <span>{doneTasks + ' / ' + totalTasks}</span>
+          </div>
+          <div>
+            {
+              plan.map((task, index) => {
+                if (task.process < 100) {
+                  return (this.showTask(task,index))
+                }
+              })
+            }
+            {
+              (totalTasks < 5) && (
+                <div onClick = {this.newTask}>
+                  <img src="../../../public/create.png" alt="Create task"/>
+                </div>
+              )
+            }
+            {
+              plan.map((task, index) => {
+                if (task.process == 100) {
+                  return (this.showTask(task, index))
+                }
+              })
+            }
+          </div>
         </div>
         <div>
           <OnBlurInput
