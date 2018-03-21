@@ -98,7 +98,8 @@ export default class DailyPlan extends Component {
         <div>
           <OnBlurInput
             default={note}
-            conditions={{maxLength: 200}}
+            // conditions={{maxLength: 200}}
+            maxLength="200"
             label='Note'
             onBlur={note => this.setState(
               {note},

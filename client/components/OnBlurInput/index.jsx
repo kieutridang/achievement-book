@@ -42,31 +42,32 @@ handlingkeydown = (e) => {
   }
 
   render() {
-    let { id, type, label, required, suggestion, onBlur, message, showMessage, disabled, conditions } = this.props;
+    let { id, type, label, required, suggestion, onBlur, message, showMessage, disabled, conditions} = this.props;
     let { value, edit } = this.state;
+    console.log(conditions);
     return (
       <div>
-        {label && <label> {label}: </label>}
-        {required && <span>*</span>}
-        {suggestion &&
-          <div>
-            <div></div>
-            <p> {suggestion} </p>
-          </div>
-        }
-        {
-          (edit || value == '') ?
-            (
+      {label && <label> {label}: </label>}
+      {required && <span>*</span>}
+      {suggestion &&
+        <div>
+        <div></div>
+        <p> {suggestion} </p>
+        </div>
+      }
+      {
+        (edit || value == '') ?
+        (
               (!disabled) ?
                 <input
                   type={type || 'text'}
                   defaultValue={value}
-                  maxlength={conditions.maxLength.toString()}
+                  // maxlength={conditions.maxLength.toString()}
+                  // maxlength={maxLength}
                   onKeyDown={(e) => {
                        this.handlingkeydown(e)
                      }
                    }
-                  maxlength={maxLength}
                   onBlur={(e) => {
                       this.handlingBlur(e.target.value)
                     }
@@ -76,11 +77,9 @@ handlingkeydown = (e) => {
                 : <input
                   type={type || 'text'}
                   defaultValue={value}
-                  maxLength={conditions.maxLength.toString()}
                   onBlur={(e) => {
-                    this.handlingBlur(e.target.value)
-
-                  }
+                      this.handlingBlur(e.target.value)
+                    }
                   }
 
                   disabled
