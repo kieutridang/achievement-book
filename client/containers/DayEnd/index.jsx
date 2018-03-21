@@ -10,6 +10,8 @@ import { _helper } from '../../components/api/_helper'
 import { Redirect } from 'react-router';
 import moment from 'moment'
 
+import './style.scss'
+
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
 export default class DailyResult extends Component {
@@ -103,7 +105,7 @@ export default class DailyResult extends Component {
       )
     }
     return (
-      <div className=".wrapper">
+      <div className="wrapper">
         <div>
           <h1> Review your day </h1>
         </div>

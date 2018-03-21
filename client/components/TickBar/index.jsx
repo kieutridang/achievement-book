@@ -50,7 +50,7 @@ export default class Tickbar extends Component {
         )
         return (
             <div>
-                <span>{ label }</span>
+                <label>{ label }</label>
                 {listSelections}
             </div>
         );
