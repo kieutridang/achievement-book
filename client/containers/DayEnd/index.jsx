@@ -18,7 +18,6 @@ export default class DailyResult extends Component {
     this.state = {
       date: moment().format('YYYY-MM-DD'),
       plan: [],
-      taskNumber: 0,
       completedTasksList: [],
       bestTask: '',
       whyBest: '',
@@ -69,13 +68,11 @@ export default class DailyResult extends Component {
         if (bestTask == '') {
           _helper.fetchAPI('/dailyplan/updateplan/' + date, {bestTask: newCompletedTasksList}, [], 'PUT');
           this.setState({
-            taskNumber: count,
             completedTasksList: newCompletedTasksList,
             bestTask: newCompletedTasksList[0]
           })
         } else {
           this.setState({
-            taskNumber: count,
             completedTasksList: newCompletedTasksList
           });
         }
@@ -99,36 +96,23 @@ export default class DailyResult extends Component {
     }
 
   render() {
-    const { authenticate, date, plan, taskNumber, completedTasksList, bestTask, whyBest, bestTime, efficiency, lessonLearned } = this.state;
+    const { authenticate, date, plan, completedTasksList, bestTask, whyBest, bestTime, efficiency, lessonLearned } = this.state;
     if (!authenticate) {
       return (
         <Redirect to={'/users/login'}></Redirect>
       )
     }
     return (
-      <div>
+      <div className=".wrapper">
         <div>
-          <h1> Daily Result </h1>
-          <DateSelection
-            date={date}
-            handleChange = {date => {
-              this.setState(
-                {date},
-                () => this.getDailyResult()
-              )
-            }}
-          />
+          <h1> Review your day </h1>
         </div>
         <div>
-          <div>
-            <label> Number of completed task(s) </label>
-            <span> {taskNumber} </span>
-          </div>
           <Select
-            label='Best Completed Task'
+            label='Which completed task you feel best?'
             optionsList={completedTasksList}
             selectedIndex={completedTasksList.indexOf(bestTask)}
-            disabled={taskNumber == 0}
+            disabled={completedTasksList.length == 0}
             disabledMessage="You haven't done any task"
             onChange={(bestTask) => this.setState(
               {bestTask},
@@ -137,17 +121,10 @@ export default class DailyResult extends Component {
               }
             )}
           />
-          <OnBlurInput
-            default={whyBest}
-            label='Why it is your best task?'
-            disabled={taskNumber == 0}
-            onBlur={whyBest => this.setState(
-              {whyBest},
-              () => {
-                _helper.fetchAPI('/dailyplan/updateplan/' + date, {whyBest: whyBest}, [], 'PUT')
-              }
-            )}
-          />
+          <div>
+            <label> Why it is your best task? </label>
+            <textarea></textarea>
+          </div>
           <TickBar
             label='Which times do you work best?'
             selections={['0-2', '2-4', '4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '16-18', '18-20', '20-22', '22-24']}
@@ -156,7 +133,7 @@ export default class DailyResult extends Component {
           />
           <SingleChoice
             choice={efficiency}
-            label='Which rate of efficiency in your task(s)?'
+            label='How is the efficiency in your task(s)?'
             optionsList={['Low', 'Medium', 'Equivalent', 'Relative', 'High', 'Excellent']}
             onChange = {(efficiency) => {
               var efficiencyNumber;
@@ -167,18 +144,15 @@ export default class DailyResult extends Component {
                 case 'Medium':
                   efficiencyNumber = 1;
                   break;
-                case 'Equivalent':
+                case 'Relative':
                   efficiencyNumber = 2;
                   break;
-                case 'Relative':
-                  efficiencyNumber = 3;
-                  break;
                 case 'High':
-                  efficiencyNumber = 4;
+                  efficiencyNumber = 3;
                   break;
               
                 default:
-                  efficiencyNumber = 5;
+                  efficiencyNumber = 4;
                   break;
               }
               this.setState(
@@ -191,20 +165,8 @@ export default class DailyResult extends Component {
           />
         </div>
         <div>
-          <OnBlurInput
-            default={lessonLearned}
-            label='Lesson Learned'
-            onBlur={lessonLearned => this.setState(
-              {lessonLearned},
-              () => {
-                _helper.fetchAPI('/dailyplan/updateplan/' + date, {lessonLearned: lessonLearned}, [], 'PUT')
-              }
-            )}
-          />
-        </div>
-        <div>
-          <Link to='/daily-plan'>Daily Plan</Link>
-          <button onClick={this.logout}>Logout</button>
+          <label> What have you learned through this day? </label>
+          <textarea></textarea>
         </div>
       </div>
     )
