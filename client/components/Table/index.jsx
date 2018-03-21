@@ -57,7 +57,7 @@ export default class Table extends Component {
                     <td>
                       <OnBlurInput
                         default={row.task}
-                        maxLength="200"
+                        conditions={{maxLength: 70}}
                         id={i}
                         onBlur={(value, id) => {
                           var newRows = this.state.rows.map(row => row);
