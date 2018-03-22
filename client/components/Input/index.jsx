@@ -9,13 +9,21 @@ export default class Input extends Component {
     }
     render() {
         let {type, label, required = false, onChange, message, showMessage} = this.props;
+        var style = {
+          borderBottomWidth: 2,
+          borderBottomStyle: 'solid',
+          borderBottomColor: 'red'
+        }
+        var inputStyle = (showMessage && message != null) ? style : undefined;
         return (
             <div>
                 <label>{label}: </label>
-                {required && 
+                {required &&
                     <span>*</span>
                 }
-                <input 
+                <input
+                    style = {inputStyle}
+
                     type={type || 'text'}
                     onChange={(e) => (onChange(e.target.value))}
                 />
