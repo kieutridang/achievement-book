@@ -4,13 +4,14 @@ import TickBar from '../../components/TickBar/index.jsx'
 import SingleChoice from '../../components/SingleChoice/index.jsx'
 import DateSelection from '../../components/DateSelection/index'
 import Select from '../../components/Select/index.jsx'
+import SideBar from '../../components/SideBar/index.jsx'
 
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
 import { Redirect } from 'react-router';
 import moment from 'moment'
 
-import './style.scss'
+import './index.scss'
 
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
@@ -82,6 +83,12 @@ export default class DailyResult extends Component {
     })
   }
 
+  handleDateChange = (date) => {
+    this.setState({date},
+      () => this.getDailyResult()
+    )
+  }
+
   logout = () => {
         _helper.fetchAPI(
             "/user/logout",
@@ -106,69 +113,82 @@ export default class DailyResult extends Component {
     }
     return (
       <div className="wrapper">
-        <div>
-          <h1> Review your day </h1>
-        </div>
-        <div>
-          <Select
-            label='Which completed task you feel best?'
-            optionsList={completedTasksList}
-            selectedIndex={completedTasksList.indexOf(bestTask)}
-            disabled={completedTasksList.length == 0}
-            disabledMessage="You haven't done any task"
-            onChange={(bestTask) => this.setState(
-              {bestTask},
-              () => {
-                _helper.fetchAPI('/dailyplan/updateplan/' + date, {bestTask: bestTask}, [], 'PUT')
-              }
-            )}
-          />
+        <SideBar 
+          date={date}
+          handleDateChange={this.handleDateChange}
+        />
+        <div className="dayEnd">
           <div>
-            <label> Why it is your best task? </label>
+            <h1> Review your day </h1>
+          </div>
+          <div>
+            <Select
+              label='Which completed task you feel best?'
+              optionsList={completedTasksList}
+              selectedIndex={completedTasksList.indexOf(bestTask)}
+              disabled={completedTasksList.length == 0}
+              disabledMessage="You haven't done any task"
+              onChange={(bestTask) => this.setState(
+                { bestTask },
+                () => {
+                  _helper.fetchAPI('/dailyplan/updateplan/' + date, { bestTask: bestTask }, [], 'PUT')
+                }
+              )}
+            />
+            <div>
+              <label> Why it is your best task? </label>
+              <textarea></textarea>
+            </div>
+            <div>
+              <label className='page-label'> Which times do you work best? </label>
+              <div className='day-night-symbol'>
+                <img src='../../../public/moon.png'/>
+                <img src='../../../public/sun-hand-drawn-symbol_318-52061.jpg'/>
+              </div>
+              <TickBar
+                label={null}
+                selections={['2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22', '24']}
+                selected={bestTime}
+                reqUrl={'/dailyplan/updateplan/' + date}
+              />
+            </div>
+            <SingleChoice
+              choice={efficiency}
+              label='How is the efficiency in your task(s)?'
+              optionsList={['Low', 'Medium', 'Equivalent', 'Relative', 'High', 'Excellent']}
+              onChange={(efficiency) => {
+                var efficiencyNumber;
+                switch (efficiency) {
+                  case 'Low':
+                    efficiencyNumber = 0;
+                    break;
+                  case 'Medium':
+                    efficiencyNumber = 1;
+                    break;
+                  case 'Relative':
+                    efficiencyNumber = 2;
+                    break;
+                  case 'High':
+                    efficiencyNumber = 3;
+                    break;
+
+                  default:
+                    efficiencyNumber = 4;
+                    break;
+                }
+                this.setState(
+                  { efficiency: efficiencyNumber },
+                  () => {
+                    _helper.fetchAPI('/dailyplan/updateplan/' + date, { efficiency: efficiencyNumber }, [], 'PUT')
+                  }
+                )
+              }}
+            />
+          </div>
+          <div>
+            <label> What have you learned through this day? </label>
             <textarea></textarea>
           </div>
-          <TickBar
-            label='Which times do you work best?'
-            selections={['0-2', '2-4', '4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '16-18', '18-20', '20-22', '22-24']}
-            selected={bestTime}
-            reqUrl={'/dailyplan/updateplan/' + date}
-          />
-          <SingleChoice
-            choice={efficiency}
-            label='How is the efficiency in your task(s)?'
-            optionsList={['Low', 'Medium', 'Equivalent', 'Relative', 'High', 'Excellent']}
-            onChange = {(efficiency) => {
-              var efficiencyNumber;
-              switch (efficiency) {
-                case 'Low':
-                  efficiencyNumber = 0;
-                  break;
-                case 'Medium':
-                  efficiencyNumber = 1;
-                  break;
-                case 'Relative':
-                  efficiencyNumber = 2;
-                  break;
-                case 'High':
-                  efficiencyNumber = 3;
-                  break;
-              
-                default:
-                  efficiencyNumber = 4;
-                  break;
-              }
-              this.setState(
-                {efficiency: efficiencyNumber},
-                () => {
-                _helper.fetchAPI('/dailyplan/updateplan/' + date, {efficiency: efficiencyNumber}, [], 'PUT')
-                }
-              )
-            }}
-          />
-        </div>
-        <div>
-          <label> What have you learned through this day? </label>
-          <textarea></textarea>
         </div>
       </div>
     )

@@ -1,0 +1,55 @@
+.dayEnd {
+  display: inline-block;
+  font-family: 'Muli';
+  box-sizing: border-box;
+  width: 60%;
+  h1 {
+    font-weight: bold;
+    font-size: 36px;
+    color: #5F29AE;;
+  }
+  .page-label {
+    font-weight: bold;
+    font-size: 17px;
+    color: #9A9696;
+    display: block;
+  }
+  .day-night-symbol {
+    display: flex;
+    height: 25px;
+    width: 600px;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    img {
+      width: 25px;
+    }
+  }
+  .tick-wrapper {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    // &:first-of-type {
+    //   .tick {
+    //     display: none;
+    //   }
+    //   .tick-label {
+    //     float: left;
+    //     text-align: left;
+    //   }
+    // }
+    .tick {
+      height: 17px;
+    }
+    .tick-label {
+      display: inline-block;
+      width: 50px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #9A9696;
+      text-align: right;
+    }
+    .selected-tick {
+      background-color: #ADFFAA;
+    }
+  }
+}
