@@ -1,7 +1,7 @@
 .signup {
   height: 100%;
   width: 100%;
-  font-family: 'Lucida Grande';
+  font-family: 'Muli';
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,50 +12,83 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 2px solid #B2B1B0;
+    padding: 50px;
   // avatar
     >div {
       &:nth-child(1) {
+
         h1 {
           display: none;
           @media only screen and (max-width: 900px) {
-            font-size: 40px;
             color: #5f29ae;
             display: block;
+            text-align: center;
           }
         }
       }
       &:nth-child(2) {
+        margin-right: 50px;
+        @media only screen and (max-width: 900px) {
+          margin-left: 70px;
+        }
         >div {
           > img {
             height: 200px;
             width: 200px;
-            background-color: #9a9595;
+            border: 1px solid #B2B1B0;
             object-fit: cover;
           }
-          > input {
+          >button {
+            cursor: pointer;
+            background-color: #5F29AE;
+            border: 0;
+            height: 30px;
+            color: white;
+            margin-left: 25px;
+            width: 150px;
+            margin-top: 10px;
             display: block;
+            font-family: 'Muli';
+            &:hover {
+              outline: none;
+              opacity: 0.8;
+              background-color: #3B22A4;
+
+            }
+          }
+          > input {
+            display: none;
           }
           span {
+            font-size: 11px;
             color: red;
+            margin-left: 5px;
+            display: block;
           }
         }
       }
       // form sign up
       &:nth-child(3) {
+
           >div {
             //form top
             &:nth-child(1) {
               display: flex;
               @media only screen and (max-width: 900px) {
                 display: block;
+
               }
               >div {
                 //form top left
                 &:nth-child(1) {
                   margin-right: 40px;
+                  @media only screen and (max-width: 900px) {
+                    margin-left: 10px;
+                    margin-right: 0px;
+                  }
                   h1 {
                     margin-top: 0;
-                    font-size: 40px;
                     color: #5f29ae;
                     margin-bottom: 50px;
                     @media only screen and (max-width: 900px) {
@@ -64,9 +97,10 @@
                   }
                   span {
                     color: red;
+                    font-size: 11px;
                   }
                   label {
-                    color: #000;
+                    color: #716c6c;
                     display: block;
                     font-size: 20px;
                     margin-top: 10px;
@@ -74,6 +108,8 @@
                   input {
                     border: 0;
                     border-bottom: 2px solid #eee;
+                    font-weight: lighter;
+                    font-size: 15px;
                     width: 300px;
                     &:focus {
                       outline: none;
@@ -87,20 +123,24 @@
                   @media only screen and (max-width: 900px) {
                     display: block;
                     margin-top: 0;
+                    margin-left: 10px;
                   }
                   >div {
                     &:nth-child(1) {
                       label {
-                        color: #000;
+                        color: #716c6c;
                         display: block;
                         font-size: 20px;
                       }
                       span {
                         color: red;
+                        font-size: 11px;
                       }
                       input {
                         border: 0;
                         border-bottom: 2px solid #eee;
+                        font-weight: lighter;
+                        font-size: 15px;
                         width: 300px;
                         &:focus {
                           outline: none;
@@ -110,17 +150,20 @@
                     }
                     &:nth-child(2) {
                       label {
-                        color: #000;
+                        color: #716c6c;
                         display: block;
                         font-size: 20px;
                         margin-top: 10px;
                       }
                       span {
                         color: red;
+                        font-size: 11px;
                       }
                       input {
                         border: 0;
                         border-bottom: 2px solid #eee;
+                        font-weight: lighter;
+                        font-size: 15px;
                         width: 300px;
                         &:focus {
                           outline: none;
@@ -130,17 +173,21 @@
                     }
                     &:nth-child(3) {
                       label {
-                        color: #000;
+                        color: #716c6c;
                         display: block;
                         font-size: 20px;
                         margin-top: 10px;
                       }
                       span {
                         color: red;
+                        font-size: 11px;
                       }
                       input {
                         border: 0;
                         border-bottom: 2px solid #eee;
+                        font-weight: lighter;
+                        color: #716c6c;
+                        font-size: 15px;
                         width: 300px;
                         &:focus {
                           outline: none;
@@ -149,21 +196,67 @@
                       }
                     }
                     &:nth-child(4) {
+                      margin-top: 10px;
                       label {
-                        color: #000;
-                        display: block;
+                        color: #716c6c;
                         font-size: 20px;
                         margin-top: 10px;
                       }
                       span {
                         color: red;
+                        font-size: 11px;
                       }
                       form {
                         display: flex;
-                        span {
-                        }
+                        justify-content: center;
                         label {
                           margin-left: 20px;
+                          position: relative;
+                          top: 6px;
+                          cursor: pointer;
+                          &:hover {
+                            input + span {
+                              background-color: #ccc;
+                            }
+                          }
+                          input {
+                            opacity: 0;
+                            outline: none;
+                            height: 20px;
+                            width: 20px;
+                            &:checked  {
+                              + span {
+                                background-color: #5F29AE;
+                                &:after {
+                                  display: block;
+
+                                }
+                              }
+
+                            }
+
+                          }
+                          span {
+                            position: absolute;
+                            top: 5px;
+                            left: 5px;
+                            height: 20px;
+                            width: 20px;
+                            border-radius: 50%;
+                            background-color: #eee;
+                            &:after {
+                              content: "";
+                              position: absolute;
+                              display: none;
+                              top: 6px;
+                              left: 6px;
+                              width: 8px;
+                              height: 8px;
+                              border-radius: 50%;
+                              background: white;
+                            }
+
+                          }
                         }
                       }
                     }
@@ -173,23 +266,33 @@
             }
             &:nth-child(2) {
               margin-top: 20px;
-              align-items: center;
-              text-align: center;
+              @media only screen and (max-width: 900px) {
+                margin-left: 10px;
+              }
               button {
-                width: 100%;
+                outline: none;
+                font-family: 'Muli';
+                cursor: pointer;
+                width: 300px;
                 height: 40px;
-                font-size: 25px;
-                text-align: center;
-                align-items: center;
+                font-size: 16px;
                 display: block;
                 background-color: #5f29ae;
                 color: white;
                 border: 0;
+                &:hover {
+                  outline: none;
+                  opacity: 0.8;
+                  background-color: #3B22A4;
+
+                }
               }
               a {
                 color:  #5f29ae;
-                font-size: 20px;
+                font-size: 18px;
                 text-decoration: none;
+                margin-left: 120px;
+
               }
             }
         }

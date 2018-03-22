@@ -16,10 +16,11 @@ export default class Select extends Component{
           {
             optionsList.map((option, index) => {
               return (
-                selectedIndex === index ? 
+                selectedIndex === index ?
                   <option key={index} value={option} selected> {option} </option>
                 : <option key={index} value={option}> {option} </option>
               )
+
             })
           }
         </select>

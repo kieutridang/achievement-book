@@ -31,8 +31,9 @@ export default class SingleChoice extends Component {
                         value={option}
                         onChange={(e) => this.props.onChange(e.target.value)}/>
                     }
-                    {option}
+                    <span></span>
                   </label>
+                  {option}
                 </div>
               )
             })

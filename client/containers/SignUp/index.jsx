@@ -95,6 +95,7 @@ export default class SignUp extends Component {
 
   render() {
     let { authenticate, redirect} = this.state;
+
     if (authenticate) {
       return (
         <Redirect to={'/home'}></Redirect>
@@ -107,7 +108,6 @@ export default class SignUp extends Component {
     }
     return (
       <div className='signup'>
-
       <div>
           <div><h1>Sign up</h1></div>
           <div>
@@ -115,6 +115,7 @@ export default class SignUp extends Component {
               onChange = {(avatar) => {this.setState({avatar})}}
               srcData = {this.state.avatar}
               required = {true}
+              button={true}
               message = {
                 checkValidate.checkAvatar(this.state.avatar, true, validations.avatar)
               }
@@ -126,8 +127,8 @@ export default class SignUp extends Component {
                 <div>
                   <h1>Sign up</h1>
                   <Input
+
                     label = 'Username'
-                    required = {true}
                     onChange = {(username) => {this.setState({username})}}
                     message = {
                       checkValidate.checkText(this.state.username, validations.username)
@@ -135,9 +136,9 @@ export default class SignUp extends Component {
                     showMessage = {this.state.showMessage}
                   />
                   <Input
+
                     type = 'password'
                     label = 'Password'
-                    required = {true}
                     onChange = {(password) => {this.setState({password})}}
                     message = {
                       checkValidate.checkText(this.state.password, validations.password)
@@ -145,9 +146,9 @@ export default class SignUp extends Component {
                     showMessage = {this.state.showMessage}
                   />
                   <Input
+
                     type = 'password'
                     label = 'Confirm password'
-                    required = {true}
                     onChange = {(confirmPassword) => {this.setState({confirmPassword})}}
                     message = {this.checkConfirmPassword()}
                     showMessage = {this.state.showMessage}
@@ -155,8 +156,8 @@ export default class SignUp extends Component {
                 </div>
               <div>
                   <Input
+
                     label = 'Full Name'
-                    required = {true}
                     onChange = {(fullName) => {this.setState({fullName})}}
                     message = {
                       checkValidate.checkText(this.state.fullName, validations.name)
@@ -164,8 +165,8 @@ export default class SignUp extends Component {
                     showMessage = {this.state.showMessage}
                   />
                   <Input
+
                     label = 'Email'
-                    required = {true}
                     onChange = {(email) => {this.setState({email})}}
                     message = {
                       checkValidate.checkText(this.state.email, validations.email)
@@ -173,9 +174,9 @@ export default class SignUp extends Component {
                     showMessage = {this.state.showMessage}
                   />
                 <Input
+                    
                     type = 'date'
                     label = 'DOB'
-                    required = {true}
                     onChange = {(DOB) => {this.setState({DOB})}}
                     message = {
                       checkValidate.checkText(this.state.DOB, validations.DOB)
@@ -184,7 +185,6 @@ export default class SignUp extends Component {
                   />
                 <SingleChoice
                     label = 'Gender'
-                    required = {true}
                     optionsList = {[
                       'Male',
                       'Female'
@@ -200,7 +200,7 @@ export default class SignUp extends Component {
               <div>
                 <Button
                   onClick = {this.signUp}
-                  value = 'CREATE ACCOUNT'
+                  value = 'Create account'
                 />
                 <Link to='/users/login'>Log In</Link>
               </div>

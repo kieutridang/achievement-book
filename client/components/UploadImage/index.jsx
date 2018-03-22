@@ -8,11 +8,15 @@ export default class UploadImage extends Component {
         }
     }
     render() {
-        let { onChange, srcData, message, showMessage } = this.props;
+        let { onChange, srcData, message, showMessage, button } = this.props;
+
+        let xhtml = button ? <button onClick={() => document.getElementById('uploadImage').click()}>Upload Image</button> : '';
         return (
             <div>
                 <img src={srcData} alt=""/><br></br>
+                {xhtml}
                 <input
+                    id='uploadImage'
                     type = 'file'
                     accept = 'image/*'
                     onChange={(e) => {
