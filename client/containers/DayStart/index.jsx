@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import OnBlurInput from '../../components/OnBlurInput/index.jsx'
+import OnBlurTextArea from '../../components/OnBlurTextArea/index.jsx'
 import Table from '../../components/Table/index.jsx'
 import DateSelection from '../../components/DateSelection/index'
 
@@ -38,32 +39,38 @@ export default class DailyPlan extends Component {
     return (
       <div
         key={index}
-        className={task.process < 100 ? 'undoneTask' : 'doneTask'}
+        className={task.process < 100 ? 'task undoneTask' : 'task doneTask'}
       >
-        <OnBlurInput
-          default={task.task}
-          id={index}
-          onBlur={(value, id) => {
-            var newPlan = plan.map(task => task);
-            newPlan[id].task = value;
-            this.updatePlan(newPlan);
-          }}
-        />
-        <OnBlurInput
-          type='number'
-          default={task.process}
-          id={index}
-          conditions={{ min: 0, max: 100 }}
-          onBlur={(value, id) => {
-            var newPlan = plan.map(task => task);
-            newPlan[id].process = value;
-            this.updatePlan(newPlan);
-          }}
-        />
+        <div>
+          <OnBlurTextArea
+            default={task.task}
+            id={index}
+            onBlur={(value, id) => {
+              var newPlan = plan.map(task => task);
+              newPlan[id].task = value;
+              this.updatePlan(newPlan);
+            }}
+            numRows={"2"}
+            maxlength={50}
+          />
+          <OnBlurInput
+            type='number'
+            default={task.process}
+            id={index}
+            conditions={{ min: 0, max: 100 }}
+            onBlur={(value, id) => {
+              var newPlan = plan.map(task => task);
+              newPlan[id].process = value;
+              this.updatePlan(newPlan);
+            }}
+            showPercentage = {true}
+          />
+        </div>
         { (task.process < 100) && 
           <img 
             src="../../../public/checkmark.png"
             id = {index}
+            className={"img"}
             onClick = {(e) => {
               var id = e.target.id;
               var newPlan = plan.map(task => task);
@@ -148,63 +155,68 @@ export default class DailyPlan extends Component {
       )
     }
     return (
-      <div>
-        <div>
-          <h1> Make plan for your day </h1>
-          <DateSelection
-            date={date}
-            handleChange={date => {
-              this.setState(
-                {date},
-                () => this.getDailyPlan()
-              )
-            }}
-          />
-        </div>  
-        <div>
+      <div className="container">
+        <div className="dayStart">
           <div>
-            <span>Tasks </span>
-            <span>{doneTasks + ' / ' + totalTasks}</span>
-          </div>
-          <div>
-            {
-              plan.map((task, index) => {
-                if (task.process < 100) {
-                  return (this.showTask(task,index))
+            <h1> Make plan for your day </h1>
+            {/* <DateSelection
+              date={date}
+              handleChange={date => {
+                this.setState(
+                  {date},
+                  () => this.getDailyPlan()
+                )
+              }}
+            /> */}
+          </div> 
+          <div> 
+            <div>
+              <div>
+                <span>Tasks </span>
+                <span>{doneTasks + ' / ' + totalTasks}</span>
+              </div>
+              <div>
+                {
+                  plan.map((task, index) => {
+                    if (task.process < 100) {
+                      return (this.showTask(task,index))
+                    }
+                  })
                 }
-              })
-            }
-            {
-              (totalTasks < 5) && (
-                <div onClick = {this.newTask}>
-                  <img src="../../../public/create.png" alt="Create task"/>
-                </div>
-              )
-            }
-            {
-              plan.map((task, index) => {
-                if (task.process == 100) {
-                  return (this.showTask(task, index))
+                {
+                  (totalTasks < 5) && (
+                    <div onClick = {this.newTask}>
+                      <img src="../../../public/create.png" alt="Create task"/>
+                    </div>
+                  )
                 }
-              })
-            }
+                {
+                  plan.map((task, index) => {
+                    if (task.process == 100) {
+                      return (this.showTask(task, index))
+                    }
+                  })
+                }
+              </div>
+            </div>
+            <div className="note">
+              <OnBlurTextArea
+                default={note}
+                label='Note'
+                onBlur={note => this.setState(
+                  {note},
+                  () => {
+                    _helper.fetchAPI('/dailyplan/updateplan/' + date, {note: note}, [], 'PUT')
+                  }
+                )}
+                numRows={6}
+              />
+            </div>
+            {/* <div>
+              <Link to='/daily-result'>Daily Result</Link>
+              <button onClick={this.logout}>Logout</button>
+            </div> */}
           </div>
-        </div>
-        <div>
-          <OnBlurInput
-            default={note}
-            label='Note'
-            onBlur={note => this.setState(
-              {note},
-              () => {
-                _helper.fetchAPI('/dailyplan/updateplan/' + date, {note: note}, [], 'PUT')
-              }
-            )}
-          />
-        </div>
-        <div>
-          <Link to='/daily-result'>Daily Result</Link>
-          <button onClick={this.logout}>Logout</button>
         </div>
       </div>
     )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class OnBlurInput extends Component {
+export default class OnBlurTextArea extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +36,7 @@ export default class OnBlurInput extends Component {
   }
 
   render() {
-    let { id, type, label, required, suggestion, onBlur, message, showMessage, disabled, showPercentage, maxlength } = this.props;
+    let { id, type, label, required, suggestion, onBlur, message, showMessage, disabled, numRows, maxlength } = this.props;
     let { value, edit } = this.state;
     return (
       <div>
@@ -52,16 +52,17 @@ export default class OnBlurInput extends Component {
           (edit || value == '') ?
             (
               (!disabled) ?
-                <input
+                <textarea
                   type={type || 'text'}
                   defaultValue={value}
                   onBlur={(e) => {
                     this.handlingBlur(e.target.value)
                   }
                   }
-                  maxlength={maxlength || 200}
+                  rows={numRows || "1"}
+                  maxlength={maxlength}
                 />
-                : <input
+                : <textarea
                   type={type || 'text'}
                   defaultValue={value}
                   onBlur={(e) => {
@@ -69,13 +70,14 @@ export default class OnBlurInput extends Component {
                   }
                   }
                   disabled
-                  maxlength={maxlength || 200}
+                  rows={numRows || "1"}
+                  maxlength={maxlength}
                 />
             )
-            : <span onDoubleClick={this.handlingDoubleClick}> {value + (showPercentage ? " %" : "")} </span>
+            : <span onDoubleClick={this.handlingDoubleClick}> {value} </span>
         }
         <div></div>
-        {showMessage && message && <span> {message} </span>}
+        {showMessage && message && <span>{message}</span>}
       </div>
     )
   }
