@@ -185,7 +185,7 @@ export default class DailyPlan extends Component {
                 }
                 {
                   (totalTasks < 5) && (
-                    <div onClick = {this.newTask}>
+                    <div onClick = {this.newTask} className={'newTask'}>
                       <img src="../../../public/create.png" alt="Create task"/>
                     </div>
                   )
@@ -210,6 +210,7 @@ export default class DailyPlan extends Component {
                   }
                 )}
                 numRows={6}
+                maxlength={300}
               />
             </div>
             {/* <div>
