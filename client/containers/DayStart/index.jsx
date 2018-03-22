@@ -45,7 +45,7 @@ export default class DailyPlan extends Component {
         <div>
           <OnBlurTextArea
             default={task.task}
-            id={date + index}
+            id={index}
             onBlur={(value, id) => {
               var newPlan = plan.map(task => task);
               newPlan[id].task = value;
@@ -147,7 +147,7 @@ export default class DailyPlan extends Component {
         .then((response) => {
             if (response) {
                 const { data, status } = response;
-                if (status == 200) {
+                if (status == 100) {
                     this.checkAuth()
                 }
             }
@@ -212,7 +212,7 @@ export default class DailyPlan extends Component {
                   }
                 )}
                 numRows={6}
-                maxlength={300}
+                maxlength={200}
               />
             </div>
             {/* <div>
