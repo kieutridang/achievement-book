@@ -3,6 +3,7 @@ import OnBlurInput from '../../components/OnBlurInput/index.jsx'
 import OnBlurTextArea from '../../components/OnBlurTextArea/index.jsx'
 import Table from '../../components/Table/index.jsx'
 import DateSelection from '../../components/DateSelection/index'
+import SideBar from '../../components/SideBar/index.jsx'
 
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
@@ -35,7 +36,7 @@ export default class DailyPlan extends Component {
   }
 
   showTask = (task, index) => {
-    const { plan } = this.state;
+    const { plan, date } = this.state;
     return (
       <div
         key={index}
@@ -44,7 +45,7 @@ export default class DailyPlan extends Component {
         <div>
           <OnBlurTextArea
             default={task.task}
-            id={index}
+            id={date + index}
             onBlur={(value, id) => {
               var newPlan = plan.map(task => task);
               newPlan[id].task = value;
@@ -80,6 +81,12 @@ export default class DailyPlan extends Component {
           />
         }
       </div>
+    )
+  }
+
+  handleDateChange = (date) => {
+    this.setState({date},
+      () => this.getDailyPlan()
     )
   }
 
@@ -156,18 +163,13 @@ export default class DailyPlan extends Component {
     }
     return (
       <div className="container">
+        <SideBar 
+          date={date}
+          handleDateChange={this.handleDateChange}
+        />
         <div className="dayStart">
           <div>
             <h1> Make plan for your day </h1>
-            {/* <DateSelection
-              date={date}
-              handleChange={date => {
-                this.setState(
-                  {date},
-                  () => this.getDailyPlan()
-                )
-              }}
-            /> */}
           </div> 
           <div> 
             <div>

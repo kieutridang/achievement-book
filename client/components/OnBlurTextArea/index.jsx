@@ -60,7 +60,7 @@ export default class OnBlurTextArea extends Component {
                   }
                   }
                   rows={numRows || "1"}
-                  maxlength={maxlength}
+                  maxLength={maxlength}
                 />
                 : <textarea
                   type={type || 'text'}
@@ -71,7 +71,7 @@ export default class OnBlurTextArea extends Component {
                   }
                   disabled
                   rows={numRows || "1"}
-                  maxlength={maxlength}
+                  maxLength={maxlength}
                 />
             )
             : <span onDoubleClick={this.handlingDoubleClick}> {value} </span>
