@@ -42,9 +42,8 @@ handlingkeydown = (e) => {
   }
 
   render() {
-    let { id, type, label, required, suggestion, onBlur, message, showMessage, disabled, conditions} = this.props;
+    let { id, type, label, required, suggestion, onBlur, message, showMessage, disabled, maxLength} = this.props;
     let { value, edit } = this.state;
-    console.log(conditions);
     return (
       <div>
       {label && <label> {label}: </label>}
@@ -62,8 +61,7 @@ handlingkeydown = (e) => {
                 <input
                   type={type || 'text'}
                   defaultValue={value}
-                  // maxlength={conditions.maxLength.toString()}
-                  // maxlength={maxLength}
+                  maxlength={maxLength}
                   onKeyDown={(e) => {
                        this.handlingkeydown(e)
                      }

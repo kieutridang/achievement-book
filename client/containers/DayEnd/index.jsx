@@ -139,7 +139,6 @@ export default class DailyResult extends Component {
           />
           <OnBlurInput
             default={whyBest}
-            // conditions={{maxLength: 200}}
             maxLength="200"
             label='Why it is your best task?'
             disabled={taskNumber == 0}
@@ -195,7 +194,6 @@ export default class DailyResult extends Component {
         <div>
           <OnBlurInput
             default={lessonLearned}
-            // conditions={{maxLength: 200}}
             maxLength="200"
             label='Lesson Learned'
             onBlur={lessonLearned => this.setState(
