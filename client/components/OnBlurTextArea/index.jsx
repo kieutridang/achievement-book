@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class OnBlurInput extends Component {
+export default class OnBlurTextArea extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,18 +31,12 @@ export default class OnBlurInput extends Component {
     })
   }
 
-handlingkeydown = (e) => {
-  if(e.keyCode === 69 && this.props.type =='number') {
-    e.preventDefault();
-  }
-}
-
   handlingDoubleClick = () => {
     this.setState({ edit: true })
   }
 
   render() {
-    let { id, type, label, required, suggestion, onBlur, message, showMessage, disabled, showPercentage, maxlength } = this.props;
+    let { id, type, label, required, suggestion, onBlur, message, showMessage, disabled, numRows, maxlength } = this.props;
     let { value, edit } = this.state;
     return (
       <div>
@@ -58,37 +52,32 @@ handlingkeydown = (e) => {
           (edit || value == '') ?
             (
               (!disabled) ?
-                <input
-                  type={type || 'text'}
-                  defaultValue={value}
-                  onKeyDown={(e) => {
-                       this.handlingkeydown(e)
-                     }
-                   }
-                  onBlur={(e) => {
-                      this.handlingBlur(e.target.value)
-                    }
-                  }
-                  maxlength={maxlength || 200}
-
-                />
-                : <input
+                <textarea
                   type={type || 'text'}
                   defaultValue={value}
                   onBlur={(e) => {
                     this.handlingBlur(e.target.value)
-
                   }
                   }
-
+                  rows={numRows || "1"}
+                  maxLength={maxlength}
+                />
+                : <textarea
+                  type={type || 'text'}
+                  defaultValue={value}
+                  onBlur={(e) => {
+                    this.handlingBlur(e.target.value)
+                  }
+                  }
                   disabled
-                  maxlength={maxlength || 200}
+                  rows={numRows || "1"}
+                  maxLength={maxlength}
                 />
             )
-            : <span onDoubleClick={this.handlingDoubleClick}> {value + (showPercentage ? " %" : "")} </span>
+            : <span onDoubleClick={this.handlingDoubleClick}> {value} </span>
         }
         <div></div>
-        {showMessage && message && <span> {message} </span>}
+        {showMessage && message && <span>{message}</span>}
       </div>
     )
   }
