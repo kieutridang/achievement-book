@@ -1,17 +1,17 @@
 .dayStart {
     display: inline-block;
     font-family: 'Muli';
-    width: 50%;
-    padding-left: 150px;
-    padding-right: 150px;
+    box-sizing: border-box;
+    width: 60%;
+    // padding-left: 100px;
+    // padding-right: 100px;
     >div {
         &:nth-child(1) {
             color: rgb(95, 41, 174);
         }
         &:nth-child(2) {
             display: flex;
-            flex-direction: row;
-            // align-items: center;
+            flex-direction: row; // align-items: center;
             justify-content: space-between;
             >div {
                 &:nth-child(1) {
@@ -29,7 +29,7 @@
                                 }
                             }
                         }
-                        &::nth-child(2) {
+                        &:nth-child(2) {
                             display: flex;
                             flex-direction: column;
                             justify-content: space-around;
@@ -167,5 +167,21 @@
         line-height: 31px;
         padding: 8px;
         word-wrap: break-word;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .dayStart {
+        display: block;
+        width: 100%;
+        > div {
+            &:nth-child(1){
+                text-align: center;
+            }
+            &:nth-child(2){
+                flex-direction: column;
+                align-items: center;
+            }
+        }
     }
 }
