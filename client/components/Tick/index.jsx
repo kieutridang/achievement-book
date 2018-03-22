@@ -10,13 +10,13 @@ export default class Tick extends Component {
     render() {
         const { label , selected, id, onSelect} = this.props;
         return (
-            <div>
+            <div className='tick-wrapper'>
                 <div
-                    className={selected ? 'selected-tick' : 'unselected-tick'}
+                    className={selected ? 'selected-tick tick' : 'unselected-tick tick'}
                     onClick={() => { onSelect(id) }}
                 >
-                    <label>{label}</label>
                 </div>
+                <label className='tick-label'>{label}</label>
             </div>
         );
     }
