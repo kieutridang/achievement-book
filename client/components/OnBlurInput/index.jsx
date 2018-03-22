@@ -75,6 +75,7 @@ handlingkeydown = (e) => {
                 : <input
                   type={type || 'text'}
                   defaultValue={value}
+                  maxLength={maxLength}
                   onBlur={(e) => {
                       this.handlingBlur(e.target.value)
                     }
