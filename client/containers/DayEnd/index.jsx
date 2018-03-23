@@ -154,8 +154,8 @@ export default class DailyResult extends Component {
             <div>
               <label className='page-label'> Which times do you work best? </label>
               <div className='day-night-symbol'>
-                <img src='../../../public/moon.png'/>
-                <img src='../../../public/sun-hand-drawn-symbol_318-52061.jpg'/>
+                <img src='../../../public/moon.png' />
+                <img src='../../../public/sun-hand-drawn-symbol_318-52061.jpg' />
               </div>
               <TickBar
                 label={null}
