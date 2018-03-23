@@ -19,7 +19,6 @@ export default class SideBar extends Component {
     }
     checkAuth = () => {
         checkAuthenticate().then((authenticate) => {
-            debugger
             this.setState({ authenticate })
         })
     }
