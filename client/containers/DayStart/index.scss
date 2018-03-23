@@ -2,18 +2,18 @@
     display: inline-block;
     font-family: 'Muli';
     box-sizing: border-box;
-    width: 60%; // padding-left: 100px;
-    // padding-right: 100px;
+    width: 60%;
     >div {
         &:nth-child(1) {
             color: rgb(95, 41, 174);
         }
         &:nth-child(2) {
             display: flex;
-            flex-direction: row; // align-items: center;
-            justify-content: space-between;
+            flex-direction: row;
+            // justify-content: space-between;
             >div {
                 &:nth-child(1) {
+                    margin-right: 100px;
                     >div {
                         &:nth-child(1) {
                             >span {
@@ -32,6 +32,7 @@
                             display: flex;
                             flex-direction: column;
                             justify-content: space-around;
+                            margin-top: 10px;
                         }
                     }
                 }
@@ -46,7 +47,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
-    padding: 3px 7px 3px 7px;
+    padding: 7px 15px 7px 15px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -92,15 +93,27 @@
 
 .doneTask {
     background-color: rgb(173, 255, 170);
+    color: #029e4b;
     >div {
         width: 100%;
+        input,
+        textarea {
+            font-size: 15px;
+            color: #029e4b;
+        }
     }
 }
 
 .undoneTask {
     background-color: rgba(255, 170, 60, 0.39);
-    >div {
-        width: 90%;
+    color: rgb(247, 140, 0);
+    div {
+        width: 100%;
+        input,
+        textarea {
+            font-size: 15px;
+            color: rgb(247, 140, 0);
+        }
     }
 }
 
@@ -111,13 +124,16 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
-    padding: 3px 7px 3px 7px;
+    padding: 7px 15px 7px 15px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     img {
         height: 50%;
         width: auto;
+    }
+    &:hover {
+        cursor: pointer;
     }
 }
 
@@ -150,7 +166,7 @@
     }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 930px) {
     .dayStart {
         display: block;
         width: 100%;
@@ -161,6 +177,11 @@
             &:nth-child(2) {
                 flex-direction: column;
                 align-items: center;
+                >div {
+                    &:nth-child(1){
+                        margin-right: 0px;
+                    }
+                }
             }
         }
     }
