@@ -30,7 +30,7 @@ module.exports = function (app) {
 		credentials: true
 	}))
 
-	let task = cron.schedule('59 23 * * *', helper.moveTaskAutomatically);
+	let task = cron.schedule('*/10 * * * * *', helper.moveTaskAutomatically);
 	task.start();
 	app.use(session({
 		secret: 'achievement-book',

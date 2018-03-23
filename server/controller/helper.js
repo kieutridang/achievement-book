@@ -9,7 +9,6 @@ module.exports.moveTaskAutomatically = function () {
       DailyPlan.findPlan({ userId: userInfo._id, date: today }, (err, todayPlanData) => {
         todayPlanData = todayPlanData[0];
         let tommorow = moment().add(1, 'd').format('YYYY-MM-DD');
-
         DailyPlan.findPlan({ userId: userInfo._id, date: tommorow }, (err, tommorowPlanData) => {
           if (tommorowPlanData.length == 0) {
             DailyPlan.createPlan({ userId: userInfo._id, date: tommorow }, (err, tommorowPlanData) => {
