@@ -5,6 +5,7 @@ import SingleChoice from '../../components/SingleChoice/index.jsx'
 import DateSelection from '../../components/DateSelection/index'
 import Select from '../../components/Select/index.jsx'
 import SideBar from '../../components/SideBar/index.jsx'
+import EditableP from '../../components/EditableP/index.jsx'
 
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
@@ -135,9 +136,20 @@ export default class DailyResult extends Component {
                 }
               )}
             />
-            <div>
-              <label> Why it is your best task? </label>
-              <textarea></textarea>
+            <div className="why-best">
+              <label className='page-label'> Why it is your best task? </label>
+              <div>
+                <EditableP
+                  defaultValue={whyBest}
+                  handleChange={whyBest => this.setState(
+                    {whyBest},
+                    () => {
+                      _helper.fetchAPI('/dailyplan/updateplan/' + date, {whyBest: whyBest}, [], 'PUT')
+                    }
+                  )}
+                  maxlength={200}
+                />
+              </div>
             </div>
             <div>
               <label className='page-label'> Which times do you work best? </label>
@@ -165,7 +177,7 @@ export default class DailyResult extends Component {
                   case 'Medium':
                     efficiencyNumber = 1;
                     break;
-                  case 'Relative':
+                  case 'Relatively':
                     efficiencyNumber = 2;
                     break;
                   case 'High':
@@ -185,10 +197,21 @@ export default class DailyResult extends Component {
               }}
             />
           </div>
-          <div>
-            <label> What have you learned through this day? </label>
-            <textarea></textarea>
-          </div>
+          <div className="lesson-learned">
+              <label className='page-label'> What have you learned through this day? </label>
+              <div>
+                <EditableP
+                  defaultValue={lessonLearned}
+                  handleChange={lessonLearned => this.setState(
+                    {lessonLearned},
+                    () => {
+                      _helper.fetchAPI('/dailyplan/updateplan/' + date, {lessonLearned: lessonLearned}, [], 'PUT')
+                    }
+                  )}
+                  maxlength={200}
+                />
+              </div>
+            </div>
         </div>
       </div>
     )

@@ -10,7 +10,7 @@ export default class SingleChoice extends Component {
     const property = label.toLowerCase().replace(' ', '-');
     return (
       <div>
-        <label> {label}: </label>
+        <label className='page-label'> {label}: </label>
         <form>
           { required && <span> * </span> }
           {
@@ -34,7 +34,6 @@ export default class SingleChoice extends Component {
                     {option} 
                     <span></span>
                   </label>
-                  {option}
                 </div>
               )
             })
