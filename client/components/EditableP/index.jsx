@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { maxlengthContentEditable } from 'maxlength-contenteditable';
 
 export default class EditableP extends Component {
     constructor(props){
