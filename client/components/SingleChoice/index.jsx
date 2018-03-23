@@ -31,19 +31,7 @@ export default class SingleChoice extends Component {
                       onChange={(e) => this.props.onChange(e.target.value)} />
                   }
                   <label>
-                    {
-                      index === choice ? <input
-                        type='radio'
-                        name={property}
-                        value={option}
-                        checked
-                        onChange={(e) => this.props.onChange(e.target.value)}/>
-                      : <input
-                        type='radio'
-                        name={property}
-                        value={option}
-                        onChange={(e) => this.props.onChange(e.target.value)}/>
-                    }
+                    {option} 
                     <span></span>
                   </label>
                   {option}
