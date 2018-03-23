@@ -51,7 +51,8 @@ export default class SideBar extends Component {
                     handleChange={date => this.props.handleDateChange(date)}
                 />
                 <div>
-                    <Link to='/daily-result'>Daily Result</Link>
+                    <div><Link to='/daily-plan'>Daily Plan</Link></div>
+                    <div><Link to='/daily-result'>Daily Result</Link></div>
                     <button onClick={this.logout}>Logout</button>
                 </div>
             </div>
