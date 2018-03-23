@@ -155,7 +155,7 @@ export default class DailyResult extends Component {
             <SingleChoice
               choice={efficiency}
               label='How is the efficiency in your task(s)?'
-              optionsList={['Low', 'Medium', 'Equivalent', 'Relative', 'High', 'Excellent']}
+              optionsList={['Low', 'Medium', 'Relatively', 'High', 'Excellent']}
               onChange={(efficiency) => {
                 var efficiencyNumber;
                 switch (efficiency) {
