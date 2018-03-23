@@ -17,18 +17,26 @@ export default class SingleChoice extends Component {
             optionsList.map((option, index) => {
               return (
                 <div key={index}>
-                  {
-                    index === choice ? <input
-                      type='radio'
-                      name={property}
-                      value={option}
-                      checked
-                      onChange={(e) => this.props.onChange(e.target.value)} />
-                    : <input
-                      type='radio'
-                      name={property}
-                      value={option}
-                      onChange={(e) => this.props.onChange(e.target.value)} />
+                  { index === choice ? 
+                    <label className="radio-image chosen-radio" for={option}>
+                      <input
+                        type='radio'
+                        name={property}
+                        value={option}
+                        id={option}
+                        checked
+                        onChange={(e) => this.props.onChange(e.target.value)} 
+                      />
+                    </label>
+                  : <label className="radio-image" for={option}>
+                      <input
+                        type='radio'
+                        name={property}
+                        value={option}
+                        id={option}
+                        onChange={(e) => this.props.onChange(e.target.value)} 
+                      />
+                    </label>
                   }
                   <label>
                     {option} 
