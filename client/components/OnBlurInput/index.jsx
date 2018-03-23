@@ -69,7 +69,7 @@ handlingkeydown = (e) => {
                       this.handlingBlur(e.target.value)
                     }
                   }
-                  maxlength={maxlength || 200}
+                  maxLength={maxlength || 200}
 
                 />
                 : <input
@@ -82,7 +82,7 @@ handlingkeydown = (e) => {
                   }
 
                   disabled
-                  maxlength={maxlength || 200}
+                  maxLength={maxlength || 200}
                 />
             )
             : <span onDoubleClick={this.handlingDoubleClick}> {value + (showPercentage ? " %" : "")} </span>

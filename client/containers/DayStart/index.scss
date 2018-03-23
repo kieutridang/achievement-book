@@ -2,18 +2,18 @@
     display: inline-block;
     font-family: 'Muli';
     box-sizing: border-box;
-    width: 60%; // padding-left: 100px;
-    // padding-right: 100px;
+    width: 60%;
     >div {
         &:nth-child(1) {
             color: rgb(95, 41, 174);
         }
         &:nth-child(2) {
             display: flex;
-            flex-direction: row; // align-items: center;
-            justify-content: space-between;
+            flex-direction: row;
+            // justify-content: space-between;
             >div {
                 &:nth-child(1) {
+                    margin-right: 100px;
                     >div {
                         &:nth-child(1) {
                             >span {
@@ -32,6 +32,7 @@
                             display: flex;
                             flex-direction: column;
                             justify-content: space-around;
+                            margin-top: 10px;
                         }
                     }
                 }
@@ -46,7 +47,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
-    padding: 3px 7px 3px 7px;
+    padding: 7px 15px 7px 15px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -92,15 +93,27 @@
 
 .doneTask {
     background-color: rgb(173, 255, 170);
+    color: #029e4b;
     >div {
         width: 100%;
+        input,
+        textarea {
+            font-size: 15px;
+            color: #029e4b;
+        }
     }
 }
 
 .undoneTask {
     background-color: rgba(255, 170, 60, 0.39);
-    >div {
-        width: 90%;
+    color: rgb(247, 140, 0);
+    div {
+        width: 100%;
+        input,
+        textarea {
+            font-size: 15px;
+            color: rgb(247, 140, 0);
+        }
     }
 }
 
@@ -111,13 +124,16 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
-    padding: 3px 7px 3px 7px;
+    padding: 7px 15px 7px 15px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     img {
         height: 50%;
         width: auto;
+    }
+    &:hover {
+        cursor: pointer;
     }
 }
 
@@ -127,49 +143,30 @@
         font-size: 20px;
         display: block;
     }
-    textarea {
-        resize: none;
-        width: 250px;
+    >div {
+        background-image: url('http://localhost:8080/public/baseline.png');
+        background-size: 100% 31px;
+        background-attachment: local;
         height: 310px;
-        background-image: -webkit-linear-gradient(left, white 10px, transparent 10px), -webkit-linear-gradient(right, white 10px, transparent 10px), -webkit-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-        background-image: -moz-linear-gradient(left, white 10px, transparent 10px), -moz-linear-gradient(right, white 10px, transparent 10px), -moz-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-        background-image: -ms-linear-gradient(left, white 10px, transparent 10px), -ms-linear-gradient(right, white 10px, transparent 10px), -ms-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-        background-image: -o-linear-gradient(left, white 10px, transparent 10px), -o-linear-gradient(right, white 10px, transparent 10px), -o-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-        background-image: linear-gradient(left, white 10px, transparent 10px), linear-gradient(right, white 10px, transparent 10px), linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-        background-size: 100% 100%, 100% 100%, 100% 31px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-        line-height: 31px;
-        padding: 8px;
-        font-family: 'Muli';
-        font-size: 18px;
-        font-weight: lighter;
-    }
-    span {
-        overflow: scroll;
-        display: inline-block;
-        width: 250px;
-        height: 310px;
-        background-image: -webkit-linear-gradient(left, white 10px, transparent 10px), -webkit-linear-gradient(right, white 10px, transparent 10px), -webkit-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-        background-image: -moz-linear-gradient(left, white 10px, transparent 10px), -moz-linear-gradient(right, white 10px, transparent 10px), -moz-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-        background-image: -ms-linear-gradient(left, white 10px, transparent 10px), -ms-linear-gradient(right, white 10px, transparent 10px), -ms-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-        background-image: -o-linear-gradient(left, white 10px, transparent 10px), -o-linear-gradient(right, white 10px, transparent 10px), -o-linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-        background-image: linear-gradient(left, white 10px, transparent 10px), linear-gradient(right, white 10px, transparent 10px), linear-gradient(white 30px, #ccc 30px, #ccc 31px, white 31px);
-        background-size: 100% 100%, 100% 100%, 100% 31px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-        font-family: 'Muli';
-        font-weight: lighter;
-        font-size: 18px;
-        line-height: 31px;
-        padding: 8px;
-        word-wrap: break-word;
+        overflow: auto;
+        p {
+            width: 250px;
+            height: 310px;
+            font-family: 'Muli';
+            font-weight: lighter;
+            font-size: 18px;
+            line-height: 31px;
+            outline: none;
+            margin-top: 2px;
+            span {
+                margin: 0px;
+                padding: 0px;
+            }
+        }
     }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 930px) {
     .dayStart {
         display: block;
         width: 100%;
@@ -180,6 +177,11 @@
             &:nth-child(2) {
                 flex-direction: column;
                 align-items: center;
+                >div {
+                    &:nth-child(1){
+                        margin-right: 0px;
+                    }
+                }
             }
         }
     }

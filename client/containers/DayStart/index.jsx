@@ -4,6 +4,7 @@ import OnBlurTextArea from '../../components/OnBlurTextArea/index.jsx'
 import Table from '../../components/Table/index.jsx'
 import DateSelection from '../../components/DateSelection/index'
 import SideBar from '../../components/SideBar/index.jsx'
+import EditableP from '../../components/EditableP/index.jsx'
 
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
@@ -202,18 +203,19 @@ export default class DailyPlan extends Component {
               </div>
             </div>
             <div className="note">
-              <OnBlurTextArea
-                default={note}
-                label='Note'
-                onBlur={note => this.setState(
-                  {note},
-                  () => {
-                    _helper.fetchAPI('/dailyplan/updateplan/' + date, {note: note}, [], 'PUT')
-                  }
-                )}
-                numRows={6}
-                maxlength={200}
-              />
+              <label>Note</label>
+              <div>
+                <EditableP
+                  defaultValue={note}
+                  handleChange={note => this.setState(
+                    {note},
+                    () => {
+                      _helper.fetchAPI('/dailyplan/updateplan/' + date, {note: note}, [], 'PUT')
+                    }
+                  )}
+                  maxlength={200}
+                />
+              </div>
             </div>
             {/* <div>
               <Link to='/daily-result'>Daily Result</Link>
