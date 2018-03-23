@@ -1,8 +1,6 @@
 .signup {
-
-  width: 100%;
-  background-image: url(http://localhost:8080/public/background-signup.png) ;
-
+   width: 100%;
+   background-image: url(http://localhost:8080/public/background-signup.png) ;
    height: 100%;
    background-position: center;
    background-repeat: no-repeat;
@@ -11,7 +9,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to right, #271593, #7358db);
   @media only screen and (max-width: 900px) {
     align-items: baseline;
     background-attachment: fixed;
@@ -61,7 +58,7 @@
           }
           >button {
             cursor: pointer;
-            background-color: #271593;
+            background-color: #5f29ae;
             border: 0;
             height: 30px;
             color: white;
@@ -248,7 +245,7 @@
                             width: 20px;
                             &:checked  {
                               + span {
-                                background-color: #271593;
+                                background-color: #5f29ae;
                                 &:after {
                                   display: block;
 
@@ -299,7 +296,7 @@
                 height: 40px;
                 font-size: 16px;
                 display: block;
-                background-color: #271593;
+                background-color: #5f29ae;
                 color: white;
                 border: 0;
                 &:hover {
