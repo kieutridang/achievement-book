@@ -108,104 +108,104 @@ export default class SignUp extends Component {
     }
     return (
       <div className='signup'>
-      <div>
-          <div><h1>Sign up</h1></div>
-          <div>
-            <UploadImage
-              onChange = {(avatar) => {this.setState({avatar})}}
-              srcData = {this.state.avatar}
-              required = {true}
-              button={true}
-              message = {
-                checkValidate.checkAvatar(this.state.avatar, true, validations.avatar)
-              }
-              showMessage = {this.state.showMessage}
-            />
-            </div>
+        <div>
+            <div><h1>Sign up</h1></div>
             <div>
+              <UploadImage
+                onChange = {(avatar) => {this.setState({avatar})}}
+                srcData = {this.state.avatar}
+                required = {true}
+                button={true}
+                message = {
+                  checkValidate.checkAvatar(this.state.avatar, true, validations.avatar)
+                }
+                showMessage = {this.state.showMessage}
+              />
+              </div>
               <div>
                 <div>
-                  <h1>Sign up</h1>
-                  <Input
+                  <div>
+                    <h1>Sign up</h1>
+                    <Input
 
-                    label = 'Username'
-                    onChange = {(username) => {this.setState({username})}}
-                    message = {
-                      checkValidate.checkText(this.state.username, validations.username)
-                    }
-                    showMessage = {this.state.showMessage}
-                  />
-                  <Input
+                      label = 'Username'
+                      onChange = {(username) => {this.setState({username})}}
+                      message = {
+                        checkValidate.checkText(this.state.username, validations.username)
+                      }
+                      showMessage = {this.state.showMessage}
+                    />
+                    <Input
 
-                    type = 'password'
-                    label = 'Password'
-                    onChange = {(password) => {this.setState({password})}}
-                    message = {
-                      checkValidate.checkText(this.state.password, validations.password)
-                    }
-                    showMessage = {this.state.showMessage}
-                  />
-                  <Input
+                      type = 'password'
+                      label = 'Password'
+                      onChange = {(password) => {this.setState({password})}}
+                      message = {
+                        checkValidate.checkText(this.state.password, validations.password)
+                      }
+                      showMessage = {this.state.showMessage}
+                    />
+                    <Input
 
-                    type = 'password'
-                    label = 'Confirm password'
-                    onChange = {(confirmPassword) => {this.setState({confirmPassword})}}
-                    message = {this.checkConfirmPassword()}
-                    showMessage = {this.state.showMessage}
-                  />
-                </div>
-              <div>
-                  <Input
-
-                    label = 'Full Name'
-                    onChange = {(fullName) => {this.setState({fullName})}}
-                    message = {
-                      checkValidate.checkText(this.state.fullName, validations.name)
-                    }
-                    showMessage = {this.state.showMessage}
-                  />
-                  <Input
-
-                    label = 'Email'
-                    onChange = {(email) => {this.setState({email})}}
-                    message = {
-                      checkValidate.checkText(this.state.email, validations.email)
-                    }
-                    showMessage = {this.state.showMessage}
-                  />
-                <Input
-                    
-                    type = 'date'
-                    label = 'DOB'
-                    onChange = {(DOB) => {this.setState({DOB})}}
-                    message = {
-                      checkValidate.checkText(this.state.DOB, validations.DOB)
-                    }
-                    showMessage = {this.state.showMessage}
-                  />
-                <SingleChoice
-                    label = 'Gender'
-                    optionsList = {[
-                      'Male',
-                      'Female'
-                    ]}
-                    onChange = {(gender) => {this.setState({gender})}}
-                    message = {
-                      checkValidate.checkSingleChoice(this.state.gender, true, validations.gender)
-                    }
-                    showMessage = {this.state.showMessage}
-                  />
+                      type = 'password'
+                      label = 'Confirm password'
+                      onChange = {(confirmPassword) => {this.setState({confirmPassword})}}
+                      message = {this.checkConfirmPassword()}
+                      showMessage = {this.state.showMessage}
+                    />
                   </div>
-              </div>
-              <div>
-                <Button
-                  onClick = {this.signUp}
-                  value = 'Create account'
-                />
-                <Link to='/users/login'>Log In</Link>
-              </div>
+                <div>
+                    <Input
+
+                      label = 'Full Name'
+                      onChange = {(fullName) => {this.setState({fullName})}}
+                      message = {
+                        checkValidate.checkText(this.state.fullName, validations.name)
+                      }
+                      showMessage = {this.state.showMessage}
+                    />
+                    <Input
+
+                      label = 'Email'
+                      onChange = {(email) => {this.setState({email})}}
+                      message = {
+                        checkValidate.checkText(this.state.email, validations.email)
+                      }
+                      showMessage = {this.state.showMessage}
+                    />
+                  <Input
+
+                      type = 'date'
+                      label = 'DOB'
+                      onChange = {(DOB) => {this.setState({DOB})}}
+                      message = {
+                        checkValidate.checkText(this.state.DOB, validations.DOB)
+                      }
+                      showMessage = {this.state.showMessage}
+                    />
+                  <SingleChoice
+                      label = 'Gender'
+                      optionsList = {[
+                        'Male',
+                        'Female'
+                      ]}
+                      onChange = {(gender) => {this.setState({gender})}}
+                      message = {
+                        checkValidate.checkSingleChoice(this.state.gender, true, validations.gender)
+                      }
+                      showMessage = {this.state.showMessage}
+                    />
+                    </div>
+                </div>
+                <div>
+                  <Button
+                    onClick = {this.signUp}
+                    value = 'Create account'
+                  />
+                  <Link to='/users/login'>Log In</Link>
+                </div>
+            </div>
           </div>
-        </div>
       </div>
     )
   }

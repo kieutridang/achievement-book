@@ -5,10 +5,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(to right, #271593, #7358db);
   @media only screen and (max-width: 900px) {
     align-items: baseline;
   }
   >div {
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,7 +43,7 @@
           }
           >button {
             cursor: pointer;
-            background-color: #5F29AE;
+            background-color: #271593;
             border: 0;
             height: 30px;
             color: white;
@@ -53,7 +55,7 @@
             &:hover {
               outline: none;
               opacity: 0.8;
-              background-color: #3B22A4;
+              background-color: #271593;
 
             }
           }
@@ -226,7 +228,7 @@
                             width: 20px;
                             &:checked  {
                               + span {
-                                background-color: #5F29AE;
+                                background-color: #271593;
                                 &:after {
                                   display: block;
 
@@ -277,13 +279,13 @@
                 height: 40px;
                 font-size: 16px;
                 display: block;
-                background-color: #5f29ae;
+                background-color: #271593;
                 color: white;
                 border: 0;
                 &:hover {
                   outline: none;
                   opacity: 0.8;
-                  background-color: #3B22A4;
+                  background-color: #271593;
 
                 }
               }
