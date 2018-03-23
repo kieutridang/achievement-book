@@ -108,6 +108,7 @@ export default class SignUp extends Component {
     }
     return (
       <div className='signup'>
+      <span className="navbar">ACHIEVEMENT BOOK</span>
       <div>
           <div><h1>Sign up</h1></div>
           <div>
