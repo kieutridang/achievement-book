@@ -108,8 +108,9 @@ export default class SignUp extends Component {
     }
     return (
       <div className='signup'>
-        <div>
-            <div><h1>Sign up</h1></div>
+      <div>
+          <div><h1>Sign up</h1></div>
+          <div>
             <div>
               <UploadImage
                 onChange = {(avatar) => {this.setState({avatar})}}
@@ -205,6 +206,7 @@ export default class SignUp extends Component {
                   <Link to='/users/login'>Log In</Link>
                 </div>
             </div>
+          </div>
           </div>
       </div>
     )

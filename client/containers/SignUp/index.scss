@@ -1,6 +1,12 @@
 .signup {
-  height: 100%;
+
   width: 100%;
+  background-image: url(http://localhost:8080/public/background-signup.png) ;
+
+   height: 100%;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
   font-family: 'Muli';
   display: flex;
   align-items: center;
@@ -8,37 +14,49 @@
   background: linear-gradient(to right, #271593, #7358db);
   @media only screen and (max-width: 900px) {
     align-items: baseline;
+    background-attachment: fixed;
+    background-size: auto;
+    height: auto;
   }
   >div {
-    background-color: white;
-    display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #B2B1B0;
+    background: rgba(255, 255, 255, 0.9);
     padding: 50px;
-  // avatar
-    >div {
-      &:nth-child(1) {
 
+    >div {
+      //h1 sign in
+      &:nth-child(1) {
         h1 {
-          display: none;
-          @media only screen and (max-width: 900px) {
+            top: 0;
             color: #5f29ae;
             display: block;
+            margin-left: 50px;
+            @media only screen and (max-width: 900px) {
             text-align: center;
-          }
+            }
+
         }
       }
+      // form
       &:nth-child(2) {
+            display: flex;
+            @media only screen and (max-width: 900px) {
+              display: block;
+            }
+
+        >div {
+          // avatar
+            &:nth-child(1) {
         margin-right: 50px;
         @media only screen and (max-width: 900px) {
           margin-left: 70px;
+          padding-bottom: 10px;
         }
         >div {
           > img {
             height: 200px;
             width: 200px;
-            border: 1px solid #B2B1B0;
             object-fit: cover;
           }
           >button {
@@ -71,8 +89,7 @@
         }
       }
       // form sign up
-      &:nth-child(3) {
-
+      &:nth-child(2) {
           >div {
             //form top
             &:nth-child(1) {
@@ -90,6 +107,7 @@
                     margin-right: 0px;
                   }
                   h1 {
+                    display: none;
                     margin-top: 0;
                     color: #5f29ae;
                     margin-bottom: 50px;
@@ -105,11 +123,11 @@
                     color: #716c6c;
                     display: block;
                     font-size: 20px;
-                    margin-top: 10px;
                   }
                   input {
+                    background: none;
                     border: 0;
-                    border-bottom: 2px solid #eee;
+                    border-bottom: 2px solid #acacac;
                     font-weight: lighter;
                     font-size: 15px;
                     width: 300px;
@@ -121,7 +139,6 @@
                 }
                 //form top right
                 &:nth-child(2) {
-                  margin-top: 100px;
                   @media only screen and (max-width: 900px) {
                     display: block;
                     margin-top: 0;
@@ -139,8 +156,9 @@
                         font-size: 11px;
                       }
                       input {
+                        background: none;
                         border: 0;
-                        border-bottom: 2px solid #eee;
+                        border-bottom: 2px solid #acacac;
                         font-weight: lighter;
                         font-size: 15px;
                         width: 300px;
@@ -162,8 +180,9 @@
                         font-size: 11px;
                       }
                       input {
+                        background: none;
                         border: 0;
-                        border-bottom: 2px solid #eee;
+                        border-bottom: 2px solid #acacac;
                         font-weight: lighter;
                         font-size: 15px;
                         width: 300px;
@@ -185,8 +204,9 @@
                         font-size: 11px;
                       }
                       input {
+                        background: none;
                         border: 0;
-                        border-bottom: 2px solid #eee;
+                        border-bottom: 2px solid #acacac;
                         font-weight: lighter;
                         color: #716c6c;
                         font-size: 15px;
@@ -245,7 +265,7 @@
                             height: 20px;
                             width: 20px;
                             border-radius: 50%;
-                            background-color: #eee;
+                            background-color: #acacac;
                             &:after {
                               content: "";
                               position: absolute;
@@ -297,9 +317,10 @@
 
               }
             }
+          }
         }
       }
-
+    }
     }
     @media only screen and (max-width: 900px) {
       display: block;
