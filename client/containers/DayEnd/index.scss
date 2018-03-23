@@ -52,4 +52,48 @@
       background-color: #ADFFAA;
     }
   }
+  >div {
+    &:nth-of-type(2) {
+      >div:last-of-type {
+        form {
+          div {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            >input {
+              background-repeat: no-repeat;
+              border-radius: 50%;
+              width: 50px;
+              height: 50p;
+            }
+            &:first-of-type {
+              >input {
+                background-image: url("../../../public/dejected-face-pensive-unhappy-emoji-316ea69b09a11aeb-512x512.png");
+              }
+            }
+            &:nth-of-type(2) {
+              >input {
+                background-image: url("../../../public/deadpan-face-neutral-sad-emoji-365402ed0fa89a04-512x512.png");
+              }
+            }
+            &:nth-of-type(3) {
+              >input {
+                background-image: url("../../../public/face-smile-happy-emoji-39f978390f86ad27-512x512.png");
+              }
+            }
+            &:nth-of-type(4) {
+              >input {
+                background-image: url("../../../public/face-wink-emoji-flirt-eye-happy-30525d123ea5bacd-512x512.png");
+              }
+            }
+            &:last-of-type {
+              >input {
+                background-image: url("../../../public/eye-face-mouth-open-smile-happy-emoji-3c0c76d5830d3427-512x512.png");
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
