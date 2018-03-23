@@ -11,28 +11,29 @@ export default class SingleChoice extends Component {
     return (
       <div>
         <label> {label}: </label>
-        { required && <span> * </span> }
         <form>
+          { required && <span> * </span> }
           {
             optionsList.map((option, index) => {
               return (
                 <div key={index}>
                   <label>
                     {
-                      index === choice ? <input 
+                      index === choice ? <input
                         type='radio'
-                        name={property} 
-                        value={option} 
+                        name={property}
+                        value={option}
                         checked
                         onChange={(e) => this.props.onChange(e.target.value)}/>
-                      : <input 
+                      : <input
                         type='radio'
-                        name={property} 
-                        value={option} 
+                        name={property}
+                        value={option}
                         onChange={(e) => this.props.onChange(e.target.value)}/>
                     }
-                    {option} 
+                    <span></span>
                   </label>
+                  {option}
                 </div>
               )
             })

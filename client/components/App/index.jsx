@@ -34,7 +34,6 @@ export default class App extends Component {
             '/user/userid/5a61f703f29dd3283e449c96',
             [{ 'Content-Type': 'javascript/json' }],)
             .then((response) => {
-              console.log(response);
             })
 
           {/* _helper.fetchPOST(

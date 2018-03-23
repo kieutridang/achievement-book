@@ -22,7 +22,6 @@ export default class Table extends Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    console.log(nextProps);
     var newRows = nextProps.rows;
     var length = 5 - newRows.length;
     for (var i = 0; i < length; ++i) {
@@ -34,6 +33,7 @@ export default class Table extends Component {
   render() {
     const { label, reqUrl, date } = this.props;
     const { rows } = this.state;
+    let moveTask = false;
     return (
       <div>
         <div>
@@ -45,14 +45,15 @@ export default class Table extends Component {
               <tr>
                 <th> Task </th>
                 <th> From </th>
-                <th> Process </th>
+                <th> Process(%) </th>
               </tr>
             </thead>
             <tbody>
               {
                 rows.map((row, i) => (
+                  moveTask = row.process != null && row.process.toString() === '100' ? true : false,
                   <tr key={i}>
-                    <td> 
+                    <td>
                       <OnBlurInput
                         default={row.task}
                         id={i}
@@ -68,7 +69,7 @@ export default class Table extends Component {
                         }}
                       />
                     </td>
-                    <td> 
+                    <td>
                       <OnBlurInput
                         type = 'time'
                         default={row.from}
@@ -85,7 +86,7 @@ export default class Table extends Component {
                         }}
                       />
                     </td>
-                    <td> 
+                    <td>
                       <OnBlurInput
                         type = 'number'
                         default={row.process}
@@ -103,23 +104,21 @@ export default class Table extends Component {
                         }}
                       />
                     </td>
-                    <td> 
+                    <td>
                         {
                         (date < moment().add(1, 'd').format('YYYY-MM-DD')) &&
-                        <button 
+                        <button
                           onClick = {() => {
                               var getURL;
                               let tommorrowDay = moment().add(1, 'd').format('YYYY-MM-DD');
                               _helper.fetchGET('/dailyplan/getplan/' + tommorrowDay, {})
                               .then((response) => {
                                 let tommorowTask = response.data.plan;
-                                console.log(tommorrowDay);
-                                console.log(response.data);
                                 for (var i = 0; i < 5; ++i) {
                                   if (tommorowTask[i] && row.task == tommorowTask[i].task && row.from == tommorowTask[i].from) {
                                     tommorowTask[i].process = row.process;
                                     return tommorowTask;
-                              
+
                                   }
                                 }
                                 for (var i = 0; i < 5; ++i) {

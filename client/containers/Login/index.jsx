@@ -3,22 +3,24 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import Input from '../../components/Input/index.jsx';
+import Input2 from '../../components/Input2/index.jsx';
 import Button from '../../components/Button/index.jsx';
 
 import { _helper } from '../../components/api/_helper';
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
+import './index.scss';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       username: '',
       password: '',
       message: '',
       showMessage: false,
       authenticate: false
-     }
+    }
   }
   checkAuth = () => {
     checkAuthenticate().then((authenticate) => {
@@ -39,57 +41,75 @@ export default class Login extends Component {
         password
       }
     )
-    .then((response) => {
-      if (response) {
-        const {data, status} = response;
-        if (status == 200) {
-          this.checkAuth()
+      .then((response) => {
+        if (response) {
+          const { data, status } = response;
+          if (status == 200) {
+            this.checkAuth()
+          }
+          else {
+            if (status == 401){
+              this.setState({
+                showMessage: true,
+                messagePassword: data,
+                messageUser: '',
+              })
+            }
+            else {
+              this.setState({
+                showMessage: true,
+                messagePassword: '',
+                messageUser: data,
+              })
+            }
+          }
         }
-        else {
-          this.setState({
-            showMessage: true,
-            message: data
-          })
-        }
-      }
-    })
+      })
   }
   render() {
-    const { authenticate, message, showMessage} = this.state
+    const { authenticate, messageUser, messagePassword, showMessage } = this.state
     if (authenticate) {
       return (
         <Redirect to={'/home'}></Redirect>
       )
     }
     return (
-      <div>
-        <div>
-          <h1> Log In </h1>
-        </div>
-        <div>
-          {showMessage &&
-            <span>{message}</span>
-          }
-          <Input
-            label = "Username"
-            onChange = {(username) => {this.setState({username})}}
-          />
-          <Input
-            type = "password"
-            label = "Password"
-            onChange={(password) => { this.setState({ password }) }}
-          />
-          <Button
-            value="Log In"
-            onClick= {this.login}
-          />
-        </div>
+      <div className="log-in">
         <div>
           <div>
-            <Link to='/users/reset-password'>Forgot Password?</Link>
+            <div>
+              <h1> Achievement Book </h1>
+            </div>
+            <div>
+              <Input2
+                label="username"
+                onChange={(username) => { this.setState({ username }) }}
+                showMessage={showMessage}
+                message={messageUser}
+              />
+              <Input2
+                type="password"
+                label="password"
+                onChange={(password) => { this.setState({ password }) }}
+                showMessage={showMessage}
+                message={messagePassword}
+              />
+            </div>
+            <div>
+              <Button
+                value="Log In"
+                onClick={this.login}
+              />
+              <div>
+                <Link to='/users/reset-password'>Forgot Password?</Link>
+              </div>
+              <div>
+                <Link to='/users/signup'>Sign Up</Link>
+              </div>
+            </div>
           </div>
           <div>
-            <Link to='/users/signup'>Sign Up</Link>
+            <img src="http://localhost:8080/public/log-in-background.jpg" alt="" />
           </div>
         </div>
       </div>
