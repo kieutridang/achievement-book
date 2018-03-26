@@ -14,9 +14,9 @@ const cron = require('node-cron');
 
 module.exports = function (app) {
 
-	app.use(morgan('dev'));
+	// app.use(morgan('dev'));
 
-	mongoose.connect(process.env.MONGODB_URI, {
+	mongoose.connect('mongodb://minhhuynk:minhhuy123@ds223009.mlab.com:23009/achievement-book', {
 		useMongoClient: true
 	});
 
@@ -41,10 +41,10 @@ module.exports = function (app) {
 			maxAge: 15 * 60 * 1000
 		},
 		store: new MongoStore({
-			url: process.env.MONGODB_URI,
+			url: 'mongodb://minhhuynk:minhhuy123@ds223009.mlab.com:23009/achievement-book',
 			ttl: 15
 		})
-	}))
+	})) 
 	
 	app.use((req, res, next) => {
 		req.session.touch();
