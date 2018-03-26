@@ -16,7 +16,7 @@ module.exports = function (app) {
 
 	app.use(morgan('dev'));
 
-	mongoose.connect('mongodb://localhost/achievement-book', {
+	mongoose.connect("mongodb://test:test@ds121289.mlab.com:21289/achievement-book", {
 		useMongoClient: true
 	});
 
@@ -41,7 +41,7 @@ module.exports = function (app) {
 			maxAge: 15 * 60 * 1000
 		},
 		store: new MongoStore({
-			url: 'mongodb://localhost/achievement-book',
+			url: "mongodb://test:test@ds121289.mlab.com:21289/achievement-book",
 			ttl: 15
 		})
 	}))
@@ -51,9 +51,10 @@ module.exports = function (app) {
 		next()
 	})
 
-	app.get(/^\/[a-z]*$/, (req, res) => {
-		res.sendFile(path.join(__dirname, staticPath, '/index.html'))
+	app.get(/^(\/[a-z]*)+$/, (req, res) => {
+		res.sendFile(path.join(__dirname, staticPath, '/index.html'));
 	})
+	app.use('/', express.static(path.join(__dirname,staticPath)));
 
 	app.use('/public', express.static(path.join(__dirname, publicPath)))
 
