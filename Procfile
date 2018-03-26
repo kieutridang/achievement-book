@@ -1,1 +1,1 @@
-node app.js
+webpack -d | node app.js
