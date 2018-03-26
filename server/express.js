@@ -16,7 +16,7 @@ module.exports = function (app) {
 
 	app.use(morgan('dev'));
 
-	mongoose.connect('mongodb://<nnmhuy>:<minhhuy123>@ds223009.mlab.com:23009/achievement-book', {
+	mongoose.connect(process.env.MONGODB_URI, {
 		useMongoClient: true
 	});
 
@@ -41,7 +41,7 @@ module.exports = function (app) {
 			maxAge: 15 * 60 * 1000
 		},
 		store: new MongoStore({
-			url: 'mongodb://<nnmhuy>:<minhhuy123>@ds223009.mlab.com:23009/achievement-book',
+			url: process.env.MONGODB_URI,
 			ttl: 15
 		})
 	}))
