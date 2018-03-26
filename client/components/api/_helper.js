@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const baseURL = 'http://localhost:8080/api';
+// const baseURL = 'http://localhost:8080/api';
+const baseURL = 'https://still-anchorage-48670.herokuapp.com/api'
 const defaultHeaders = [{ 'Content-Type': 'javascript/json' }]
 
 let _helper = {

@@ -5300,7 +5300,8 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var baseURL = 'http://localhost:8080/api';
+// const baseURL = 'http://localhost:8080/api';
+var baseURL = 'https://still-anchorage-48670.herokuapp.com/api';
 var defaultHeaders = [{ 'Content-Type': 'javascript/json' }];
 
 var _helper = {
@@ -42919,7 +42920,7 @@ var Login = function (_Component) {
           _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement('img', { src: 'http://localhost:8080/public/log-in-background.jpg', alt: '' })
+            _react2.default.createElement('img', { src: 'http://still-anchorage-48670.herokuapp.com/public/log-in-background.jpg', alt: '' })
           )
         )
       );

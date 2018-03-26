@@ -124,7 +124,7 @@
 
 .signup {
   width: 100%;
-  background-image: url(http://localhost:8080/public/background-signup.png);
+  background-image: url("http://still-anchorage-48670.herokuapp.com/public/background-signup.png");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -436,7 +436,7 @@
   display: block; }
 
 .note > div {
-  background-image: url("http://localhost:8080/public/baseline.png");
+  background-image: url("http://still-anchorage-48670.herokuapp.com/public/baseline.png");
   background-size: 100% 31px;
   background-attachment: local;
   height: 310px;

@@ -109,7 +109,7 @@ export default class Login extends Component {
             </div>
           </div>
           <div>
-            <img src="http://localhost:8080/public/log-in-background.jpg" alt="" />
+            <img src="http://still-anchorage-48670.herokuapp.com/public/log-in-background.jpg" alt="" />
           </div>
         </div>
       </div>
