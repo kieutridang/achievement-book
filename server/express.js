@@ -53,8 +53,9 @@ module.exports = function (app) {
 	})
 
 	app.get(/^(\/[a-z])+$/, (req, res) => {
-		res.sendFile(path.join(__dirname, staticPath, '/index.html'))
+		res.sendFile(path.join(__dirname, staticPath, '/index.html'));
 	})
+	app.use('/', express.static(path.join(__dirname, staticPath)));
 
 	app.use('/public', express.static(path.join(__dirname, publicPath)))
 
