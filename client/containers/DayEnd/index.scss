@@ -24,10 +24,10 @@
     border-bottom-color: #D8D8D8;
   }
   .day-night-symbol {
-    margin: auto;
+    // margin: auto;
     display: flex;
     height: 25px;
-    width: 600px;
+    width: 100%;
     flex-direction: row-reverse;
     justify-content: space-between;
     img {
@@ -37,13 +37,13 @@
   .tick-wrapper {
     display: inline-block;
     height: 50px;
-    width: 50px;
+    flex-grow: 1;
     .tick {
       height: 17px;
     }
     .tick-label {
       display: inline-block;
-      width: 50px;
+      width: 100%;
       font-weight: bold;
       font-size: 14px;
       color: #9A9696;
@@ -84,6 +84,12 @@
 }
   >div {
     &:nth-of-type(2) {
+      >div:nth-of-type(3) {
+        >div:nth-of-type(2) {
+          width: 100%;
+          display: flex;
+        }
+      }
       >div:last-of-type {
         form {
           height: 100px;
@@ -156,7 +162,6 @@
       >div:nth-of-type(3) {
         >div:nth-of-type(2) {
           >div {
-            // &:nth-of-type(1n+2)
             >div {
               border: 2px solid #9A9696;
               border-left: none;
@@ -192,6 +197,38 @@
   height: 50px;
   border-radius: 50%;
 }
-// .symbol-tickbar {
-//   margin: auto;
-// }
+
+@media only screen and (max-width: 770px) {
+  .dayEnd {
+    width: 100%;
+    padding: 0 20px;
+  }
+}
+
+@media only screen and (max-width:360px) {
+  .dayEnd {
+    .tick-wrapper .tick-label {
+      font-size: 8px;
+    }
+    .radio-image:not(.chosen-radio) {
+      cursor:pointer;
+      border:3px solid transparent;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+    }
+    .chosen-radio {
+      cursor:pointer;
+      border: 3px solid #9A4DFF;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+    }
+    >div:nth-of-type(2) > div:last-of-type form {
+      height: 50px;
+      >div label {
+        font-size: 14px;
+      }
+    }
+  }
+}
