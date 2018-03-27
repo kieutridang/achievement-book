@@ -126,7 +126,7 @@ export default class DailyResult extends Component {
             <Select
               label='Which completed task you feel best?'
               optionsList={completedTasksList}
-              selectedIndex={completedTasksList.indexOf(bestTask)}
+              selectedValue={bestTask}
               disabled={completedTasksList.length == 0}
               disabledMessage="You haven't done any task"
               onChange={(bestTask) => this.setState(
