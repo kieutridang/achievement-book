@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+require('dotenv').load();
+
 const baseURL = (process.env.NODE_ENV == 'production' ? '/api' : 'http://localhost:8080/api') ;
 debugger
 

@@ -58,7 +58,6 @@ module.exports = {
     plugins: [
         HtmlWebpackPluginConfig,
         extractSass,
-        new webpack.DefinePlugin({
-            'NODE_ENV': JSON.stringify('production')}),
+        new webpack.DefinePlugin({'NODE_ENV': JSON.stringify('production')}),
     ]
 }
