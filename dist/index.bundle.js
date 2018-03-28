@@ -5300,7 +5300,8 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var baseURL = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:8080/api';
+var baseURL = process.env.NODE_ENV == 'production' ? '/api' : 'http://localhost:8080/api';
+debugger;
 
 var defaultHeaders = [{ 'Content-Type': 'javascript/json' }];
 
