@@ -5301,6 +5301,7 @@ var _axios2 = _interopRequireDefault(_axios);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var baseURL = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:8080/api';
+
 var defaultHeaders = [{ 'Content-Type': 'javascript/json' }];
 
 var _helper = {
@@ -42920,7 +42921,7 @@ var Login = function (_Component) {
           _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement('img', { src: 'http://localhost:8080/public/log-in-background.jpg', alt: '' })
+            _react2.default.createElement('img', { src: '../../public/log-in-background.jpg', alt: '' })
           )
         )
       );
