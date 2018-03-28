@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack -p",
     "start": "pm2 start app.js --watch | webpack-dev-server --port 8081",
     "stop": "pm2 delete app",
     "dev": "webpack-dev-server --port 8081"
@@ -36,6 +36,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
     "forever": "^0.15.3",
+    "fs": "0.0.1-security",
     "html-webpack-plugin": "^2.30.1",
     "image-webpack-loader": "^3.6.0",
     "jwt-simple": "^0.5.1",
