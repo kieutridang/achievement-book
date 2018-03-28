@@ -93,7 +93,7 @@
 
 @media only screen and (max-width: 900px) {
   .log-in {
-    background-image: url("http://localhost:8080/public/log-in-background.jpg");
+    background-image: url(/2740735ac51a79e2e3f5753deb1e036b.jpg);
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat; }
@@ -124,7 +124,7 @@
 
 .signup {
   width: 100%;
-  background-image: url(http://localhost:8080/public/background-signup.png);
+  background-image: url(/4c6f765a464420bd708155e554cdd06f.png);
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
