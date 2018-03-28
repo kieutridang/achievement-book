@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-console.log(process);
 const baseURL = (process.env.NODE_ENV == 'production' ? '/api' : 'http://localhost:8080/api') ;
+debugger
 
 const defaultHeaders = [{ 'Content-Type': 'javascript/json' }]
 
