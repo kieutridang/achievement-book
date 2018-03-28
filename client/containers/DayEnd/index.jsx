@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import OnBlurInput from '../../components/OnBlurInput/index.jsx'
 import TickBar from '../../components/TickBar/index.jsx'
-import SingleChoice from '../../components/SingleChoice/index.jsx'
+import SingleChoice2 from '../../components/SingleChoice2/index.jsx'
 import DateSelection from '../../components/DateSelection/index'
 import Select from '../../components/Select/index.jsx'
 import SideBar from '../../components/SideBar/index.jsx'
@@ -170,7 +170,7 @@ export default class DailyResult extends Component {
                 )}
               />
             </div>
-            <SingleChoice
+            <SingleChoice2
               choice={efficiency}
               label='How is the efficiency in your task(s)?'
               optionsList={['Low', 'Medium', 'Relatively', 'High', 'Excellent']}

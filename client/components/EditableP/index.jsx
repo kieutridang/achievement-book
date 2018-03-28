@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import './index.scss'
+
 export default class EditableP extends Component {
     constructor(props){
         super(props);
@@ -51,6 +53,7 @@ export default class EditableP extends Component {
         const { maxlength, editable } = this.props;
         return (
             <p
+                className={editable === false && 'content-disabled'}
                 contentEditable={editable !== undefined ? editable : true}
                 ref={p => this.p = p}
                 onKeyPress={(event) => this.handleKeyPress(event)}
