@@ -29,7 +29,7 @@ export default class Tickbar extends Component {
       }
 
     render() {
-        const { label, selections, reqUrl } = this.props;
+        const { label, selections, onChange } = this.props;
         const { selected } = this.state;
         const listSelections = selections.map((selection, index) => 
             <Tick
@@ -40,11 +40,8 @@ export default class Tickbar extends Component {
                 onSelect = {(id) => {
                     let newArr = this.state.selected.map((value) => value);
                     newArr[id] = !newArr[id];
-                    this.setState({
-                        selected: newArr
-                    }, () =>{
-                        _helper.fetchAPI(reqUrl, {bestTime: newArr}, [], "PUT")
-                    })
+                    this.setState({selected: newArr});
+                    onChange(newArr);
                 }}
             />
         )

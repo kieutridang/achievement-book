@@ -140,7 +140,8 @@ export default class DailyResult extends Component {
               <label className='page-label'> Why it is your best task? </label>
               <div>
                 <EditableP
-                  defaultValue={whyBest}
+                  editable={completedTasksList.length > 0}
+                  defaultValue={whyBest != '' ? whyBest : "You haven't done any task"}
                   handleChange={whyBest => this.setState(
                     {whyBest},
                     () => {
@@ -161,7 +162,12 @@ export default class DailyResult extends Component {
                 label={null}
                 selections={['2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22', '24']}
                 selected={bestTime}
-                reqUrl={'/dailyplan/updateplan/' + date}
+                onChange={bestTime => this.setState(
+                  {bestTime}, 
+                  () => {
+                    _helper.fetchAPI('/dailyplan/updateplan/' + date, {bestTime: bestTime}, [], "PUT")
+                  }
+                )}
               />
             </div>
             <SingleChoice

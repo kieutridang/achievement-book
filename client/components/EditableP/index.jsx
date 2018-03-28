@@ -48,10 +48,10 @@ export default class EditableP extends Component {
     }
     render() {
         const { value } = this.state;
-        const {maxlength} = this.props;
+        const { maxlength, editable } = this.props;
         return (
             <p
-                contentEditable={true}
+                contentEditable={editable !== undefined ? editable : true}
                 ref={p => this.p = p}
                 onKeyPress={(event) => this.handleKeyPress(event)}
                 onPaste={(event) => this.handlePaste(event)}
