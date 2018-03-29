@@ -141,7 +141,7 @@ export default class DailyResult extends Component {
               <div>
                 <EditableP
                   editable={completedTasksList.length > 0}
-                  defaultValue={whyBest != '' ? whyBest : "You haven't done any task"}
+                  defaultValue={completedTasksList.length > 0 ? whyBest : "You haven't done any task"}
                   handleChange={whyBest => this.setState(
                     {whyBest},
                     () => {
