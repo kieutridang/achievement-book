@@ -8,7 +8,8 @@
     "build": "NODE_ENV=production webpack -p",
     "start": "pm2 start app.js --watch | webpack-dev-server --port 8081",
     "stop": "pm2 delete app",
-    "dev": "webpack-dev-server --port 8081"
+    "dev": "webpack-dev-server --port 8081",
+    "build windows": "SET NODE_ENV=production | webpack -p"
   },
   "repository": {
     "type": "git",
