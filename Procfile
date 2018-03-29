@@ -1,1 +1,1 @@
-./node_modules/webpack/bin/webpack.js | node app.js
+node app.js
