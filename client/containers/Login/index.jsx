@@ -78,7 +78,7 @@ export default class Login extends Component {
         <div>
           <div>
             <div>
-              <h1> Achievement Book 1 2 3 </h1>
+              <h1> Achievement Book</h1>
             </div>
             <div>
               <Input2
