@@ -30,9 +30,11 @@ module.exports = {
                 test: /.scss$/,
                 use: extractSass.extract({
                     use: [{
-                        loader: "css-loader"
+                        loader: "css-loader",
+                        options: { url: false }
                     }, {
-                        loader: "sass-loader"
+                        loader: "sass-loader",
+                        options: { url: false }
                     }],
                     fallback: "style-loader"
                 })
