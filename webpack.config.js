@@ -22,7 +22,7 @@ module.exports = {
         publicPath: '/',
         filename: 'index.bundle.js'
     },
-    watch: true,
+    watch: false,
     module: {
         loaders: [
             { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
