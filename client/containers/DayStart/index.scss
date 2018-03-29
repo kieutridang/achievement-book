@@ -144,14 +144,14 @@
         display: block;
     }
     >div {
-        background-image: url('http://localhost:8080/public/baseline.png');
+        background-image: url('/public/baseline.png');
         background-size: 100% 31px;
         background-attachment: local;
         height: 310px;
         overflow: auto;
         p {
             width: 250px;
-            height: 310px;
+            height: 290px;
             font-family: 'Muli';
             font-weight: lighter;
             font-size: 18px;

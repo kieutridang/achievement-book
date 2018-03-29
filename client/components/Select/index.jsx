@@ -6,19 +6,17 @@ export default class Select extends Component{
   }
 
   render() {
-    const { label, required, optionsList, selectedIndex, disabled, disabledMessage } = this.props;
+    const { label, required, optionsList, selectedValue, disabled, disabledMessage } = this.props;
     return (
       <div>
-        <label> {label}: </label>
+        <label className='page-label'> {label}: </label>
         { required && <span> * </span> }
-        <select onChange={e => this.props.onChange(e.target.value)} disabled={disabled}>
+        <select onChange={e => this.props.onChange(e.target.value)} disabled={disabled} value={selectedValue}>
           { disabled && <option> {disabledMessage} </option> }
           {
             optionsList.map((option, index) => {
               return (
-                selectedIndex === index ?
-                  <option key={index} value={option} selected> {option} </option>
-                : <option key={index} value={option}> {option} </option>
+                <option key={index} value={option}> {option} </option>
               )
 
             })
