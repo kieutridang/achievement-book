@@ -1,1 +1,1 @@
-webpack -d | node app.js
+./node_modules/webpack/bin/webpack.js | node app.js
