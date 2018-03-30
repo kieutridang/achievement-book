@@ -9,6 +9,8 @@ import EditableP from '../../components/EditableP/index.jsx'
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
 import { Redirect } from 'react-router';
+import BlockUi from 'react-block-ui';
+import 'react-block-ui/style.css'
 
 import moment from 'moment'
 
@@ -26,7 +28,8 @@ export default class DailyPlan extends Component {
       totalTasks: 0,
       doneTasks: 0,
       note: '',
-      authenticate: true
+      authenticate: true,
+      blockingUI: true
     }
   }
   
@@ -133,7 +136,8 @@ export default class DailyPlan extends Component {
         plan: plan,
         note: note,
         totalTasks: plan.length,
-        doneTasks: doneTasks, 
+        doneTasks: doneTasks,
+        blockingUI: false
       })
     })
   }
@@ -176,67 +180,65 @@ export default class DailyPlan extends Component {
       )
     }
     return (
-      <div className="container">
-        <SideBar 
-          date={date}
-          handleDateChange={this.handleDateChange}
-        />
-        <div className="dayStart">
-          <div>
-            <h1> Make plan for your day </h1>
-          </div> 
-          <div> 
+      <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
+        <div className="container">
+          <SideBar
+            date={date}
+            handleDateChange={this.handleDateChange}
+          />
+          <div className="dayStart">
+            <div>
+              <h1> Make plan for your day </h1>
+            </div>
             <div>
               <div>
-                <span>Tasks </span>
-                <span>{doneTasks + ' / ' + totalTasks}</span>
+                <div>
+                  <span>Tasks </span>
+                  <span>{doneTasks + ' / ' + totalTasks}</span>
+                </div>
+                <div>
+                  {
+                    plan.map((task, index) => {
+                      if (task.process < 100) {
+                        return (this.showTask(task, index))
+                      }
+                    })
+                  }
+                  {
+                    (totalTasks < 5) && (
+                      <div onClick={this.newTask} className={'newTask'}>
+                        <img src="../../../public/create.png" alt="Create task" />
+                      </div>
+                    )
+                  }
+                  {
+                    plan.map((task, index) => {
+                      if (task.process == 100) {
+                        return (this.showTask(task, index))
+                      }
+                    })
+                  }
+                </div>
               </div>
-              <div>
-                {
-                  plan.map((task, index) => {
-                    if (task.process < 100) {
-                      return (this.showTask(task,index))
-                    }
-                  })
-                }
-                {
-                  (totalTasks < 5) && (
-                    <div onClick = {this.newTask} className={'newTask'}>
-                      <img src="../../../public/create.png" alt="Create task"/>
-                    </div>
-                  )
-                }
-                {
-                  plan.map((task, index) => {
-                    if (task.process == 100) {
-                      return (this.showTask(task, index))
-                    }
-                  })
-                }
+              <div className="note">
+                <label>Note</label>
+                <div>
+                  <EditableP
+                    defaultValue={note}
+                    handleChange={note => this.setState(
+                      { note },
+                      () => {
+                        _helper.fetchAPI('/dailyplan/updateplan/' + date, { note: note }, [], 'PUT')
+                      }
+                    )}
+                    maxlength={200}
+                  />
+                </div>
               </div>
             </div>
-            <div className="note">
-              <label>Note</label>
-              <div>
-                <EditableP
-                  defaultValue={note}
-                  handleChange={note => this.setState(
-                    {note},
-                    () => {
-                      _helper.fetchAPI('/dailyplan/updateplan/' + date, {note: note}, [], 'PUT')
-                    }
-                  )}
-                  maxlength={200}
-                />
-              </div>
-            </div>
-            {/* <div>
-              <Link to='/daily-result'>Daily Result</Link>
-              <button onClick={this.logout}>Logout</button>
-            </div> */}
           </div>
         </div>
-      </div>
+      </BlockUi>
     )
   }
 }
