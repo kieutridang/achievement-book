@@ -35,6 +35,14 @@ export default class OnBlurTextArea extends Component {
     this.setState({ edit: true })
   }
 
+  checkValidValue = (value) => {
+    const { type } = this.props;
+    if ((!type || type == 'text') && value.split(' ').join('').split('\n').join('') == '') {
+      return false;
+    }
+    return true;
+  }
+
   render() {
     let { id, type, label, required, suggestion, onBlur, message, showMessage, disabled, numRows, maxlength } = this.props;
     let { value, edit } = this.state;
@@ -49,30 +57,18 @@ export default class OnBlurTextArea extends Component {
           </div>
         }
         {
-          (edit || value == '') ?
+          (edit || !this.checkValidValue(value)) ?
             (
-              (!disabled) ?
-                <textarea
-                  type={type || 'text'}
-                  defaultValue={value}
-                  onBlur={(e) => {
-                    this.handlingBlur(e.target.value)
-                  }
-                  }
-                  rows={numRows || "1"}
-                  maxLength={maxlength}
-                />
-                : <textarea
-                  type={type || 'text'}
-                  defaultValue={value}
-                  onBlur={(e) => {
-                    this.handlingBlur(e.target.value)
-                  }
-                  }
-                  disabled
-                  rows={numRows || "1"}
-                  maxLength={maxlength}
-                />
+              <textarea
+                type={type || 'text'}
+                defaultValue={value}
+                onBlur={(e) => {
+                  this.handlingBlur(e.target.value)
+                }}
+                disabled={disabled}
+                rows={numRows || "1"}
+                maxLength={maxlength}
+              />
             )
             : <span onDoubleClick={this.handlingDoubleClick}> {value} </span>
         }

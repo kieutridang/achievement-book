@@ -16,9 +16,12 @@ module.exports = function (app) {
 
 	app.use(morgan('dev'));
 
-	mongoose.connect("mongodb://test:test@ds121289.mlab.com:21289/achievement-book", {
+	mongoose.connect("mongodb://localhost/achievement-book", {
 		useMongoClient: true
 	});
+	// mongoose.connect("mongodb://test:test@ds121289.mlab.com:21289/achievement-book", {
+	// 	useMongoClient: true
+	// });
 
 	app.use(bodyParser.json({
 		limit: "50mb"
@@ -41,7 +44,8 @@ module.exports = function (app) {
 			maxAge: 15 * 60 * 1000
 		},
 		store: new MongoStore({
-			url: "mongodb://test:test@ds121289.mlab.com:21289/achievement-book",
+			// url: "mongodb://test:test@ds121289.mlab.com:21289/achievement-book",
+			url: "mongodb://localhost/achievement-book",			
 			ttl: 15
 		})
 	}))
