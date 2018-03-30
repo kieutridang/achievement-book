@@ -20,6 +20,9 @@ module.exports = function (app) {
 	mongoose.connect(DATA_URL, {
 		useMongoClient: true
 	});
+	// mongoose.connect("mongodb://test:test@ds121289.mlab.com:21289/achievement-book", {
+	// 	useMongoClient: true
+	// });
 
 	app.use(bodyParser.json({
 		limit: "50mb"

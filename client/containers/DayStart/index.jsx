@@ -36,6 +36,14 @@ export default class DailyPlan extends Component {
     })
   }
 
+  checkValidValue = (value) => {
+    const { type } = this.props;
+    if ((!type || type == 'text') && value.split(' ').join('').split('\n').join('') == '') {
+      return false;
+    }
+    return true;
+  }
+
   showTask = (task, index) => {
     const { plan, date } = this.state;
     return (
@@ -50,6 +58,9 @@ export default class DailyPlan extends Component {
             onBlur={(value, id) => {
               var newPlan = plan.map(task => task);
               newPlan[id].task = value;
+              if (!this.checkValidValue(task.task)){
+                newPlan[id].process = 0;
+              }
               this.updatePlan(newPlan);
             }}
             numRows={"2"}
@@ -57,7 +68,7 @@ export default class DailyPlan extends Component {
           />
           <OnBlurInput
             type='number'
-            default={task.process}
+            default={task.process || '0'}
             id={index}
             conditions={{ min: 0, max: 100 }}
             onBlur={(value, id) => {
@@ -66,6 +77,7 @@ export default class DailyPlan extends Component {
               this.updatePlan(newPlan);
             }}
             showPercentage = {true}
+            disabled={!this.checkValidValue(task.task)}
           />
         </div>
         { (task.process < 100) && 
@@ -74,6 +86,7 @@ export default class DailyPlan extends Component {
             id = {index}
             className={"img"}
             onClick = {(e) => {
+              if (!this.checkValidValue(task.task)) return;
               var id = e.target.id;
               var newPlan = plan.map(task => task);
               newPlan[id].process = 100;

@@ -31,14 +31,24 @@ export default class OnBlurInput extends Component {
     })
   }
 
-handlingkeydown = (e) => {
-  if(e.keyCode === 69 && this.props.type =='number') {
-    e.preventDefault();
+  handlingkeydown = (e) => {
+    if (e.keyCode === 69 && this.props.type == 'number') {
+      e.preventDefault();
+    }
   }
-}
 
   handlingDoubleClick = () => {
+    const { disabled } = this.props;
+    if (disabled) return;
     this.setState({ edit: true })
+  }
+
+  checkValidValue = (value) => {
+    const { type } = this.props;
+    if ((!type || type == 'text') && value.split(' ').join('').split('\n').join('') == '') {
+      return false;
+    }
+    return true;
   }
 
   render() {
@@ -55,35 +65,17 @@ handlingkeydown = (e) => {
           </div>
         }
         {
-          (edit || value == '') ?
+          (edit || !this.checkValidValue(value)) ?
             (
-              (!disabled) ?
-                <input
-                  type={type || 'text'}
-                  defaultValue={value}
-                  onKeyDown={(e) => {
-                       this.handlingkeydown(e)
-                     }
-                   }
-                  onBlur={(e) => {
-                      this.handlingBlur(e.target.value)
-                    }
-                  }
-                  maxLength={maxlength || 200}
-
-                />
-                : <input
-                  type={type || 'text'}
-                  defaultValue={value}
-                  onBlur={(e) => {
-                    this.handlingBlur(e.target.value)
-
-                  }
-                  }
-
-                  disabled
-                  maxLength={maxlength || 200}
-                />
+              <input
+                type={type || 'text'}
+                defaultValue={value}
+                onBlur={(e) => {
+                  this.handlingBlur(e.target.value)
+                }}
+                disabled={disabled}
+                maxLength={maxlength || 200}
+              />
             )
             : <span onDoubleClick={this.handlingDoubleClick}> {value + (showPercentage ? " %" : "")} </span>
         }
