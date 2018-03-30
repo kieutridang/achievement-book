@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
 import { Redirect } from 'react-router';
 import moment from 'moment'
+import BlockUi from 'react-block-ui';
+import 'react-block-ui/style.css'
 
 import './index.scss'
 
@@ -28,7 +30,8 @@ export default class DailyResult extends Component {
       bestTime: [],
       efficiency: -1,
       lessonLearned: '',
-      authenticate: true      
+      authenticate: true,
+      blockingUI: true
     }
   }
 
@@ -52,35 +55,38 @@ export default class DailyResult extends Component {
     )
     .then((response) => {
       const { date, plan, bestTask, whyBest, bestTime, efficiency, lessonLearned } = response.data;
-      this.setState({
-        plan: plan,
-        bestTask: bestTask,
-        whyBest: whyBest,
-        bestTime: bestTime,
-        efficiency: efficiency,
-        lessonLearned: lessonLearned
-      }, () => {
-        const { plan } = this.state;
-        var count = 0;
-        var newCompletedTasksList = [];
-        for (var i = 0; i < plan.length; ++i) {
-          if (plan[i].process === 100) {
-            count++;
-            newCompletedTasksList.push(plan[i].task);
-          }
+      var count = 0;
+      var newCompletedTasksList = [];
+      for (var i = 0; i < plan.length; ++i) {
+        if (plan[i].process === 100) {
+          count++;
+          newCompletedTasksList.push(plan[i].task);
         }
-        if (bestTask == '') {
-          _helper.fetchAPI('/dailyplan/updateplan/' + date, {bestTask: newCompletedTasksList}, [], 'PUT');
-          this.setState({
-            completedTasksList: newCompletedTasksList,
-            bestTask: newCompletedTasksList[0]
-          })
-        } else {
-          this.setState({
-            completedTasksList: newCompletedTasksList
-          });
-        }
-      })
+      }
+      if (bestTask == '') {
+        _helper.fetchAPI('/dailyplan/updateplan/' + date, {bestTask: newCompletedTasksList[0]}, [], 'PUT');
+        this.setState({
+          plan: plan,
+          bestTask: newCompletedTasksList[0],
+          whyBest: whyBest,
+          bestTime: bestTime,
+          efficiency: efficiency,
+          lessonLearned: lessonLearned,
+          completedTasksList: newCompletedTasksList,
+          blockingUI: false
+        });
+      } else {
+        this.setState({
+          plan: plan,
+          bestTask: bestTask,
+          whyBest: whyBest,
+          bestTime: bestTime,
+          efficiency: efficiency,
+          lessonLearned: lessonLearned,
+          completedTasksList: newCompletedTasksList,
+          blockingUI: false
+        });
+      }
     })
   }
 
@@ -113,113 +119,115 @@ export default class DailyResult extends Component {
       )
     }
     return (
-      <div className="wrapper">
-        <SideBar 
-          date={date}
-          handleDateChange={this.handleDateChange}
-        />
-        <div className="dayEnd">
-          <div>
-            <h1> Review your day </h1>
-          </div>
-          <div>
-            <Select
-              label='Which completed task you feel best?'
-              optionsList={completedTasksList}
-              selectedValue={bestTask}
-              disabled={completedTasksList.length == 0}
-              disabledMessage="You haven't done any task"
-              onChange={(bestTask) => this.setState(
-                { bestTask },
-                () => {
-                  _helper.fetchAPI('/dailyplan/updateplan/' + date, { bestTask: bestTask }, [], 'PUT')
-                }
-              )}
-            />
-            <div className="why-best">
-              <label className='page-label'> Why it is your best task? </label>
-              <div>
-                <EditableP
-                  editable={completedTasksList.length > 0}
-                  defaultValue={completedTasksList.length > 0 ? whyBest : "You haven't done any task"}
-                  handleChange={whyBest => this.setState(
-                    {whyBest},
-                    () => {
-                      _helper.fetchAPI('/dailyplan/updateplan/' + date, {whyBest: whyBest}, [], 'PUT')
-                    }
-                  )}
-                  maxlength={200}
-                />
-              </div>
+      <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
+        <div className="wrapper">
+          <SideBar
+            date={date}
+            handleDateChange={this.handleDateChange}
+          />
+          <div className="dayEnd">
+            <div>
+              <h1> Review your day </h1>
             </div>
             <div>
-              <label className='page-label'> Which times do you work best? </label>
-              <div className='day-night-symbol'>
-                <img src='../../../public/moon.png' />
-                <img src='../../../public/sun-hand-drawn-symbol_318-52061.jpg' />
-              </div>
-              <TickBar
-                label={null}
-                selections={['2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22', '24']}
-                selected={bestTime}
-                onChange={bestTime => this.setState(
-                  {bestTime}, 
+              <Select
+                label='Which completed task you feel best?'
+                optionsList={completedTasksList}
+                selectedValue={bestTask}
+                disabled={completedTasksList.length == 0}
+                disabledMessage="You haven't done any task"
+                onChange={(bestTask) => this.setState(
+                  { bestTask },
                   () => {
-                    _helper.fetchAPI('/dailyplan/updateplan/' + date, {bestTime: bestTime}, [], "PUT")
+                    _helper.fetchAPI('/dailyplan/updateplan/' + date, { bestTask: bestTask }, [], 'PUT')
                   }
                 )}
               />
-            </div>
-            <SingleChoice2
-              choice={efficiency}
-              label='How is the efficiency in your task(s)?'
-              optionsList={['Low', 'Medium', 'Relatively', 'High', 'Excellent']}
-              onChange={(efficiency) => {
-                var efficiencyNumber;
-                switch (efficiency) {
-                  case 'Low':
-                    efficiencyNumber = 0;
-                    break;
-                  case 'Medium':
-                    efficiencyNumber = 1;
-                    break;
-                  case 'Relatively':
-                    efficiencyNumber = 2;
-                    break;
-                  case 'High':
-                    efficiencyNumber = 3;
-                    break;
+              <div className="why-best">
+                <label className='page-label'> Why it is your best task? </label>
+                <div>
+                  <EditableP
+                    editable={completedTasksList.length > 0}
+                    defaultValue={completedTasksList.length > 0 ? whyBest : "You haven't done any task"}
+                    handleChange={whyBest => this.setState(
+                      { whyBest },
+                      () => {
+                        _helper.fetchAPI('/dailyplan/updateplan/' + date, { whyBest: whyBest }, [], 'PUT')
+                      }
+                    )}
+                    maxlength={200}
+                  />
+                </div>
+              </div>
+              <div>
+                <label className='page-label'> Which times do you work best? </label>
+                <div className='day-night-symbol'>
+                  <img src='../../../public/moon.png' />
+                  <img src='../../../public/sun-hand-drawn-symbol_318-52061.jpg' />
+                </div>
+                <TickBar
+                  label={null}
+                  selections={['2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22', '24']}
+                  selected={bestTime}
+                  onChange={bestTime => this.setState(
+                    { bestTime },
+                    () => {
+                      _helper.fetchAPI('/dailyplan/updateplan/' + date, { bestTime: bestTime }, [], "PUT")
+                    }
+                  )}
+                />
+              </div>
+              <SingleChoice2
+                choice={efficiency}
+                label='How is the efficiency in your task(s)?'
+                optionsList={['Low', 'Medium', 'Relatively', 'High', 'Excellent']}
+                onChange={(efficiency) => {
+                  var efficiencyNumber;
+                  switch (efficiency) {
+                    case 'Low':
+                      efficiencyNumber = 0;
+                      break;
+                    case 'Medium':
+                      efficiencyNumber = 1;
+                      break;
+                    case 'Relatively':
+                      efficiencyNumber = 2;
+                      break;
+                    case 'High':
+                      efficiencyNumber = 3;
+                      break;
 
-                  default:
-                    efficiencyNumber = 4;
-                    break;
-                }
-                this.setState(
-                  { efficiency: efficiencyNumber },
-                  () => {
-                    _helper.fetchAPI('/dailyplan/updateplan/' + date, { efficiency: efficiencyNumber }, [], 'PUT')
+                    default:
+                      efficiencyNumber = 4;
+                      break;
                   }
-                )
-              }}
-            />
-          </div>
-          <div className="lesson-learned">
+                  this.setState(
+                    { efficiency: efficiencyNumber },
+                    () => {
+                      _helper.fetchAPI('/dailyplan/updateplan/' + date, { efficiency: efficiencyNumber }, [], 'PUT')
+                    }
+                  )
+                }}
+              />
+            </div>
+            <div className="lesson-learned">
               <label className='page-label'> What have you learned through this day? </label>
               <div>
                 <EditableP
                   defaultValue={lessonLearned}
                   handleChange={lessonLearned => this.setState(
-                    {lessonLearned},
+                    { lessonLearned },
                     () => {
-                      _helper.fetchAPI('/dailyplan/updateplan/' + date, {lessonLearned: lessonLearned}, [], 'PUT')
+                      _helper.fetchAPI('/dailyplan/updateplan/' + date, { lessonLearned: lessonLearned }, [], 'PUT')
                     }
                   )}
                   maxlength={200}
                 />
               </div>
             </div>
+          </div>
         </div>
-      </div>
+      </BlockUi>
     )
   }
 }
