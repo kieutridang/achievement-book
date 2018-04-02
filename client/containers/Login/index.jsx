@@ -78,18 +78,18 @@ export default class Login extends Component {
         <div>
           <div>
             <div>
-              <h1> Achievement Book</h1>
+              <img src='../../../public/logo.png'/>
             </div>
             <div>
-              <Input2
-                label="username"
+              <Input
+                label="Username"
                 onChange={(username) => { this.setState({ username }) }}
                 showMessage={showMessage}
                 message={messageUser}
               />
-              <Input2
+              <Input
                 type="password"
-                label="password"
+                label="Password"
                 onChange={(password) => { this.setState({ password }) }}
                 showMessage={showMessage}
                 message={messagePassword}
