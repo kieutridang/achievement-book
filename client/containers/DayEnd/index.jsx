@@ -17,6 +17,7 @@ import 'react-block-ui/style.css'
 import './index.scss'
 
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
+import NavigationBar from '../../components/NavigationBar/index.jsx';
 
 export default class DailyResult extends Component {
   constructor(props) {
@@ -166,6 +167,18 @@ export default class DailyResult extends Component {
                 document.getElementById("root").style.overflow = 'auto';
               }}
             >
+          <SideBar/>
+        <NavigationBar authenticate={this.state.authenticate} />
+        </div>
+        <div>
+          <h1> Daily Result </h1>
+          <DateSelection
+            date={date}
+            handleDateChange={this.handleDateChange}
+          />
+          <div className="dayEnd">
+            <div>
+              <h1> Review your day </h1>
             </div>
             <div className="dayEnd">
               <div>
@@ -269,6 +282,8 @@ export default class DailyResult extends Component {
               </div>
             </div>
           </div>
+        </div>
+        </div>
         </div>
       </BlockUi>
     )

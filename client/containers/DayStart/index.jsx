@@ -5,7 +5,6 @@ import Table from '../../components/Table/index.jsx'
 import DateSelection from '../../components/DateSelection/index'
 import SideBar from '../../components/SideBar/index.jsx'
 import EditableP from '../../components/EditableP/index.jsx'
-
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
 import { Redirect } from 'react-router';
@@ -17,6 +16,8 @@ import moment from 'moment'
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
 import './index.scss';
+import NavigationBar from '../../components/NavigationBar/index.jsx';
+
 
 export default class DailyPlan extends Component {
   constructor(props) {
@@ -30,7 +31,8 @@ export default class DailyPlan extends Component {
       note: '',
       authenticate: true,
       blockingUI: true,
-      showSidebar: false
+      showSidebar: false,
+      username: '',
     }
   }
 
@@ -187,6 +189,7 @@ export default class DailyPlan extends Component {
     }
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
+        <NavigationBar authenticate={this.state.authenticate}/>
         <div className="container">
           <div className="TopNav">
             <img
@@ -276,6 +279,10 @@ export default class DailyPlan extends Component {
                   </div>
                 </div>
               </div>
+              {/* <div>
+                <Link to='/daily-result'>Daily Result</Link>
+                <button onClick={this.logout}>Logout</button>
+              </div> */}
             </div>
           </div>
         </div>

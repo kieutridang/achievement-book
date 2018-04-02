@@ -6,6 +6,7 @@ import Button from '../../components/Button/index.jsx';
 
 import { _helper } from '../../components/api/_helper';
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
+import NavigationBar from '../../components/NavigationBar/index.jsx';
 
 export default class Login extends Component {
     constructor(props) {
@@ -49,6 +50,7 @@ export default class Login extends Component {
         }
         return (
             <div>
+                <NavigationBar authenticate={this.state.authenticate}/>
                 <h1>Logged in successfully</h1>
                 <div><Link to='/daily-plan'>Daily Plan</Link></div>
                 <div><Link to='/daily-result'>Daily Result</Link></div>
