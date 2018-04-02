@@ -11,6 +11,7 @@ import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
 import './index.scss';
 import { debug } from 'util';
+import NavigationBar from '../../components/NavigationBar/index.jsx';
 
 export default class Login extends Component {
   constructor(props) {
@@ -46,7 +47,9 @@ export default class Login extends Component {
         if (response) {
           const { data, status } = response;
           if (status == 200) {
-            this.checkAuth()
+            this.checkAuth();
+            console.log(data);
+      
           }
           else {
             if (status == 401) {
@@ -74,7 +77,7 @@ export default class Login extends Component {
     }
   }
   render() {
-    const { authenticate, messageUser, messagePassword, showMessage } = this.state
+    const { authenticate, messageUser, messagePassword, showMessage } = this.state;
     if (authenticate) {
       return (
         <Redirect to={'/home'}></Redirect>
@@ -82,6 +85,8 @@ export default class Login extends Component {
     }
     return (
       <div className="log-in">
+        <NavigationBar authenticate={this.state.authenticate} />
+    
         <div>
           <div>
             <div>

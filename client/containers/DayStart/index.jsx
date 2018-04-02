@@ -5,7 +5,6 @@ import Table from '../../components/Table/index.jsx'
 import DateSelection from '../../components/DateSelection/index'
 import SideBar from '../../components/SideBar/index.jsx'
 import EditableP from '../../components/EditableP/index.jsx'
-
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
 import { Redirect } from 'react-router';
@@ -17,6 +16,8 @@ import moment from 'moment'
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
 import './index.scss';
+import NavigationBar from '../../components/NavigationBar/index.jsx';
+
 
 export default class DailyPlan extends Component {
   constructor(props) {
@@ -29,7 +30,8 @@ export default class DailyPlan extends Component {
       doneTasks: 0,
       note: '',
       authenticate: true,
-      blockingUI: true
+      blockingUI: true,
+      username: '',
     }
   }
   
@@ -181,16 +183,17 @@ export default class DailyPlan extends Component {
     }
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
+        <NavigationBar authenticate={this.state.authenticate}/>
         <div className="container">
-          <SideBar
+          <SideBar 
             date={date}
             handleDateChange={this.handleDateChange}
           />
           <div className="dayStart">
             <div>
               <h1> Make plan for your day </h1>
-            </div>
-            <div>
+            </div> 
+            <div> 
               <div>
                 <div>
                   <span>Tasks </span>
@@ -235,6 +238,10 @@ export default class DailyPlan extends Component {
                   />
                 </div>
               </div>
+              {/* <div>
+                <Link to='/daily-result'>Daily Result</Link>
+                <button onClick={this.logout}>Logout</button>
+              </div> */}
             </div>
           </div>
         </div>

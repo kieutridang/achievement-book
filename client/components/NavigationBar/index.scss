@@ -1,0 +1,132 @@
+.navigationbar {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid darkgray;
+    width: 100%;
+    background: white;
+    height: 50px;
+    font-family: Muli;
+  
+    @media only screen and(max-width: 900px) {
+        display: flex;
+       
+
+    }
+    >div {
+        &:nth-child(1) {
+            display: flex;
+            align-items: center;
+            img {
+                width: 140px;
+                height: 86px;
+                margin-left: 50px;
+                margin-top: 5px;
+                @media only screen and (max-width: 900px) {
+                    margin-left: 0;
+                }
+
+            }
+        }
+    }
+}
+.login {
+   
+    >div {
+        &:nth-child(1) {
+        }
+        &:nth-child(2) {
+            display: flex;
+            align-items: center;          
+            >div {
+                
+                &:nth-child(1) {
+                    margin-right: 30px;
+                    a {
+                        text-decoration: none;
+                        font-family: Muli;
+                        font-size: 20px;
+                    }
+
+                }
+                &:nth-child(2) {
+                    margin-right: 50px; 
+                    a {
+                        border-radius: 5px;
+                        text-decoration: none;
+                        font-family: Muli;
+                        font-size: 20px;
+                        padding: 5px 20px;
+                        outline: none;
+                        background: blueviolet;
+                        color: white;
+                        border: 0;
+                    }
+                    @media only screen and (max-width: 900px) {
+                        margin-right: 10px;
+                    }
+                    
+
+                }
+            }
+           
+
+        }
+    }
+}
+.home {
+    >div {
+        &:nth-child(1) {
+
+        }
+        &:nth-child(2)  
+        {
+            display: flex;
+            align-items: center;
+            margin-right: 50px;
+            @media only screen and(max-width: 900px) {
+                margin-right: 10px;
+               
+        
+            }
+            label {
+                font-size: 16px;
+                &:hover {
+                    color: green;
+                    cursor: pointer;
+                }
+            }
+
+            img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    }
+}
+.sign-up {
+    @media only screen and (max-width: 900px) {
+        position: fixed;
+    }
+
+    >div {
+        &:nth-child(1) {
+
+        }
+        &:nth-child(2) {
+            display: flex;
+            align-items: center;
+            margin-right: 50px;
+            a {
+                border-radius: 5px;
+                text-decoration: none;
+                font-family: Muli;
+                font-size: 20px;
+                padding: 5px 20px;
+                outline: none;
+                background: blueviolet;
+                color: white;
+                border: 0;
+            }
+        }
+    }
+}

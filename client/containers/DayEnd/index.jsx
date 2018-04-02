@@ -17,6 +17,7 @@ import 'react-block-ui/style.css'
 import './index.scss'
 
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
+import NavigationBar from '../../components/NavigationBar/index.jsx';
 
 export default class DailyResult extends Component {
   constructor(props) {
@@ -121,7 +122,12 @@ export default class DailyResult extends Component {
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
         <div className="wrapper">
-          <SideBar
+          <SideBar/>
+        <NavigationBar authenticate={this.state.authenticate} />
+        </div>
+        <div>
+          <h1> Daily Result </h1>
+          <DateSelection
             date={date}
             handleDateChange={this.handleDateChange}
           />
