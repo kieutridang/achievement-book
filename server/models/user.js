@@ -7,7 +7,6 @@ var UserSchema = new Schema({
   id: { type: String },
   avatar: {
     type: String,
-    required: [true, "Avatar is required"],
   },
   username: { 
     type: String, 
@@ -50,11 +49,9 @@ var UserSchema = new Schema({
       },
       message: 'Invalid date'
     },
-    required: [true, "Date of Birth is required"]
   },
   gender: {
     type: String,
-    required: [true, "Gender is required"],
   }
 });
 
