@@ -6,6 +6,7 @@ import DateSelection from '../../components/DateSelection/index'
 import Select from '../../components/Select/index.jsx'
 import SideBar from '../../components/SideBar/index.jsx'
 import EditableP from '../../components/EditableP/index.jsx'
+import Sidebar from 'react-sidebar';
 
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
@@ -17,6 +18,8 @@ import 'react-block-ui/style.css'
 import './index.scss'
 
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
+
+// const mql = window.matchMedia(`(min-width: 800px)`);
 
 export default class DailyResult extends Component {
   constructor(props) {
@@ -31,7 +34,10 @@ export default class DailyResult extends Component {
       efficiency: -1,
       lessonLearned: '',
       authenticate: true,
-      blockingUI: true
+      blockingUI: true,
+      // mql: mql,
+      // docked: true,
+      // sidebarOpen: props.open
     }
   }
 
@@ -111,8 +117,53 @@ export default class DailyResult extends Component {
         })
     }
 
+  // onSetSidebarOpen = (open) => {
+  //   this.setState({sidebarOpen: open});
+  // }
+
+  // componentWillMount = () => {
+  //   mql.addListener(this.mediaQueryChanged);
+  //   this.setState({
+  //     mql: mql,
+  //     sidebarDocked: mql.matches
+  //   });
+  // }
+
+  // componentWillUnmount = () => {
+  //   this.state.mql.removeListener(this.mediaQueryChanged);
+  // }
+
+  // mediaQueryChanged = () => {
+  //   this.setState({sidebarDocked: this.state.mql.matches});
+  // }
+
   render() {
     const { authenticate, date, plan, completedTasksList, bestTask, whyBest, bestTime, efficiency, lessonLearned } = this.state;
+    // const { sidebarOpen, sidebarDocked } = this.state;
+    // var sidebarContent = 
+    //   <div className="SideBar">
+    //     <div>
+    //       <div>
+    //           <Link to='/daily-plan'>Day's Plan</Link>
+    //       </div>
+    //       <div>
+    //           <Link to='/daily-result'>Day's Result</Link>
+    //       </div>
+    //     </div>
+    //     <DateSelection
+    //       date={date}
+    //       handleChange={date => handleDateChange(date)}
+    //     />
+    //     <div>
+    //       <h3> Day's Topic </h3>
+    //       <p> Learn top 10 algorithms </p>
+    //     </div>
+    //   </div>;
+    // var sidebarProps = {
+    //   sidebar: sidebarOpen,
+    //   docked: sidebarDocked,
+    //   onSetOpen: this.onSetSidebarOpen
+    // };
     if (!authenticate) {
       return (
         <Redirect to={'/users/login'}></Redirect>
@@ -121,6 +172,8 @@ export default class DailyResult extends Component {
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
         <div className="wrapper">
+          <div className="TopNav">
+          </div>
           <SideBar
             date={date}
             handleDateChange={this.handleDateChange}
