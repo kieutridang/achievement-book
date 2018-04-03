@@ -13,47 +13,35 @@ import './index.scss';
 export default class SideBar extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            authenticate: true,
-        }
-    }
-    checkAuth = () => {
-        checkAuthenticate().then((authenticate) => {
-            this.setState({ authenticate })
-        })
-    }
-    logout = () => {
-        _helper.fetchAPI(
-            "/user/logout",
-            {}
-        )
-            .then((response) => {
-                if (response) {
-                    const { data, status } = response;
-                    if (status == 200) {
-                        this.checkAuth()
-                    }
-                }
-            })
+        this.state = {  }
     }
     render() {
-        const { date } = this.props;
-        const { authenticate } = this.state;
-        if (!authenticate) {
-            return (
-                <Redirect to={'/users/login'}></Redirect>
-            )
-        }
+        const { date, handleDateChange } = this.props;
         return (
             <div className="SideBar">
+                <div>
+                    <div>
+                        <img src="../../../public/chosen-page.png" alt=""/>
+                        <div>
+                            <img src="../../../public/day-plan.png" alt="" />
+                            <Link to='/daily-plan'>Day's Plan</Link>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="../../../public/chosen-page.png" alt=""/>
+                        <div>
+                            <img src="../../../public/day-result.png" alt="" />
+                            <Link to='/daily-result'>Day's Result</Link>
+                        </div>
+                    </div>
+                </div>
                 <DateSelection
                     date={date}
-                    handleChange={date => this.props.handleDateChange(date)}
+                    handleChange={date => handleDateChange(date)}
                 />
                 <div>
-                    <div><Link to='/daily-plan'>Daily Plan</Link></div>
-                    <div><Link to='/daily-result'>Daily Result</Link></div>
-                    <button onClick={this.logout}>Logout</button>
+                    <h3> Day's Topic </h3>
+                    <p> Learn top 10 algorithms </p>
                 </div>
             </div>
         );

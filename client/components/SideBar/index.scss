@@ -1,4 +1,11 @@
 .SideBar {
     display: inline-block;
-    width: 300px;
+    // width: 300px;
+    padding-top: 23px;
+    padding-left: 25px;
+    padding-right: 25px;
+    img {
+        width: 30px;
+        height: 30px;
+    }
 }
