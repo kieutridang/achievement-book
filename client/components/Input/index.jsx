@@ -8,7 +8,7 @@ export default class Input extends Component {
 		}
 	}
 	render() {
-		let { type, label, required = false, onChange, message, showMessage } = this.props;
+		let { type, label, required = false, onChange, message, showMessage, pressEnter = {} } = this.props;
 		var style = {
 			borderBottomWidth: 2,
 			borderBottomStyle: 'solid',
@@ -26,6 +26,7 @@ export default class Input extends Component {
 
 					type={type || 'text'}
 					onChange={(e) => (onChange(e.target.value))}
+					onKeyPress = {(e) => {pressEnter(e)}}
 				/>
 				{showMessage && message && <span>{message}</span>}
 			</div>

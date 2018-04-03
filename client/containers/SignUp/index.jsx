@@ -49,14 +49,11 @@ export default class SignUp extends Component {
   signUp = () => {
     this.setState({ showMessage: true });
     if (
-      checkValidate.checkAvatar(this.state.avatar, true, validations.avatar) == null &&
       checkValidate.checkText(this.state.username, validations.username) == null &&
       checkValidate.checkText(this.state.password, validations.password) == null &&
       this.checkConfirmPassword() == null &&
       checkValidate.checkText(this.state.fullName, validations.name) == null &&
-      checkValidate.checkText(this.state.email, validations.email) == null &&
-      checkValidate.checkText(this.state.DOB, validations.DOB) == null &&
-      checkValidate.checkSingleChoice(this.state.gender, true, validations.gender) == null
+      checkValidate.checkText(this.state.email, validations.email) == null
     ) {
       const { avatar, username, password, fullName, email, DOB, gender } = this.state;
       _helper.fetchAPI(
@@ -86,6 +83,12 @@ export default class SignUp extends Component {
         }
       });
 
+    }
+  }
+  _onKeyPress = (event) => {
+    debugger
+    if(event.key == "Enter") { //13 is the enter keycode
+      this.refs.signup.refs.button.click();
     }
   }
 
@@ -119,6 +122,7 @@ export default class SignUp extends Component {
                     checkValidate.checkText(this.state.fullName, validations.name)
                   }
                   showMessage={this.state.showMessage}
+                  pressEnter = {this._onKeyPress}               
                 />
                 <Input
 
@@ -128,6 +132,7 @@ export default class SignUp extends Component {
                     checkValidate.checkText(this.state.email, validations.email)
                   }
                   showMessage={this.state.showMessage}
+                  pressEnter = {this._onKeyPress}
                 />
                 <Input
 
@@ -137,6 +142,7 @@ export default class SignUp extends Component {
                     checkValidate.checkText(this.state.username, validations.username)
                   }
                   showMessage={this.state.showMessage}
+                  pressEnter = {this._onKeyPress}
                 />
                 <Input
 
@@ -147,6 +153,7 @@ export default class SignUp extends Component {
                     checkValidate.checkText(this.state.password, validations.password)
                   }
                   showMessage={this.state.showMessage}
+                  pressEnter = {this._onKeyPress}
                 />
                 <Input
 
@@ -155,6 +162,7 @@ export default class SignUp extends Component {
                   onChange={(confirmPassword) => { this.setState({ confirmPassword }) }}
                   message={this.checkConfirmPassword()}
                   showMessage={this.state.showMessage}
+                  pressEnter = {this._onKeyPress}
                 />
               </div>
 
@@ -163,6 +171,8 @@ export default class SignUp extends Component {
               <Button
                 onClick={this.signUp}
                 value='Create account'
+                refName = "button"
+                ref = "signup"
               />
               <Link to='/users/login'>Log In</Link>
             </div>
