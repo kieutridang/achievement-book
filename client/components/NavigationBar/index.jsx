@@ -10,16 +10,10 @@ export default class NavigationBar extends Component {
     constructor(props){
         super(props);
         this.state = {
-            username: 'Bùi Tấn Dâng',
+            user: {},
             url: ''
         }
     }
-    // checkAuth = () => {
-    //     checkAuthenticate().then((authenticate) => {
-    //         this.setState({ authenticate })
-    //     })
-        
-    // }
     logout = () => {
         _helper.fetchAPI(
             "/user/logout",
@@ -45,11 +39,11 @@ export default class NavigationBar extends Component {
         )
         .then((response) => {
             const {data, status} = response;
-            console.log(data + status)  
-            debugger      
+            if(status == 200 ) {  
+            this.setState({user: data})
+            }  
         })
       }
-    
     componentDidMount() {
         this.getURL(); 
     }
@@ -96,18 +90,21 @@ export default class NavigationBar extends Component {
                     <img src='../../../public/logo.png' alt='logo' />
                 </div>
                 <div>
-                    <Popup username={this.state.username}>
+                    <div className='notification'>
+                        <img src='../../../public/notification.png'/>
+                    </div>
+                    <Popup username={this.state.user.fullname} avatar={this.state.user.avatar}>
                         <label className='list-link'>
-                            <Link to='#'>View Profile</Link><br></br>
-                            <Link to='#'>Edit Profile</Link><br></br>
-                            <Link to='#'>Change password</Link><br></br>
-                            <Link to='#'>Help</Link><br></br>
+                            <Link to='#'>View Profile</Link>
+                            <Link to='#'>Edit Profile</Link>
+                            <Link to='#'>Change Password</Link>
+                            <Link to='#'>Help</Link>
                             <Link to='/users/login' onClick={this.logout}>Log out</Link>
                         </label>
                     </Popup>
                 </div>
             </div>    
-         );
+        );
         }
     }
 }

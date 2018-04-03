@@ -129,6 +129,7 @@ export default class DailyResult extends Component {
     }
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
+        <NavigationBar authenticate={this.state.authenticate} />
         <div className="wrapper">
           <div className="TopNav">
             <img
@@ -168,7 +169,7 @@ export default class DailyResult extends Component {
               }}
             >
           <SideBar/>
-        <NavigationBar authenticate={this.state.authenticate} />
+      
         </div>
         <div>
           <h1> Daily Result </h1>
