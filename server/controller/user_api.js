@@ -69,7 +69,7 @@ module.exports = {
 										_id: user._id,
 										fullname: user.fullname
 									}
-									res.status(200).end('Logged in successfully' + JSON.stringify(req.session.user));
+									res.status(200).end('Logged in successfully' );
 								})
 							}
 							else {
@@ -138,7 +138,7 @@ module.exports = {
 					}
 					else {
 						var user = data[0];
-						res.status(200).end("abcdefghjklmnopq"+ req.session.user._id);
+						res.status(200).end(JSON.stringify(user));
 					}
 				}
 			})

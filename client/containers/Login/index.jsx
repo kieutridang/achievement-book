@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-
 import Input from '../../components/Input/index.jsx';
 import Input2 from '../../components/Input2/index.jsx';
 import Button from '../../components/Button/index.jsx';
-
 import { _helper } from '../../components/api/_helper';
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
-
 import './index.scss';
 import { debug } from 'util';
 import NavigationBar from '../../components/NavigationBar/index.jsx';
@@ -48,7 +45,6 @@ export default class Login extends Component {
           const { data, status } = response;
           if (status == 200) {
             this.checkAuth();
-            console.log(data);
       
           }
           else {
@@ -86,7 +82,6 @@ export default class Login extends Component {
     return (
       <div className="log-in">
         <NavigationBar authenticate={this.state.authenticate} />
-    
         <div>
           <div>
             <div>
