@@ -4,15 +4,16 @@ import React, { PropTypes } from 'react';
 
 const PopupContainer =  ({className, children, username, avatar}) =>{ 
     
-    const srcImg =  (avatar == null) ? '../../../public/default-profile-pic.png' : avatar.toString();
+    const srcImg =  (!avatar) ? '../../../public/default-profile-pic.png' : avatar;
     return (
     <div className={className}>
         <Popup trigger = { 
               <div className='popup-top'>
-                <label>{username}</label>
+                <label className='label-name'>{username}</label>
                 <img src={ srcImg} />
               </div>
             }
+            position='bottom right'
             on='hover'  
             mouseLeaveDelay={500}
             >{children}
@@ -29,31 +30,31 @@ const PopupWrapper = styled(PopupContainer)`
         &:hover {
             color: green;
             cursor: pointer;
-            }
-        label {
-            margin-right: 20px;
-        }
+            }       
     }
     .popup-content {
-        padding: 5px !important;
-        background-color: #000000 !important;
         top: 50px !important;
-        div {
-            background-color: #000000 !important;
-        }
+    }
+    .label-name {
+        font-size: 16px;
+        margin-right: 10px;
+         &:hover {
+            color: green;
+            cursor: pointer;
+         }
+        
     }
     .list-link {
         a {
             padding: 10px;
             text-decoration: none;
-            color: white;
+            color: black;
             font-size: 16px;
             display: block;
             white-space: nowrap;
             &:hover {
-                color: rgb(0,255,0);
                 cursor: pointer;
-                background-color: rgba(255,255,255,0.3);
+                background-color: rgba(54,54,54,0.2);
             }
         }
     }

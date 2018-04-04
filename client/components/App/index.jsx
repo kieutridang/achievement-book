@@ -11,6 +11,7 @@ import {_helper} from '../api/_helper'
 import {checkValidate} from '../functions/checkValidate'
 import {validations} from '../functions/validations'
 import moment from 'moment'
+import NavigationBar from '../NavigationBar/index.jsx';
 
 export default class App extends Component {
   constructor(props) {
@@ -22,13 +23,22 @@ export default class App extends Component {
       department: [],
 
       showMessage: false,
-      date: moment().format('YYYY-MM-DD')
+      date: moment().format('YYYY-MM-DD'),
+      url: ''
     }
   }
+  getURL = () => {
+    const newUrl = window.location.href.split("/")[window.location.href.split("/").length-1];
+    this.setState({url: newUrl});
 
+}
+  componentDidMount = () => {   
+    this.getURL();
+  }
   render() {
     return (
       <div>
+        <NavigationBar url={this.state.url}/>
         <button onClick={() => {
           _helper.fetchGET(
             '/user/userid/5a61f703f29dd3283e449c96',

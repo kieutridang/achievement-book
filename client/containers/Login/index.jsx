@@ -18,7 +18,8 @@ export default class Login extends Component {
       password: '',
       message: '',
       showMessage: false,
-      authenticate: false
+      authenticate: false,
+      url: ''
     }
   }
   checkAuth = () => {
@@ -28,8 +29,14 @@ export default class Login extends Component {
       })
     })
   }
+  getURL = () => {
+    const newUrl = window.location.href.split("/")[window.location.href.split("/").length-1];
+    return newUrl;
+
+}
   componentDidMount = () => {
-    this.checkAuth()
+    this.checkAuth();
+    // this.getURL();
   }
   login = () => {
     const { username, password } = this.state;
@@ -81,7 +88,7 @@ export default class Login extends Component {
     }
     return (
       <div className="log-in">
-        <NavigationBar authenticate={this.state.authenticate} />
+        <NavigationBar authenticate={this.state.authenticate} url={this.getURL()} />
         <div>
           <div>
             <div>
