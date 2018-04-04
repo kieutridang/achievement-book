@@ -74,7 +74,6 @@ export default class Login extends Component {
       })
   }
   _onKeyPress = (event) => {
-    debugger
     if(event.key == "Enter") { //13 is the enter keycode
       this.refs.login.refs.button.click();
     }

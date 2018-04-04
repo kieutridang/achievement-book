@@ -284,13 +284,18 @@ html body {
 }
 
 .signup {
-	display: flex;
+	//display: flex;
 	justify-content: space-around;
 	align-items: center;
 	background-color: rgb(95, 41, 174);
 	height: 100%;
-	overflow: auto;
+    overflow: auto;
+    .navigationbar {
+        position: fixed;
+    }
     .wrapper {
+        display: flex;
+        flex-direction: column;
         width: 350px;
         margin: auto;
         padding: 50px;
@@ -601,6 +606,8 @@ html body {
         //display: block;
     }
 }
-
-
 }
+}
+
+
+
