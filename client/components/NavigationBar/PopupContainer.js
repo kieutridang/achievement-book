@@ -15,7 +15,6 @@ const PopupContainer =  ({className, children, username, avatar}) =>{
             }
             position='bottom right'
             on='hover'  
-            mouseLeaveDelay={500}
             >{children}
         </Popup>
     </div>

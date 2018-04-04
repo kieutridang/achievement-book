@@ -16,12 +16,12 @@
             align-items: center;
             img {
                 width: 140px;
-                height: 86px;
-                //margin-left: 50px;
+                height: 36px;
+                margin-left: 10px;
                 margin-top: 5px;
                 @media only screen and(max-width: 900px) {
                     width: 92px;
-                    height: 56px;
+                    height: 23px;
                 }
             }
         }
@@ -83,7 +83,8 @@
         &:nth-child(2)  
         {
             display: flex;
-            align-items: center;                                   
+            align-items: center;
+            margin-right: 10px;                                   
             .notification {
                 margin-right: 20px;
                 img {
