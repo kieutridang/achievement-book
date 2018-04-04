@@ -34,7 +34,8 @@ export default class DailyResult extends Component {
       lessonLearned: '',
       authenticate: true,
       blockingUI: true,
-      showSidebar: false
+      showSidebar: false,
+      user:{}
     }
   }
 
@@ -53,6 +54,7 @@ export default class DailyResult extends Component {
   componentDidMount = () => {
     this.checkAuth();
     this.getDailyResult();
+    this.getUser();
   }
 
   getDailyResult = () => {
@@ -97,13 +99,23 @@ export default class DailyResult extends Component {
       }
     })
   }
-
+  getUser(){
+    _helper.fetchGET(
+      '/user/getuser',
+      {}
+    )
+    .then((response) => {
+        const {data, status} = response;
+        if(status == 200 ) {
+            this.setState({user: data})
+        }  
+    })
+  }
   handleDateChange = (date) => {
     this.setState({date},
       () => this.getDailyResult()
     )
   }
-
   logout = () => {
         _helper.fetchAPI(
             "/user/logout",
@@ -129,7 +141,7 @@ export default class DailyResult extends Component {
     }
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
-        <NavigationBar authenticate={this.state.authenticate} />
+        <NavigationBar authenticate={this.state.authenticate} user={this.state.user} />
         <div className="wrapper">
           <div className="TopNav">
             <img

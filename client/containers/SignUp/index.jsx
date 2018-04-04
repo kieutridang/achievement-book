@@ -26,7 +26,8 @@ export default class SignUp extends Component {
       message: '',
       redirect: false,
       showMessage: false,
-      authenticate: false
+      authenticate: false,
+      url: ''
     }
   }
 
@@ -35,9 +36,15 @@ export default class SignUp extends Component {
       this.setState({ authenticate });
     })
   }
+  getURL = () => {
+    const newUrl = window.location.href.split("/")[window.location.href.split("/").length-1];
+    return newUrl;
+
+}
 
   componentDidMount() {
     this.checkAuth();
+    this.getURL();
   }
 
   checkConfirmPassword = () => {
@@ -106,7 +113,7 @@ export default class SignUp extends Component {
     }
     return (
       <div className='signup'>
-        <NavigationBar authenticate={this.state.authenticate} />
+        <NavigationBar authenticate={this.state.authenticate} url={this.getURL()} />
         <div className='wrapper'>
           <div>
             <img src='../../../public/logo.png'></img>

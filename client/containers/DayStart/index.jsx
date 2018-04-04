@@ -33,6 +33,7 @@ export default class DailyPlan extends Component {
       blockingUI: true,
       showSidebar: false,
       username: '',
+      user: {},
     }
   }
 
@@ -159,10 +160,23 @@ export default class DailyPlan extends Component {
     const date = this.state.date;
     _helper.fetchAPI('/dailyplan/updateplan/' + date, { plan: newPlan }, [], "PUT");
   }
+  getUser(){
+    _helper.fetchGET(
+      '/user/getuser',
+      {}
+    )
+    .then((response) => {
+        const {data, status} = response;
+        if(status == 200 ) {
+            this.setState({user: data})
+        }  
+    })
+  }
 
   componentDidMount = () => {
     this.checkAuth();
     this.getDailyPlan();
+    this.getUser()
   }
 
   logout = () => {
@@ -189,7 +203,7 @@ export default class DailyPlan extends Component {
     }
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
-        <NavigationBar authenticate={this.state.authenticate}/>
+        <NavigationBar authenticate={this.state.authenticate} user={this.state.user}/>
         <div className="container">
           <div className="TopNav">
             <img

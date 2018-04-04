@@ -8,6 +8,7 @@
     font-family: Muli;
     @media only screen and(max-width: 900px) {
         display: flex;
+        height: 40px;
     }
     >div {
         &:nth-child(1) {
@@ -16,16 +17,17 @@
             img {
                 width: 140px;
                 height: 86px;
-                margin-left: 50px;
+                //margin-left: 50px;
                 margin-top: 5px;
-                @media only screen and (max-width: 900px) {
-                    margin-left: 0;
+                @media only screen and(max-width: 900px) {
+                    width: 92px;
+                    height: 56px;
                 }
             }
         }
     }
 }
-.login {  
+.intro {  
     >div {
         &:nth-child(1) {
         }
@@ -35,28 +37,38 @@
             >div {              
                 &:nth-child(1) {
                     margin-right: 30px;
+                    @media only screen and (max-width: 900px) {
+                        margin-right: 10px;
+                    } 
                     a {
                         text-decoration: none;
                         font-family: Muli;
-                        font-size: 20px;
+                        font-size: 16px;
+                        @media only screen and (max-width: 900px) {
+                            font-size: 12px;
+                        }
                     }
                 }
                 &:nth-child(2) {
-                    margin-right: 50px; 
+                    margin-right: 50px;
+                    @media only screen and (max-width: 900px) {
+                        margin-right: 10px;
+                    } 
                     a {
                         border-radius: 5px;
                         text-decoration: none;
                         font-family: Muli;
-                        font-size: 20px;
-                        padding: 5px 20px;
+                        font-size: 16px;
+                        padding: 5px 10px;
                         outline: none;
                         background: blueviolet;
                         color: white;
                         border: 0;
+                        @media only screen and (max-width: 900px) {
+                            font-size: 12px;
+                        }
                     }
-                    @media only screen and (max-width: 900px) {
-                        margin-right: 10px;
-                    }
+                    
                 }
             }
         }
@@ -71,27 +83,44 @@
         &:nth-child(2)  
         {
             display: flex;
-            align-items: center;
-            @media only screen and(max-width: 900px) {
-            }
+            align-items: center;                                   
             .notification {
                 margin-right: 20px;
                 img {
-                width: 30px;
-                height: 30px;
+                    width: 25px;
+                    height: 25px;
+                    @media only screen and ( max-width: 900px) {
+                        width: 20px;
+                        height: 20px;
+                    }
                 }
             }
-            label {
-                font-size: 16px;
-                &:hover {
-                    color: green;
-                    cursor: pointer;
+            .popup-top {
+               label {
+                @media only screen and ( max-width: 900px) {
+                    display: none;
                 }
+               }        
             }
+            .popup-content {
+                @media only screen and ( max-width: 900px) {
+                    top: 40px !important;
+                }
+                a {
+                    @media only screen and ( max-width: 900px) {
+                        padding: 5px;
+                        font-size: 11.5px;
+                    }
+                } 
+            }          
             img {
                 width: 40px;
                 height: 40px;
                 cursor: pointer;
+                @media only screen and ( max-width: 900px) {
+                    width: 30px;
+                    height: 30px;
+                }
             }
         }
     }
@@ -109,16 +138,23 @@
             display: flex;
             align-items: center;
             margin-right: 50px;
+            @media only screen and (max-width: 900px) {
+                margin-right: 10px;
+                font-size: 12px;
+            }
             a {
                 border-radius: 5px;
                 text-decoration: none;
                 font-family: Muli;
-                font-size: 20px;
-                padding: 5px 20px;
+                font-size: 16px;
+                padding: 5px 10px;
                 outline: none;
                 background: blueviolet;
                 color: white;
                 border: 0;
+                @media only screen and (max-width: 900px) {
+                    font-size: 12px;
+                }
             }
         }
     }

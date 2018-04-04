@@ -14,12 +14,30 @@ export default class Login extends Component {
         this.state = {
             authenticate: checkAuthenticate(),
             showMessage: false,
-            message: ""
+            message: "",
+            user: {}
         }
     }
     componentDidMount = () => {
         this.checkAuth()
+        this.getUser()
     }
+    getURL = () => {
+        const newUrl = window.location.href.split("/")[window.location.href.split("/").length-1];
+        return newUrl;
+    }
+    getUser(){
+        _helper.fetchGET(
+          '/user/getuser',
+          {}
+        )
+        .then((response) => {
+            const {data, status} = response;
+            if(status == 200 ) {
+                this.setState({user: data})
+            }  
+        })
+      }
     checkAuth = () => {
         checkAuthenticate().then((authenticate) => {
             this.setState({
@@ -50,7 +68,7 @@ export default class Login extends Component {
         }
         return (
             <div>
-                <NavigationBar authenticate={this.state.authenticate}/>
+                <NavigationBar authenticate={this.state.authenticate} url={this.getURL()} user={this.state.user}/>
                 <h1>Logged in successfully</h1>
                 <div><Link to='/daily-plan'>Daily Plan</Link></div>
                 <div><Link to='/daily-result'>Daily Result</Link></div>
