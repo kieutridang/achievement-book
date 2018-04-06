@@ -284,15 +284,13 @@ html body {
 }
 
 .signup {
-	//display: flex;
+    display: flex;
+    flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
 	background-color: rgb(95, 41, 174);
 	height: 100%;
     overflow: auto;
-    .navigationbar {
-        position: fixed;
-    }
     .wrapper {
         display: flex;
         flex-direction: column;
