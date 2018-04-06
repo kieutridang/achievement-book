@@ -16,31 +16,69 @@ export default class SideBar extends Component {
         this.state = {  }
     }
     render() {
-        const { date, handleDateChange } = this.props;
+        const { show, date, page, handleDateChange } = this.props;
         return (
-            <div className="SideBar">
+            <div 
+                className={show ? 'SideBar showing-sidebar' : "SideBar"}
+            >
                 <div>
                     <div>
-                        <img src="../../../public/chosen-page.png" alt=""/>
+                        <img 
+                            src="../../../public/chosen-page.png" 
+                            alt="" 
+                            className={page === 'plan' ? 'chosen-symbol' : 'unchosen-page chosen-symbol'}
+                        />
                         <div>
-                            <img src="../../../public/day-plan.png" alt="" />
-                            <Link to='/daily-plan'>Day's Plan</Link>
+                            <img
+                                src="../../../public/day-plan.png"
+                                alt=""
+                                className={page === 'plan' ? 'unchosen-icon' : 'chosen-icon'}
+                            />
+                            <img
+                                src="../../../public/day-plan-chosen.png"
+                                alt=""
+                                className={page === 'plan' ? 'chosen-icon' : 'unchosen-icon'}
+                            />
+                            <Link 
+                                className={page === 'plan' ? 'chosen-link page-link' : 'page-link'}
+                                to='/daily-plan'
+                            > 
+                                Day's Plan
+                            </Link>
                         </div>
                     </div>
+                    <div className="line-day"></div>
                     <div>
-                        <img src="../../../public/chosen-page.png" alt=""/>
+                        <img
+                            src="../../../public/chosen-page.png"
+                            alt=""
+                            className={page === 'result' ? 'chosen-symbol' : 'unchosen-page chosen-symbol'}
+                        />
                         <div>
-                            <img src="../../../public/day-result.png" alt="" />
-                            <Link to='/daily-result'>Day's Result</Link>
+                            <img
+                                src="../../../public/day-result.png"
+                                alt=""
+                                className={page === 'result' ? 'unchosen-icon' : 'chosen-icon'}
+                            />
+                            <img
+                                src="../../../public/day-result-chosen.png"
+                                alt=""
+                                className={page === 'result' ? 'chosen-icon' : 'unchosen-icon'}
+                            />
+                            <Link
+                                className={page === 'result' ? 'chosen-link page-link' : 'page-link'}
+                                to='/daily-result'
+                            >
+                                Day's Result
+                            </Link>
                         </div>
                     </div>
                 </div>
-                <DateSelection
-                    date={date}
-                    handleChange={date => handleDateChange(date)}
-                />
+                <div className="line"></div>
+                <div className='calendar'></div>
+                <div className="line"></div>
                 <div>
-                    <h3> Day's Topic </h3>
+                    <h4> Day's Topic </h4>
                     <p> Learn top 10 algorithms </p>
                 </div>
             </div>
