@@ -298,12 +298,14 @@ html body {
         margin: auto;
         padding: 50px;
         background-color: white;
+        
         @media only screen and( max-width:450px) {
             padding: 50px 15px;
         }
         >div {
             &:nth-child(2) {
                 flex-direction: column;
+                margin-top: 0px;
             }
         }
         img {
@@ -376,7 +378,7 @@ html body {
                     }
                 } // form
                 &:nth-child(2) {
-                    display: flex;
+                    //display: flex;
                     @media only screen and (max-width: 900px) {
                         display: block;
                     }
@@ -516,8 +518,8 @@ html body {
                                                 font-size: 11px;
                                             }
                                             form {
-                                                display: flex;
-                                                justify-content: center;
+                                               // display: flex;
+                                                // justify-content: center;
                                                 >div {
                                                     display: flex;
                                                     align-items: center;
