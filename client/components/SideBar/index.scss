@@ -1,4 +1,92 @@
 .SideBar {
-    display: inline-block;
-    width: 300px;
+    font-family: 'Muli';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    padding: 25px 10px;
+    margin-right: 100px;
+    border: 1px solid #E4E4E4;
+    background-color: white;
+    height: 500px;
+    img {
+        width: 35px;
+        height: 35px;
+    }
+    .chosen-symbol {
+        transform: rotate(180deg);
+        -ms-transform: rotate(180deg); /* IE 9 */
+        -webkit-transform: rotate(180deg); /* Safari 3-8 */
+    }
+    .unchosen-page {
+        visibility: hidden;
+    }
+    .page-link {
+        text-decoration: none;
+        color: #000000;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .chosen-link {
+        color: #5f29ae;
+    }
+    .unchosen-icon {
+        display: none;
+    }
+    > div {
+        width: 250px;
+        &:first-child {
+            > div {
+                display: flex;
+                align-items: center;
+                > div {
+                    display: flex;
+                    align-items: center;
+                    img {
+                        margin-left: 15px;
+                        margin-right: 6px;
+                    }
+                }
+            }
+        }
+        &:last-child {
+            text-align: center;
+        }
+    }
+    .line {
+        background: #D8D8D8;
+        border: .5px solid #E4E4E4;
+        width: 100%;
+        margin: 20px 0;
+        .SideBar > div:first-child > div {
+            width: 170px;
+            margin: 15px auto;
+            border: .5px solid #000000;
+        }
+    }
+    .line {
+        background: #D8D8D8;
+        border: .5px solid #E4E4E4;
+        width: 100%;
+        margin: 20px 0;
+        .SideBar > div:first-child > div {
+            width: 170px;
+            margin: 15px auto;
+            border: .5px solid #000000;
+        }
+    }.line {
+        background: #D8D8D8;
+        border: .5px solid #E4E4E4;
+        width: 100%;
+        margin: 20px 0;
+    }
+    .line-day {
+        background: #D8D8D8;
+        width: 170px;
+        margin: 15px auto;
+        border: .5px solid #000000;
+    }
+    .calendar {
+        height: 150px;
+    }
 }

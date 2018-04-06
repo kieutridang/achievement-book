@@ -1,9 +1,35 @@
+.wrapper {
+  > div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    margin-top: 85px;
+  }
+}
+.TopNav {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+.sidebar-icon, .none-sidebar-icon { 
+  display: none;
+}
+
+html body {
+  margin: 0px;
+  overflow: hidden;
+}
+
 .dayEnd {
+  border: 1px solid #E4E4E4;
+  background: white;
+  padding: 50px;
   display: inline-block;
   font-family: 'Muli';
   box-sizing: border-box;
-  width: 60%;
-  h1 {
+  width: 830px;
+  margin-bottom: 50px;
+  h1 {  
     font-weight: bold;
     font-size: 36px;
     color: #5F29AE;;
@@ -23,9 +49,9 @@
     border-left: none;
     border-right: none;
     border-bottom-color: #D8D8D8;
+    background: white
   }
   .day-night-symbol {
-    // margin: auto;
     display: flex;
     height: 25px;
     width: 100%;
@@ -199,15 +225,70 @@
   border-radius: 50%;
 }
 
-@media only screen and (max-width: 770px) {
+.none {
+  display: none;
+}
+
+@media only screen and (max-width: 930px) {
+  .wrapper {
+    > div:nth-child(2) {
+      margin-top: 0px;
+    }
+  }
+  .TopNav {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-bottom: .5px solid;
+  }
+  .sidebar-icon {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
   .dayEnd {
     width: 100%;
-    padding: 0 20px;
+    padding: 0 50px;
+  }
+  .SideBar {
+    position: absolute;
+    left: -300px;
+    top: 40px;
+    -webkit-transition: left .1s ease-in;
+    transition: left .1s ease-in;
+  }
+  .showing-sidebar {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    height: 100%;
+    // -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    // box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .disable-content {
+    display: block;
+    position: fixed;
+    right: -1200px;
+    background-color: whitesmoke;
+    opacity: 0.8;
+    transition: right 0s ease-in;
+    margin-left: 272px;
+    width: 100%;
+    height: 100%;
+    right: 0px;    
+    transition: right 0s ease-in;
+    transition-delay: .1s;
+    left: 0px;
   }
 }
 
 @media only screen and (max-width:360px) {
   .dayEnd {
+    padding: 0 10px;
     .tick-wrapper .tick-label {
       font-size: 8px;
     }

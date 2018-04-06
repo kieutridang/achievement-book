@@ -29,8 +29,14 @@ export default class DailyPlan extends Component {
       doneTasks: 0,
       note: '',
       authenticate: true,
-      blockingUI: true
+      blockingUI: true,
+      showSidebar: false
     }
+  }
+
+  componentWillMount = () => {
+    document.body.parentElement.style.overflow = 'auto';
+    document.getElementById("root").style.overflow = 'auto';
   }
   
   checkAuth = () => {
@@ -182,57 +188,92 @@ export default class DailyPlan extends Component {
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
         <div className="container">
-          <SideBar
-            date={date}
-            handleDateChange={this.handleDateChange}
-          />
-          <div className="dayStart">
-            <div>
-              <h1> Make plan for your day </h1>
+          <div className="TopNav">
+            <img
+              src="../../../public/show-sidebar.png"
+              alt=""
+              className={this.state.showSidebar ? 'none-sidebar-icon' : 'sidebar-icon'}
+              onClick={() => {
+                this.setState({showSidebar: true});
+                document.body.parentElement.style.overflow = 'hidden';
+                document.getElementById("root").style.overflow = 'hidden';                
+              }}
+            />
+            <img
+              src="../../../public/cancel-disable.png"
+              alt=""
+              className={this.state.showSidebar ? 'sidebar-icon' : 'none-sidebar-icon'}
+              onClick={() => {
+                this.setState({showSidebar: false});
+                document.body.parentElement.style.overflow = 'auto';
+                document.getElementById("root").style.overflow = 'auto';                
+              }}
+            />
+          </div>
+          <div>
+            <SideBar
+              show={this.state.showSidebar}
+              date={date}
+              handleDateChange={this.handleDateChange}
+              page='plan'
+            />
+            <div
+              className={this.state.showSidebar ? 'disable-content' : 'none'}
+              onClick={() => {
+                this.setState({showSidebar: false});
+                document.body.parentElement.style.overflow = 'auto';
+                document.getElementById("root").style.overflow = 'auto';
+              }}
+            >
             </div>
-            <div>
+            <div className="dayStart">
               <div>
-                <div>
-                  <span>Tasks </span>
-                  <span>{doneTasks + ' / ' + totalTasks}</span>
-                </div>
-                <div>
-                  {
-                    plan.map((task, index) => {
-                      if (task.process < 100) {
-                        return (this.showTask(task, index))
-                      }
-                    })
-                  }
-                  {
-                    (totalTasks < 5) && (
-                      <div onClick={this.newTask} className={'newTask'}>
-                        <img src="../../../public/create.png" alt="Create task" />
-                      </div>
-                    )
-                  }
-                  {
-                    plan.map((task, index) => {
-                      if (task.process == 100) {
-                        return (this.showTask(task, index))
-                      }
-                    })
-                  }
-                </div>
+                <h1> Make plan for your day </h1>
               </div>
-              <div className="note">
-                <label>Note</label>
+              <div className="taskAndNote">
                 <div>
-                  <EditableP
-                    defaultValue={note}
-                    handleChange={note => this.setState(
-                      { note },
-                      () => {
-                        _helper.fetchAPI('/dailyplan/updateplan/' + date, { note: note }, [], 'PUT')
-                      }
-                    )}
-                    maxlength={200}
-                  />
+                  <div>
+                    <span>Tasks </span>
+                    <span>{doneTasks + ' / ' + totalTasks}</span>
+                  </div>
+                  <div>
+                    {
+                      plan.map((task, index) => {
+                        if (task.process < 100) {
+                          return (this.showTask(task, index))
+                        }
+                      })
+                    }
+                    {
+                      (totalTasks < 5) && (
+                        <div onClick={this.newTask} className={'newTask'}>
+                          <img src="../../../public/create.png" alt="Create task" />
+                        </div>
+                      )
+                    }
+                    {
+                      plan.map((task, index) => {
+                        if (task.process == 100) {
+                          return (this.showTask(task, index))
+                        }
+                      })
+                    }
+                  </div>
+                </div>
+                <div className="note">
+                  <label>Note</label>
+                  <div>
+                    <EditableP
+                      defaultValue={note}
+                      handleChange={note => this.setState(
+                        { note },
+                        () => {
+                          _helper.fetchAPI('/dailyplan/updateplan/' + date, { note: note }, [], 'PUT')
+                        }
+                      )}
+                      maxlength={200}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
