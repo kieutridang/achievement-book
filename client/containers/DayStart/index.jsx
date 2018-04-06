@@ -41,7 +41,7 @@ export default class DailyPlan extends Component {
   
   checkAuth = () => {
     checkAuthenticate().then((authenticate) => {
-      this.setState({authenticate})
+      this.setState({ authenticate })
     })
   }
 
@@ -67,7 +67,7 @@ export default class DailyPlan extends Component {
             onBlur={(value, id) => {
               var newPlan = plan.map(task => task);
               newPlan[id].task = value;
-              if (!this.checkValidValue(task.task)){
+              if (!this.checkValidValue(task.task)) {
                 newPlan[id].process = 0;
               }
               this.updatePlan(newPlan);
@@ -85,16 +85,16 @@ export default class DailyPlan extends Component {
               newPlan[id].process = value;
               this.updatePlan(newPlan);
             }}
-            showPercentage = {true}
+            showPercentage={true}
             disabled={!this.checkValidValue(task.task)}
           />
         </div>
-        { (task.process < 100) && 
-          <img 
+        {(task.process < 100) &&
+          <img
             src="../../../public/checkmark.png"
-            id = {index}
+            id={index}
             className={"img"}
-            onClick = {(e) => {
+            onClick={(e) => {
               if (!this.checkValidValue(task.task)) return;
               var id = e.target.id;
               var newPlan = plan.map(task => task);
@@ -108,7 +108,7 @@ export default class DailyPlan extends Component {
   }
 
   handleDateChange = (date) => {
-    this.setState({date},
+    this.setState({ date },
       () => this.getDailyPlan()
     )
   }
@@ -116,14 +116,14 @@ export default class DailyPlan extends Component {
   newTask = () => {
     const { plan } = this.state;
     var newPlan = plan.map(task => task);
-    newPlan.push({ task: '', process: '0'});
+    newPlan.push({ task: '', process: '0' });
     this.updatePlan(newPlan);
   }
 
   countDoneTasks = (plan) => {
     let count = 0;
-    for (var i = 0; i < plan.length; ++i){
-      if (plan[i].process == 100) ++count; 
+    for (var i = 0; i < plan.length; ++i) {
+      if (plan[i].process == 100)++count;
     }
     return count;
   }
@@ -143,7 +143,7 @@ export default class DailyPlan extends Component {
         note: note,
         totalTasks: plan.length,
         doneTasks: doneTasks,
-        blockingUI: false
+        blockingUI: false,
       })
     })
   }
@@ -155,7 +155,7 @@ export default class DailyPlan extends Component {
       doneTasks: this.countDoneTasks(newPlan),
     })
     const date = this.state.date;
-    _helper.fetchAPI('/dailyplan/updateplan/' + date, {plan: newPlan}, [], "PUT");
+    _helper.fetchAPI('/dailyplan/updateplan/' + date, { plan: newPlan }, [], "PUT");
   }
 
   componentDidMount = () => {
@@ -164,19 +164,19 @@ export default class DailyPlan extends Component {
   }
 
   logout = () => {
-        _helper.fetchAPI(
-            "/user/logout",
-            {}
-        )
-        .then((response) => {
-            if (response) {
-                const { data, status } = response;
-                if (status == 100) {
-                    this.checkAuth()
-                }
-            }
-        })
-    }
+    _helper.fetchAPI(
+      "/user/logout",
+      {}
+    )
+      .then((response) => {
+        if (response) {
+          const { data, status } = response;
+          if (status == 100) {
+            this.checkAuth()
+          }
+        }
+      })
+  }
 
   render() {
     const { authenticate, date, quote, plan, note, doneTasks, totalTasks } = this.state;
