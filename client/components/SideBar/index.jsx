@@ -16,10 +16,10 @@ export default class SideBar extends Component {
         this.state = {  }
     }
     render() {
-        const { show, date, page, handleDateChange } = this.props;
+        const { date, page, handleDateChange } = this.props;
         return (
             <div 
-                className={show ? 'SideBar showing-sidebar' : "SideBar"}
+                className='SideBar'
             >
                 <div>
                     <div>
