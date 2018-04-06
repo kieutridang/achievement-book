@@ -12,6 +12,7 @@ import { SingleDatePicker, DayPickerRangeController, DateRangePicker } from 'rea
 import MonthPicker from '../MonthPicker/index.jsx';
 import WeekPicker from '../WeekPicker/index.jsx';
 import DayPicker from '../DayPicker/index.jsx';
+import DatePicker from '../DatePicker/index.jsx';
 
 import 'react-dates/lib/css/_datepicker.css';
 // import './index.scss';
@@ -54,7 +55,8 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <MonthPicker
+        <DatePicker/>
+        {/* <MonthPicker
           date={this.state.date}
           handleSelect={this.handleSelect}
         />
@@ -65,7 +67,7 @@ export default class App extends Component {
         <DayPicker
           date={this.state.date}
           handleSelect={this.handleSelect}
-        />
+        /> */}
       </div>
     )
   }

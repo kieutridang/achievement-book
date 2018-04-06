@@ -5,27 +5,50 @@ import moment from 'moment';
 const months = [['Jan', 'Feb', 'Mar'], ['Apr', 'May', 'Jun'], ['Jul', 'Aug', 'Sep'], ['Oct', 'Nov', 'Dec']];
 
 export default class MonthPicker extends Component {
-  state = {}
+  constructor(props){
+    super(props);
+    const date = moment(props.date.toDate());
+    this.state = {
+      year: date.year() || moment().year(),
+    }
+  }
+
   handleChange = (month, year) => {
     this.props.handleSelect(moment(year + "-" + month, "YYYY-MM"));
   }
   handleMonthChange = (month) => {
-    let { date } = this.props;
-    let year = moment(date).year();
-    this.handleChange(month, year);
+    const { date } = this.props;
+    const { year } = this.state;
+    const newDate = moment(moment(year + "-" + month + "-" + moment(date.toDate()).day()).format());
+    this.props.handleSelect(newDate);
   }
+
+  onPrevClick = () => {
+    const { year } = this.state;
+    this.setState({
+      year: year - 1,
+    })
+  }
+
+  onNextClick = () => {
+    const { year } = this.state;
+    this.setState({
+      year: year + 1,
+    })
+  }
+
   render() {
     const { date } = this.props;
+    const { year } = this.state;
     let month = moment(date).month();
-    let year = moment(date).year();
     return (
       <Calendar>
         <Title>
-          <ArrowButton onClick={() => this.handleChange(month + 1, year - 1)}>
+          <ArrowButton onClick={this.onPrevClick}>
             <Arrow src="../../../public/arrow-left.png"></Arrow>
           </ArrowButton>
           <YearTitle>{year}</YearTitle>
-          <ArrowButton onClick={() => this.handleChange(month + 1, year + 1)}>
+          <ArrowButton onClick={this.onNextClick}>
             <Arrow src="../../../public/arrow-right.png"></Arrow>
           </ArrowButton>
         </Title>
@@ -38,7 +61,7 @@ export default class MonthPicker extends Component {
                   <tr key={index}>
                     {arrMonth.map((m, index) => {
                       let num = count + index;
-                      if (num != month) {
+                      if (num != month || year != date.year()) {
                         return <Td key={m} onClick={() => this.handleMonthChange(num + 1)}>{m}</Td>;
                       }
                       else {
@@ -61,7 +84,7 @@ const Calendar = styled.div`
   height: 295px;
   background-color: white;
   padding: 13px 13px;
-  border: 1px solid #e4e7e7;
+  /* border: 1px solid #e4e7e7; */
   box-sizing: border-box;
 `
 
@@ -75,6 +98,7 @@ const Title = styled.div`
 const YearTitle = styled.span`
   font-family: 'Muli';
   font-size: 18px;
+  color: #565a5c;
   font-weight: bold;
   text-align: center;
 `

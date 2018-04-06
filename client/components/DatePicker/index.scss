@@ -1,0 +1,27 @@
+.react-tabs__tab-list {
+    display: flex;
+    margin: 0px;
+    padding: 0px 10px 0px 10px;
+    height: 43px;
+    align-items: center;
+    list-style-type: none;
+}
+
+.react-tabs__tab {
+    flex-grow: 1;
+    text-align: center;
+    font-family: 'Muli';
+    padding: 10px 0px 10px 0px;
+    border-bottom: 3px solid #D2D2D2;
+    color: #979797;
+    font-weight: bold;
+}
+
+.react-tabs__tab--selected {
+    border-bottom: 3px solid #5F29AE;
+    color: #000000;
+}
+
+.DayPicker__withBorder {
+    box-shadow: none;
+}
