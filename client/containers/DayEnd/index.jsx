@@ -184,15 +184,6 @@ export default class DailyResult extends Component {
       
         </div>
         <div>
-          <h1> Daily Result </h1>
-          <DateSelection
-            date={date}
-            handleDateChange={this.handleDateChange}
-          />
-          <div className="dayEnd">
-            <div>
-              <h1> Review your day </h1>
-            </div>
             <div className="dayEnd">
               <div>
                 <h1> Review your day </h1>
@@ -295,7 +286,6 @@ export default class DailyResult extends Component {
               </div>
             </div>
           </div>
-        </div>
         </div>
         </div>
       </BlockUi>

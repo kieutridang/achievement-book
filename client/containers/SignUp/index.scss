@@ -298,6 +298,14 @@ html body {
         margin: auto;
         padding: 50px;
         background-color: white;
+        @media only screen and( max-width:450px) {
+            padding: 50px 15px;
+        }
+        >div {
+            &:nth-child(2) {
+                flex-direction: column;
+            }
+        }
         img {
             width: 350px;
             display: block;
