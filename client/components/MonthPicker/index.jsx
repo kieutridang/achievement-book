@@ -58,6 +58,8 @@ export default class MonthPicker extends Component {
 
 const Calendar = styled.div`
   width: 319px;
+  height: 295px;
+  background-color: white;
   padding: 13px 13px;
   border: 1px solid #e4e7e7;
   box-sizing: border-box;
