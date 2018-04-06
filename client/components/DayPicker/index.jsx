@@ -24,7 +24,6 @@ export default class DayPicker extends Component {
     }
 
     render() {
-        debugger
         const { date } = this.props;
         return (
             <DayPickerSingleDateController
