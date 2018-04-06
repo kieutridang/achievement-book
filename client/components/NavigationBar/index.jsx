@@ -5,11 +5,13 @@ import { _helper } from '../../components/api/_helper'
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 import Popup from './PopupContainer.js'
 import './index.scss';
+import SideBar from '../SideBar/index.jsx';
 
 export default class NavigationBar extends Component {
     constructor(props){
         super(props);
         this.state = {
+            showSidebar: false
         }
     }
     logout = () => {
@@ -17,6 +19,9 @@ export default class NavigationBar extends Component {
             "/user/logout",
             {}
         )       
+    }
+    toggleSibar =  () =>{
+        this.setState({showSidebar: !this.state.showSidebar})
     }
     componentDidMount() {
     }
@@ -28,7 +33,7 @@ export default class NavigationBar extends Component {
                 return (
                 <div className='navigationbar sign-up'>
                     <div>
-                        <img src='../../../public/logo.png'  alt='logo'/>
+                        <img id='logo' src='../../../public/logo.png'  alt='logo'/>
                     </div>
                     <div>
                         <Link to='/users/login'> Log in</Link>
@@ -40,7 +45,7 @@ export default class NavigationBar extends Component {
                 return (
                     <div className='navigationbar sign-up'>
                         <div>
-                            <img src='../../../public/logo.png'  alt='logo'/>
+                            <img  id='logo' src='../../../public/logo.png'  alt='logo'/>
                         </div>                                   
                         <div>
                             <Link to='/users/signup'> Sign up</Link>
@@ -52,7 +57,8 @@ export default class NavigationBar extends Component {
                 return (
                     <div className='navigationbar intro'>
                         <div>
-                            <img src='../../../public/logo.png'  alt='logo'/>
+                            <img id='logo' src='../../../public/logo.png'  alt='logo'/>
+                            
                         </div>
                         <div>
                             <div>
@@ -67,15 +73,33 @@ export default class NavigationBar extends Component {
          }   
     }
     else {
-        
         return (
             <div className='navigationbar home'>
                 <div >
-                    <img src='../../../public/logo.png' alt='logo' />
+                    <img id='logo' src='../../../public/logo.png' alt='logo' />
+                    <div className="toggle-sidebar">
+                        <img
+                            src="../../../public/show-sidebar.png"
+                            alt=""
+                            className={this.state.showSidebar ? 'none-sidebar-icon' : 'sidebar-icon'}
+                            onClick={() => {
+                                this.toggleSibar();
+                            }}
+                        />
+                        <img
+                            src="../../../public/cancel-disable.png"
+                            alt=""
+                            className={this.state.showSidebar ? 'sidebar-icon' : 'none-sidebar-icon'}
+                            onClick={() => {
+                                this.toggleSibar();
+                            }}
+                        />
+                    </div>
                 </div>
                 <div>
                     <div className='notification'>
                         <img src='../../../public/notification.png'/>
+                        
                     </div>
                     <Popup username={user.fullname} avatar={user.avatar}>
                         <label className='list-link'>
@@ -87,6 +111,9 @@ export default class NavigationBar extends Component {
                         </label>
                     </Popup>
                 </div>
+                <SideBar  sideTop={'sideInTopNav'}
+                show={this.state.showSidebar}
+                    page='result' />
             </div>    
         );
         }

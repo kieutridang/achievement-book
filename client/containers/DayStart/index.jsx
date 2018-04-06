@@ -218,7 +218,7 @@ export default class DailyPlan extends Component {
         <NavigationBar authenticate={this.state.authenticate} user={this.state.user}/>
         <div className="container">
           <div className="TopNav">
-            <img
+            {/* <img
               src="../../../public/show-sidebar.png"
               alt=""
               className={this.state.showSidebar ? 'none-sidebar-icon' : 'sidebar-icon'}
@@ -237,7 +237,7 @@ export default class DailyPlan extends Component {
                 document.body.parentElement.style.overflow = 'auto';
                 document.getElementById("root").style.overflow = 'auto';                
               }}
-            />
+            /> */}
           </div>
           <div>
             <SideBar

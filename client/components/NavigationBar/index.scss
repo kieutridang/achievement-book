@@ -18,9 +18,7 @@
                 width: 140px;
                 height: 36px;
                 margin-left: 15px;
-                @media only screen and(max-width: 900px) {
-                    width: 92px;
-                    height: 23px;
+                @media only screen and(max-width: 900px) {               
                 }
             }
         }
@@ -76,6 +74,17 @@
 .home {
     >div {
         &:nth-child(1)  {
+            #logo {
+                @media only screen and(max-width: 900px) {               
+                    display: none;
+                }
+            }
+            .toggle-sidebar {
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
 
         }
        
