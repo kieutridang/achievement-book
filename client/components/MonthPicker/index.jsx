@@ -80,7 +80,7 @@ export default class MonthPicker extends Component {
 }
 
 const Calendar = styled.div`
-  width: 319px;
+  width: 100%;
   height: 295px;
   background-color: white;
   padding: 13px 13px;
@@ -136,7 +136,7 @@ const Td = styled.td`
   font-family: 'Muli';
   font-size: 14px;
   color: #565a5c;
-  height: 50px;
+  height: 40px;
   cursor: pointer;
   :hover {
     background - color: rgb(228, 231, 231);

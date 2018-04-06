@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import DateSelection from '../DateSelection/index';
-
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
+
+import DateSelection from '../DateSelection/index';
+import DatePicker from '../DatePicker/index.jsx';
 
 import { _helper } from '../../components/api/_helper'
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
@@ -75,7 +76,12 @@ export default class SideBar extends Component {
                     </div>
                 </div>
                 <div className="line"></div>
-                <div className='calendar'></div>
+                <div className='calendar'>
+                    <DatePicker
+                        date={date}
+                        handleDateChange={handleDateChange}
+                    />
+                </div>
                 <div className="line"></div>
                 <div>
                     <h4> Day's Topic </h4>
