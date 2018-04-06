@@ -6,7 +6,6 @@ import DateSelection from '../../components/DateSelection/index'
 import Select from '../../components/Select/index.jsx'
 import SideBar from '../../components/SideBar/index.jsx'
 import EditableP from '../../components/EditableP/index.jsx'
-import Sidebar from 'react-sidebar';
 
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
