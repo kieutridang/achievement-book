@@ -143,8 +143,9 @@ export default class DailyPlan extends Component {
         note: note,
         totalTasks: plan.length,
         doneTasks: doneTasks,
-        blockingUI: false
+        blockingUI: false,
       })
+    })
   }
 
   updatePlan = (newPlan) => {
