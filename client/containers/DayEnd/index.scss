@@ -1,7 +1,7 @@
 .wrapper {
   > div:nth-child(2) {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 85px;
   }
 }
@@ -15,11 +15,20 @@
   display: none;
 }
 
+html body {
+  margin: 0px;
+  overflow: hidden;
+}
+
 .dayEnd {
+  border: 1px solid #E4E4E4;
+  background: white;
+  padding: 50px;
   display: inline-block;
   font-family: 'Muli';
   box-sizing: border-box;
-  width: 60%;
+  width: 830px;
+  margin-bottom: 50px;
   h1 {  
     font-weight: bold;
     font-size: 36px;
@@ -40,6 +49,7 @@
     border-left: none;
     border-right: none;
     border-bottom-color: #D8D8D8;
+    background: white
   }
   .day-night-symbol {
     display: flex;
@@ -215,7 +225,11 @@
   border-radius: 50%;
 }
 
-@media only screen and (max-width: 900px) {
+.none {
+  display: none;
+}
+
+@media only screen and (max-width: 930px) {
   .wrapper {
     > div:nth-child(2) {
       margin-top: 0px;
@@ -256,16 +270,15 @@
     // box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
   .disable-content {
+    display: block;
     position: fixed;
-    right: -875px;
+    right: -1200px;
     background-color: whitesmoke;
     opacity: 0.8;
     transition: right 0s ease-in;
     margin-left: 272px;
     width: 100%;
     height: 100%;
-  }
-  .disabled {
     right: 0px;    
     transition: right 0s ease-in;
     transition-delay: .1s;

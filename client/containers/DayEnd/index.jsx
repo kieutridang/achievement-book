@@ -39,9 +39,9 @@ export default class DailyResult extends Component {
 
   componentWillMount = () => {
     document.body.parentElement.style.overflow = 'auto';
+    document.getElementById("root").style.overflow = 'auto';
   }
   
-
   checkAuth = () => {
     checkAuthenticate().then((authenticate) => {
       this.setState({
@@ -137,6 +137,7 @@ export default class DailyResult extends Component {
               onClick={() => {
                 this.setState({showSidebar: true});
                 document.body.parentElement.style.overflow = 'hidden';
+                document.getElementById("root").style.overflow = 'hidden';
               }}
             />
             <img
@@ -146,6 +147,7 @@ export default class DailyResult extends Component {
               onClick={() => {
                 this.setState({showSidebar: false});
                 document.body.parentElement.style.overflow = 'auto';
+                document.getElementById("root").style.overflow = 'auto';
               }}
             />
           </div>
@@ -157,10 +159,11 @@ export default class DailyResult extends Component {
               page='result'
             />
             <div
-              className={this.state.showSidebar ? 'disabled disable-content' : 'disable-content'}
+              className={this.state.showSidebar ? 'disable-content' : 'none'}
               onClick={() => {
                 this.setState({showSidebar: false});
                 document.body.parentElement.style.overflow = 'auto';
+                document.getElementById("root").style.overflow = 'auto';
               }}
             >
             </div>

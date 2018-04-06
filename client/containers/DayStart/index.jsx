@@ -36,6 +36,7 @@ export default class DailyPlan extends Component {
 
   componentWillMount = () => {
     document.body.parentElement.style.overflow = 'auto';
+    document.getElementById("root").style.overflow = 'auto';
   }
   
   checkAuth = () => {
@@ -195,6 +196,7 @@ export default class DailyPlan extends Component {
               onClick={() => {
                 this.setState({showSidebar: true});
                 document.body.parentElement.style.overflow = 'hidden';
+                document.getElementById("root").style.overflow = 'hidden';                
               }}
             />
             <img
@@ -204,6 +206,7 @@ export default class DailyPlan extends Component {
               onClick={() => {
                 this.setState({showSidebar: false});
                 document.body.parentElement.style.overflow = 'auto';
+                document.getElementById("root").style.overflow = 'auto';                
               }}
             />
           </div>
@@ -215,10 +218,11 @@ export default class DailyPlan extends Component {
               page='plan'
             />
             <div
-              className={this.state.showSidebar ? 'disable-content disabled' : 'disable-content'}
+              className={this.state.showSidebar ? 'disable-content' : 'none'}
               onClick={() => {
                 this.setState({showSidebar: false});
                 document.body.parentElement.style.overflow = 'auto';
+                document.getElementById("root").style.overflow = 'auto';
               }}
             >
             </div>
@@ -226,7 +230,7 @@ export default class DailyPlan extends Component {
               <div>
                 <h1> Make plan for your day </h1>
               </div>
-              <div>
+              <div className="taskAndNote">
                 <div>
                   <div>
                     <span>Tasks </span>
