@@ -1,9 +1,13 @@
 .container {
   > div:nth-child(2) {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 85px;
   }
+}
+
+#root {
+    background: rgb(243, 243, 243);
 }
 
 .TopNav {
@@ -16,11 +20,23 @@
   display: none;
 }
 
+h1 {
+    font-size: 36px;
+}
+
+.taskAndNote {
+    display: flex;
+    justify-content: center;
+}
+
 .dayStart {
+    padding: 50px;
+    border: 1px solid #E4E4E4;
     display: inline-block;
     font-family: 'Muli';
     box-sizing: border-box;
-    width: 60%;
+    background: white;
+    width: 830px;
     >div {
         &:nth-child(1) {
             color: rgb(95, 41, 174);

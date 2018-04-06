@@ -226,7 +226,7 @@ export default class DailyPlan extends Component {
               <div>
                 <h1> Make plan for your day </h1>
               </div>
-              <div>
+              <div className="taskAndNote">
                 <div>
                   <div>
                     <span>Tasks </span>

@@ -1,7 +1,7 @@
 .wrapper {
   > div:nth-child(2) {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 85px;
   }
 }
@@ -15,11 +15,24 @@
   display: none;
 }
 
+html body {
+  margin: 0px;
+  overflow: hidden;
+}
+
+#root {
+  overflow: auto;
+}
+
 .dayEnd {
+  border: 1px solid #E4E4E4;
+  background: white;
+  padding: 50px;
   display: inline-block;
   font-family: 'Muli';
   box-sizing: border-box;
-  width: 60%;
+  width: 830px;
+  margin-bottom: 50px;
   h1 {  
     font-weight: bold;
     font-size: 36px;
@@ -40,6 +53,7 @@
     border-left: none;
     border-right: none;
     border-bottom-color: #D8D8D8;
+    background: white
   }
   .day-night-symbol {
     display: flex;
