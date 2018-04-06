@@ -10,23 +10,14 @@ export default class DayPicker extends Component {
     state = {  }
 
     onDateChange = (date) => {
-        this.props.handleSelect(date);
-    }
-
-    onPrevMonthClick = () => {
-        const { date } = this.props;
-        this.props.handleSelect(moment(date.toDate()).subtract(1, 'month'));
-    }
-
-    onNextMonthClick = () => {
-        const { date } = this.props;
-        this.props.handleSelect(moment(date.toDate()).add(1, 'month'));
+        this.props.handleSelect(moment(date.toDate()));
     }
 
     render() {
         const { date } = this.props;
         return (
             <DayPickerSingleDateController
+                focused={true}
                 onDateChange={this.onDateChange}
                 date={date}
                 enableOutsideDays={true}
