@@ -68,7 +68,9 @@ export default class App extends Component {
   componentDidMount = () => {   
     this.getURL();
   }
-
+  componentDidMount = () => {   
+    this.getURL();
+  }
   render() {
 
     return (

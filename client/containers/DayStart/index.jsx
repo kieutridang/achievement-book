@@ -172,6 +172,18 @@ export default class DailyPlan extends Component {
         }  
     })
   }
+  getUser(){
+    _helper.fetchGET(
+      '/user/getuser',
+      {}
+    )
+    .then((response) => {
+        const {data, status} = response;
+        if(status == 200 ) {
+            this.setState({user: data})
+        }  
+    })
+  }
 
   componentDidMount = () => {
     this.checkAuth();
