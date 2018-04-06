@@ -29,10 +29,10 @@ export default class DailyPlan extends Component {
       authenticate: true
     }
   }
-  
+
   checkAuth = () => {
     checkAuthenticate().then((authenticate) => {
-      this.setState({authenticate})
+      this.setState({ authenticate })
     })
   }
 
@@ -58,7 +58,7 @@ export default class DailyPlan extends Component {
             onBlur={(value, id) => {
               var newPlan = plan.map(task => task);
               newPlan[id].task = value;
-              if (!this.checkValidValue(task.task)){
+              if (!this.checkValidValue(task.task)) {
                 newPlan[id].process = 0;
               }
               this.updatePlan(newPlan);
@@ -76,16 +76,16 @@ export default class DailyPlan extends Component {
               newPlan[id].process = value;
               this.updatePlan(newPlan);
             }}
-            showPercentage = {true}
+            showPercentage={true}
             disabled={!this.checkValidValue(task.task)}
           />
         </div>
-        { (task.process < 100) && 
-          <img 
+        {(task.process < 100) &&
+          <img
             src="../../../public/checkmark.png"
-            id = {index}
+            id={index}
             className={"img"}
-            onClick = {(e) => {
+            onClick={(e) => {
               if (!this.checkValidValue(task.task)) return;
               var id = e.target.id;
               var newPlan = plan.map(task => task);
@@ -99,7 +99,7 @@ export default class DailyPlan extends Component {
   }
 
   handleDateChange = (date) => {
-    this.setState({date},
+    this.setState({ date },
       () => this.getDailyPlan()
     )
   }
@@ -107,14 +107,14 @@ export default class DailyPlan extends Component {
   newTask = () => {
     const { plan } = this.state;
     var newPlan = plan.map(task => task);
-    newPlan.push({ task: '', process: '0'});
+    newPlan.push({ task: '', process: '0' });
     this.updatePlan(newPlan);
   }
 
   countDoneTasks = (plan) => {
     let count = 0;
-    for (var i = 0; i < plan.length; ++i){
-      if (plan[i].process == 100) ++count; 
+    for (var i = 0; i < plan.length; ++i) {
+      if (plan[i].process == 100)++count;
     }
     return count;
   }
@@ -125,17 +125,17 @@ export default class DailyPlan extends Component {
       '/dailyplan/getplan/' + date,
       {}
     )
-    .then((response) => {
-      const { date, quote, plan, note } = response.data;
-      const doneTasks = this.countDoneTasks(plan);
-      this.setState({
-        quote: quote,
-        plan: plan,
-        note: note,
-        totalTasks: plan.length,
-        doneTasks: doneTasks, 
+      .then((response) => {
+        const { date, quote, plan, note } = response.data;
+        const doneTasks = this.countDoneTasks(plan);
+        this.setState({
+          quote: quote,
+          plan: plan,
+          note: note,
+          totalTasks: plan.length,
+          doneTasks: doneTasks,
+        })
       })
-    })
   }
 
   updatePlan = (newPlan) => {
@@ -145,7 +145,7 @@ export default class DailyPlan extends Component {
       doneTasks: this.countDoneTasks(newPlan),
     })
     const date = this.state.date;
-    _helper.fetchAPI('/dailyplan/updateplan/' + date, {plan: newPlan}, [], "PUT");
+    _helper.fetchAPI('/dailyplan/updateplan/' + date, { plan: newPlan }, [], "PUT");
   }
 
   componentDidMount = () => {
@@ -154,19 +154,19 @@ export default class DailyPlan extends Component {
   }
 
   logout = () => {
-        _helper.fetchAPI(
-            "/user/logout",
-            {}
-        )
-        .then((response) => {
-            if (response) {
-                const { data, status } = response;
-                if (status == 100) {
-                    this.checkAuth()
-                }
-            }
-        })
-    }
+    _helper.fetchAPI(
+      "/user/logout",
+      {}
+    )
+      .then((response) => {
+        if (response) {
+          const { data, status } = response;
+          if (status == 100) {
+            this.checkAuth()
+          }
+        }
+      })
+  }
 
   render() {
     const { authenticate, date, quote, plan, note, doneTasks, totalTasks } = this.state;
@@ -177,15 +177,15 @@ export default class DailyPlan extends Component {
     }
     return (
       <div className="container">
-        <SideBar 
+        <SideBar
           date={date}
           handleDateChange={this.handleDateChange}
         />
         <div className="dayStart">
           <div>
             <h1> Make plan for your day </h1>
-          </div> 
-          <div> 
+          </div>
+          <div>
             <div>
               <div>
                 <span>Tasks </span>
@@ -195,14 +195,14 @@ export default class DailyPlan extends Component {
                 {
                   plan.map((task, index) => {
                     if (task.process < 100) {
-                      return (this.showTask(task,index))
+                      return (this.showTask(task, index))
                     }
                   })
                 }
                 {
                   (totalTasks < 5) && (
-                    <div onClick = {this.newTask} className={'newTask'}>
-                      <img src="../../../public/create.png" alt="Create task"/>
+                    <div onClick={this.newTask} className={'newTask'}>
+                      <img src="../../../public/create.png" alt="Create task" />
                     </div>
                   )
                 }
@@ -221,9 +221,9 @@ export default class DailyPlan extends Component {
                 <EditableP
                   defaultValue={note}
                   handleChange={note => this.setState(
-                    {note},
+                    { note },
                     () => {
-                      _helper.fetchAPI('/dailyplan/updateplan/' + date, {note: note}, [], 'PUT')
+                      _helper.fetchAPI('/dailyplan/updateplan/' + date, { note: note }, [], 'PUT')
                     }
                   )}
                   maxlength={200}

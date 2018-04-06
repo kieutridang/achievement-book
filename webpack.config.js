@@ -27,7 +27,7 @@ module.exports = {
             { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
             { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
             {
-                test: /.scss$/,
+                test: /.s?css$/,
                 use: extractSass.extract({
                     use: [{
                         loader: "css-loader",
@@ -50,7 +50,8 @@ module.exports = {
                     },
                   }
                 ]
-            }
+            },
+            { test: /\.svg$/, loader: 'svg-inline' },
         ]
     },
     devServer: {

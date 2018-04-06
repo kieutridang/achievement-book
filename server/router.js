@@ -7,7 +7,7 @@ module.exports = function(app) {
     var router = express.Router()
     
     router.post('/user/createuser', userApi.createUser);
-    router.get('/user/getuser/', userApi.authenticate, userApi.getUser);
+    router.get('/user/getuser', userApi.authenticate, userApi.getUser);
     router.put('/user/updateuser', userApi.authenticate, user.updateUser);
     router.post('/user/login', userApi.login);
     router.post('/user/logout', userApi.authenticate, userApi.logout);
