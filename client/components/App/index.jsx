@@ -22,19 +22,7 @@ import moment from 'moment';
 
 const START_DATE = 'startDate';
 const END_DATE = 'endDate';
-import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import moment from 'moment'
-import Button from '../Button/index.jsx'
-import Select from '../Select/index.jsx'
-import SingleChoice from '../SingleChoice/index.jsx'
-import MultipleChoice from '../MultipleChoice/index.jsx'
-import Input from '../Input/index.jsx'
-import UploadImage from '../UploadImage/index.jsx'
-import DateSelection from '../DateSelection/index'
-import { _helper } from '../api/_helper'
-import { checkValidate } from '../functions/checkValidate'
-import { validations } from '../functions/validations'
 import AddTodo from '../testRedux/index'
 import ShowField from '../testRedux/showField'
 import NavigationBar from '../NavigationBar/index.jsx';
