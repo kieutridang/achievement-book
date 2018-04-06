@@ -9,6 +9,7 @@
     margin-right: 50px;
     border: 1px solid #E4E4E4;
     background-color: white;
+    // height: 500px;
     img {
         width: 35px;
         height: 35px;
@@ -87,7 +88,9 @@
         border: .5px solid #000000;
     }
     .calendar {
-        height: 150px;
+        display: flex;
+        justify-content: space-around;
+        // height: 150px;
     }
 }
 

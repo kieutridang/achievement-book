@@ -10,18 +10,14 @@ import MonthPicker from '../MonthPicker/index.jsx';
 import './index.scss';
 
 export default class DatePicker extends Component {
-    state = { 
-        date: moment(),
-     }
+    state = { }
 
     handleSelect = (date) => {
-        this.setState({
-            date: date
-        })
+        this.props.handleDateChange(date.format("YYYY-MM-DD"));
     }
 
     render() {
-        const { date } = this.state;
+        const date = moment(this.props.date);
         return (
             <StyledTabs>
                 <TabList>
@@ -56,7 +52,7 @@ export default class DatePicker extends Component {
 
 
 const StyledTabs = styled(Tabs)`
-    width: 319px;
+    width: 200px;
     background-color: white;
     box-sizing: border-box;
 `
