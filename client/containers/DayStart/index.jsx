@@ -29,16 +29,10 @@ export default class DailyPlan extends Component {
       doneTasks: 0,
       note: '',
       authenticate: true,
-      blockingUI: true,
-      showSidebar: false
+      blockingUI: true
     }
   }
 
-  componentWillMount = () => {
-    document.body.parentElement.style.overflow = 'auto';
-    document.getElementById("root").style.overflow = 'auto';
-  }
-  
   checkAuth = () => {
     checkAuthenticate().then((authenticate) => {
       this.setState({ authenticate })
@@ -189,43 +183,14 @@ export default class DailyPlan extends Component {
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
         <div className="container">
           <div className="TopNav">
-            <img
-              src="../../../public/show-sidebar.png"
-              alt=""
-              className={this.state.showSidebar ? 'none-sidebar-icon' : 'sidebar-icon'}
-              onClick={() => {
-                this.setState({showSidebar: true});
-                document.body.parentElement.style.overflow = 'hidden';
-                document.getElementById("root").style.overflow = 'hidden';                
-              }}
-            />
-            <img
-              src="../../../public/cancel-disable.png"
-              alt=""
-              className={this.state.showSidebar ? 'sidebar-icon' : 'none-sidebar-icon'}
-              onClick={() => {
-                this.setState({showSidebar: false});
-                document.body.parentElement.style.overflow = 'auto';
-                document.getElementById("root").style.overflow = 'auto';                
-              }}
-            />
+            
           </div>
           <div>
             <SideBar
-              show={this.state.showSidebar}
               date={date}
               handleDateChange={this.handleDateChange}
               page='plan'
             />
-            <div
-              className={this.state.showSidebar ? 'disable-content' : 'none'}
-              onClick={() => {
-                this.setState({showSidebar: false});
-                document.body.parentElement.style.overflow = 'auto';
-                document.getElementById("root").style.overflow = 'auto';
-              }}
-            >
-            </div>
             <div className="dayStart">
               <div>
                 <h1> Make plan for your day </h1>

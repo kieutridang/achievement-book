@@ -1,14 +1,14 @@
 .SideBar {
+    // height: 100vh;
     font-family: 'Muli';
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 250px;
     padding: 25px 10px;
-    margin-right: 100px;
+    margin-right: 50px;
     border: 1px solid #E4E4E4;
     background-color: white;
-    height: 500px;
     img {
         width: 35px;
         height: 35px;
@@ -88,5 +88,11 @@
     }
     .calendar {
         height: 150px;
+    }
+}
+
+@media only screen and (max-width: 1085px) {
+    .SideBar {
+        // height: 100%;
     }
 }
