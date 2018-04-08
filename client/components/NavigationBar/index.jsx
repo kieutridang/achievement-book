@@ -113,7 +113,7 @@ export default class NavigationBar extends Component {
                 </div>
                 <SideBar  sideTop={'sideInTopNav'}
                 show={this.state.showSidebar}
-                    page='result' />
+                     />
             </div>    
         );
         }

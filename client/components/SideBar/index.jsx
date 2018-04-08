@@ -13,10 +13,30 @@ import './index.scss';
 export default class SideBar extends Component {
     constructor(props){
         super(props);
-        this.state = {  }
+        this.state = {
+            page : '',
+            
+          }
+          
+    }
+    getURL = () => {
+        const newUrl = window.location.href.split("/")[window.location.href.split("/").length-1];
+        if(newUrl == 'daily-plan') {
+            return 'plan'
+        }
+        return 'result';
+    
+    }
+    handleChangePage = () => {
+        //console.log(this.getURL())
+        this.setState({page: this.getURL() })
+    }
+    componentDidMount() {
+        this.setState({page: this.getURL() })
     }
     render() {
-        const { show, date, page, handleDateChange,sideTop  } = this.props;
+        const { show, date, handleDateChange,sideTop  } = this.props;
+        const {page} = this.state;
         let cssSide = (show ? 'SideBar showing-sidebar ' : "SideBar ").concat(sideTop)
         return (
             <div 
@@ -28,6 +48,7 @@ export default class SideBar extends Component {
                             src="../../../public/chosen-page.png" 
                             alt="" 
                             className={page === 'plan' ? 'chosen-symbol' : 'unchosen-page chosen-symbol'}
+                         
                         />
                         <div>
                             <img
@@ -43,6 +64,7 @@ export default class SideBar extends Component {
                             <Link 
                                 className={page === 'plan' ? 'chosen-link page-link' : 'page-link'}
                                 to='/daily-plan'
+                                onClick={this.handleChangePage}
                             > 
                                 Day's Plan
                             </Link>
@@ -69,6 +91,7 @@ export default class SideBar extends Component {
                             <Link
                                 className={page === 'result' ? 'chosen-link page-link' : 'page-link'}
                                 to='/daily-result'
+                                onClick={this.handleChangePage}
                             >
                                 Day's Result
                             </Link>
