@@ -5,7 +5,6 @@ import Table from '../../components/Table/index.jsx'
 import DateSelection from '../../components/DateSelection/index'
 import SideBar from '../../components/SideBar/index.jsx'
 import EditableP from '../../components/EditableP/index.jsx'
-
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
 import { Redirect } from 'react-router';
@@ -17,6 +16,8 @@ import moment from 'moment'
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
 import './index.scss';
+import NavigationBar from '../../components/NavigationBar/index.jsx';
+
 
 export default class DailyPlan extends Component {
   constructor(props) {
@@ -29,7 +30,10 @@ export default class DailyPlan extends Component {
       doneTasks: 0,
       note: '',
       authenticate: true,
-      blockingUI: true
+      blockingUI: true,
+      showSidebar: false,
+      username: '',
+      user: {},
     }
   }
 
@@ -151,10 +155,35 @@ export default class DailyPlan extends Component {
     const date = this.state.date;
     _helper.fetchAPI('/dailyplan/updateplan/' + date, { plan: newPlan }, [], "PUT");
   }
+  getUser(){
+    _helper.fetchGET(
+      '/user/getuser',
+      {}
+    )
+    .then((response) => {
+        const {data, status} = response;
+        if(status == 200 ) {
+            this.setState({user: data})
+        }  
+    })
+  }
+  getUser(){
+    _helper.fetchGET(
+      '/user/getuser',
+      {}
+    )
+    .then((response) => {
+        const {data, status} = response;
+        if(status == 200 ) {
+            this.setState({user: data})
+        }  
+    })
+  }
 
   componentDidMount = () => {
     this.checkAuth();
     this.getDailyPlan();
+    this.getUser()
   }
 
   logout = () => {
@@ -181,9 +210,29 @@ export default class DailyPlan extends Component {
     }
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
+        <NavigationBar authenticate={this.state.authenticate} user={this.state.user}/>
         <div className="container">
           <div className="TopNav">
-            
+            {/* <img
+              src="../../../public/show-sidebar.png"
+              alt=""
+              className={this.state.showSidebar ? 'none-sidebar-icon' : 'sidebar-icon'}
+              onClick={() => {
+                this.setState({showSidebar: true});
+                document.body.parentElement.style.overflow = 'hidden';
+                document.getElementById("root").style.overflow = 'hidden';                
+              }}
+            />
+            <img
+              src="../../../public/cancel-disable.png"
+              alt=""
+              className={this.state.showSidebar ? 'sidebar-icon' : 'none-sidebar-icon'}
+              onClick={() => {
+                this.setState({showSidebar: false});
+                document.body.parentElement.style.overflow = 'auto';
+                document.getElementById("root").style.overflow = 'auto';                
+              }}
+            /> */}
           </div>
           <div>
             <SideBar
@@ -241,6 +290,10 @@ export default class DailyPlan extends Component {
                   </div>
                 </div>
               </div>
+              {/* <div>
+                <Link to='/daily-result'>Daily Result</Link>
+                <button onClick={this.logout}>Logout</button>
+              </div> */}
             </div>
           </div>
         </div>

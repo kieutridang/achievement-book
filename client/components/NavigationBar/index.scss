@@ -1,0 +1,171 @@
+.navigationbar {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid darkgray;
+    width: 100%;
+    background: white;
+    height: 50px;
+    font-family: Muli;
+    @media only screen and(max-width: 900px) {
+        display: flex;
+        height: 40px;
+    }
+    >div {
+        &:nth-child(1) {
+            display: flex;
+            align-items: center;
+            img {
+                width: 140px;
+                height: 36px;
+                margin-left: 15px;
+                @media only screen and(max-width: 900px) {               
+                }
+            }
+        }
+    }
+}
+.intro {  
+    >div {
+        &:nth-child(1) {
+        }
+        &:nth-child(2) {
+            display: flex;
+            align-items: center;          
+            >div {              
+                &:nth-child(1) {
+                    margin-right: 15px;
+                    @media only screen and (max-width: 900px) {
+                        margin-right: 10px;
+                    } 
+                    a {
+                        text-decoration: none;
+                        font-family: Muli;
+                        font-size: 16px;
+                        @media only screen and (max-width: 900px) {
+                            font-size: 12px;
+                        }
+                    }
+                }
+                &:nth-child(2) {
+                    margin-right: 15px;
+                    @media only screen and (max-width: 900px) {
+                        margin-right: 10px;
+                    } 
+                    a {
+                        border-radius: 5px;
+                        text-decoration: none;
+                        font-family: Muli;
+                        font-size: 16px;
+                        padding: 5px 10px;
+                        outline: none;
+                        background: blueviolet;
+                        color: white;
+                        border: 0;
+                        @media only screen and (max-width: 900px) {
+                            font-size: 12px;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+}
+.home {
+    >div {
+        &:nth-child(1)  {
+            #logo {
+                @media only screen and(max-width: 900px) {               
+                    display: none;
+                }
+            }
+            .toggle-sidebar {
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+        }
+       
+        &:nth-child(2)  
+        {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;                                   
+            .notification {
+                margin-right: 15px;
+                img {
+                    width: 25px;
+                    height: 25px;
+                    @media only screen and ( max-width: 900px) {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+            .popup-top {
+               label {
+                @media only screen and ( max-width: 900px) {
+                    display: none;
+                }
+               }        
+            }
+            .popup-content {
+                @media only screen and ( max-width: 900px) {
+                    top: 40px !important;
+                }
+                a {
+                    @media only screen and ( max-width: 900px) {
+                        padding: 5px;
+                        font-size: 11.5px;
+                    }
+                } 
+            }          
+            img {
+                width: 40px;
+                height: 40px;
+                cursor: pointer;
+                @media only screen and ( max-width: 900px) {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+    }
+}
+.sign-up {
+    @media only screen and (max-width: 900px) {
+        position: fixed;
+        top: 0;
+    }
+
+    >div {
+        &:nth-child(1) {
+
+        }
+        &:nth-child(2) {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            @media only screen and (max-width: 900px) {
+                margin-right: 10px;
+                font-size: 12px;
+            }
+            a {
+                border-radius: 5px;
+                text-decoration: none;
+                font-family: Muli;
+                font-size: 16px;
+                padding: 5px 10px;
+                outline: none;
+                background: blueviolet;
+                color: white;
+                border: 0;
+                @media only screen and (max-width: 900px) {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

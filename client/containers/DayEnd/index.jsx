@@ -17,6 +17,7 @@ import 'react-block-ui/style.css'
 import './index.scss'
 
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
+import NavigationBar from '../../components/NavigationBar/index.jsx';
 
 export default class DailyResult extends Component {
   constructor(props) {
@@ -32,7 +33,9 @@ export default class DailyResult extends Component {
       efficiency: -1,
       lessonLearned: '',
       authenticate: true,
-      blockingUI: true
+      blockingUI: true,
+      showSidebar: false,
+      user:{}
     }
   }
 
@@ -46,6 +49,7 @@ export default class DailyResult extends Component {
   componentDidMount = () => {
     this.checkAuth();
     this.getDailyResult();
+    this.getUser();
   }
 
   getDailyResult = () => {
@@ -90,13 +94,23 @@ export default class DailyResult extends Component {
       }
     })
   }
-
+  getUser(){
+    _helper.fetchGET(
+      '/user/getuser',
+      {}
+    )
+    .then((response) => {
+        const {data, status} = response;
+        if(status == 200 ) {
+            this.setState({user: data})
+        }  
+    })
+  }
   handleDateChange = (date) => {
     this.setState({date},
       () => this.getDailyResult()
     )
   }
-
   logout = () => {
         _helper.fetchAPI(
             "/user/logout",
@@ -122,9 +136,29 @@ export default class DailyResult extends Component {
     }
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
+        <NavigationBar authenticate={this.state.authenticate} user={this.state.user} />
         <div className="wrapper">
           <div className="TopNav">
-
+            {/* <img
+              src="../../../public/show-sidebar.png"
+              alt=""
+              className={this.state.showSidebar ? 'none-sidebar-icon' : 'sidebar-icon'}
+              onClick={() => {
+                this.setState({showSidebar: true});
+                document.body.parentElement.style.overflow = 'hidden';
+                document.getElementById("root").style.overflow = 'hidden';
+              }}
+            />
+            <img
+              src="../../../public/cancel-disable.png"
+              alt=""
+              className={this.state.showSidebar ? 'sidebar-icon' : 'none-sidebar-icon'}
+              onClick={() => {
+                this.setState({showSidebar: false});
+                document.body.parentElement.style.overflow = 'auto';
+                document.getElementById("root").style.overflow = 'auto';
+              }}
+            /> */}
           </div>
           <div>
             <SideBar
@@ -132,6 +166,18 @@ export default class DailyResult extends Component {
               handleDateChange={this.handleDateChange}
               page='result'
             />
+            <div
+              className={this.state.showSidebar ? 'disable-content' : 'none'}
+              onClick={() => {
+                this.setState({showSidebar: false});
+                document.body.parentElement.style.overflow = 'auto';
+                document.getElementById("root").style.overflow = 'auto';
+              }}
+            >
+          <SideBar/>
+      
+        </div>
+        <div>
             <div className="dayEnd">
               <div>
                 <h1> Review your day </h1>
@@ -234,6 +280,7 @@ export default class DailyResult extends Component {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </BlockUi>
     )

@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-
 import Input from '../../components/Input/index.jsx';
 import Input2 from '../../components/Input2/index.jsx';
 import Button from '../../components/Button/index.jsx';
-
 import { _helper } from '../../components/api/_helper';
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
-
 import './index.scss';
 import { debug } from 'util';
+import NavigationBar from '../../components/NavigationBar/index.jsx';
 
 export default class Login extends Component {
   constructor(props) {
@@ -20,7 +18,8 @@ export default class Login extends Component {
       password: '',
       message: '',
       showMessage: false,
-      authenticate: false
+      authenticate: false,
+      url: ''
     }
   }
   checkAuth = () => {
@@ -30,8 +29,14 @@ export default class Login extends Component {
       })
     })
   }
+  getURL = () => {
+    const newUrl = window.location.href.split("/")[window.location.href.split("/").length-1];
+    return newUrl;
+
+}
   componentDidMount = () => {
-    this.checkAuth()
+    this.checkAuth();
+    // this.getURL();
   }
   login = () => {
     const { username, password } = this.state;
@@ -46,7 +51,8 @@ export default class Login extends Component {
         if (response) {
           const { data, status } = response;
           if (status == 200) {
-            this.checkAuth()
+            this.checkAuth();
+      
           }
           else {
             if (status == 401) {
@@ -73,7 +79,7 @@ export default class Login extends Component {
     }
   }
   render() {
-    const { authenticate, messageUser, messagePassword, showMessage } = this.state
+    const { authenticate, messageUser, messagePassword, showMessage } = this.state;
     if (authenticate) {
       return (
         <Redirect to={'/home'}></Redirect>
@@ -81,6 +87,7 @@ export default class Login extends Component {
     }
     return (
       <div className="log-in">
+        <NavigationBar authenticate={this.state.authenticate} url={this.getURL()} />
         <div>
           <div>
             <div>

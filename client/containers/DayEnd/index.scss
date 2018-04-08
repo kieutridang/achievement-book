@@ -225,7 +225,20 @@
       margin-top: 0px;
     }
   }
-
+  // .TopNav {
+  //   width: 100%;
+  //   height: 40px;
+  //   display: flex;
+  //   align-items: center;
+  //   border-bottom: .5px solid;
+  // }
+  .sidebar-icon {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
   .dayEnd {
     width: 100%;
   }

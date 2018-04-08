@@ -5,7 +5,6 @@ import SingleChoice from '../../components/SingleChoice/index.jsx'
 import MultipleChoice from '../../components/MultipleChoice/index.jsx'
 import UploadImage from '../../components/UploadImage/index.jsx'
 import Button from '../../components/Button/index.jsx'
-
 import { _helper } from '../../components/api/_helper'
 import { checkValidate } from '../../components/functions/checkValidate'
 import { validations } from '../../components/functions/validations'
@@ -13,6 +12,7 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom'
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 import './index.scss';
+import NavigationBar from '../../components/NavigationBar/index.jsx';
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -26,7 +26,8 @@ export default class SignUp extends Component {
       message: '',
       redirect: false,
       showMessage: false,
-      authenticate: false
+      authenticate: false,
+      url: ''
     }
   }
 
@@ -35,9 +36,15 @@ export default class SignUp extends Component {
       this.setState({ authenticate });
     })
   }
+  getURL = () => {
+    const newUrl = window.location.href.split("/")[window.location.href.split("/").length-1];
+    return newUrl;
+
+}
 
   componentDidMount() {
     this.checkAuth();
+    this.getURL();
   }
 
   checkConfirmPassword = () => {
@@ -106,6 +113,7 @@ export default class SignUp extends Component {
     }
     return (
       <div className='signup'>
+        <NavigationBar authenticate={this.state.authenticate} url={this.getURL()} />
         <div className='wrapper'>
           <div>
             <img src='../../../public/logo.png'></img>
