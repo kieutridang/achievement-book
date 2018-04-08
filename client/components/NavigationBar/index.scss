@@ -84,6 +84,9 @@
                     width: 20px;
                     height: 20px;
                 }
+                @media only screen and(min-width: 900px) {               
+                    display: none;
+                }
             }
 
         }

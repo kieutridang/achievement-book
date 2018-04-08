@@ -212,7 +212,7 @@ export default class DailyPlan extends Component {
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
         <NavigationBar authenticate={this.state.authenticate} user={this.state.user}/>
         <div className="container">
-          <div className="TopNav">
+          <div className="">
             {/* <img
               src="../../../public/show-sidebar.png"
               alt=""

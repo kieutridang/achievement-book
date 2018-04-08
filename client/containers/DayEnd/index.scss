@@ -1,27 +1,29 @@
 .wrapper {
   > div:nth-child(2) {
     display: flex;
-    justify-content: center;
+    
+    justify-content: space-around;
     margin: 60px auto;
-    width: 1070px;
+   // width: 1070px;
+   @media only screen and (min-width: 1500px){
+    max-width: 1500px;
+   }
   }
 }
-.TopNav {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  border-bottom: .5px solid;
-}
+
 
 .dayEnd {
+  width: 732px;
   border: 1px solid #E4E4E4;
   background: white;
   padding: 50px;
   display: inline-block;
   font-family: 'Muli';
   box-sizing: border-box;
-  width: 830px;
+  @media only screen and (max-width: 700px) {
+    width: auto;
+  }
+  //width: 830px;
   margin-bottom: 50px;
   h1 {  
     font-weight: bold;
@@ -240,7 +242,7 @@
     cursor: pointer;
   }
   .dayEnd {
-    width: 100%;
+   // width: 100%;
   }
 }
 

@@ -22,10 +22,10 @@ export default class SideBar extends Component {
     }
     getURL = () => {
         const newUrl = window.location.href.split("/")[window.location.href.split("/").length-1];
-        if(newUrl == 'daily-plan') {
-            return 'plan'
+        if(newUrl == 'daily-result') {
+            return 'result'
         }
-        return 'result';
+        return 'plan';
     
     }
     handleChangePage = () => {

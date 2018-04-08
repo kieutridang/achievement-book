@@ -138,7 +138,7 @@ export default class DailyResult extends Component {
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
         <NavigationBar authenticate={this.state.authenticate} user={this.state.user} />
         <div className="wrapper">
-          <div className="TopNav">
+          <div className="">
             {/* <img
               src="../../../public/show-sidebar.png"
               alt=""
@@ -164,19 +164,7 @@ export default class DailyResult extends Component {
             <SideBar
               date={date}
               handleDateChange={this.handleDateChange}
-              page='result'
             />
-            <div
-              className={this.state.showSidebar ? 'disable-content' : 'none'}
-              onClick={() => {
-                this.setState({showSidebar: false});
-                document.body.parentElement.style.overflow = 'auto';
-                document.getElementById("root").style.overflow = 'auto';
-              }}
-            >
-          <SideBar/>
-      
-        </div>
         <div>
             <div className="dayEnd">
               <div>
