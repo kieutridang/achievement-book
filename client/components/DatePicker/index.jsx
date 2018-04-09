@@ -52,7 +52,8 @@ export default class DatePicker extends Component {
 
 
 const StyledTabs = styled(Tabs)`
-    width: 200px;
+    margin: auto;
+    width: 250px;
     background-color: white;
     box-sizing: border-box;
 `

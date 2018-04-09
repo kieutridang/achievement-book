@@ -26,6 +26,7 @@ export default class DayPicker extends Component {
                 date={date}
                 enableOutsideDays={true}
                 isOutsideRange={this.isOutsideRange}
+                daySize={28}
             />
         );
     }

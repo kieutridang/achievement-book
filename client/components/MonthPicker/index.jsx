@@ -87,8 +87,9 @@ export default class MonthPicker extends Component {
 }
 
 const Calendar = styled.div`
-  width: 100%;
-  height: 295px;
+  margin: auto;
+  width: 90%;
+  height: 241px;
   background-color: white;
   padding: 13px 13px;
   /* border: 1px solid #e4e7e7; */
@@ -126,8 +127,8 @@ const ArrowButton = styled.button`
 `
 
 const Arrow = styled.img`
-  width: 19px;
-  height: 19px;
+  width: 21px;
+  height: 17px;
 `
 
 const TableOfMonth = styled.table`
@@ -143,7 +144,7 @@ const Td = styled.td`
   font-family: 'Muli';
   font-size: 14px;
   color: #565a5c;
-  height: 40px;
+  height: 35px;
   cursor: pointer;
   :hover {
     background - color: rgb(228, 231, 231);

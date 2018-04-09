@@ -55,6 +55,7 @@ export default class WeekPicker extends Component {
                 endDate={endDate}
                 enableOutsideDays={true}
                 isOutsideRange={this.isOutsideRange}
+                daySize={28}
             />
         );
     }
