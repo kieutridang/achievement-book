@@ -7,7 +7,7 @@ export default class Button extends Component  {
 
   render() {
     return (
-      <button onClick={this.props.onClick}>
+      <button onClick={this.props.onClick} ref={this.props.refName}>
         {this.props.value}
       </button>
     )

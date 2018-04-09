@@ -66,9 +66,10 @@ module.exports = {
 							if (valid) {
 								req.session.regenerate(function () {
 									req.session.user = {
-										_id: user._id
+										_id: user._id,
+										fullname: user.fullname
 									}
-									res.status(200).end('Logged in successfully');
+									res.status(200).end('Logged in successfully' );
 								})
 							}
 							else {

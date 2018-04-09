@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-
 import Input from '../../components/Input/index.jsx';
 import Input2 from '../../components/Input2/index.jsx';
 import Button from '../../components/Button/index.jsx';
-
 import { _helper } from '../../components/api/_helper';
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
-
 import './index.scss';
+import { debug } from 'util';
+import NavigationBar from '../../components/NavigationBar/index.jsx';
 
 export default class Login extends Component {
   constructor(props) {
@@ -19,7 +18,8 @@ export default class Login extends Component {
       password: '',
       message: '',
       showMessage: false,
-      authenticate: false
+      authenticate: false,
+      url: ''
     }
   }
   checkAuth = () => {
@@ -29,8 +29,14 @@ export default class Login extends Component {
       })
     })
   }
+  getURL = () => {
+    const newUrl = window.location.href.split("/")[window.location.href.split("/").length-1];
+    return newUrl;
+
+}
   componentDidMount = () => {
-    this.checkAuth()
+    this.checkAuth();
+    // this.getURL();
   }
   login = () => {
     const { username, password } = this.state;
@@ -45,10 +51,11 @@ export default class Login extends Component {
         if (response) {
           const { data, status } = response;
           if (status == 200) {
-            this.checkAuth()
+            this.checkAuth();
+      
           }
           else {
-            if (status == 401){
+            if (status == 401) {
               this.setState({
                 showMessage: true,
                 messagePassword: data,
@@ -66,8 +73,13 @@ export default class Login extends Component {
         }
       })
   }
+  _onKeyPress = (event) => {
+    if(event.key == "Enter") { //13 is the enter keycode
+      this.refs.login.refs.button.click();
+    }
+  }
   render() {
-    const { authenticate, messageUser, messagePassword, showMessage } = this.state
+    const { authenticate, messageUser, messagePassword, showMessage } = this.state;
     if (authenticate) {
       return (
         <Redirect to={'/home'}></Redirect>
@@ -75,30 +87,35 @@ export default class Login extends Component {
     }
     return (
       <div className="log-in">
+        <NavigationBar authenticate={this.state.authenticate} url={this.getURL()} />
         <div>
           <div>
             <div>
-              <h1> Achievement Book </h1>
+              <img src='../../../public/logo.png' />
             </div>
             <div>
-              <Input2
-                label="username"
+              <Input
+                label="Username"
                 onChange={(username) => { this.setState({ username }) }}
                 showMessage={showMessage}
                 message={messageUser}
+                pressEnter={this._onKeyPress}
               />
-              <Input2
+              <Input
                 type="password"
-                label="password"
+                label="Password"
                 onChange={(password) => { this.setState({ password }) }}
                 showMessage={showMessage}
                 message={messagePassword}
+                pressEnter={this._onKeyPress}
               />
             </div>
             <div>
               <Button
                 value="Log In"
                 onClick={this.login}
+                refName={"button"}
+                ref="login"
               />
               <div>
                 <Link to='/users/reset-password'>Forgot Password?</Link>
@@ -109,7 +126,7 @@ export default class Login extends Component {
             </div>
           </div>
           <div>
-            <img src="http://localhost:8080/public/log-in-background.jpg" alt="" />
+            <img src="../../public/log-in-background.jpg" alt="" />
           </div>
         </div>
       </div>

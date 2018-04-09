@@ -22,22 +22,36 @@ module.exports = {
         publicPath: '/',
         filename: 'index.bundle.js'
     },
-    watch: true,
     module: {
         loaders: [
             { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
             { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
             {
-                test: /.scss$/,
+                test: /.s?css$/,
                 use: extractSass.extract({
                     use: [{
-                        loader: "css-loader"
+                        loader: "css-loader",
+                        options: { url: false }
                     }, {
-                        loader: "sass-loader"
+                        loader: "sass-loader",
+                        options: { url: false }
                     }],
                     fallback: "style-loader"
                 })
-            }
+            },
+            {
+                test: /\.(gif|png|jpe?g|svg)$/i,
+                use: [
+                  'file-loader',
+                  {
+                    loader: 'image-webpack-loader',
+                    options: {
+                      bypassOnDebug: true,
+                    },
+                  }
+                ]
+            },
+            { test: /\.svg$/, loader: 'svg-inline' },
         ]
     },
     devServer: {
@@ -45,6 +59,7 @@ module.exports = {
     },
     plugins: [
         HtmlWebpackPluginConfig,
-        extractSass
+        extractSass,
+        new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
     ]
 }

@@ -1,0 +1,34 @@
+.Input {
+    font-family: 'Muli', sans-serif;
+    margin: 20px 0px 20px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 350px;
+    label {
+      display: inline-block;
+      width: 350px;
+      font-size: 23px;
+      color:rgb(114, 114, 114);
+    }
+    input {
+        // font
+        font-family: 'Muli', san-serif;
+        font-weight: lighter;
+        font-size: 15px;
+        //size
+        line-height: 30px;
+        width: 350px;
+        background: none;
+        border: 0;
+        border-bottom: 2px solid #acacac;
+        &:focus {
+            outline: none;
+            border-bottom: 2px solid #5f29ae;
+        }
+    }
+    span {
+        margin-top: 5px;
+        color: red;
+        font-size: 15px;
+    }
+}

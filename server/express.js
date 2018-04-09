@@ -11,14 +11,20 @@ const morgan = require('morgan');
 const MongoStore = require('connect-mongo')(session);
 const helper = require('./controller/helper');
 const cron = require('node-cron');
+const DATA_URL = (process.env.NODE_ENV == 'production' ? "mongodb://test:test@ds121289.mlab.com:21289/achievement-book" : "mongodb://localhost/achievement-book");
 
 module.exports = function (app) {
 
 	app.use(morgan('dev'));
+	//
+	//mongodb://test:test@ds121289.mlab.com:21289/achievement-book
 
-	mongoose.connect('mongodb://localhost/achievement-book', {
+	mongoose.connect(DATA_URL, {
 		useMongoClient: true
 	});
+	// mongoose.connect("mongodb://test:test@ds121289.mlab.com:21289/achievement-book", {
+	// 	useMongoClient: true
+	// });
 
 	app.use(bodyParser.json({
 		limit: "50mb"
@@ -30,7 +36,7 @@ module.exports = function (app) {
 		credentials: true
 	}))
 
-	let task = cron.schedule('*/10 * * * * *', helper.moveTaskAutomatically);
+	let task = cron.schedule('59 23 * * *', helper.moveTaskAutomatically);
 	task.start();
 	app.use(session({
 		secret: 'achievement-book',
@@ -41,19 +47,20 @@ module.exports = function (app) {
 			maxAge: 15 * 60 * 1000
 		},
 		store: new MongoStore({
-			url: 'mongodb://localhost/achievement-book',
-			ttl: 15
+			url: DATA_URL,
+			ttl: 15 * 60,
 		})
 	}))
-	
+
 	app.use((req, res, next) => {
 		req.session.touch();
 		next()
 	})
 
-	app.get(/^\/[a-z]*$/, (req, res) => {
-		res.sendFile(path.join(__dirname, staticPath, '/index.html'))
+	app.get(/^((?!\/api)(\/[a-z\-]*)*)*$/, (req, res) => {
+		res.sendFile(path.join(__dirname, staticPath, '/index.html'));
 	})
+	app.use('/', express.static(path.join(__dirname, staticPath)));
 
 	app.use('/public', express.static(path.join(__dirname, publicPath)))
 

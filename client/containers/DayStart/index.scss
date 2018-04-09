@@ -1,8 +1,48 @@
+.container {
+  > div:nth-child(2) {
+    display: flex;
+    justify-content: space-around;
+    margin: 60px auto;
+    //width: 1070px;
+    @media only screen and (min-width: 1500px) {
+        max-width: 1500px;
+    }
+  }
+}
+
+#root {
+    background: rgb(243, 243, 243);
+}
+
+.TopNav {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-bottom: .5px solid;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+.taskAndNote {
+    display: flex;
+    justify-content: center;
+}
+
+.navigationbar {
+    
+
+}
 .dayStart {
+    padding: 50px;
+    border: 1px solid #E4E4E4;
     display: inline-block;
     font-family: 'Muli';
     box-sizing: border-box;
-    width: 60%;
+    background: white;
+    //width: 830px;
     >div {
         &:nth-child(1) {
             color: rgb(95, 41, 174);
@@ -10,7 +50,6 @@
         &:nth-child(2) {
             display: flex;
             flex-direction: row;
-            // justify-content: space-between;
             >div {
                 &:nth-child(1) {
                     margin-right: 100px;
@@ -87,7 +126,6 @@
         &:hover {
             cursor: pointer;
         }
-        &:active {}
     }
 }
 
@@ -144,14 +182,14 @@
         display: block;
     }
     >div {
-        background-image: url('http://localhost:8080/public/baseline.png');
+        background-image: url('/public/baseline.png');
         background-size: 100% 31px;
         background-attachment: local;
         height: 310px;
         overflow: auto;
         p {
             width: 250px;
-            height: 310px;
+            height: 290px;
             font-family: 'Muli';
             font-weight: lighter;
             font-size: 18px;
@@ -166,10 +204,25 @@
     }
 }
 
-@media only screen and (max-width: 930px) {
+@media only screen and (max-width: 1085px) {
+    .container {
+        > div:nth-child(2) {
+          margin-top: 0px;
+        }
+    }
+
+
+    .sidebar-icon {
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
     .dayStart {
         display: block;
-        width: 100%;
+        //width: 100%;
         >div {
             &:nth-child(1) {
                 text-align: center;

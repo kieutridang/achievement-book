@@ -5,16 +5,19 @@ import Table from '../../components/Table/index.jsx'
 import DateSelection from '../../components/DateSelection/index'
 import SideBar from '../../components/SideBar/index.jsx'
 import EditableP from '../../components/EditableP/index.jsx'
-
 import { Link } from 'react-router-dom'
 import { _helper } from '../../components/api/_helper'
 import { Redirect } from 'react-router';
+import BlockUi from 'react-block-ui';
+import 'react-block-ui/style.css'
 
 import moment from 'moment'
 
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
 import './index.scss';
+import NavigationBar from '../../components/NavigationBar/index.jsx';
+
 
 export default class DailyPlan extends Component {
   constructor(props) {
@@ -26,14 +29,26 @@ export default class DailyPlan extends Component {
       totalTasks: 0,
       doneTasks: 0,
       note: '',
-      authenticate: true
+      authenticate: true,
+      blockingUI: true,
+      showSidebar: false,
+      username: '',
+      user: {},
     }
   }
-  
+
   checkAuth = () => {
     checkAuthenticate().then((authenticate) => {
-      this.setState({authenticate})
+      this.setState({ authenticate })
     })
+  }
+
+  checkValidValue = (value) => {
+    const { type } = this.props;
+    if ((!type || type == 'text') && value.split(' ').join('').split('\n').join('') == '') {
+      return false;
+    }
+    return true;
   }
 
   showTask = (task, index) => {
@@ -50,6 +65,9 @@ export default class DailyPlan extends Component {
             onBlur={(value, id) => {
               var newPlan = plan.map(task => task);
               newPlan[id].task = value;
+              if (!this.checkValidValue(task.task)) {
+                newPlan[id].process = 0;
+              }
               this.updatePlan(newPlan);
             }}
             numRows={"2"}
@@ -57,7 +75,7 @@ export default class DailyPlan extends Component {
           />
           <OnBlurInput
             type='number'
-            default={task.process}
+            default={task.process || '0'}
             id={index}
             conditions={{ min: 0, max: 100 }}
             onBlur={(value, id) => {
@@ -65,15 +83,17 @@ export default class DailyPlan extends Component {
               newPlan[id].process = value;
               this.updatePlan(newPlan);
             }}
-            showPercentage = {true}
+            showPercentage={true}
+            disabled={!this.checkValidValue(task.task)}
           />
         </div>
-        { (task.process < 100) && 
-          <img 
+        {(task.process < 100) &&
+          <img
             src="../../../public/checkmark.png"
-            id = {index}
+            id={index}
             className={"img"}
-            onClick = {(e) => {
+            onClick={(e) => {
+              if (!this.checkValidValue(task.task)) return;
               var id = e.target.id;
               var newPlan = plan.map(task => task);
               newPlan[id].process = 100;
@@ -86,7 +106,7 @@ export default class DailyPlan extends Component {
   }
 
   handleDateChange = (date) => {
-    this.setState({date},
+    this.setState({ date },
       () => this.getDailyPlan()
     )
   }
@@ -94,14 +114,14 @@ export default class DailyPlan extends Component {
   newTask = () => {
     const { plan } = this.state;
     var newPlan = plan.map(task => task);
-    newPlan.push({ task: '', process: '0'});
+    newPlan.push({ task: '', process: '0' });
     this.updatePlan(newPlan);
   }
 
   countDoneTasks = (plan) => {
     let count = 0;
-    for (var i = 0; i < plan.length; ++i){
-      if (plan[i].process == 100) ++count; 
+    for (var i = 0; i < plan.length; ++i) {
+      if (plan[i].process == 100)++count;
     }
     return count;
   }
@@ -120,7 +140,8 @@ export default class DailyPlan extends Component {
         plan: plan,
         note: note,
         totalTasks: plan.length,
-        doneTasks: doneTasks, 
+        doneTasks: doneTasks,
+        blockingUI: false,
       })
     })
   }
@@ -132,28 +153,53 @@ export default class DailyPlan extends Component {
       doneTasks: this.countDoneTasks(newPlan),
     })
     const date = this.state.date;
-    _helper.fetchAPI('/dailyplan/updateplan/' + date, {plan: newPlan}, [], "PUT");
+    _helper.fetchAPI('/dailyplan/updateplan/' + date, { plan: newPlan }, [], "PUT");
+  }
+  getUser(){
+    _helper.fetchGET(
+      '/user/getuser',
+      {}
+    )
+    .then((response) => {
+        const {data, status} = response;
+        if(status == 200 ) {
+            this.setState({user: data})
+        }  
+    })
+  }
+  getUser(){
+    _helper.fetchGET(
+      '/user/getuser',
+      {}
+    )
+    .then((response) => {
+        const {data, status} = response;
+        if(status == 200 ) {
+            this.setState({user: data})
+        }  
+    })
   }
 
   componentDidMount = () => {
     this.checkAuth();
     this.getDailyPlan();
+    this.getUser()
   }
 
   logout = () => {
-        _helper.fetchAPI(
-            "/user/logout",
-            {}
-        )
-        .then((response) => {
-            if (response) {
-                const { data, status } = response;
-                if (status == 100) {
-                    this.checkAuth()
-                }
-            }
-        })
-    }
+    _helper.fetchAPI(
+      "/user/logout",
+      {}
+    )
+      .then((response) => {
+        if (response) {
+          const { data, status } = response;
+          if (status == 100) {
+            this.checkAuth()
+          }
+        }
+      })
+  }
 
   render() {
     const { authenticate, date, quote, plan, note, doneTasks, totalTasks } = this.state;
@@ -163,67 +209,95 @@ export default class DailyPlan extends Component {
       )
     }
     return (
-      <div className="container">
-        <SideBar 
-          date={date}
-          handleDateChange={this.handleDateChange}
-        />
-        <div className="dayStart">
+      <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
+        <NavigationBar authenticate={this.state.authenticate} user={this.state.user}/>
+        <div className="container">
+          <div className="">
+            {/* <img
+              src="../../../public/show-sidebar.png"
+              alt=""
+              className={this.state.showSidebar ? 'none-sidebar-icon' : 'sidebar-icon'}
+              onClick={() => {
+                this.setState({showSidebar: true});
+                document.body.parentElement.style.overflow = 'hidden';
+                document.getElementById("root").style.overflow = 'hidden';                
+              }}
+            />
+            <img
+              src="../../../public/cancel-disable.png"
+              alt=""
+              className={this.state.showSidebar ? 'sidebar-icon' : 'none-sidebar-icon'}
+              onClick={() => {
+                this.setState({showSidebar: false});
+                document.body.parentElement.style.overflow = 'auto';
+                document.getElementById("root").style.overflow = 'auto';                
+              }}
+            /> */}
+          </div>
           <div>
-            <h1> Make plan for your day </h1>
-          </div> 
-          <div> 
-            <div>
+            <SideBar
+              date={date}
+              handleDateChange={this.handleDateChange}
+              page='plan'
+            />
+            <div className="dayStart">
               <div>
-                <span>Tasks </span>
-                <span>{doneTasks + ' / ' + totalTasks}</span>
+                <h1> Make plan for your day </h1>
               </div>
-              <div>
-                {
-                  plan.map((task, index) => {
-                    if (task.process < 100) {
-                      return (this.showTask(task,index))
+              <div className="taskAndNote">
+                <div>
+                  <div>
+                    <span>Tasks </span>
+                    <span>{doneTasks + ' / ' + totalTasks}</span>
+                  </div>
+                  <div>
+                    {
+                      plan.map((task, index) => {
+                        if (task.process < 100) {
+                          return (this.showTask(task, index))
+                        }
+                      })
                     }
-                  })
-                }
-                {
-                  (totalTasks < 5) && (
-                    <div onClick = {this.newTask} className={'newTask'}>
-                      <img src="../../../public/create.png" alt="Create task"/>
-                    </div>
-                  )
-                }
-                {
-                  plan.map((task, index) => {
-                    if (task.process == 100) {
-                      return (this.showTask(task, index))
+                    {
+                      (totalTasks < 5) && (
+                        <div onClick={this.newTask} className={'newTask'}>
+                          <img src="../../../public/create.png" alt="Create task" />
+                        </div>
+                      )
                     }
-                  })
-                }
+                    {
+                      plan.map((task, index) => {
+                        if (task.process == 100) {
+                          return (this.showTask(task, index))
+                        }
+                      })
+                    }
+                  </div>
+                </div>
+                <div className="note">
+                  <label>Note</label>
+                  <div>
+                    <EditableP
+                      defaultValue={note}
+                      handleChange={note => this.setState(
+                        { note },
+                        () => {
+                          _helper.fetchAPI('/dailyplan/updateplan/' + date, { note: note }, [], 'PUT')
+                        }
+                      )}
+                      maxlength={200}
+                    />
+                  </div>
+                </div>
               </div>
+              {/* <div>
+                <Link to='/daily-result'>Daily Result</Link>
+                <button onClick={this.logout}>Logout</button>
+              </div> */}
             </div>
-            <div className="note">
-              <label>Note</label>
-              <div>
-                <EditableP
-                  defaultValue={note}
-                  handleChange={note => this.setState(
-                    {note},
-                    () => {
-                      _helper.fetchAPI('/dailyplan/updateplan/' + date, {note: note}, [], 'PUT')
-                    }
-                  )}
-                  maxlength={200}
-                />
-              </div>
-            </div>
-            {/* <div>
-              <Link to='/daily-result'>Daily Result</Link>
-              <button onClick={this.logout}>Logout</button>
-            </div> */}
           </div>
         </div>
-      </div>
+      </BlockUi>
     )
   }
 }
