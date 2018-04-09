@@ -89,13 +89,38 @@
     }
     .calendar {
         display: flex;
-        justify-content: space-around;
+        //justify-content: space-around;
         // height: 150px;
     }
 }
 
-@media only screen and (max-width: 1085px) {
+@media only screen and (max-width: 900px) {
     .SideBar {
-        // height: 100%;
+        display: none
     }
+}
+.sideInTopNav {
+    display: none;
+        
+    
+}
+.none-sidebar-icon {
+    display: none
+} 
+.sidebar-icon {
+    display: block
+}
+
+.showing-sidebar {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    height: 100%; 
+    @media only screen and (min-width: 900px) {
+        display: none;
+        
+    }
+    // -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    // box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }

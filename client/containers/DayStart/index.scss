@@ -1,9 +1,12 @@
 .container {
   > div:nth-child(2) {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin: 60px auto;
-    width: 1070px;
+    //width: 1070px;
+    @media only screen and (min-width: 1500px) {
+        max-width: 1500px;
+    }
   }
 }
 
@@ -28,6 +31,10 @@ h1 {
     justify-content: center;
 }
 
+.navigationbar {
+    
+
+}
 .dayStart {
     padding: 50px;
     border: 1px solid #E4E4E4;
@@ -35,7 +42,7 @@ h1 {
     font-family: 'Muli';
     box-sizing: border-box;
     background: white;
-    width: 830px;
+    //width: 830px;
     >div {
         &:nth-child(1) {
             color: rgb(95, 41, 174);
@@ -204,16 +211,18 @@ h1 {
         }
     }
 
-    .TopNav {
-        width: 100%;
-        height: 40px;
-        display: flex;
-        align-items: center;
+
+    .sidebar-icon {
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+        margin-left: 10px;
+        cursor: pointer;
     }
 
     .dayStart {
         display: block;
-        width: 100%;
+        //width: 100%;
         >div {
             &:nth-child(1) {
                 text-align: center;

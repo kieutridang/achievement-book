@@ -16,6 +16,8 @@ const DATA_URL = (process.env.NODE_ENV == 'production' ? "mongodb://test:test@ds
 module.exports = function (app) {
 
 	app.use(morgan('dev'));
+	//
+	//mongodb://test:test@ds121289.mlab.com:21289/achievement-book
 
 	mongoose.connect(DATA_URL, {
 		useMongoClient: true
