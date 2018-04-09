@@ -28,6 +28,10 @@ export default class WeekPicker extends Component {
         });
     }
 
+    isOutsideRange = (date) => {
+        return date > moment().add(1, 'week').weekday(6);
+    }
+
     onPrevMonthClick = () => {
         const { date } = this.props;
         this.props.handleSelect(moment(date.toDate()).subtract(1, 'month'));
@@ -50,6 +54,7 @@ export default class WeekPicker extends Component {
                 startDate={startDate}
                 endDate={endDate}
                 enableOutsideDays={true}
+                isOutsideRange={this.isOutsideRange}
             />
         );
     }

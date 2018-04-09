@@ -19,8 +19,12 @@ export default class MonthPicker extends Component {
   handleMonthChange = (month) => {
     const { date } = this.props;
     const { year } = this.state;
-    const newDate = moment(moment(year + "-" + month + "-" + moment(date.toDate()).day()).format());
+    const newDate = moment(moment(year + "-" + month + "-" + "01").format());
     this.props.handleSelect(newDate);
+  }
+
+  isOutsideRange = (date) => {
+    return date > moment().add(1, 'month');
   }
 
   onPrevClick = () => {
@@ -61,6 +65,9 @@ export default class MonthPicker extends Component {
                   <tr key={index}>
                     {arrMonth.map((m, index) => {
                       let num = count + index;
+                      if (this.isOutsideRange(moment(year + "-" + (num + 1), "YYYY-MM"))) {
+                        return <BlockedTd key={m} >{m}</BlockedTd>;
+                      }
                       if (num != month || year != date.year()) {
                         return <Td key={m} onClick={() => this.handleMonthChange(num + 1)}>{m}</Td>;
                       }
@@ -144,6 +151,14 @@ const Td = styled.td`
 `
 
 const SelectedTd = Td.extend`
-  background-color: rgb(107, 226, 218);
+  background-color: rgb(25, 165, 152);
   color: #fff;
+`
+
+const BlockedTd = Td.extend`
+  color: rgb(195,196,202);
+  cursor: default;
+  :hover {
+    background-color: rgb(255, 255, 255);
+  }
 `

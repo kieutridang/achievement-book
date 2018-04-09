@@ -13,6 +13,10 @@ export default class DayPicker extends Component {
         this.props.handleSelect(moment(date.toDate()));
     }
 
+    isOutsideRange = (date) => {
+        return date > moment().add(1, 'days');
+    }
+
     render() {
         const { date } = this.props;
         return (
@@ -21,6 +25,7 @@ export default class DayPicker extends Component {
                 onDateChange={this.onDateChange}
                 date={date}
                 enableOutsideDays={true}
+                isOutsideRange={this.isOutsideRange}
             />
         );
     }
