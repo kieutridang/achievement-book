@@ -19,8 +19,12 @@ export default class MonthPicker extends Component {
   handleMonthChange = (month) => {
     const { date } = this.props;
     const { year } = this.state;
-    const newDate = moment(moment(year + "-" + month + "-" + moment(date.toDate()).day()).format());
+    const newDate = moment(moment(year + "-" + month + "-" + "01").format());
     this.props.handleSelect(newDate);
+  }
+
+  isOutsideRange = (date) => {
+    return date > moment().add(1, 'month');
   }
 
   onPrevClick = () => {
@@ -61,6 +65,9 @@ export default class MonthPicker extends Component {
                   <tr key={index}>
                     {arrMonth.map((m, index) => {
                       let num = count + index;
+                      if (this.isOutsideRange(moment(year + "-" + (num + 1), "YYYY-MM"))) {
+                        return <BlockedTd key={m} >{m}</BlockedTd>;
+                      }
                       if (num != month || year != date.year()) {
                         return <Td key={m} onClick={() => this.handleMonthChange(num + 1)}>{m}</Td>;
                       }
@@ -80,8 +87,9 @@ export default class MonthPicker extends Component {
 }
 
 const Calendar = styled.div`
-  width: 100%;
-  height: 295px;
+  margin: auto;
+  width: 90%;
+  height: 241px;
   background-color: white;
   padding: 13px 13px;
   /* border: 1px solid #e4e7e7; */
@@ -119,8 +127,8 @@ const ArrowButton = styled.button`
 `
 
 const Arrow = styled.img`
-  width: 19px;
-  height: 19px;
+  width: 21px;
+  height: 17px;
 `
 
 const TableOfMonth = styled.table`
@@ -136,7 +144,7 @@ const Td = styled.td`
   font-family: 'Muli';
   font-size: 14px;
   color: #565a5c;
-  height: 40px;
+  height: 35px;
   cursor: pointer;
   :hover {
     background - color: rgb(228, 231, 231);
@@ -144,6 +152,14 @@ const Td = styled.td`
 `
 
 const SelectedTd = Td.extend`
-  background-color: rgb(107, 226, 218);
+  background-color: rgb(25, 165, 152);
   color: #fff;
+`
+
+const BlockedTd = Td.extend`
+  color: rgb(195,196,202);
+  cursor: default;
+  :hover {
+    background-color: rgb(255, 255, 255);
+  }
 `
