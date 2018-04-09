@@ -89,7 +89,7 @@
     }
     .calendar {
         display: flex;
-        justify-content: space-around;
+        //justify-content: space-around;
         // height: 150px;
     }
 }
@@ -97,11 +97,11 @@
 @media only screen and (max-width: 900px) {
     .SideBar {
         display: none
-}
+    }
 }
 .sideInTopNav {
-
-        display: none;
+    display: none;
+        
     
 }
 .none-sidebar-icon {
@@ -117,7 +117,10 @@
     left: 0;
     top: 40px;
     height: 100%; 
+    @media only screen and (min-width: 900px) {
+        display: none;
+        
+    }
     // -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     // box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
-
