@@ -10,13 +10,11 @@ import { _helper } from '../../components/api/_helper'
 import { Redirect } from 'react-router';
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css'
-
 import moment from 'moment'
-
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
-
 import './index.scss';
 import NavigationBar from '../../components/NavigationBar/index.jsx';
+
 
 
 export default class DailyPlan extends Component {

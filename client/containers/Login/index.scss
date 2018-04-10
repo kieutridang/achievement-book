@@ -21,6 +21,10 @@
           height: 600px;
           display: flex;
           align-items: center;
+          @media only screen and ( max-height:700px) {
+            margin: 60px auto;
+      
+        }
           >div {
               &:nth-child(1) {
                   flex-grow: 1;
@@ -139,4 +143,10 @@
               color: rgb(39, 21, 147);
           }
       }
+  }
+  @media only screen and ( max-height:700px) {
+      .log-in {
+          display: block;
+      }
+
   }

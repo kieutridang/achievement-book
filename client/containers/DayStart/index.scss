@@ -4,8 +4,8 @@
     justify-content: space-around;
     margin: 60px auto;
     //width: 1070px;
-    @media only screen and (min-width: 1500px) {
-        max-width: 1500px;
+    @media only screen and (min-width: 1400px) {
+        max-width: 1000px;
     }
   }
 }
@@ -205,20 +205,20 @@ h1 {
 }
 
 @media only screen and (max-width: 1085px) {
-    .container {
-        > div:nth-child(2) {
-          margin-top: 0px;
-        }
-    }
+    // .container {
+    //     > div:nth-child(2) {
+    //       margin-top: 0px;
+    //     }
+    // }
 
 
-    .sidebar-icon {
-        display: inline-block;
-        height: 30px;
-        width: 30px;
-        margin-left: 10px;
-        cursor: pointer;
-    }
+    // .sidebar-icon {
+    //     display: inline-block;
+    //     height: 30px;
+    //     width: 30px;
+    //     margin-left: 10px;
+    //     cursor: pointer;
+    // }
 
     .dayStart {
         display: block;
