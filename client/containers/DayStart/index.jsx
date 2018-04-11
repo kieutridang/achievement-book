@@ -23,7 +23,7 @@ export default class DailyPlan extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: moment().format('YYYY-MM-DD'),
+      date: props.match.params.date || moment().format('YYYY-MM-DD'),
       quote: '',
       plan: [],
       totalTasks: 0,
@@ -212,31 +212,11 @@ export default class DailyPlan extends Component {
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
         <NavigationBar authenticate={this.state.authenticate} user={this.state.user}/>
         <div className="container">
-          <div className="">
-            {/* <img
-              src="../../../public/show-sidebar.png"
-              alt=""
-              className={this.state.showSidebar ? 'none-sidebar-icon' : 'sidebar-icon'}
-              onClick={() => {
-                this.setState({showSidebar: true});
-                document.body.parentElement.style.overflow = 'hidden';
-                document.getElementById("root").style.overflow = 'hidden';                
-              }}
-            />
-            <img
-              src="../../../public/cancel-disable.png"
-              alt=""
-              className={this.state.showSidebar ? 'sidebar-icon' : 'none-sidebar-icon'}
-              onClick={() => {
-                this.setState({showSidebar: false});
-                document.body.parentElement.style.overflow = 'auto';
-                document.getElementById("root").style.overflow = 'auto';                
-              }}
-            /> */}
-          </div>
+          <div className=""></div>
           <div>
             <SideBar
               date={date}
+              type={'Day'}
               handleDateChange={this.handleDateChange}
               page='plan'
             />
