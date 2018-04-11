@@ -15,7 +15,10 @@ const routes = (
         <Route exact path='/users/login' component={Login} />
         <Route exact path='/users/signup' component={SignUp} />
         <Route exact path='/daily-plan' component={DailyPlan} />
+        <Route exact path='/daily-plan/:date' component={DailyPlan} />        
         <Route exact path='/daily-result' component={DailyResult} />
+        <Route exact path='/daily-result/:date' component={DailyResult} />
+        
     </Switch>
 )
 
