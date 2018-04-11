@@ -1,25 +1,77 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema
+var mongoose = require('mongoose');
+var moment = require('moment');
+var Schema = mongoose.Schema;
 
-var Schema = new Schema({
-  id                   : { type: String },
-  userId               : { type: String },
-  monthlyPlan          : { type: String },
-  startDay             : { type: Date },
-  goal                 : { type: String },
-  tasks                : [{type: String}],
-  weeklySchedule       : [{type: String}],
-  percentComplete      : { type: Number },
-  bestCompletedTask    : { type: String },
-  lessonLearned        : [{type: String}],
-  mostEnthusiasticDays : [{type: Boolean}],
-  taskRating           : { type: String },
-  memo                 : { type: String },
-  experience           : [{
+var WeeklyPlan = new Schema({
+  id: {
+    type: String,
+  },
+  userId: {
+    type: String,
+    required: [true, 'UserId is required']
+  },
+  monthlyPlanId: {
+    type: String
+  },
+  startDate: {
+    type: String,
+    validate: {
+			validator: function (date) {
+        if (moment(date, 'YYYY-MM-DD', true).format() == "Invalid date"
+            && moment(date).isoWeekday() != 1)
+					return false;
+				else return true;
+			},
+			message: 'Invalid date'
+		}
+  },
+  goal: {
+    type: String
+  },
+  tasksPlanning: [{
+    type: String
+  }],
+  schedule: [{
+    mission: {
+      type: String
+    },
+    description: {
+      type: String
+    },
+    milestones: [{
+      description: {
+        type: String
+      },
+      task: {
+        type: Number
+      },
+      day: {
+        type: Number
+      }
+    }]
+  }],
+  bestCompletedTask: {
+    type: String
+  },
+  lessonLearned: [{
+    type: String
+  }],
+  mostEnthusiasticDays: [{
+    type: Boolean
+  }],
+  taskRating: {
+    type: Number,
+    min: 0,
+    max: 5
+  },
+  memo: {
+    type: String
+  },
+  experience: [{
     problem  : { type: String },
     reason   : { type: String },
     solution : { type: String }
   }]
 });
 
-module.exports = mongoose.model('WeeklyPlan', Schema);
+module.exports = mongoose.model('weekly_plan', WeeklyPlan);
