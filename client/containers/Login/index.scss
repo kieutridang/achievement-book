@@ -125,6 +125,7 @@
           >div {
               &:nth-child(1) {}
               &:nth-child(2) {
+              width: 480px;
               background-color: white;
               opacity: 0.9;
               max-width: 500px;

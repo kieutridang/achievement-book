@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-around;
     margin: 60px auto;
+    min-width: 480px;
     //width: 1070px;
     @media only screen and (min-width: 1400px) {
         max-width: 1000px;

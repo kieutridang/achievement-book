@@ -3,6 +3,7 @@
     justify-content: space-between;
     border-bottom: 1px solid darkgray;
     width: 100%;
+    min-width: 480px;
     background: white;
     height: 50px;
     font-family: Muli;
@@ -80,6 +81,7 @@
                 }
             }
             .toggle-sidebar {
+                cursor: pointer;
                 img {
                     width: 20px;
                     height: 20px;
@@ -139,7 +141,7 @@
 }
 .sign-up {
     @media only screen and (max-width: 900px) {
-        position: fixed;
+        //position: fixed;
         top: 0;
     }
 
