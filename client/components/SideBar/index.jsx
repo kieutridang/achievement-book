@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
-import moment from 'moment';
 
 import DateSelection from '../DateSelection/index';
 import DatePicker from '../DatePicker/index.jsx';
@@ -17,22 +16,27 @@ export default class SideBar extends Component {
         super(props);
         this.state = {
             page : '',
+            
           }
           
     }
     getURL = () => {
         const newUrl = window.location.href.split("/")[window.location.href.split("/").length-1];
-        const url = window.location.href;
-        if(url.search('result') != -1) {
+        if(newUrl == 'daily-result') {
             return 'result'
         }
         return 'plan';
+    
+    }
+    handleChangePage = () => {
+        //console.log(this.getURL())
+        this.setState({page: this.getURL() })
     }
     componentDidMount() {
         this.setState({page: this.getURL() })
     }
     render() {
-        const { show, date, handleDateChange, sideTop, type } = this.props;
+        const { show, date, handleDateChange,sideTop  } = this.props;
         const {page} = this.state;
         let cssSide = (show ? 'SideBar showing-sidebar ' : "SideBar ").concat(sideTop)
         return (
@@ -60,9 +64,10 @@ export default class SideBar extends Component {
                             />
                             <Link 
                                 className={page === 'plan' ? 'chosen-link page-link' : 'page-link'}
-                                to={'/daily-plan/' + date}
+                                to='/daily-plan'
+                                onClick={this.handleChangePage}
                             > 
-                                {type}'s Plan
+                                Day's Plan
                             </Link>
                         </div>
                     </div>
@@ -86,9 +91,10 @@ export default class SideBar extends Component {
                             />
                             <Link
                                 className={page === 'result' ? 'chosen-link page-link' : 'page-link'}
-                                to={'/daily-result/' + date}
+                                to='/daily-result'
+                                onClick={this.handleChangePage}
                             >
-                                {type}'s Result
+                                Day's Result
                             </Link>
                         </div>
                     </div>
