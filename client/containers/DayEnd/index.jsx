@@ -59,38 +59,40 @@ export default class DailyResult extends Component {
       {}
     )
     .then((response) => {
-      const { date, plan, bestTask, whyBest, bestTime, efficiency, lessonLearned } = response.data;
-      var count = 0;
-      var newCompletedTasksList = [];
-      for (var i = 0; i < plan.length; ++i) {
-        if (plan[i].process === 100) {
-          count++;
-          newCompletedTasksList.push(plan[i].task);
+      if (response.status == 200) {
+        const { date, plan, bestTask, whyBest, bestTime, efficiency, lessonLearned } = response.data;
+        var count = 0;
+        var newCompletedTasksList = [];
+        for (var i = 0; i < plan.length; ++i) {
+          if (plan[i].process === 100) {
+            count++;
+            newCompletedTasksList.push(plan[i].task);
+          }
         }
-      }
-      if (bestTask == '') {
-        _helper.fetchAPI('/dailyplan/updateplan/' + date, {bestTask: newCompletedTasksList[0]}, [], 'PUT');
-        this.setState({
-          plan: plan,
-          bestTask: newCompletedTasksList[0],
-          whyBest: whyBest,
-          bestTime: bestTime,
-          efficiency: efficiency,
-          lessonLearned: lessonLearned,
-          completedTasksList: newCompletedTasksList,
-          blockingUI: false
-        });
-      } else {
-        this.setState({
-          plan: plan,
-          bestTask: bestTask,
-          whyBest: whyBest,
-          bestTime: bestTime,
-          efficiency: efficiency,
-          lessonLearned: lessonLearned,
-          completedTasksList: newCompletedTasksList,
-          blockingUI: false
-        });
+        if (bestTask == '') {
+          _helper.fetchAPI('/dailyplan/updateplan/' + date, { bestTask: newCompletedTasksList[0] }, [], 'PUT');
+          this.setState({
+            plan: plan,
+            bestTask: newCompletedTasksList[0],
+            whyBest: whyBest,
+            bestTime: bestTime,
+            efficiency: efficiency,
+            lessonLearned: lessonLearned,
+            completedTasksList: newCompletedTasksList,
+            blockingUI: false
+          });
+        } else {
+          this.setState({
+            plan: plan,
+            bestTask: bestTask,
+            whyBest: whyBest,
+            bestTime: bestTime,
+            efficiency: efficiency,
+            lessonLearned: lessonLearned,
+            completedTasksList: newCompletedTasksList,
+            blockingUI: false
+          });
+        }
       }
     })
   }
@@ -107,9 +109,11 @@ export default class DailyResult extends Component {
     })
   }
   handleDateChange = (date) => {
-    this.setState({date},
-      () => this.getDailyResult()
-    )
+    const { history } = this.props;
+    history.push({ pathname: '/day-result/' + date });
+    // this.setState({date},
+    //   () => this.getDailyResult()
+    // )
   }
   logout = () => {
         _helper.fetchAPI(
@@ -142,7 +146,7 @@ export default class DailyResult extends Component {
           <div>
             <SideBar
               date={date}
-              type={'Day'}
+              type={0}
               handleDateChange={this.handleDateChange}
             />
         <div>
