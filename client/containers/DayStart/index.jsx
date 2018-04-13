@@ -29,7 +29,6 @@ export default class DailyPlan extends Component {
       totalTasks: 0,
       doneTasks: 0,
       note: '',
-      authenticate: true,
       blockingUI: true,
       showSidebar: false,
       username: '',
@@ -38,8 +37,11 @@ export default class DailyPlan extends Component {
   }
 
   checkAuth = () => {
+    const { history } = this.props;
     checkAuthenticate().then((authenticate) => {
-      this.setState({ authenticate })
+      if (!authenticate){
+        history.replace('/users/login');
+      }
     })
   }
 
@@ -106,9 +108,11 @@ export default class DailyPlan extends Component {
   }
 
   handleDateChange = (date) => {
-    this.setState({ date },
-      () => this.getDailyPlan()
-    )
+    const { history } = this.props;
+    history.push({pathname: '/day-plan/' + date});
+    // this.setState({ date },
+    //   () => this.getDailyPlan()
+    // )
   }
 
   newTask = () => {
@@ -134,15 +138,17 @@ export default class DailyPlan extends Component {
     )
     .then((response) => {
       const { date, quote, plan, note } = response.data;
-      const doneTasks = this.countDoneTasks(plan);
-      this.setState({
-        quote: quote,
-        plan: plan,
-        note: note,
-        totalTasks: plan.length,
-        doneTasks: doneTasks,
-        blockingUI: false,
-      })
+      if (response.status == 200){
+        const doneTasks = this.countDoneTasks(plan);
+        this.setState({
+          quote: quote,
+          plan: plan,
+          note: note,
+          totalTasks: plan.length,
+          doneTasks: doneTasks,
+          blockingUI: false,
+        })
+      }
     })
   }
 
@@ -186,37 +192,17 @@ export default class DailyPlan extends Component {
     this.getUser()
   }
 
-  logout = () => {
-    _helper.fetchAPI(
-      "/user/logout",
-      {}
-    )
-      .then((response) => {
-        if (response) {
-          const { data, status } = response;
-          if (status == 100) {
-            this.checkAuth()
-          }
-        }
-      })
-  }
-
   render() {
-    const { authenticate, date, quote, plan, note, doneTasks, totalTasks } = this.state;
-    if (!authenticate) {
-      return (
-        <Redirect to={'/users/login'}></Redirect>
-      )
-    }
+    const { date, quote, plan, note, doneTasks, totalTasks } = this.state;
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
-        <NavigationBar authenticate={this.state.authenticate} user={this.state.user}/>
+        <NavigationBar user={this.state.user}/>
         <div className="container">
           <div className=""></div>
           <div>
             <SideBar
               date={date}
-              type={'Day'}
+              type={0}
               handleDateChange={this.handleDateChange}
               page='plan'
             />
@@ -270,10 +256,6 @@ export default class DailyPlan extends Component {
                   </div>
                 </div>
               </div>
-              {/* <div>
-                <Link to='/daily-result'>Daily Result</Link>
-                <button onClick={this.logout}>Logout</button>
-              </div> */}
             </div>
           </div>
         </div>

@@ -11,6 +11,8 @@ import checkAuthenticate from '../../components/functions/checkAuthenticate';
 
 import './index.scss';
 
+const typeLabel = ['Day', 'Week', 'Month'];
+const typeBase = ['day', 'week', 'month'];
 
 export default class SideBar extends Component {
     constructor(props){
@@ -60,9 +62,9 @@ export default class SideBar extends Component {
                             />
                             <Link 
                                 className={page === 'plan' ? 'chosen-link page-link' : 'page-link'}
-                                to={'/daily-plan/' + date}
+                                to={'/day-plan/' + date}
                             > 
-                                {type}'s Plan
+                                {typeLabel[type]}'s Plan
                             </Link>
                         </div>
                     </div>
@@ -86,9 +88,9 @@ export default class SideBar extends Component {
                             />
                             <Link
                                 className={page === 'result' ? 'chosen-link page-link' : 'page-link'}
-                                to={'/daily-result/' + date}
+                                to={'/day-result/' + date}
                             >
-                                {type}'s Result
+                                {typeLabel[type]}'s Result
                             </Link>
                         </div>
                     </div>
@@ -97,6 +99,8 @@ export default class SideBar extends Component {
                 <div className='calendar'>
                     <DatePicker
                         date={date}
+                        page={page}
+                        type={0}
                         handleDateChange={handleDateChange}
                     />
                 </div>

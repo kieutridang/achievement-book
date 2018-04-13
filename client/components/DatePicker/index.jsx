@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import moment from 'moment';
@@ -9,20 +10,25 @@ import MonthPicker from '../MonthPicker/index.jsx';
 
 import './index.scss';
 
-export default class DatePicker extends Component {
-    state = { }
+const typeLabel = ['Day', 'Week', 'Month'];
+const typeBase = ['day', 'week', 'month'];
 
+export default withRouter(class DatePicker extends Component {
     handleSelect = (date) => {
-        this.props.handleDateChange(date.format("YYYY-MM-DD"));
+        const { history, type, page } = this.props;
+        // this.props.handleDateChange(date.format("YYYY-MM-DD"));
+        const newUrl = '/' + typeBase[type] + '-' + page + '/' + date.format("YYYY-MM-DD");
+        history.push({ pathname: newUrl});
     }
 
     render() {
         const date = moment(this.props.date);
+        const { type } = this.props;
         return (
             <StyledTabs>
                 <TabList>
                     <Tab>Day</Tab>
-                    <Tab>Week</Tab>
+                    <Tab>Week</Tab> 
                     <Tab>Month</Tab>
                 </TabList>
 
@@ -48,7 +54,7 @@ export default class DatePicker extends Component {
             </StyledTabs>
         );
     }
-}
+})
 
 
 const StyledTabs = styled(Tabs)`
