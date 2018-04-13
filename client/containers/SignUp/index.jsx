@@ -26,14 +26,19 @@ export default class SignUp extends Component {
       message: '',
       redirect: false,
       showMessage: false,
-      authenticate: false,
       url: ''
     }
   }
 
   checkAuth = () => {
+    // checkAuthenticate().then((authenticate) => {
+    //   this.setState({ authenticate });
+    // })
+    const { history } = this.props;
     checkAuthenticate().then((authenticate) => {
-      this.setState({ authenticate });
+      if (authenticate){
+        history.replace('/home');
+      }
     })
   }
   getURL = () => {
@@ -55,6 +60,7 @@ export default class SignUp extends Component {
 
   signUp = () => {
     this.setState({ showMessage: true });
+    const { history } = this.props;
     if (
       checkValidate.checkText(this.state.username, validations.username) == null &&
       checkValidate.checkText(this.state.password, validations.password) == null &&
@@ -81,9 +87,7 @@ export default class SignUp extends Component {
             this.setState({ message: data }, function () {
               alert(this.state.message);
               if (this.state.message == 'Create user successful') {
-                this.setState({
-                  redirect: true
-                })
+                history.push('/users/login');
               }
             })
           }
@@ -99,18 +103,6 @@ export default class SignUp extends Component {
   }
 
   render() {
-    let { authenticate, redirect } = this.state;
-
-    if (authenticate) {
-      return (
-        <Redirect to={'/home'}></Redirect>
-      )
-    }
-    if (redirect) {
-      return (
-        <Redirect to={'/users/login'}></Redirect>
-      )
-    }
     return (
       <div className='signup'>
         <NavigationBar authenticate={this.state.authenticate} url={this.getURL()} />
