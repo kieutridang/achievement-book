@@ -8,7 +8,7 @@ import { _helper } from '../../components/api/_helper';
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 import NavigationBar from '../../components/NavigationBar/index.jsx';
 
-export default class Login extends Component {
+export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,10 +39,11 @@ export default class Login extends Component {
         })
       }
     checkAuth = () => {
+        const { history } = this.props;
         checkAuthenticate().then((authenticate) => {
-            this.setState({
-                authenticate: authenticate
-            })
+            if (!authenticate){
+                history.replace('/users/login');
+            }
         })
     }
     logout = () => {
@@ -60,18 +61,13 @@ export default class Login extends Component {
         })
     }
     render() {
-        const {authenticate, message, showMessage } = this.state
-        if (!authenticate) {
-            return (
-                <Redirect to={'/users/login'}></Redirect>
-            )
-        }
+        const {message, showMessage } = this.state
         return (
             <div>
-                <NavigationBar authenticate={this.state.authenticate} url={this.getURL()} user={this.state.user}/>
+                <NavigationBar url={this.getURL()} user={this.state.user}/>
                 <h1>Logged in successfully</h1>
-                <div><Link to='/daily-plan'>Daily Plan</Link></div>
-                <div><Link to='/daily-result'>Daily Result</Link></div>
+                <div><Link to='/day-plan'>Daily Plan</Link></div>
+                <div><Link to='/day-result'>Daily Result</Link></div>
                 <button onClick={this.logout}>Logout</button>
             </div>
         )
