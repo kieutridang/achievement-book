@@ -1,9 +1,11 @@
 .navigationbar {
+    z-index: 1;
     display: flex;
+    position: fixed;
+    top: 0;
     justify-content: space-between;
     border-bottom: 1px solid darkgray;
     width: 100%;
-    min-width: 480px;
     background: white;
     height: 50px;
     font-family: Muli;

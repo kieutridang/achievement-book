@@ -1,5 +1,6 @@
 .SideBar {
     // height: 100vh;
+    z-index: 0;
     font-family: 'Muli';
     display: flex;
     flex-direction: column;
@@ -99,7 +100,6 @@
     position: absolute;
     left: 0;
     top: 40px;
-    height: 100%; 
     @media only screen and (min-width: 900px) {
         display: none;
         

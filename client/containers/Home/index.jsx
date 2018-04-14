@@ -7,6 +7,7 @@ import Button from '../../components/Button/index.jsx';
 import { _helper } from '../../components/api/_helper';
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 import NavigationBar from '../../components/NavigationBar/index.jsx';
+import './index.scss';
 
 export default class Login extends Component {
     constructor(props) {
@@ -69,10 +70,12 @@ export default class Login extends Component {
         return (
             <div>
                 <NavigationBar authenticate={this.state.authenticate} url={this.getURL()} user={this.state.user}/>
-                <h1>Logged in successfully</h1>
-                <div><Link to='/daily-plan'>Daily Plan</Link></div>
-                <div><Link to='/daily-result'>Daily Result</Link></div>
-                <button onClick={this.logout}>Logout</button>
+                <div className='content' >
+                    <h1>Logged in successfully</h1>
+                    <div><Link to='/daily-plan'>Daily Plan</Link></div>
+                    <div><Link to='/daily-result'>Daily Result</Link></div>
+                    <button onClick={this.logout}>Logout</button>
+                </div>
             </div>
         )
     }
