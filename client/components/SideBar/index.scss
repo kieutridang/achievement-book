@@ -1,0 +1,112 @@
+.SideBar {
+    // height: 100vh;
+    font-family: 'Muli';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    padding: 25px 10px;
+    margin-right: 50px;
+    border: 1px solid #E4E4E4;
+    background-color: white;
+    .chosen-symbol {
+        width: 35px;
+        height: 35px;
+        transform: rotate(180deg);
+        -ms-transform: rotate(180deg); /* IE 9 */
+        -webkit-transform: rotate(180deg); /* Safari 3-8 */
+    }
+    .unchosen-page {
+        visibility: hidden;
+    }
+    .page-link {
+        text-decoration: none;
+        color: #000000;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .chosen-link {
+        color: #5f29ae;
+    }
+    .unchosen-icon {
+        display: none;
+    }
+    > div {
+        width: 250px;
+        &:first-child {
+            > div {
+                display: flex;
+                align-items: center;
+                > div {
+                    display: flex;
+                    align-items: center;
+                    img {
+                        width: 35px;
+                        height: 35px;
+                        margin-left: 15px;
+                        margin-right: 6px;
+                    }
+                }
+            }
+        }
+        &:last-child {
+            text-align: center;
+        }
+    }
+    .line {
+        background: #D8D8D8;
+        border: .5px solid #E4E4E4;
+        width: 100%;
+        margin: 20px 0;
+        .SideBar > div:first-child > div {
+            width: 170px;
+            margin: 15px auto;
+            border: .5px solid #000000;
+        }
+    }
+    .line-day {
+        background: #D8D8D8;
+        width: 170px;
+        margin: 15px auto;
+        border: .5px solid #000000;
+    }
+    .calendar {
+        display: flex;
+        //justify-content: space-around;
+        // height: 150px;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .SideBar {
+        display: none   
+    }
+}
+.sideInTopNav {
+    display: none;
+        
+    
+}
+.none-sidebar-icon {
+    display: none
+} 
+.sidebar-icon {
+    display: block
+}
+
+.showing-sidebar {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    height: 100%; 
+    @media only screen and (min-width: 900px) {
+        display: none;
+        
+    }
+    // -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    // box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.DayPicker_transitionContainer {
+    height: 300px !important;
+}

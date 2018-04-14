@@ -1,0 +1,153 @@
+  .log-in {
+      height: 100vh;
+      width: 100%;
+      background: rgb(95, 41, 174);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      overflow: auto;
+      flex-direction: column;
+      >div {
+          &:nth-child(1) {
+
+          }
+      
+      &:nth-child(2){
+          margin: auto;
+          font-family: 'Muli';
+          background-color: white;
+          height: 60%;
+          max-width: 900px;
+          height: 600px;
+          display: flex;
+          align-items: center;
+          @media only screen and ( max-height:700px) {
+            margin: 60px auto;
+      
+        }
+          >div {
+              &:nth-child(1) {
+                  flex-grow: 1;
+                  height: 100%;
+                  padding: 0px 40px;
+                  >div {
+                      &:nth-child(1) {
+                          height: 30%;
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: space-around;
+                          img {
+                              width: 350px;
+                          }
+                      }
+                      &:nth-child(2) {
+                          height: 30%;
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: space-around;
+                          align-items: center;
+                          >div {
+                              div {
+                                  >span {
+                                      color: red;
+                                      font-size: 10px;
+                                  }
+                              }
+                          }
+                      }
+                      &:nth-child(3) {
+                          height: 40%;
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: space-evenly;
+                          button {
+                              border: 0px;
+                              background-color: rgb(95, 41, 174);
+                              width: 350px;
+                              height: 50px;
+                              font-family: 'Muli', sans-serif;
+                              color: white;
+                              font-size: 20px;
+                              margin: auto;
+                              margin-top: 30px;
+                              margin-bottom: 10px;
+                              &:hover {
+                                  opacity: 0.9;
+                              }
+                              &:active {
+                                  background-color: rgb(27, 11, 117);
+                              }
+                          }
+                          >div {
+                              text-align: center;
+                              &:nth-child(2) {
+                                  font-size: 15px;
+                              }
+                              &:nth-child(3) {
+                                  font-size: 20px;
+                                  font-weight: bold;
+                              }
+                              a {
+                                  color: rgb(39, 21, 147);
+                                  text-decoration-line: none;
+                              }
+                          }
+                      }
+                  }
+              }
+              &:nth-child(2) {
+                  height: 100%;
+                  max-width: 50%;
+                  overflow: hidden;
+                  display: flex;
+                  justify-content: space-around;
+                  img {
+                      min-height: 100%;
+                      max-height: 100%;
+                      width: auto;
+                  }
+              }
+          }
+      }
+    }
+  }
+
+  ::placeholder {
+      font-family: 'Muli';
+  }
+
+  @media only screen and (max-width: 900px) {
+      .log-in {
+          background-image: url('../../../public/log-in-background.jpg');
+          background-size: cover;
+          background-position: 50% 50%;
+          background-repeat: no-repeat;
+          >div {
+              &:nth-child(1) {}
+              &:nth-child(2) {
+              width: 480px;
+              background-color: white;
+              opacity: 0.9;
+              max-width: 500px;
+              >div {
+                  &:nth-child(1) {}
+                  &:nth-child(2) {
+                      display: none;
+                  }
+              }
+            }
+          }
+          input {
+              background-color: transparent;
+          }
+          h1 {
+              color: rgb(39, 21, 147);
+          }
+      }
+  }
+  @media only screen and ( max-height:700px) {
+      .log-in {
+          display: block;
+      }
+
+  }
