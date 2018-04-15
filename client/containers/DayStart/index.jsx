@@ -196,7 +196,12 @@ export default class DailyPlan extends Component {
     const { date, quote, plan, note, doneTasks, totalTasks } = this.state;
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
-        <NavigationBar user={this.state.user}/>
+        <NavigationBar user={this.state.user}  
+          date={date}
+          type={0}
+          handleDateChange={this.handleDateChange}
+          page='plan'
+        />
         <div className="container">
           <div className=""></div>
           <div>

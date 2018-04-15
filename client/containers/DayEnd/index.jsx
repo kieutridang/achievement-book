@@ -135,7 +135,12 @@ export default class DailyResult extends Component {
     const { authenticate, date, plan, completedTasksList, bestTask, whyBest, bestTime, efficiency, lessonLearned } = this.state;
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
-        <NavigationBar authenticate={this.state.authenticate} user={this.state.user} />
+        <NavigationBar authenticate={this.state.authenticate} user={this.state.user}
+          date={date}
+          type={0}
+          handleDateChange={this.handleDateChange}
+          page='result'
+        />
         <div className="wrapper">
           <div className=""></div>
           <div>

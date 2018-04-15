@@ -173,7 +173,6 @@ export default class SignUp extends Component {
                 refName = "button"
                 ref = "signup"
               />
-              <Link to='/users/login'>Log In</Link>
             </div>
           </div>
         </div>

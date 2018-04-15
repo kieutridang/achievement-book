@@ -1,5 +1,6 @@
 .SideBar {
     // height: 100vh;
+    z-index: 0;
     font-family: 'Muli';
     display: flex;
     flex-direction: column;
@@ -99,11 +100,13 @@
     position: absolute;
     left: 0;
     top: 40px;
-    height: 100%; 
     @media only screen and (min-width: 900px) {
         display: none;
         
     }
     // -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     // box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.DayPicker_transitionContainer {
+    height: 300px !important;
 }
