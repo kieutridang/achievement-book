@@ -32,7 +32,6 @@ export default class DailyResult extends Component {
       bestTime: [],
       efficiency: -1,
       lessonLearned: '',
-      authenticate: true,
       blockingUI: true,
       showSidebar: false,
       user:{}
@@ -40,10 +39,11 @@ export default class DailyResult extends Component {
   }
 
   checkAuth = () => {
+    const { history } = this.props;
     checkAuthenticate().then((authenticate) => {
-      this.setState({
-        authenticate: authenticate
-      })
+      if (!authenticate) {
+        history.replace('/users/login');
+      }
     })
   }
   componentDidMount = () => {
@@ -133,11 +133,6 @@ export default class DailyResult extends Component {
 
   render() {
     const { authenticate, date, plan, completedTasksList, bestTask, whyBest, bestTime, efficiency, lessonLearned } = this.state;
-    if (!authenticate) {
-      return (
-        <Redirect to={'/users/login'}></Redirect>
-      )
-    }
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
         <NavigationBar authenticate={this.state.authenticate} user={this.state.user} />
