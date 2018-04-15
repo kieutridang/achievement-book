@@ -25,7 +25,7 @@ export default withRouter(class NavigationBar extends Component {
     }
 
     render() {
-        const { user, history } = this.props;
+        const { user, history, type, date, handleDateChange } = this.props;
         const url = history.location.pathname;
         switch (url) {
             case '/users/signup':
@@ -108,6 +108,9 @@ export default withRouter(class NavigationBar extends Component {
                         </div>
                         <SideBar sideTop={'sideInTopNav'}
                             show={this.state.showSidebar}
+                            type={type}
+                            date={date}
+                            handleDateChange={this.handleDateChange}
                         />
                     </div>
                 );
