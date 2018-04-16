@@ -28,24 +28,23 @@ var WeeklyPlan = new Schema({
   goal: {
     type: String
   },
-  tasksPlanning: [{
-    type: String
-  }],
-  schedule: [{
-    mission: {
+  missions: [{
+    name: {
       type: String
     },
     description: {
       type: String
-    },
+    }
+  }],
+  days: [{
     milestones: [{
+      name: {
+        type: String
+      },
       description: {
         type: String
       },
-      task: {
-        type: Number
-      },
-      day: {
+      mission: {
         type: Number
       }
     }]
@@ -69,7 +68,7 @@ var WeeklyPlan = new Schema({
   },
   experience: [{
     problem  : { type: String },
-    reason   : { type: String },
+    cause    : { type: String },
     solution : { type: String }
   }]
 });
