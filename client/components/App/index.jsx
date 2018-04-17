@@ -13,6 +13,7 @@ import WeekPicker from '../WeekPicker/index.jsx';
 import DayPicker from '../DayPicker/index.jsx';
 import DatePicker from '../DatePicker/index.jsx';
 import WeekStart from '../../containers/WeekStart/index'
+import SlideTab from '../SlideTab/index.jsx';
 
 import 'react-dates/lib/css/_datepicker.css';
 // import './index.scss';
