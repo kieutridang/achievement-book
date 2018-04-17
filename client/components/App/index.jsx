@@ -12,7 +12,7 @@ import MonthPicker from '../MonthPicker/index.jsx';
 import WeekPicker from '../WeekPicker/index.jsx';
 import DayPicker from '../DayPicker/index.jsx';
 import DatePicker from '../DatePicker/index.jsx';
-import SlideTab from '../SlideTab/index.jsx';
+import WeekStart from '../../containers/WeekStart/index'
 
 import 'react-dates/lib/css/_datepicker.css';
 // import './index.scss';
@@ -61,6 +61,15 @@ export default class App extends Component {
           data={data}
           handleChange={this.handleChange}
         />
+        <WeekPicker
+          date={this.state.date}
+          handleSelect={this.handleSelect}
+        />
+        <DayPicker
+          date={this.state.date}
+          handleSelect={this.handleSelect}
+        /> */}
+        <WeekStart></WeekStart>
       </div>
     )
   }
