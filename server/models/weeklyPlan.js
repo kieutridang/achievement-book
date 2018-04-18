@@ -28,6 +28,7 @@ var WeeklyPlan = new Schema({
   goal: {
     type: String
   },
+  // kế hoạch lớn
   tasksPlanning: [{
     type: String
   }],
@@ -38,6 +39,7 @@ var WeeklyPlan = new Schema({
     description: {
       type: String
     },
+    // cột mốc
     milestones: [{
       description: {
         type: String
@@ -45,17 +47,21 @@ var WeeklyPlan = new Schema({
       task: {
         type: Number
       },
+      // thứ 2 -CN
       day: {
         type: Number
       }
     }]
   }],
+  // name bestCompletedTask
   bestCompletedTask: {
     type: String
   },
+
   lessonLearned: [{
     type: String
   }],
+  // giống best time daily
   mostEnthusiasticDays: [{
     type: Boolean
   }],
@@ -64,6 +70,7 @@ var WeeklyPlan = new Schema({
     min: 0,
     max: 5
   },
+  // những điều hứng thú
   memo: {
     type: String
   },

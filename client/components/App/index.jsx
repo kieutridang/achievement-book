@@ -32,14 +32,17 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: moment().weekday(0),
+      date: moment().format('YYYY-MM-DD'),
       focusedInput: END_DATE,
-      startDate: moment(),
+      startDate: '',
       endDate: moment(),
+      weeklyPlan:[],
       name: '',
       gender: '',
       city: 'Ho Chi Minh',
       department: [],
+      schedule:[],
+      experience: [],
 
       showMessage: false,
       date: moment().format('YYYY-MM-DD'),
@@ -66,17 +69,131 @@ export default class App extends Component {
       date: date
     })
   }
-  componentDidMount = () => {   
-    this.getURL();
+  getStartDate = () => {
+    var firstDay = moment().startOf('week').format('dddd') === 'Sunday' ?     
+        moment().startOf('week').add('d',1).format('YYYY-MM-DD') : 
+        moment().startOf('week').format('YYYY-MM-DD');
+    console.log(firstDay);
+
+
   }
-  componentDidMount = () => {   
+  getWeeklyPlan = () => {
+    var firstDay = moment().startOf('week').format('dddd') === 'Sunday' ?     
+    moment().startOf('week').add('d',1).format('YYYY-MM-DD') : 
+    moment().startOf('week').format('YYYY-MM-DD');
+    console.log(firstDay);
+    _helper.fetchGET(
+      '/weeklyplan/getweeklyplan/'+ firstDay,
+      {}
+    )
+    .then((respone) => {
+      const {experience, schedule} = respone.data;
+      if(respone.status === 200) {
+        this.setState({
+          experience: experience,
+          schedule: schedule
+        })
+      }
+
+    })
+  }
+  newExperience = () => {
+    const { experience } = this.state;
+    var newExperience = experience.map(experience => experience);
+    newExperience.push({
+      problem  : "" ,
+      reason   : "",
+      solution: ""
+    })
+    let {weeklyPlan} = this.state;
+    weeklyPlan = {
+      experience : newExperience
+    }
+    console.log(JSON.stringify(weeklyPlan));
+    this.updateWeeklyPlan(weeklyPlan);
+  }
+  newSchedule = () => {
+    const { schedule } = this.state;
+    var newSchedule = schedule.map(schedule => schedule);
+    newSchedule.push({
+      mission: ' new mission 3',
+      description: '  new schedule desription 3',
+      milestones: {
+        description: '  milestones desription123456',
+        task: 2,
+        day: 1
+      }
+    });
+    let {weeklyPlan} = this.state;
+    weeklyPlan = {
+      schedule : newSchedule
+    }
+    console.log(JSON.stringify(weeklyPlan));
+    this.updateWeeklyPlan(weeklyPlan);
+  }
+  newWeeklyPlan = () => {
+    const { schedule } = this.state;
+    var newSchedule = schedule.map(schedule => schedule);
+    newSchedule.push({ mission: ' new mission', description: '  new schedule desription', milestones : {
+      description: '   new milestones desription',
+      task: 2,
+      day: 1
+    } });
+    const { experience } = this.state;
+    var newExperience = experience.map(experience => experience);
+    newExperience.push({
+      problem  : " problem 2" ,
+      reason   : "reason 2",
+      solution: "solution 2"
+    })
+    let {weeklyPlan} = this.state;
+    weeklyPlan = {
+      schedule : newSchedule,
+      experience: newExperience
+    }
+    console.log(JSON.stringify(weeklyPlan));
+    this.updateWeeklyPlan(weeklyPlan);
+ 
+  }
+  
+  updateWeeklyPlan = (weeklyplan) =>{
+    var firstDay = moment().startOf('week').format('dddd') === 'Sunday' ?     
+    moment().startOf('week').add('d',1).format('YYYY-MM-DD') : 
+    moment().startOf('week').format('YYYY-MM-DD');
+    _helper.fetchAPI(
+      '/weeklyplan/updateweeklyplan/'+ firstDay,
+      {schedule : weeklyplan.schedule, experience : weeklyplan.experience},[], 'PUT'
+    )
+    .then((respone) => {
+      const {data, status} = respone;
+
+    })
+    this.getWeeklyPlan();
+
+  }
+  componentDidMount()  {   
     this.getURL();
+    this.getWeeklyPlan();
+    this.getStartDate();
   }
   render() {
-
+    const {schedule, experience} = this.state;
+    console.log(experience)
     return (
       <div>
-        <DatePicker/>
+        <h1>Experience</h1>
+        {experience.map((item) =>
+           <label key={item._id}> {item._id}  {item.solution}  </label>
+           )}
+        <br></br>
+        <h1>Schedule</h1>        
+        {schedule.map((item) =>
+           <label key={item._id}>{item._id} {item.mission}  </label>
+           )}
+        <button onClick={this.newWeeklyPlan} > new Weekly Plan</button>
+        <button onClick={this.newSchedule} > new Schedule</button>
+        <button onClick={this.newExperience} > new Experience</button>
+        {/* <DatePicker/> */}
         {/* <MonthPicker
           date={this.state.date}
           handleSelect={this.handleSelect}/>

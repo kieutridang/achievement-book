@@ -2,6 +2,7 @@ const express = require('express');
 const user = require('./controller/user');
 const userApi = require('./controller/user_api');
 const dailyApi = require('./controller/daily_plan_api');
+const weeklyApi = require('./controller/weekly_plan_api');
 
 module.exports = function(app) {
     var router = express.Router()
@@ -17,6 +18,11 @@ module.exports = function(app) {
     router.get('/dailyplan/getplan/:date', userApi.authenticate, dailyApi.getPlan);
     router.post('/dailyplan/createplan/:date', userApi.authenticate, dailyApi.createPlan);
     router.put('/dailyplan/updateplan/:date', userApi.authenticate, dailyApi.updatePlan);
+
+    
+    router.get('/weeklyplan/getweeklyplan/:startDate', weeklyApi.getWeeklyPlan);
+    router.post('/weeklyplan/createweeklyplan/:startDate',  weeklyApi.createWeeklyPlan);
+    router.put('/weeklyplan/updateweeklyplan/:startDate', weeklyApi.updateWeeklyPlan);
 
     app.use('/api', router)
 }

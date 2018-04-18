@@ -5,10 +5,12 @@ module.exports = {
 		try {
 			var Weekly = require('../models/weeklyPlan');
 			var weeklyPlan = {
-				userId: req.session.user._id,
+				userId: 'abfaca02edf6556ecc339cb',
 				startDate: req.params.startDate
 			}
+			
 			var findingWeeklyPlan = new Weekly(weeklyPlan);
+
 			var err = findingWeeklyPlan.validateSync();
 			if (err) {
 				res.status(404).end('Invalid weekly plan');
@@ -35,7 +37,7 @@ module.exports = {
 					}
 
 				})
-			}
+			 }
 		} catch (error) {
 			res.status(500).end(error);
 		}
@@ -49,7 +51,7 @@ module.exports = {
 			Object.keys(req.body).map((key) => {
 				weeklyPlan[key] = req.body[key];
 			})
-			weeklyPlan.userId = req.session.user._id;
+			weeklyPlan.userId = 'abfaca02edf6556ecc339cb';
 			weeklyPlan.startDate = req.params.startDate;
 			var newWeeklyPlan = new Weekly(weeklyPlan);
 			var err = newWeeklyPlan.validateSync();
@@ -85,6 +87,7 @@ module.exports = {
 
 	updateWeeklyPlan: function (req, res) {
 		try {
+		
 			var Weekly = require('../models/weeklyPlan');
 			if (req.body.startDate || req.body.userId) {
 				res.status(403).end('You are not allowed to edit date or user');
@@ -94,7 +97,7 @@ module.exports = {
 				Object.keys(req.body).map((key) => {
 					weeklyPlan[key] = req.body[key];
 				})
-				weeklyPlan.userId = req.session.user._id;
+				weeklyPlan.userId =	'abfaca02edf6556ecc339cb' ;
 				weeklyPlan.startDate = req.params.startDate;
 				var newWeeklyPlan = new Weekly(weeklyPlan);
 				var err = newWeeklyPlan.validateSync();
@@ -102,7 +105,7 @@ module.exports = {
 					res.status(403).end("Invalid weekly plan");
 				}
 				else {
-					dataDaily.updateWeeklyPlan({ userId: weeklyPlan.userId, startDate: weeklyPlan.startDate }, weeklyPlan, function (error, data) {
+					dataWeekly.updateWeeklyPlan({ userId: weeklyPlan.userId, startDate: weeklyPlan.startDate }, weeklyPlan, function (error, data) {
 						if (error) {
 							res.status(500).end(error);
 						}
@@ -111,6 +114,7 @@ module.exports = {
 						}
 					})
 				}
+				
 			}
 		} catch (error) {
 			res.status(500).end();
