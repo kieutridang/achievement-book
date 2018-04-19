@@ -17,8 +17,7 @@ var WeeklyPlan = new Schema({
     type: String,
     validate: {
 			validator: function (date) {
-        if (moment(date, 'YYYY-MM-DD', true).format() == "Invalid date"
-            && moment(date).isoWeekday() != 1)
+        if (moment(date, 'YYYY-MM-DD').weekday() != 1 )
 					return false;
 				else return true;
 			},

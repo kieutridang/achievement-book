@@ -17,9 +17,9 @@ import WeekStart from '../../containers/WeekStart/index'
 import 'react-dates/lib/css/_datepicker.css';
 // import './index.scss';
 
-import {_helper} from '../api/_helper';
-import {checkValidate} from '../functions/checkValidate';
-import {validations} from '../functions/validations';
+import { _helper } from '../api/_helper';
+import { checkValidate } from '../functions/checkValidate';
+import { validations } from '../functions/validations';
 import moment from 'moment';
 
 const START_DATE = 'startDate';
@@ -39,23 +39,119 @@ export default class App extends Component {
         Cause: 'Huy',
         Solution: 'Thuc',
       },
+      weeklyPlan: [],
+      name: '',
+      gender: '',
+      city: 'Ho Chi Minh',
+      department: [],
+      missions: [],
+      days: [],
+      updateDay: 0
     }
   }
 
+  getWeeklyPlan = () => {
+    var firstDay = moment().startOf('week').format('dddd') === 'Sunday' ?
+      moment().startOf('week').add('d', 1).format('YYYY-MM-DD') :
+      moment().startOf('week').format('YYYY-MM-DD');
+    console.log(firstDay);
+    _helper.fetchGET(
+      '/weeklyplan/' + firstDay,
+      {}
+    )
+      .then((respone) => {
+        const { missions, days } = respone.data;
+        if (respone.status === 200) {
+          this.setState({
+            missions: missions,
+            days: days
+          })
+        }
+
+      })
+  }
+  newExperience = () => {
+    const { experience } = this.state;
+    var newExperience = experience.map(experience => experience);
+    newExperience.push({
+      problem: "",
+      reason: "",
+      solution: ""
+    })
+    let { weeklyPlan } = this.state;
+    weeklyPlan = {
+      experience: newExperience
+    }
+    console.log(JSON.stringify(weeklyPlan));
+    this.updateWeeklyPlan(weeklyPlan);
+  }
+  newMission = () => {
+    const { missions } = this.state;
+    var newMission = missions.map(mission => mission);
+    newMission.push({
+      name: ' new mission',
+      description: '  new schedule desription ',
+    });
+    let { weeklyPlan } = this.state;
+    weeklyPlan = {
+      missions: newMission
+    }
+    console.log(JSON.stringify(weeklyPlan));
+    this.updateWeeklyPlan(weeklyPlan);
+  }
+  newDays = () => {
+    const { days } = this.state;
+    var newDays = days.map(day => day);
+    newDays.push({
+      milestones: {
+        name: ' name day',
+        description: '   new milestones desription',
+        mission: 1
+      }
+    });
+    let { weeklyPlan } = this.state;
+    weeklyPlan = {
+      days: newDays,
+    }
+    console.log(JSON.stringify(weeklyPlan));
+    this.updateWeeklyPlan(weeklyPlan);
+
+  }
+
+  updateWeeklyPlan = (weeklyplan) => {
+    var firstDay = moment().startOf('week').format('dddd') === 'Sunday' ?
+      moment().startOf('week').add('d', 1).format('YYYY-MM-DD') :
+      moment().startOf('week').format('YYYY-MM-DD');
+    _helper.fetchAPI(
+      '/weeklyplan/' + firstDay,
+      { days: weeklyplan.days, missions: weeklyplan.missions }, [], 'PUT'
+    )
+      .then((respone) => {
+        const { data, status } = respone;
+
+      })
+    this.getWeeklyPlan();
+
+  }
   handleChange = (value, label) => {
     let newData = {};
     const { data } = this.state;
-    Object.keys(this.state.data).forEach((key) => {newData[key] = data[key]})
+    Object.keys(this.state.data).forEach((key) => { newData[key] = data[key] })
     newData[label] = value;
     this.setState({
       data: newData,
     })
   }
+  componentDidMount() {
+    this.getWeeklyPlan();
+  }
 
   render() {
+    const { missions, days } = this.state;
     const { data } = this.state;
+  
     return (
-      <div>
+      <div>           
         <DatePicker/>
         <SlideTab
           data={data}
@@ -68,7 +164,7 @@ export default class App extends Component {
         <DayPicker
           date={this.state.date}
           handleSelect={this.handleSelect}
-        /> */}
+        /> 
         <WeekStart></WeekStart>
       </div>
     )
@@ -76,7 +172,7 @@ export default class App extends Component {
 }
 
 
-  
+
 
 
 
