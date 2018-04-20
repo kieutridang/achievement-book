@@ -16,7 +16,7 @@ const TaskMission = ({ index, task, changeTaskName, changeDescription, missionLi
       <select onChange={(e) => { changeMission(e.target.value, index) }}>
         {missionList && missionList.map((element, index) => {
           return (
-            <option key={index} value={element.name}>{element.name}</option>
+            <option key={index} value={element.name} selected={task.name == element.name ? "selected" : ""}>{element.name}</option>
           );
         })}
       </select>
