@@ -4,7 +4,7 @@ import OnBlurInput from '../../../components/OnBlurInput/index.jsx';
 import OnBlurArea from '../../../components/OnBlurTextArea/index.jsx';
 
 
-const TaskMission = ({ index, task, changeTaskName, changeDescription, missionList, changeMission }) => {
+const TaskMission = ({ index, task, changeTaskName, changeDescription, missions, changeMission }) => {
   return (
     <div>
       <OnBlurInput
@@ -14,7 +14,7 @@ const TaskMission = ({ index, task, changeTaskName, changeDescription, missionLi
         onBlur={changeTaskName}
       />
       <select onChange={(e) => { changeMission(e.target.value, index) }}>
-        {missionList && missionList.map((element, index) => {
+        {missions && missions.map((element, index) => {
           return (
             <option key={index} value={element.name} selected={task.name == element.name ? "selected" : ""}>{element.name}</option>
           );
