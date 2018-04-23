@@ -12,7 +12,7 @@ import { _helper } from '../../components/api/_helper';
 import TaskMission from './components/TaskMission'
 import OnBlurTextArea from '../../components/OnBlurTextArea/index.jsx'
 import Mission from './components/Mission'
-import { addWeeklyMission } from './action';
+import { addWeeklyMission, changeMissionName } from './action';
 import { debug } from 'util';
 
 class WeekStart extends Component {
@@ -40,10 +40,10 @@ class WeekStart extends Component {
     alert(value);
   }
   _addMission = () => {
-    
+
   }
   _addTask = () => {
-    
+
   }
   render() {
     const { weeklyPlan } = this.props;
@@ -58,9 +58,10 @@ class WeekStart extends Component {
         />
         <div>
           {
-            missionList && missionList.map((mission, index) => {
+            missions && missions.map((mission, index) => {
               return (
                 <Mission
+                  key={index}
                   index={index}
                   mission={mission}
                   changeMissionName={_changeMissionName}
@@ -76,16 +77,17 @@ class WeekStart extends Component {
             taskList && taskList.map((task, index) => {
               return (
                 <TaskMission
-                task={task}
-                missionList={missionList}
-                changeTaskName={this._changeTaskName}
-                changeMission={this._changeMission}
-                changeDescription={this._changeDescription}
+                  key={index}
+                  task={task}
+                  missions={missions}
+                  changeTaskName={this._changeTaskName}
+                  changeMission={this._changeMission}
+                  changeDescription={this._changeDescription}
                 />
               );
             })
           }
-          <button onClick={this._addTask}>Add Task</button>
+          <button onClick={this._addTask}>Add Task</button> 
         </div>
       </div>
     );

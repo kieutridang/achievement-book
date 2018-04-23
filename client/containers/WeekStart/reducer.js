@@ -21,11 +21,13 @@ const initialState = {
 function weeklyData(state = initialState, action) {
   switch (action.type) {
     case ADD_WEEKLY_MISSION: {
+      debugger
       let newState = JSON.parse(JSON.stringify(state));
-      newState.missions.push({name:'', description: ''});
+      newState.missions.push({ name: '', description: '' });
       return newState;
     }
     case CHANGE_WEEKLY_TASK_NAME: {
+      debugger
       let newState = JSON.parse(JSON.stringify(state));
       newState.missions[action.index].name = action.value;
       return newState;
@@ -35,7 +37,7 @@ function weeklyData(state = initialState, action) {
       newState.missions[action.index].description = action.value;
       return newState;
     }
-    default: 
+    default:
       return state;
   }
 }
