@@ -16,6 +16,11 @@ import WeekStart from '../../containers/WeekStart/index'
 
 import 'react-dates/lib/css/_datepicker.css';
 // import './index.scss';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import * as actions from './actions'
+import * as select from './selector';
 
 import { _helper } from '../api/_helper';
 import { checkValidate } from '../functions/checkValidate';
@@ -24,12 +29,12 @@ import moment from 'moment';
 
 const START_DATE = 'startDate';
 const END_DATE = 'endDate';
-import { connect } from 'react-redux';
+
 import AddTodo from '../testRedux/index'
 import ShowField from '../testRedux/showField'
 import NavigationBar from '../NavigationBar/index.jsx';
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -144,12 +149,13 @@ export default class App extends Component {
   }
   componentDidMount() {
     this.getWeeklyPlan();
+    this.props._getWeeklyPlan(moment().format('YYYY-MM-DD'));
   }
 
   render() {
     const { missions, days } = this.state;
     const { data } = this.state;
-  
+    console.log('index                  ' + this.props.weeklyPlan)
     return (
       <div>           
         <DatePicker/>
@@ -170,6 +176,19 @@ export default class App extends Component {
     )
   }
 }
+
+const mapStateToProps = createStructuredSelector ({
+  //weeklyPlan : select.WeeklyPlanData()
+
+})
+const mapDispatchToProps = (dispatch) => ({
+  _getWeeklyPlan: (date) => dispatch(actions.fetchWeeklyPlan(date)),
+});
+
+const withRedux = connect(mapStateToProps, mapDispatchToProps);
+export default compose(
+  withRedux,
+)(App);
 
 
 
