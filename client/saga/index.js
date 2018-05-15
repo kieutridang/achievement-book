@@ -4,6 +4,6 @@ import { fork } from 'redux-saga/effects';
 import weeklyPlanSaga from '../components/App/saga'
 
 
-export default function* root() { 
+export default function* rootSaga() { 
     yield fork(weeklyPlanSaga);
 }

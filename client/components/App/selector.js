@@ -1,10 +1,12 @@
 import { createSelector } from 'reselect';
+import { fromJS } from 'immutable';
 
 const WeeklyPlanSelector = (state) => state.get('WeeklyPlan');
 
-const WeeklyPlanData = createSelector(
+
+const WeeklyPlanData = () => createSelector(
   (WeeklyPlanSelector),
-  (state) => state.get('data')
+  (WeeklyPlanSelector) => WeeklyPlanSelector.get('data')
 )
 
 export {
