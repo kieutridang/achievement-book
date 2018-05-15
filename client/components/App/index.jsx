@@ -156,7 +156,7 @@ class App extends Component {
   render() {
     const { missions, days } = this.state;
     const { data } = this.state;
-    console.log('index                  ' + this.props.weeklyPlan)
+    console.log(this.props.weeklyPlan)
     return (
       <div>           
         <DatePicker/>
@@ -178,10 +178,15 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector ({
-  //weeklyPlan : select.WeeklyPlanData()
+// const mapStateToProps = createStructuredSelector ({
+//   weeklyPlan : select.WeeklyPlanData()
 
-})
+// })
+const mapStateToProps = (state) => {
+  return {
+    weeklyPlan: state.get('data')
+  }
+}
 const mapDispatchToProps = (dispatch) => ({
   _getWeeklyPlan: (date) => dispatch(actions.fetchWeeklyPlan(date)),
 });

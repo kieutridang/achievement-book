@@ -4,12 +4,15 @@ import createReducer from './reducers/reducers'
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import root from './saga'
-import { fromJS } from 'immutable';
+import { fromJS, Map } from 'immutable';
+import { routerMiddleware } from 'react-router-redux';
 
 const sagaMiddleware = createSagaMiddleware()
-const middleware = applyMiddleware(sagaMiddleware);
 
-const initialState = {};
+export default function configureStore(initialState = {}, history) {
+
+const middleware = applyMiddleware(sagaMiddleware,  routerMiddleware(history),);
+
  
 const store = createStore(
   createReducer(),
@@ -17,6 +20,7 @@ const store = createStore(
   compose(middleware, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 )
-sagaMiddleware.run(root)
-
-export default store;
+store.runSaga = sagaMiddleware.run;
+store.runSaga(root);
+return store;
+}

@@ -9,8 +9,8 @@ export function* fetchWeeklyPlan(action) {
   try {
     const response = yield call(_helper.fetchGET, '/dailyplan/getplan/' + action.payload.date);
     if (response && !response.error) {
-        console.log(response)
-        yield put(actions.fetchWeeklyPlanSuccessfully(response));
+        console.log(response.data)
+        yield put(actions.fetchWeeklyPlanSuccessfully(response.data));
       } else {
         throw new Error(response.error);
       }
