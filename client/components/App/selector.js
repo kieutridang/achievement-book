@@ -4,7 +4,7 @@ const WeeklyPlanSelector = (state) => state.get('WeeklyPlan');
 
 const WeeklyPlanData = createSelector(
   (WeeklyPlanSelector),
-  (WeeklyPlanSelector) => WeeklyPlanSelector.get('data')
+  (state) => state.get('data')
 )
 
 export {

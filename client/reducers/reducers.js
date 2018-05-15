@@ -3,6 +3,6 @@ import WeeklyPlanReducer from '../components/App/reducer'
 
 export default function createReducer() {
   return combineReducers({
-    WeeklyPlan : WeeklyPlanReducer
-  })
+    WeeklyPlan : WeeklyPlanReducer,
+  });
 }
