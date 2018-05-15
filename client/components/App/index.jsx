@@ -177,15 +177,16 @@ class App extends Component {
   }
 }
 
-// const mapStateToProps = createStructuredSelector ({
-//   weeklyPlan : select.WeeklyPlanData()
+const mapStateToProps = createStructuredSelector ({
+  weeklyPlan : select.WeeklyPlanData()
 
-// })
-const mapStateToProps = (state) => {
-  return {
-    weeklyPlan: state.get('data')
-  }
-}
+})
+// const mapStateToProps =ư (state) => {
+//   console.log(state)
+//   return {
+//     weeklyPlan: state.get('data')
+//   }
+// }
 const mapDispatchToProps = (dispatch) => ({
   _getWeeklyPlan: (date) => dispatch(actions.fetchWeeklyPlan(date)),
 });

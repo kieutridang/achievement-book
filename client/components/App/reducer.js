@@ -10,7 +10,6 @@ const initialState = fromJS({
 const WeeklyPlanReducer = (state = initialState, action) => {
   switch (action.type) {
     case constants.FETCH_WEEKLY_PLAN_SUCCESSFULLY:
-    debugger
           return  state.set('data', action.payload.data)  ;
 
     default:
