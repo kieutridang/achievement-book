@@ -7,6 +7,8 @@ import SignUp from './containers/SignUp/index.jsx';
 import Home from "./containers/Home/index.jsx";
 import DailyPlan from './containers/DayStart/index.jsx';
 import DailyResult from './containers/DayEnd/index.jsx';
+import WeeklyPlan from './containers/WeekStart/index'
+import WeeklyResult from './containers/WeekEnd/index.jsx'
 
 const routes = (
     <Switch>
@@ -18,7 +20,8 @@ const routes = (
         <Route exact path='/day-plan/:date' component={DailyPlan} />        
         <Route exact path='/day-result' component={DailyResult} />
         <Route exact path='/day-result/:date' component={DailyResult} />
-        
+        <Route exact path='/week-plan' component={WeeklyPlan} />
+        <Route exact path='/week-result' component={WeeklyResult} />
     </Switch>
 )
 
