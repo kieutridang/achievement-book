@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 
-import * as constants from './constants';
+import * as constants from '../constants/index';
 import { debug } from 'util';
 
 const initialState = fromJS({

@@ -84,7 +84,8 @@ export default class Home extends Component {
                     <h1>Logged in successfully</h1>
                     <div><Link to='/day-plan'>Daily Plan</Link></div>
                     <div><Link to='/day-result'>Daily Result</Link></div>
-                    <div><Link to='/week-result'>Week Result</Link></div>
+                    <div><Link to='/week-plan'>Weekly Plan</Link></div>
+                    <div><Link to='/week-result'>Weekly Result</Link></div>
                     <button onClick={this.logout}>Logout</button>
                 </div>
             </div>
