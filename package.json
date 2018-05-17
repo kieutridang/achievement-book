@@ -71,7 +71,7 @@
     "react-router-native": "^4.2.0",
     "react-router-redux": "^4.0.8",
     "react-sidebar": "^2.3.2",
-    "react-tabs": "^2.2.1",
+    "react-tabs": "^2.2.2",
     "reactjs-popup": "^1.0.5",
     "redux": "^3.7.2",
     "redux-immutable": "^4.0.0",
