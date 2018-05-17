@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 
-import OnBlurInput from '../../../components/OnBlurInput/index.jsx';
-import OnBlurArea from '../../../components/OnBlurTextArea/index.jsx';
+import OnBlurInput from '../../../components/OnBlurInput1/index.jsx';
+import OnBlurArea from '../../../components/OnBlurTextArea1/index.jsx';
 
 
-const TaskMission = ({ index, task, changeTaskName, changeDescription, missions, changeMission }) => {
+const TaskMission = ({ index, task, missions, submitChange, handleChangeName, handleChangeDescription, handleChangeMission }) => {
   return (
     <div>
       <OnBlurInput
         id={index}
         label={"Task name"}
         default={task.name}
-        onBlur={changeTaskName}
+        onBlur={submitChange}
+        onChange={handleChangeName}
       />
-      <select onChange={(e) => { changeMission(e.target.value, index) }}>
+      <select onChange={handleChangeMission} value={task.name}>
         {missions && missions.map((element, index) => {
           return (
-            <option key={index} value={element.name} selected={task.name == element.name ? "selected" : ""}>{element.name}</option>
+            <option key={index} value={element.name}>{element.name}</option>
           );
         })}
       </select>
@@ -25,7 +26,8 @@ const TaskMission = ({ index, task, changeTaskName, changeDescription, missions,
         label={"Description:"}
         default={task.description}
         numRows={3}
-        onBlur={changeDescription}
+        onBlur={submitChange}
+        onChange={handleChangeDescription}
       />
     </div>
   );
