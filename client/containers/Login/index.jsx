@@ -18,15 +18,13 @@ export default class Login extends Component {
       password: '',
       message: '',
       showMessage: false,
-      authenticate: false,
       url: ''
     }
   }
   checkAuth = () => {
+    const { history } = this.props;
     checkAuthenticate().then((authenticate) => {
-      this.setState({
-        authenticate: authenticate
-      })
+      if (authenticate) history.replace('/home');
     })
   }
   getURL = () => {
@@ -79,12 +77,7 @@ export default class Login extends Component {
     }
   }
   render() {
-    const { authenticate, messageUser, messagePassword, showMessage } = this.state;
-    if (authenticate) {
-      return (
-        <Redirect to={'/home'}></Redirect>
-      )
-    }
+    const { messageUser, messagePassword, showMessage } = this.state;
     return (
       <div className="log-in">
         <NavigationBar authenticate={this.state.authenticate} url={this.getURL()} />
@@ -119,9 +112,6 @@ export default class Login extends Component {
               />
               <div>
                 <Link to='/users/reset-password'>Forgot Password?</Link>
-              </div>
-              <div>
-                <Link to='/users/signup'>Sign Up</Link>
               </div>
             </div>
           </div>

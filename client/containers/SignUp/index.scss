@@ -295,17 +295,17 @@ html body {
         display: flex;
         flex-direction: column;
         width: 350px;
+        min-width: 480px;
         margin: auto;
-        padding: 50px;
+        padding: 50px 0px;
         background-color: white;
-        
-        @media only screen and( max-width:450px) {
-            padding: 50px 15px;
+        @media only screen and (max-height: 900px) {
+            margin: 60px auto 20px auto; 
         }
         >div {
             &:nth-child(2) {
                 flex-direction: column;
-                margin-top: 0px;
+                margin: auto;
             }
         }
         img {
@@ -610,11 +610,14 @@ html body {
         }
     }
 }
-    @media only screen and (max-width: 900px) {
-        //display: block;
-    }
+
 }
 }
+}
+@media only screen and (max-height: 900px) {
+   .signup {
+       display: block;
+   }
 }
 
 

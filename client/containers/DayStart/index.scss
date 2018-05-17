@@ -1,241 +1,242 @@
 .container {
-  > div:nth-child(2) {
-    display: flex;
-    justify-content: space-around;
-    margin: 60px auto;
-    //width: 1070px;
-    @media only screen and (min-width: 1500px) {
-        max-width: 1500px;
+    > div:nth-child(2) {
+      display: flex;
+      justify-content: space-around;
+      margin: 60px auto;
+      min-width: 480px;
+      //width: 1070px;
+      @media only screen and (min-width: 1400px) {
+          max-width: 1000px;
+      }
     }
   }
-}
-
-#root {
-    background: rgb(243, 243, 243);
-}
-
-.TopNav {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  border-bottom: .5px solid;
-}
-
-h1 {
-    font-size: 36px;
-}
-
-.taskAndNote {
+  
+  #root {
+      background: rgb(243, 243, 243);
+  }
+  
+  .TopNav {
+    width: 100%;
+    height: 50px;
     display: flex;
-    justify-content: center;
-}
-
-.navigationbar {
-    
-
-}
-.dayStart {
-    padding: 50px;
-    border: 1px solid #E4E4E4;
-    display: inline-block;
-    font-family: 'Muli';
-    box-sizing: border-box;
-    background: white;
-    //width: 830px;
-    >div {
-        &:nth-child(1) {
-            color: rgb(95, 41, 174);
-        }
-        &:nth-child(2) {
-            display: flex;
-            flex-direction: row;
-            >div {
-                &:nth-child(1) {
-                    margin-right: 100px;
-                    >div {
-                        &:nth-child(1) {
-                            >span {
-                                color: rgb(154, 150, 150);
-                                &:nth-child(1) {
-                                    font-size: 20px;
-                                    display: inline-block;
-                                    width: 100px;
-                                }
-                                &:nth-child(2) {
-                                    font-size: 12px;
-                                }
-                            }
-                        }
-                        &:nth-child(2) {
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: space-around;
-                            margin-top: 10px;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-.task {
-    min-height: 60px;
-    width: 250px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    padding: 7px 15px 7px 15px;
-    display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
-    >div {
-        text-align: center;
-        >div {
-            input,
-            textarea {
-                text-align: center;
-                font-family: 'Muli';
-                width: 95%;
-                background-color: transparent;
-                border: none;
-                border-bottom: 1px solid rgb(154, 150, 150);
-                outline: none;
-            }
-            textarea {
-                resize: none;
-            }
-            &:nth-child(1) {
-                span {
-                    font-size: 15px;
-                    word-wrap: break-word;
-                }
-            }
-            &:nth-child(2) {
-                span {
-                    font-size: 10px;
-                }
-            }
-        }
-    }
-    >img {
-        width: 7%;
-        height: auto;
-        &:hover {
-            cursor: pointer;
-        }
-    }
-}
-
-.doneTask {
-    background-color: rgb(173, 255, 170);
-    color: #029e4b;
-    >div {
-        width: 100%;
-        input,
-        textarea {
-            font-size: 15px;
-            color: #029e4b;
-        }
-    }
-}
-
-.undoneTask {
-    background-color: rgba(255, 170, 60, 0.39);
-    color: rgb(247, 140, 0);
-    div {
-        width: 100%;
-        input,
-        textarea {
-            font-size: 15px;
-            color: rgb(247, 140, 0);
-        }
-    }
-}
-
-.newTask {
-    background-color: rgba(255, 171, 60, 0.1205);
-    height: 60px;
-    width: 250px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    padding: 7px 15px 7px 15px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    img {
-        height: 50%;
-        width: auto;
-    }
-    &:hover {
-        cursor: pointer;
-    }
-}
-
-.note {
-    label {
-        color: rgb(154, 150, 150);
-        font-size: 20px;
-        display: block;
-    }
-    >div {
-        background-image: url('/public/baseline.png');
-        background-size: 100% 31px;
-        background-attachment: local;
-        height: 310px;
-        overflow: auto;
-        p {
-            width: 250px;
-            height: 290px;
-            font-family: 'Muli';
-            font-weight: lighter;
-            font-size: 18px;
-            line-height: 31px;
-            outline: none;
-            margin-top: 2px;
-            span {
-                margin: 0px;
-                padding: 0px;
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 1085px) {
-    .container {
-        > div:nth-child(2) {
-          margin-top: 0px;
-        }
-    }
-
-
-    .sidebar-icon {
-        display: inline-block;
-        height: 30px;
-        width: 30px;
-        margin-left: 10px;
-        cursor: pointer;
-    }
-
-    .dayStart {
-        display: block;
-        //width: 100%;
-        >div {
-            &:nth-child(1) {
-                text-align: center;
-            }
-            &:nth-child(2) {
-                flex-direction: column;
-                align-items: center;
-                >div {
-                    &:nth-child(1){
-                        margin-right: 0px;
-                    }
-                }
-            }
-        }
-    }
-}
+    border-bottom: .5px solid;
+  }
+  
+  h1 {
+      font-size: 36px;
+  }
+  
+  .taskAndNote {
+      display: flex;
+      justify-content: center;
+  }
+  
+  .navigationbar {
+      
+  
+  }
+  .dayStart {
+      padding: 50px;
+      border: 1px solid #E4E4E4;
+      display: inline-block;
+      font-family: 'Muli';
+      box-sizing: border-box;
+      background: white;
+      //width: 830px;
+      >div {
+          &:nth-child(1) {
+              color: rgb(95, 41, 174);
+          }
+          &:nth-child(2) {
+              display: flex;
+              flex-direction: row;
+              >div {
+                  &:nth-child(1) {
+                      margin-right: 100px;
+                      >div {
+                          &:nth-child(1) {
+                              >span {
+                                  color: rgb(154, 150, 150);
+                                  &:nth-child(1) {
+                                      font-size: 20px;
+                                      display: inline-block;
+                                      width: 100px;
+                                  }
+                                  &:nth-child(2) {
+                                      font-size: 12px;
+                                  }
+                              }
+                          }
+                          &:nth-child(2) {
+                              display: flex;
+                              flex-direction: column;
+                              justify-content: space-around;
+                              margin-top: 10px;
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  }
+  
+  .task {
+      min-height: 60px;
+      width: 250px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      padding: 7px 15px 7px 15px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+      >div {
+          text-align: center;
+          >div {
+              input,
+              textarea {
+                  text-align: center;
+                  font-family: 'Muli';
+                  width: 95%;
+                  background-color: transparent;
+                  border: none;
+                  border-bottom: 1px solid rgb(154, 150, 150);
+                  outline: none;
+              }
+              textarea {
+                  resize: none;
+              }
+              &:nth-child(1) {
+                  span {
+                      font-size: 15px;
+                      word-wrap: break-word;
+                  }
+              }
+              &:nth-child(2) {
+                  span {
+                      font-size: 10px;
+                  }
+              }
+          }
+      }
+      >img {
+          width: 7%;
+          height: auto;
+          &:hover {
+              cursor: pointer;
+          }
+      }
+  }
+  
+  .doneTask {
+      background-color: rgb(173, 255, 170);
+      color: #029e4b;
+      >div {
+          width: 100%;
+          input,
+          textarea {
+              font-size: 15px;
+              color: #029e4b;
+          }
+      }
+  }
+  
+  .undoneTask {
+      background-color: rgba(255, 170, 60, 0.39);
+      color: rgb(247, 140, 0);
+      div {
+          width: 100%;
+          input,
+          textarea {
+              font-size: 15px;
+              color: rgb(247, 140, 0);
+          }
+      }
+  }
+  
+  .newTask {
+      background-color: rgba(255, 171, 60, 0.1205);
+      height: 60px;
+      width: 250px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      padding: 7px 15px 7px 15px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      img {
+          height: 50%;
+          width: auto;
+      }
+      &:hover {
+          cursor: pointer;
+      }
+  }
+  
+  .note {
+      label {
+          color: rgb(154, 150, 150);
+          font-size: 20px;
+          display: block;
+      }
+      >div {
+          background-image: url('/public/baseline.png');
+          background-size: 100% 31px;
+          background-attachment: local;
+          height: 310px;
+          overflow: auto;
+          p {
+              width: 250px;
+              height: 290px;
+              font-family: 'Muli';
+              font-weight: lighter;
+              font-size: 18px;
+              line-height: 31px;
+              outline: none;
+              margin-top: 2px;
+              span {
+                  margin: 0px;
+                  padding: 0px;
+              }
+          }
+      }
+  }
+  
+  @media only screen and (max-width: 1085px) {
+      // .container {
+      //     > div:nth-child(2) {
+      //       margin-top: 0px;
+      //     }
+      // }
+  
+  
+      // .sidebar-icon {
+      //     display: inline-block;
+      //     height: 30px;
+      //     width: 30px;
+      //     margin-left: 10px;
+      //     cursor: pointer;
+      // }
+  
+      .dayStart {
+          display: block;
+          //width: 100%;
+          >div {
+              &:nth-child(1) {
+                  text-align: center;
+              }
+              &:nth-child(2) {
+                  flex-direction: column;
+                  align-items: center;
+                  >div {
+                      &:nth-child(1){
+                          margin-right: 0px;
+                      }
+                  }
+              }
+          }
+      }
+  }

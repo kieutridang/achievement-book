@@ -1,5 +1,6 @@
 .SideBar {
     // height: 100vh;
+    z-index: 0;
     font-family: 'Muli';
     display: flex;
     flex-direction: column;
@@ -9,12 +10,9 @@
     margin-right: 50px;
     border: 1px solid #E4E4E4;
     background-color: white;
-    height: 650px;
-    img {
+    .chosen-symbol {
         width: 35px;
         height: 35px;
-    }
-    .chosen-symbol {
         transform: rotate(180deg);
         -ms-transform: rotate(180deg); /* IE 9 */
         -webkit-transform: rotate(180deg); /* Safari 3-8 */
@@ -44,6 +42,8 @@
                     display: flex;
                     align-items: center;
                     img {
+                        width: 35px;
+                        height: 35px;
                         margin-left: 15px;
                         margin-right: 6px;
                     }
@@ -65,22 +65,6 @@
             border: .5px solid #000000;
         }
     }
-    .line {
-        background: #D8D8D8;
-        border: .5px solid #E4E4E4;
-        width: 100%;
-        margin: 20px 0;
-        .SideBar > div:first-child > div {
-            width: 170px;
-            margin: 15px auto;
-            border: .5px solid #000000;
-        }
-    }.line {
-        background: #D8D8D8;
-        border: .5px solid #E4E4E4;
-        width: 100%;
-        margin: 20px 0;
-    }
     .line-day {
         background: #D8D8D8;
         width: 170px;
@@ -96,7 +80,7 @@
 
 @media only screen and (max-width: 900px) {
     .SideBar {
-        display: none
+        display: none   
     }
 }
 .sideInTopNav {
@@ -116,11 +100,13 @@
     position: absolute;
     left: 0;
     top: 40px;
-    height: 100%; 
     @media only screen and (min-width: 900px) {
         display: none;
         
     }
     // -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     // box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.DayPicker_transitionContainer {
+    height: 300px !important;
 }

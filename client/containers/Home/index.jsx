@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-
+import moment from 'moment'
 import Button from '../../components/Button/index.jsx';
 
 import { _helper } from '../../components/api/_helper';
 import checkAuthenticate from '../../components/functions/checkAuthenticate';
 import NavigationBar from '../../components/NavigationBar/index.jsx';
+import './index.scss'
 
-export default class Login extends Component {
+export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            date: props.match.params.date || moment().format('YYYY-MM-DD'),
             authenticate: checkAuthenticate(),
             showMessage: false,
             message: "",
             user: {}
         }
+    }
+    
+    handleDateChange = (date) => {
+        const { history } = this.props;
+        history.push({pathname: '/day-plan/' + date});
+        // this.setState({ date },
+        //   () => this.getDailyPlan()
+        // )
     }
     componentDidMount = () => {
         this.checkAuth()
@@ -39,10 +49,11 @@ export default class Login extends Component {
         })
       }
     checkAuth = () => {
+        const { history } = this.props;
         checkAuthenticate().then((authenticate) => {
-            this.setState({
-                authenticate: authenticate
-            })
+            if (!authenticate){
+                history.replace('/users/login');
+            }
         })
     }
     logout = () => {
@@ -60,19 +71,23 @@ export default class Login extends Component {
         })
     }
     render() {
-        const {authenticate, message, showMessage } = this.state
-        if (!authenticate) {
-            return (
-                <Redirect to={'/users/login'}></Redirect>
-            )
-        }
+        const {message, showMessage, date } = this.state
         return (
             <div>
-                <NavigationBar authenticate={this.state.authenticate} url={this.getURL()} user={this.state.user}/>
-                <h1>Logged in successfully</h1>
-                <div><Link to='/daily-plan'>Daily Plan</Link></div>
-                <div><Link to='/daily-result'>Daily Result</Link></div>
-                <button onClick={this.logout}>Logout</button>
+                <NavigationBar url={this.getURL()} user={this.state.user}
+                  date={date}
+                  type={0}
+                  handleDateChange={this.handleDateChange}
+                  page='plan'
+                  />
+                <div className='content' >
+                    <h1>Logged in successfully</h1>
+                    <div><Link to='/day-plan'>Daily Plan</Link></div>
+                    <div><Link to='/day-result'>Daily Result</Link></div>
+                    <div><Link to='/week-plan'>Weekly Plan</Link></div>
+                    <div><Link to='/week-result'>Weekly Result</Link></div>
+                    <button onClick={this.logout}>Logout</button>
+                </div>
             </div>
         )
     }

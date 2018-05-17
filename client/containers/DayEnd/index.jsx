@@ -24,7 +24,7 @@ export default class DailyResult extends Component {
     super(props);
     this.timeOut = 0;
     this.state = {
-      date: moment().format('YYYY-MM-DD'),
+      date: props.match.params.date || moment().format('YYYY-MM-DD'),
       plan: [],
       completedTasksList: [],
       bestTask: '',
@@ -32,7 +32,6 @@ export default class DailyResult extends Component {
       bestTime: [],
       efficiency: -1,
       lessonLearned: '',
-      authenticate: true,
       blockingUI: true,
       showSidebar: false,
       user:{}
@@ -40,10 +39,11 @@ export default class DailyResult extends Component {
   }
 
   checkAuth = () => {
+    const { history } = this.props;
     checkAuthenticate().then((authenticate) => {
-      this.setState({
-        authenticate: authenticate
-      })
+      if (!authenticate) {
+        history.replace('/users/login');
+      }
     })
   }
   componentDidMount = () => {
@@ -59,38 +59,40 @@ export default class DailyResult extends Component {
       {}
     )
     .then((response) => {
-      const { date, plan, bestTask, whyBest, bestTime, efficiency, lessonLearned } = response.data;
-      var count = 0;
-      var newCompletedTasksList = [];
-      for (var i = 0; i < plan.length; ++i) {
-        if (plan[i].process === 100) {
-          count++;
-          newCompletedTasksList.push(plan[i].task);
+      if (response.status == 200) {
+        const { date, plan, bestTask, whyBest, bestTime, efficiency, lessonLearned } = response.data;
+        var count = 0;
+        var newCompletedTasksList = [];
+        for (var i = 0; i < plan.length; ++i) {
+          if (plan[i].process === 100) {
+            count++;
+            newCompletedTasksList.push(plan[i].task);
+          }
         }
-      }
-      if (bestTask == '') {
-        _helper.fetchAPI('/dailyplan/updateplan/' + date, {bestTask: newCompletedTasksList[0]}, [], 'PUT');
-        this.setState({
-          plan: plan,
-          bestTask: newCompletedTasksList[0],
-          whyBest: whyBest,
-          bestTime: bestTime,
-          efficiency: efficiency,
-          lessonLearned: lessonLearned,
-          completedTasksList: newCompletedTasksList,
-          blockingUI: false
-        });
-      } else {
-        this.setState({
-          plan: plan,
-          bestTask: bestTask,
-          whyBest: whyBest,
-          bestTime: bestTime,
-          efficiency: efficiency,
-          lessonLearned: lessonLearned,
-          completedTasksList: newCompletedTasksList,
-          blockingUI: false
-        });
+        if (bestTask == '') {
+          _helper.fetchAPI('/dailyplan/updateplan/' + date, { bestTask: newCompletedTasksList[0] }, [], 'PUT');
+          this.setState({
+            plan: plan,
+            bestTask: newCompletedTasksList[0],
+            whyBest: whyBest,
+            bestTime: bestTime,
+            efficiency: efficiency,
+            lessonLearned: lessonLearned,
+            completedTasksList: newCompletedTasksList,
+            blockingUI: false
+          });
+        } else {
+          this.setState({
+            plan: plan,
+            bestTask: bestTask,
+            whyBest: whyBest,
+            bestTime: bestTime,
+            efficiency: efficiency,
+            lessonLearned: lessonLearned,
+            completedTasksList: newCompletedTasksList,
+            blockingUI: false
+          });
+        }
       }
     })
   }
@@ -107,9 +109,11 @@ export default class DailyResult extends Component {
     })
   }
   handleDateChange = (date) => {
-    this.setState({date},
-      () => this.getDailyResult()
-    )
+    const { history } = this.props;
+    history.push({ pathname: '/day-result/' + date });
+    // this.setState({date},
+    //   () => this.getDailyResult()
+    // )
   }
   logout = () => {
         _helper.fetchAPI(
@@ -129,40 +133,20 @@ export default class DailyResult extends Component {
 
   render() {
     const { authenticate, date, plan, completedTasksList, bestTask, whyBest, bestTime, efficiency, lessonLearned } = this.state;
-    if (!authenticate) {
-      return (
-        <Redirect to={'/users/login'}></Redirect>
-      )
-    }
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
-        <NavigationBar authenticate={this.state.authenticate} user={this.state.user} />
+        <NavigationBar authenticate={this.state.authenticate} user={this.state.user}
+          date={date}
+          type={0}
+          handleDateChange={this.handleDateChange}
+          page='result'
+        />
         <div className="wrapper">
-          <div className="">
-            {/* <img
-              src="../../../public/show-sidebar.png"
-              alt=""
-              className={this.state.showSidebar ? 'none-sidebar-icon' : 'sidebar-icon'}
-              onClick={() => {
-                this.setState({showSidebar: true});
-                document.body.parentElement.style.overflow = 'hidden';
-                document.getElementById("root").style.overflow = 'hidden';
-              }}
-            />
-            <img
-              src="../../../public/cancel-disable.png"
-              alt=""
-              className={this.state.showSidebar ? 'sidebar-icon' : 'none-sidebar-icon'}
-              onClick={() => {
-                this.setState({showSidebar: false});
-                document.body.parentElement.style.overflow = 'auto';
-                document.getElementById("root").style.overflow = 'auto';
-              }}
-            /> */}
-          </div>
+          <div className=""></div>
           <div>
             <SideBar
               date={date}
+              type={0}
               handleDateChange={this.handleDateChange}
             />
         <div>
@@ -218,38 +202,6 @@ export default class DailyResult extends Component {
                     )}
                   />
                 </div>
-                <SingleChoice2
-                  choice={efficiency}
-                  label='How is the efficiency in your task(s)?'
-                  optionsList={['Low', 'Medium', 'Relatively', 'High', 'Excellent']}
-                  onChange={(efficiency) => {
-                    var efficiencyNumber;
-                    switch (efficiency) {
-                      case 'Low':
-                        efficiencyNumber = 0;
-                        break;
-                      case 'Medium':
-                        efficiencyNumber = 1;
-                        break;
-                      case 'Relatively':
-                        efficiencyNumber = 2;
-                        break;
-                      case 'High':
-                        efficiencyNumber = 3;
-                        break;
-
-                      default:
-                        efficiencyNumber = 4;
-                        break;
-                    }
-                    this.setState(
-                      { efficiency: efficiencyNumber },
-                      () => {
-                        _helper.fetchAPI('/dailyplan/updateplan/' + date, { efficiency: efficiencyNumber }, [], 'PUT')
-                      }
-                    )
-                  }}
-                />
               </div>
               <div className="lesson-learned">
                 <label className='page-label'> What have you learned through this day? </label>

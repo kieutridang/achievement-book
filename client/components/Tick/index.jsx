@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import './style.scss'
-export default class Tick extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
 
-        }
-    }
+export default class Tick extends Component {
     render() {
         const { label , selected, id, onSelect} = this.props;
         return (
