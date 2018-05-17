@@ -171,8 +171,7 @@ class App extends Component {
         <DayPicker
           date={this.state.date}
           handleSelect={this.handleSelect}
-        /> 
-        <WeekStart></WeekStart>
+        /> */}
       </div>
     )
   }
