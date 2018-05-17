@@ -13,6 +13,7 @@ const TaskMission = ({ index, task, missions, submitChange, handleChangeName, ha
         default={task.name}
         onBlur={submitChange}
         onChange={handleChangeName}
+        maxlength={100}
       />
       <select onChange={handleChangeMission} value={task.name}>
         {missions && missions.map((element, index) => {
@@ -28,6 +29,7 @@ const TaskMission = ({ index, task, missions, submitChange, handleChangeName, ha
         numRows={3}
         onBlur={submitChange}
         onChange={handleChangeDescription}
+        maxlength={100}
       />
     </div>
   );

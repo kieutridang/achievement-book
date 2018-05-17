@@ -59,6 +59,7 @@ class WeekStart extends Component {
             onBlur={submitForm}
             onChange={handleChange}
             numRows={3}
+            maxlength={100}
           />
           <div>
             {
@@ -130,13 +131,11 @@ class WeekStart extends Component {
                                 let newDay = JSON.parse(JSON.stringify(days));
                                 newDay[index].taskList[id].name = value.target.value;
                                 setFieldValue("days", newDay);
-                                setTimeout(50);
                               }}
                               handleChangeDescription={(value) => {
                                 let newDay = JSON.parse(JSON.stringify(days));
                                 newDay[index].taskList[id].description = value.target.value;
                                 setFieldValue("days", newDay);
-                                setTimeout(50);
                               }}
                             />
                           );
@@ -147,7 +146,6 @@ class WeekStart extends Component {
                           let newDay = JSON.parse(JSON.stringify(days));
                           newDay[index].taskList.push({ name: '', mission: '', description: '' });
                           setFieldValue("days", newDay);
-                          setTimeout(50);
                         }}
                       >Add Task</button>
                     </div>
