@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { withFormik } from 'formik';
-import { compose } from 'redux';
-
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -11,6 +8,7 @@ import * as select from '../../selectors/weekly';
 
 import { _helper } from '../../components/api/_helper';
 
+import moment from 'moment'
 import TaskMission from './components/TaskMission'
 import OnBlurTextArea from '../../components/OnBlurTextArea1/index.jsx'
 import Mission from './components/Mission'
@@ -26,21 +24,15 @@ class WeekStart extends Component {
         history.replace('/users/login');
       }
     })
-  constructor(props) {
-    super(props);
-    this.state = {
-      date: '2018-05-14'
-    };
   }
   componentDidMount = () => {
     this.checkAuth();
-
-  componentWillMount = () => {
-    this.props.getWeeklyPlan(this.state.date);
   }
-  
-  _changeTaskName = (value) => {
-    alert(value);
+  componentWillMount = () => {
+    let firstDay = moment().startOf('week').format('dddd') === 'Sunday' ?
+      moment().startOf('week').add('d', 1).format('YYYY-MM-DD') :
+      moment().startOf('week').format('YYYY-MM-DD');
+    this.props.getWeeklyPlan(firstDay);
   }
   render() {
     const {
@@ -55,13 +47,6 @@ class WeekStart extends Component {
       setFieldValue,
     } = this.props;
     const listDay = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    if (days.length < 7) {
-      let newDayList = [];
-      for (let i = 1; i <= 7; i += 1) {
-        newDayList.push([]);
-      }
-      setFieldValue('days', newDayList);
-    }
     const { weeklyPlan } = this.props;
     console.log(weeklyPlan);
     return (
@@ -177,38 +162,42 @@ class WeekStart extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    weeklyData: state.weeklyData,
-  }
-}
-const mapStateToProps = createStructuredSelector ({
-  weeklyPlan : select.WeeklyPlanData()
+// const mapStateToProps = (state) => {
+//   return {
+//     weeklyData: state.weeklyData,
+//   }
+// }
+const mapStateToProps = createStructuredSelector({
+  weeklyPlan: select.WeeklyPlanData()
 })
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    editPlan: (values) => dispatch(values),
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     editPlan: (values) => dispatch(values),
+//   }
+// }
 const mapDispatchToProps = (dispatch) => ({
   getWeeklyPlan: (date) => dispatch(actions.fetchWeeklyPlan(date)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withRedux = connect(mapStateToProps, mapDispatchToProps);
+//const withRedux = connect(mapStateToProps, mapDispatchToProps);
 
 const createForm = withFormik({
   enableReinitialize: true,
   mapPropsToValues: (props) => {
-    const data = props.weeklyData;
+    const data = props.weeklyPlan;
     let newDayList = [];
-    for (let i = 1; i <= 7; i += 1) {
-      newDayList.push({ taskList: [] });
+    if (!data.days || data.days < 7) {
+
+      for (let i = 1; i <= 7; i += 1) {
+        newDayList.push({ taskList: [] });
+      }
     }
+    else newDayList = data.days;
     const initialState = {
       goal: data.goal || '',
-      days: data.days || newDayList,
+      days: newDayList,
       missionList: data.missions || [],
     };
     return initialState;
@@ -224,6 +213,4 @@ const createForm = withFormik({
 export default compose(
   withConnect,
   createForm,
-export default compose(
-  withRedux,
 )(WeekStart);
