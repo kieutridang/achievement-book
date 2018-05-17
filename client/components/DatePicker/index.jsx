@@ -25,7 +25,7 @@ export default withRouter(class DatePicker extends Component {
         const date = moment(this.props.date);
         const { type } = this.props;
         return (
-            <StyledTabs>
+            <StyledTabs defaultIndex={type}>
                 <TabList>
                     <Tab>Day</Tab>
                     <Tab>Week</Tab> 
