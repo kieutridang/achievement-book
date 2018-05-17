@@ -202,38 +202,6 @@ export default class DailyResult extends Component {
                     )}
                   />
                 </div>
-                <SingleChoice2
-                  choice={efficiency}
-                  label='How is the efficiency in your task(s)?'
-                  optionsList={['Low', 'Medium', 'Relatively', 'High', 'Excellent']}
-                  onChange={(efficiency) => {
-                    var efficiencyNumber;
-                    switch (efficiency) {
-                      case 'Low':
-                        efficiencyNumber = 0;
-                        break;
-                      case 'Medium':
-                        efficiencyNumber = 1;
-                        break;
-                      case 'Relatively':
-                        efficiencyNumber = 2;
-                        break;
-                      case 'High':
-                        efficiencyNumber = 3;
-                        break;
-
-                      default:
-                        efficiencyNumber = 4;
-                        break;
-                    }
-                    this.setState(
-                      { efficiency: efficiencyNumber },
-                      () => {
-                        _helper.fetchAPI('/dailyplan/updateplan/' + date, { efficiency: efficiencyNumber }, [], 'PUT')
-                      }
-                    )
-                  }}
-                />
               </div>
               <div className="lesson-learned">
                 <label className='page-label'> What have you learned through this day? </label>
