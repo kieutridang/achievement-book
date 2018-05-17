@@ -12,6 +12,7 @@ const Mission = ({ index, mission, submitChange, handleChangeName, handleChangeD
         default={mission.name}
         onBlur={submitChange}
         onChange={handleChangeName}
+        maxlength={100}
       />
       <OnBlurTextArea
         label={"Descrition"}
@@ -19,6 +20,7 @@ const Mission = ({ index, mission, submitChange, handleChangeName, handleChangeD
         default={mission.description}
         onBlur={submitChange}
         onChange={handleChangeDescription}
+        maxlength={100}
       />
     </div>
   );
