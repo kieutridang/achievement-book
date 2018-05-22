@@ -47,7 +47,8 @@ export default class EditableP extends Component {
         const maxlength = this.props.maxlength || 500;
         if (value.length <= maxlength) {
             this.handleInput(value);
-            document.execCommand("insertHTML", false, value);
+            // document.execCommand("insertHTML", false, value);
+            this.p.innerText = value;
         }
     }
     render() {
