@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import './index.scss'
 
 export default class EditableP extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             value: props.defaultValue || '',
@@ -23,7 +23,7 @@ export default class EditableP extends Component {
         const maxlength = this.props.maxlength || 500;
         if (value.length <= maxlength) {
             this.setState(
-                {value},
+                { value },
                 () => this.props.handleChange(value)
             );
         }
@@ -42,10 +42,12 @@ export default class EditableP extends Component {
         }
     }
     handlePaste = (event) => {
-        const value = this.p.innerText + event.clipboardData.getData('text');
+        event.preventDefault();
+        const value = this.p.innerText + event.clipboardData.getData("text/plain");
         const maxlength = this.props.maxlength || 500;
-        if (value.length > maxlength) {
-            event.preventDefault();
+        if (value.length <= maxlength) {
+            this.handleInput(value);
+            document.execCommand("insertHTML", false, value);
         }
     }
     render() {
