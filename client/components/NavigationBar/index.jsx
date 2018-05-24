@@ -71,7 +71,7 @@ export default withRouter(class NavigationBar extends Component {
                 return (
                     <div className='navigationbar home'>
                         <div >
-                            <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            <img id='logo' src='../../../public/logo.png' alt='logo' onClick={() => history.push('/home') } />
                             <div className="toggle-sidebar">
                                 <img
                                     src="../../../public/show-sidebar.png"
