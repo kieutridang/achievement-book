@@ -18,11 +18,12 @@ export default class EditableP extends Component {
     }
   }
   handlePaste = (event) => {
-    const { value } = this.props;
-    const newValue = value + event.clipboardData.getData('text');
-    const maxlength = this.props.maxlength || 2000;
-    if (newValue.length > maxlength) {
-      event.preventDefault();
+    event.preventDefault();
+    const value = this.p.innerText + event.clipboardData.getData("text/plain");
+    const maxlength = this.props.maxlength || 500;
+    if (value.length <= maxlength) {
+      this.handleInput(value);
+      document.execCommand("insertHTML", false, value);
     }
   }
   render() {
