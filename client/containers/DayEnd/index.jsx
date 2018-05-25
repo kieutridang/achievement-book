@@ -110,7 +110,7 @@ export default class DailyResult extends Component {
   }
   handleDateChange = (date) => {
     const { history } = this.props;
-    history.push({ pathname: '/day-result/' + date });
+    history.push({ pathname: '/dailyplan/getplan/' + date });
     // this.setState({date},
     //   () => this.getDailyResult()
     // )

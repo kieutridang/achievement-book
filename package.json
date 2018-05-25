@@ -33,6 +33,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "connect-mongo": "^2.0.1",
     "cors": "^2.8.4",
+    "csp-webpack-plugin": "^1.0.2",
     "css-loader": "^0.28.8",
     "dotenv": "^5.0.1",
     "es2015": "0.0.0",
