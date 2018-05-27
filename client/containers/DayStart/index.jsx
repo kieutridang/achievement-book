@@ -161,42 +161,17 @@ export default class DailyPlan extends Component {
     const date = this.state.date;
     _helper.fetchAPI('/dailyplan/updateplan/' + date, { plan: newPlan }, [], "PUT");
   }
-  getUser(){
-    _helper.fetchGET(
-      '/user/getuser',
-      {}
-    )
-    .then((response) => {
-        const {data, status} = response;
-        if(status == 200 ) {
-            this.setState({user: data})
-        }  
-    })
-  }
-  getUser(){
-    _helper.fetchGET(
-      '/user/getuser',
-      {}
-    )
-    .then((response) => {
-        const {data, status} = response;
-        if(status == 200 ) {
-            this.setState({user: data})
-        }  
-    })
-  }
 
   componentDidMount = () => {
     this.checkAuth();
     this.getDailyPlan();
-    this.getUser()
   }
 
   render() {
     const { date, quote, plan, note, doneTasks, totalTasks } = this.state;
     return (
       <BlockUi tag="div" blocking={this.state.blockingUI} message="Please wait" keepInView>
-        <NavigationBar user={this.state.user}  
+        <NavigationBar 
           date={date}
           type={0}
           handleDateChange={this.handleDateChange}
