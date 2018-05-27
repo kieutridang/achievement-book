@@ -57,7 +57,7 @@ module.exports = function (app) {
 		next()
 	})
 
-	app.get(/^((?!\/api)(\/[a-z\-]*)*)*$/, (req, res) => {
+	app.get(/^((?!\/api)(\/[a-z0-9\-]*)*)*$/, (req, res) => {
 		res.sendFile(path.join(__dirname, staticPath, '/index.html'));
 	})
 	app.use('/', express.static(path.join(__dirname, staticPath)));
