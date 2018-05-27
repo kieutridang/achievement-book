@@ -9,6 +9,8 @@ import checkAuthenticate from '../../components/functions/checkAuthenticate';
 import NavigationBar from '../../components/NavigationBar/index.jsx';
 import './index.scss'
 
+
+
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -28,26 +30,14 @@ export default class Home extends Component {
         //   () => this.getDailyPlan()
         // )
     }
+
     componentDidMount = () => {
         this.checkAuth()
-        this.getUser()
     }
     getURL = () => {
         const newUrl = window.location.href.split("/")[window.location.href.split("/").length-1];
         return newUrl;
     }
-    getUser(){
-        _helper.fetchGET(
-          '/user/getuser',
-          {}
-        )
-        .then((response) => {
-            const {data, status} = response;
-            if(status == 200 ) {
-                this.setState({user: data})
-            }  
-        })
-      }
     checkAuth = () => {
         const { history } = this.props;
         checkAuthenticate().then((authenticate) => {
@@ -55,6 +45,8 @@ export default class Home extends Component {
                 history.replace('/users/login');
             }
         })
+   
+
     }
     logout = () => {
         _helper.fetchAPI(
@@ -72,9 +64,10 @@ export default class Home extends Component {
     }
     render() {
         const {message, showMessage, date } = this.state
+        
         return (
             <div>
-                <NavigationBar url={this.getURL()} user={this.state.user}
+                <NavigationBar url={this.getURL()}
                   date={date}
                   type={0}
                   handleDateChange={this.handleDateChange}
