@@ -9,11 +9,13 @@ import DailyPlan from './containers/DayStart/index.jsx';
 import DailyResult from './containers/DayEnd/index.jsx';
 import WeekStart from './containers/WeekStart/index';
 import WeekEnd from './containers/WeekEnd/index.jsx';
+import Dashboard from './containers/Dashboard/index.jsx';
 
 const routes = (
     <Switch>
         <Route exact path='/' component={App} />
         <Route exact path='/home' component={Home} />
+        <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/users/login' component={Login} />
         <Route exact path='/users/signup' component={SignUp} />
         <Route exact path='/day-plan' component={DailyPlan} />
