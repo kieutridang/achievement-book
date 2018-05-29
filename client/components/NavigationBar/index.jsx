@@ -6,8 +6,14 @@ import checkAuthenticate from '../../components/functions/checkAuthenticate';
 import Popup from './PopupContainer.js'
 import './index.scss';
 import SideBar from '../SideBar/index.jsx';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 
-export default withRouter(class NavigationBar extends Component {
+import * as actions from '../../actions/appActions';
+import * as select from '../../selectors/appSelector'
+
+class NavigationBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +29,9 @@ export default withRouter(class NavigationBar extends Component {
     toggleSibar = () => {
         this.setState({ showSidebar: !this.state.showSidebar })
     }
-
+    componentWillMount = () => {
+        this.props.fetchUser();
+    }
     render() {
         const { user, history, type, date, handleDateChange } = this.props;
         const url = history.location.pathname;
@@ -117,4 +125,17 @@ export default withRouter(class NavigationBar extends Component {
         }
     }
 
-})
+}
+const mapStateToProps = createStructuredSelector({
+    user: select.AppData(),
+  })
+  const mapDispatchToProps = (dispatch) => ({
+    fetchUser: () => dispatch(actions.fetchUser()),
+  });
+  
+  const withConnect = connect(mapStateToProps, mapDispatchToProps);
+  
+  export default compose(
+    withConnect,
+    withRouter
+  )(NavigationBar);
