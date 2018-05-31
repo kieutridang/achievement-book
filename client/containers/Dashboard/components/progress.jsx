@@ -61,11 +61,16 @@ const BoxContainer = styled.div`
     background-color: white;
     width: 310px ;
     height: 130px;
-    margin: 5px;
+    @media only screen and (max-width: 1250px) {
+        margin: 0 10px;
+    }
+    @media only screen and (max-width: 650px) {
+        margin: auto;
+    }
 `
 
-export const ProgressBox = ({image, label, done, total, color}) => (
-    <BoxContainer>
+export const ProgressBox = ({image, label, done, total, color, handlerClick}) => (
+    <BoxContainer onClick={ handlerClick}>
         <InfoContainer>
             <LabelContainer>
                 <Img src={image}/>
