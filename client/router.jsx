@@ -13,8 +13,8 @@ import Dashboard from './containers/Dashboard/index.jsx';
 
 const routes = (
     <Switch>
-        <Route exact path='/' component={App} />
-        <Route exact path='/home' component={Home} />
+        <Route exact path='/' component={Dashboard} />
+        <Route exact path='/home' component={Dashboard} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/users/login' component={Login} />
         <Route exact path='/users/signup' component={SignUp} />
