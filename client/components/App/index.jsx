@@ -17,8 +17,9 @@ import DatePicker from '../DatePicker/index.jsx';
 import WeekStart from '../../containers/WeekStart/index'
 import SlideTab from '../SlideTab/index.jsx';
 import OnBlurInput from '../OnBlurInput2/index.jsx';
-
+import EditableP from '../EditableP/index.jsx'
 import 'react-dates/lib/css/_datepicker.css';
+import UserInfo from '../UserInfo/index.jsx'
 // import './index.scss';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -161,7 +162,8 @@ class App extends Component {
     const { data } = this.state;
     console.log(this.props.weeklyPlan)
     return (
-      <div>           
+      <div>  
+        <UserInfo/>         
         <DatePicker/>
         <SlideTab
           data={data}
@@ -175,6 +177,10 @@ class App extends Component {
           date={this.state.date}
           handleSelect={this.handleSelect}
         /> */}
+        <EditableP
+          editable={true}
+          defaultValue={"Hello"}
+        />
       </div>
     )
   }

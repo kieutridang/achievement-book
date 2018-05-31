@@ -6,8 +6,14 @@ import checkAuthenticate from '../../components/functions/checkAuthenticate';
 import Popup from './PopupContainer.js'
 import './index.scss';
 import SideBar from '../SideBar/index.jsx';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 
-export default withRouter(class NavigationBar extends Component {
+import * as actions from '../../actions/appActions';
+import * as select from '../../selectors/appSelector'
+
+class NavigationBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +29,9 @@ export default withRouter(class NavigationBar extends Component {
     toggleSibar = () => {
         this.setState({ showSidebar: !this.state.showSidebar })
     }
-
+    componentWillMount = () => {
+        this.props.fetchUser();
+    }
     render() {
         const { user, history, type, date, handleDateChange } = this.props;
         const url = history.location.pathname;
@@ -32,7 +40,9 @@ export default withRouter(class NavigationBar extends Component {
                 return (
                     <div className='navigationbar sign-up'>
                         <div>
-                            <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            <Link to='/dashboard'>
+                                <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            </Link>
                         </div>
                         <div>
                             <Link to='/users/login'> Log in</Link>
@@ -43,7 +53,9 @@ export default withRouter(class NavigationBar extends Component {
                 return (
                     <div className='navigationbar sign-up'>
                         <div>
-                            <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            <Link to='/dashboard'>
+                                <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            </Link>
                         </div>
                         <div>
                             <Link to='/users/signup'> Sign up</Link>
@@ -54,7 +66,9 @@ export default withRouter(class NavigationBar extends Component {
                 return (
                     <div className='navigationbar intro'>
                         <div>
-                            <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            <Link to='/dashboard'>
+                                <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            </Link>
 
                         </div>
                         <div>
@@ -71,7 +85,7 @@ export default withRouter(class NavigationBar extends Component {
                 return (
                     <div className='navigationbar home'>
                         <div >
-                            <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            <img id='logo' src='../../../public/logo.png' alt='logo' onClick={() => history.push('/home')} />
                             <div className="toggle-sidebar">
                                 <img
                                     src="../../../public/show-sidebar.png"
@@ -117,4 +131,17 @@ export default withRouter(class NavigationBar extends Component {
         }
     }
 
+}
+const mapStateToProps = createStructuredSelector({
+    user: select.AppData(),
 })
+const mapDispatchToProps = (dispatch) => ({
+    fetchUser: () => dispatch(actions.fetchUser()),
+});
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(
+    withConnect,
+    withRouter
+)(NavigationBar);

@@ -49,7 +49,6 @@ export default class DailyResult extends Component {
   componentDidMount = () => {
     this.checkAuth();
     this.getDailyResult();
-    this.getUser();
   }
 
   getDailyResult = () => {
@@ -96,21 +95,10 @@ export default class DailyResult extends Component {
       }
     })
   }
-  getUser(){
-    _helper.fetchGET(
-      '/user/getuser',
-      {}
-    )
-    .then((response) => {
-        const {data, status} = response;
-        if(status == 200 ) {
-            this.setState({user: data})
-        }  
-    })
-  }
+
   handleDateChange = (date) => {
     const { history } = this.props;
-    history.push({ pathname: '/day-result/' + date });
+    history.push({ pathname: '/dailyplan/getplan/' + date });
     // this.setState({date},
     //   () => this.getDailyResult()
     // )

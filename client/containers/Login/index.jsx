@@ -10,7 +10,9 @@ import './index.scss';
 import { debug } from 'util';
 import NavigationBar from '../../components/NavigationBar/index.jsx';
 
-export default class Login extends Component {
+
+
+ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,15 +28,16 @@ export default class Login extends Component {
     checkAuthenticate().then((authenticate) => {
       if (authenticate) history.replace('/home');
     })
+    
   }
   getURL = () => {
     const newUrl = window.location.href.split("/")[window.location.href.split("/").length-1];
     return newUrl;
 
 }
+
   componentDidMount = () => {
     this.checkAuth();
-    // this.getURL();
   }
   login = () => {
     const { username, password } = this.state;
@@ -78,6 +81,7 @@ export default class Login extends Component {
   }
   render() {
     const { messageUser, messagePassword, showMessage } = this.state;
+    
     return (
       <div className="log-in">
         <NavigationBar authenticate={this.state.authenticate} url={this.getURL()} />
