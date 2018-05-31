@@ -10,6 +10,7 @@ import UserInfo from './components/UserInfo/index.jsx';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { DateTable } from './components/DateTable.js'
+import checkAuthenticate from '../../components/functions/checkAuthenticate'
 
 const typeBase = ['day', 'week', 'month'];
 
@@ -20,6 +21,20 @@ export default class Dashboard extends Component {
       date: props.match.params.date || moment().format('YYYY-MM-DD'),
     }
   }
+
+  checkAuth = () => {
+    const { history } = this.props;
+    checkAuthenticate().then((authenticate) => {
+      if (!authenticate){
+        history.replace('/users/login');
+      }
+    })
+  }
+
+  componentWillMount = () => {
+    this.checkAuth();
+  }
+
   handlerClickProgress = (type) => {
     if( type == 3) return;
     const { history } = this.props;

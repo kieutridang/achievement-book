@@ -9,7 +9,7 @@ import { createBrowserHistory } from 'history';
 
 
 
-const history = createBrowserHistory({basename: '/', forceRefresh: false});
+const history = createBrowserHistory({basename: '/', forceRefresh: true});
   
 
 ReactDom.render((

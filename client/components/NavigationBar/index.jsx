@@ -40,7 +40,9 @@ class NavigationBar extends Component {
                 return (
                     <div className='navigationbar sign-up'>
                         <div>
-                            <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            <Link to='/dashboard'>
+                                <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            </Link>
                         </div>
                         <div>
                             <Link to='/users/login'> Log in</Link>
@@ -51,7 +53,9 @@ class NavigationBar extends Component {
                 return (
                     <div className='navigationbar sign-up'>
                         <div>
-                            <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            <Link to='/dashboard'>
+                                <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            </Link>
                         </div>
                         <div>
                             <Link to='/users/signup'> Sign up</Link>
@@ -62,7 +66,9 @@ class NavigationBar extends Component {
                 return (
                     <div className='navigationbar intro'>
                         <div>
-                            <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            <Link to='/dashboard'>
+                                <img id='logo' src='../../../public/logo.png' alt='logo' />
+                            </Link>
 
                         </div>
                         <div>
@@ -79,7 +85,7 @@ class NavigationBar extends Component {
                 return (
                     <div className='navigationbar home'>
                         <div >
-                            <img id='logo' src='../../../public/logo.png' alt='logo' onClick={() => history.push('/home') } />
+                            <img id='logo' src='../../../public/logo.png' alt='logo' onClick={() => history.push('/home')} />
                             <div className="toggle-sidebar">
                                 <img
                                     src="../../../public/show-sidebar.png"
@@ -128,14 +134,14 @@ class NavigationBar extends Component {
 }
 const mapStateToProps = createStructuredSelector({
     user: select.AppData(),
-  })
-  const mapDispatchToProps = (dispatch) => ({
+})
+const mapDispatchToProps = (dispatch) => ({
     fetchUser: () => dispatch(actions.fetchUser()),
-  });
-  
-  const withConnect = connect(mapStateToProps, mapDispatchToProps);
-  
-  export default compose(
+});
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(
     withConnect,
     withRouter
-  )(NavigationBar);
+)(NavigationBar);
