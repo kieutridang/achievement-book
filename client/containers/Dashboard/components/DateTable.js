@@ -21,13 +21,15 @@ const ImageTable = styled.img`
     height: 50px;
 
 `
-const TextField = ({className, data}) => (
-    <label>{data}</label>
-)
+const TextField = styled.label`
+        font-family: 'Muli';
+        font-size: 20px;
+        font-weight: bold;
+`
 export const DateTable = ({src, data}) => (
     <Container>
         <ImageTable src={ src ? src : '../../../public/calendar.png'} />
-        <TextField data={data}/>
+        <TextField >{data}</TextField>
     </Container>
 )
 

@@ -11,12 +11,20 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { DateTable } from './components/DateTable.js'
 
+const typeBase = ['day', 'week', 'month'];
+
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       date: props.match.params.date || moment().format('YYYY-MM-DD'),
     }
+  }
+  handlerClickProgress = (type) => {
+    if( type == 3) return;
+    const { history } = this.props;
+    const newUrl = '/' + typeBase[type] + '-plan/' + this.state.date;
+    history.push({ pathname: newUrl});
   }
 
   render() {
@@ -59,10 +67,10 @@ export default class Dashboard extends Component {
         <TextDashboard>Dashboard</TextDashboard>
         <Main>
           <DateTable data={date}/>
-          <CarouselWrapper data={progress} />
+          <CarouselWrapper data={progress} handlerClick={(i) =>  this.handlerClickProgress(i) }  />
           <ProgressWrapper>
             {
-              progress.map(item => <ProgressBox {...item} />)
+              progress.map( (item, i) => <ProgressBox key={i} {...item} handlerClick={() =>  this.handlerClickProgress(i) } />)
             }
           </ProgressWrapper>
           <ContentWrapper>

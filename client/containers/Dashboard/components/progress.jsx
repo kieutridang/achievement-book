@@ -69,8 +69,8 @@ const BoxContainer = styled.div`
     }
 `
 
-export const ProgressBox = ({image, label, done, total, color}) => (
-    <BoxContainer>
+export const ProgressBox = ({image, label, done, total, color, handlerClick}) => (
+    <BoxContainer onClick={ handlerClick}>
         <InfoContainer>
             <LabelContainer>
                 <Img src={image}/>

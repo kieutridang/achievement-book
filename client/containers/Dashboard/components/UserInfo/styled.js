@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-const gray =  '#666666';
+const gray =  '#000000';
 export const UserInfoWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 200px;
-    height: 350px;
+    min-width: 200px;
+    height: 400px;
     background: white;
     align-items: center;
     justify-content: center;
@@ -36,8 +37,10 @@ export const InfoWrapper = styled.div`
 `
 export const LabelUser = styled.label`
     font-weight: bold;
+    font-family: 'Muli', sans-serif;
     color: ${gray};
 `
 export const LabelAdress = styled.label`
     color: ${gray};
+    font-family: 'Muli', sans-serif;
 `
