@@ -4,8 +4,21 @@ import styled from 'styled-components';
 
 import { ProgressBox } from './components/progress.jsx';
 import { Chart } from './components/chart.jsx';
+import Navigationbar from '../../components/NavigationBar/index.jsx'
+import { TextDashboard, ProgressWrapper, ContentWrapper, DPWrapper, CarouselWrapper, Main } from './styled';
+import UserInfo from './components/UserInfo/index.jsx';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { DateTable } from './components/DateTable.js'
 
 export default class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: props.match.params.date || moment().format('YYYY-MM-DD'),
+    }
+  }
+
   render() {
     const progress = [
       { done: 3, total: 5, color: '#F79376', label: 'Day', image: '../../../public/dashboard/idea.png', },
@@ -39,12 +52,26 @@ export default class Dashboard extends Component {
         }
       ]
     };
+    const { date } = this.state;
     return (
       <div>
-        {
-          progress.map(item => <ProgressBox {...item} />)
-        }
-        <Chart data={dailyData} />
+        <Navigationbar />
+        <TextDashboard>Dashboard</TextDashboard>
+        <Main>
+          <DateTable data={date}/>
+          <CarouselWrapper data={progress} />
+          <ProgressWrapper>
+            {
+              progress.map(item => <ProgressBox {...item} />)
+            }
+          </ProgressWrapper>
+          <ContentWrapper>
+            <UserInfo />
+            <Chart data={dailyData} />
+            <DPWrapper date={date} />
+          </ContentWrapper>
+        </Main>
+
       </div>
     );
   }
