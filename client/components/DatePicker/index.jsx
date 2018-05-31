@@ -58,7 +58,6 @@ export default withRouter(class DatePicker extends Component {
 
 
 const StyledTabs = styled(Tabs)`
-    margin: auto;
     width: 250px;
     background-color: white;
     box-sizing: border-box;

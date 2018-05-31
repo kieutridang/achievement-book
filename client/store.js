@@ -6,6 +6,7 @@ import createSagaMiddleware from 'redux-saga'
 import rootSaga from './saga'
 import { fromJS, Map } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
+import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -17,11 +18,11 @@ const store = createStore(
   createReducer(),
   fromJS({}),
   // Immutable.Map({}),
-  compose(middleware, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  composeWithDevTools(middleware),
 
 )
 store.runSaga = sagaMiddleware.run;
 store.runSaga(rootSaga);
 
 
-export default store;
+export default store; 
